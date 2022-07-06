@@ -28,7 +28,7 @@
         </dd>
         <dt><span jhiTranslate="temrinMatikApp.soru.resimUrl">Resim Url</span></dt>
         <dd>
-          <span>{{ soru.resimUrl }}</span>
+          <img class="responsive" [src]="'https://temrinbucket.s3.eu-central-1.amazonaws.com/' + soru.resimUrl" />
         </dd>
         <dt><span jhiTranslate="temrinMatikApp.soru.konu">Konu</span></dt>
         <dd>

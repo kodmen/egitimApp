@@ -8,6 +8,8 @@ export interface ISoru {
   sira?: number | null;
   resimUrl?: string | null;
   konu?: IKonu | null;
+  imageContentType?: string | null;
+  image?: string | null;
   denemelers?: IDeneme[] | null;
 }
 
@@ -19,6 +21,8 @@ export class Soru implements ISoru {
     public sira?: number | null,
     public resimUrl?: string | null,
     public konu?: IKonu | null,
+    public imageContentType?: string | null,
+    public image?: string | null,
     public denemelers?: IDeneme[] | null
   ) {}
 }

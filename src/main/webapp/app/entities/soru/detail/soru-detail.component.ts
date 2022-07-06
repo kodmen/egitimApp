@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ISoru } from '../soru.model';
 
 @Component({
+  styleUrls: ['./soru-detail.component.scss'],
   selector: 'jhi-soru-detail',
   templateUrl: './soru-detail.component.html',
 })

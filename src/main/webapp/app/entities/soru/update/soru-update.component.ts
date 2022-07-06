@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit} from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -9,6 +9,9 @@ import { ISoru, Soru } from '../soru.model';
 import { SoruService } from '../service/soru.service';
 import { IKonu } from 'app/entities/konu/konu.model';
 import { KonuService } from 'app/entities/konu/service/konu.service';
+import { DataUtils, FileLoadError } from 'app/core/util/data-util.service';
+import { EventManager, EventWithContent } from 'app/core/util/event-manager.service';
+import { AlertError } from 'app/shared/alert/alert-error.model';
 
 @Component({
   selector: 'jhi-soru-update',
@@ -26,13 +29,18 @@ export class SoruUpdateComponent implements OnInit {
     sira: [],
     resimUrl: [null, [Validators.maxLength(500)]],
     konu: [],
+    imageContentType: [],
+    image: [],
   });
 
   constructor(
     protected soruService: SoruService,
     protected konuService: KonuService,
     protected activatedRoute: ActivatedRoute,
-    protected fb: FormBuilder
+    protected fb: FormBuilder,
+    protected dataUtils: DataUtils,
+    protected eventManager: EventManager,
+    protected elementRef: ElementRef
   ) {}
 
   ngOnInit(): void {
@@ -45,6 +53,27 @@ export class SoruUpdateComponent implements OnInit {
 
   previousState(): void {
     window.history.back();
+  }
+
+  setFileData(event: Event, field: string, isImage: boolean): void {
+    this.dataUtils.loadFileToForm(event, this.editForm, field, isImage).subscribe({
+      error: (err: FileLoadError) =>
+        this.eventManager.broadcast(new EventWithContent<AlertError>('temrinMatikApp.error', { ...err, key: 'error.file.' + err.key })),
+    });
+  }
+
+  byteSize(base64String: string): string {
+    return this.dataUtils.byteSize(base64String);
+  }
+
+  clearInputImage(field: string, fieldContentType: string, idInput: string): void {
+    this.editForm.patchValue({
+      [field]: null,
+      [fieldContentType]: null,
+    });
+    if (idInput && this.elementRef.nativeElement.querySelector('#' + idInput)) {
+      this.elementRef.nativeElement.querySelector('#' + idInput).value = null;
+    }
   }
 
   save(): void {
@@ -110,6 +139,8 @@ export class SoruUpdateComponent implements OnInit {
       sira: this.editForm.get(['sira'])!.value,
       resimUrl: this.editForm.get(['resimUrl'])!.value,
       konu: this.editForm.get(['konu'])!.value,
+      imageContentType: this.editForm.get(['imageContentType'])!.value,
+      image: this.editForm.get(['image'])!.value,
     };
   }
 }
