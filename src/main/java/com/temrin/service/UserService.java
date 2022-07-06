@@ -24,6 +24,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tech.jhipster.security.RandomUtil;
 
+import static com.temrin.security.SecurityUtils.getCurrentUserAuthories;
+
 /**
  * Service class for managing users.
  */
@@ -321,5 +323,57 @@ public class UserService {
         if (user.getEmail() != null) {
             Objects.requireNonNull(cacheManager.getCache(UserRepository.USERS_BY_EMAIL_CACHE)).evict(user.getEmail());
         }
+    }
+
+
+    public Optional<User> getUserLogin(String login) {
+        return userRepository.findOneByLogin(login);
+    }
+
+    public String getAuth() {
+        List<String> auths = getCurrentUserAuthories();
+
+        // buraya niye giriyor
+        if (auths.size() >= 2) auths = Collections.singletonList(getBuyukRole(auths));
+
+        for (String a : auths) {
+            if (a.equals("ROLE_ADMIN")) {
+                return "ROLE_ADMIN";
+            }
+
+            if (a.equals("ROLE_MESUL")) {
+                return "ROLE_MESUL";
+            }
+
+            if (a.equals("ROLE_HOCA")) {
+                return "ROLE_HOCA";
+            }
+        }
+        return "ROLE_USER";
+    }
+
+    public String getBuyukRole(List<String> role) {
+        for (String r : role) {
+            if (r.equals("ROLE_MESUL")) {
+                return "ROLE_MESUL";
+            }
+        }
+
+        for (String r : role) {
+            if (r.equals("ROLE_ADMIN")) {
+                return "ROLE_ADMIN";
+            }
+        }
+
+        return "ROLE_USER";
+    }
+
+    public List<User> getAuthUser(Authority auth) {
+        return userRepository.findAllByAuthoritiesContaining(auth);
+    }
+
+    public User getCurrentUser() {
+        String login = SecurityUtils.getCurrentUserLogin().get();
+        return getUserWithAuthoritiesByLogin(login).get();
     }
 }

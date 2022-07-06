@@ -1,7 +1,9 @@
 package com.temrin.security;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -96,5 +98,10 @@ public final class SecurityUtils {
 
     private static Stream<String> getAuthorities(Authentication authentication) {
         return authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority);
+    }
+
+    public static List<String> getCurrentUserAuthories() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return getAuthorities(authentication).collect(Collectors.toList());
     }
 }
