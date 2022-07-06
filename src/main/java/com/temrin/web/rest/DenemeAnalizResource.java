@@ -2,6 +2,7 @@ package com.temrin.web.rest;
 
 import com.temrin.domain.DenemeAnaliz;
 import com.temrin.repository.DenemeAnalizRepository;
+import com.temrin.service.DenemeAnalizService;
 import com.temrin.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -35,9 +36,11 @@ public class DenemeAnalizResource {
     private String applicationName;
 
     private final DenemeAnalizRepository denemeAnalizRepository;
+    private final DenemeAnalizService denemeAnalizService;
 
-    public DenemeAnalizResource(DenemeAnalizRepository denemeAnalizRepository) {
+    public DenemeAnalizResource(DenemeAnalizRepository denemeAnalizRepository, DenemeAnalizService denemeAnalizService) {
         this.denemeAnalizRepository = denemeAnalizRepository;
+        this.denemeAnalizService = denemeAnalizService;
     }
 
     /**
@@ -160,7 +163,21 @@ public class DenemeAnalizResource {
     @GetMapping("/deneme-analizs")
     public List<DenemeAnaliz> getAllDenemeAnalizs(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get all DenemeAnalizs");
-        return denemeAnalizRepository.findAllWithEagerRelationships();
+//        return denemeAnalizRepository.findAllWithEagerRelationships();
+        return denemeAnalizService.getAllDeneme();
+    }
+
+    /**
+     * {@code GET  /deneme-analizs/:id} : get the "id" denemeAnaliz.
+     *
+     * @param id the id of the denemeAnaliz to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the denemeAnaliz, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/deneme-analizs/hoca/{id}")
+    public List<DenemeAnaliz> getDenemeAnalizHoca(@PathVariable Long id) {
+        log.debug("REST request to get DenemeAnaliz : {}", id);
+        List<DenemeAnaliz> denemeAnaliz = denemeAnalizService.getHocaDeneme(id);
+        return denemeAnaliz;
     }
 
     /**

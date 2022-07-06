@@ -2,6 +2,7 @@ package com.temrin.web.rest;
 
 import com.temrin.domain.DenemeAnalizSinif;
 import com.temrin.repository.DenemeAnalizSinifRepository;
+import com.temrin.service.DenemeAnalizSinifService;
 import com.temrin.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -35,9 +36,11 @@ public class DenemeAnalizSinifResource {
     private String applicationName;
 
     private final DenemeAnalizSinifRepository denemeAnalizSinifRepository;
+    private final DenemeAnalizSinifService denemeAnalizSinifService;
 
-    public DenemeAnalizSinifResource(DenemeAnalizSinifRepository denemeAnalizSinifRepository) {
+    public DenemeAnalizSinifResource(DenemeAnalizSinifRepository denemeAnalizSinifRepository, DenemeAnalizSinifService denemeAnalizSinifService) {
         this.denemeAnalizSinifRepository = denemeAnalizSinifRepository;
+        this.denemeAnalizSinifService = denemeAnalizSinifService;
     }
 
     /**
@@ -152,7 +155,8 @@ public class DenemeAnalizSinifResource {
     @GetMapping("/deneme-analiz-sinifs")
     public List<DenemeAnalizSinif> getAllDenemeAnalizSinifs(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get all DenemeAnalizSinifs");
-        return denemeAnalizSinifRepository.findAllWithEagerRelationships();
+//        return denemeAnalizSinifRepository.findAllWithEagerRelationships();
+        return denemeAnalizSinifService.getAllDenemeAnalizSinif();
     }
 
     /**

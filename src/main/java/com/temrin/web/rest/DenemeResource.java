@@ -2,9 +2,14 @@ package com.temrin.web.rest;
 
 import com.temrin.domain.Deneme;
 import com.temrin.repository.DenemeRepository;
+import com.temrin.service.DenemeService;
+import com.temrin.service.dto.DenemeDTO;
+import com.temrin.service.dto.deneme.DenemeCevapRequest;
+import com.temrin.service.dto.deneme.DenemeSinavDto;
 import com.temrin.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.text.ParseException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -35,9 +40,11 @@ public class DenemeResource {
     private String applicationName;
 
     private final DenemeRepository denemeRepository;
+    private final DenemeService denemeService;
 
-    public DenemeResource(DenemeRepository denemeRepository) {
+    public DenemeResource(DenemeRepository denemeRepository, DenemeService denemeService) {
         this.denemeRepository = denemeRepository;
+        this.denemeService = denemeService;
     }
 
     /**
@@ -48,12 +55,12 @@ public class DenemeResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/denemes")
-    public ResponseEntity<Deneme> createDeneme(@Valid @RequestBody Deneme deneme) throws URISyntaxException {
+    public ResponseEntity<Deneme> createDeneme(@Valid @RequestBody DenemeDTO deneme) throws URISyntaxException, ParseException {
         log.debug("REST request to save Deneme : {}", deneme);
-        if (deneme.getId() != null) {
-            throw new BadRequestAlertException("A new deneme cannot already have an ID", ENTITY_NAME, "idexists");
-        }
-        Deneme result = denemeRepository.save(deneme);
+//        if (deneme.getId() != null) {
+//            throw new BadRequestAlertException("A new deneme cannot already have an ID", ENTITY_NAME, "idexists");
+//        }
+        Deneme result = denemeService.create(deneme);
         return ResponseEntity
             .created(new URI("/api/denemes/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
@@ -163,7 +170,32 @@ public class DenemeResource {
     @GetMapping("/denemes")
     public List<Deneme> getAllDenemes(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get all Denemes");
-        return denemeRepository.findAllWithEagerRelationships();
+//        return denemeRepository.findAllWithEagerRelationships();
+        return denemeService.getAllDeneme();
+    }
+    /**
+     * {@code GET  /denemes/:id} : get the "id" deneme.
+     * burda denemeye gireceğimiz soruları getircez
+     * @param id the id of the deneme to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the deneme, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/denemeSinva/{id}")
+    public DenemeSinavDto getDenemeGiris(@PathVariable Long id) {
+        return denemeService.denemeSinavOlustur(id);
+    }
+
+    /**
+     * {@code POST  /denemes} : Create a new deneme.
+     *
+     * @param deneme the deneme to create.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new deneme, or with status {@code 400 (Bad Request)} if the deneme has already an ID.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @PostMapping("/denemes/cevaplar")
+    public boolean denemeCevap(@Valid @RequestBody DenemeCevapRequest deneme) throws URISyntaxException, ParseException {
+        log.debug("REST request to save Deneme : {}", deneme);
+
+        return denemeService.cevapKontrol(deneme);
     }
 
     /**

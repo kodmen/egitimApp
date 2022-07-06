@@ -2,6 +2,7 @@ package com.temrin.web.rest;
 
 import com.temrin.domain.Sinif;
 import com.temrin.repository.SinifRepository;
+import com.temrin.service.SinifService;
 import com.temrin.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -35,9 +36,11 @@ public class SinifResource {
     private String applicationName;
 
     private final SinifRepository sinifRepository;
+    private final SinifService sinifService;
 
-    public SinifResource(SinifRepository sinifRepository) {
+    public SinifResource(SinifRepository sinifRepository, SinifService sinifService) {
         this.sinifRepository = sinifRepository;
+        this.sinifService = sinifService;
     }
 
     /**
@@ -149,8 +152,8 @@ public class SinifResource {
     @GetMapping("/sinifs")
     public List<Sinif> getAllSinifs(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get all Sinifs");
-        return sinifRepository.findAllWithEagerRelationships();
-    }
+//        return sinifRepository.findAllWithEagerRelationships();
+        return sinifService.getAllSinif();    }
 
     /**
      * {@code GET  /sinifs/:id} : get the "id" sinif.

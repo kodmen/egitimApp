@@ -2,7 +2,11 @@ package com.temrin.web.rest;
 
 import com.temrin.domain.Soru;
 import com.temrin.repository.SoruRepository;
+import com.temrin.service.SoruService;
+import com.temrin.service.dto.SoruDto;
 import com.temrin.web.rest.errors.BadRequestAlertException;
+
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -35,9 +39,11 @@ public class SoruResource {
     private String applicationName;
 
     private final SoruRepository soruRepository;
+    private final SoruService soruService;
 
-    public SoruResource(SoruRepository soruRepository) {
+    public SoruResource(SoruRepository soruRepository, SoruService soruService) {
         this.soruRepository = soruRepository;
+        this.soruService = soruService;
     }
 
     /**
@@ -48,12 +54,13 @@ public class SoruResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/sorus")
-    public ResponseEntity<Soru> createSoru(@Valid @RequestBody Soru soru) throws URISyntaxException {
+    public ResponseEntity<Soru> createSoru(@Valid @RequestBody SoruDto soru) throws URISyntaxException, IOException {
         log.debug("REST request to save Soru : {}", soru);
         if (soru.getId() != null) {
             throw new BadRequestAlertException("A new soru cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        Soru result = soruRepository.save(soru);
+//        Soru result = soruRepository.save(soru);
+        Soru result = soruService.create(soru);
         return ResponseEntity
             .created(new URI("/api/sorus/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
@@ -180,7 +187,8 @@ public class SoruResource {
     @DeleteMapping("/sorus/{id}")
     public ResponseEntity<Void> deleteSoru(@PathVariable Long id) {
         log.debug("REST request to delete Soru : {}", id);
-        soruRepository.deleteById(id);
+//        soruRepository.deleteById(id);
+        soruService.delete(id);
         return ResponseEntity
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
