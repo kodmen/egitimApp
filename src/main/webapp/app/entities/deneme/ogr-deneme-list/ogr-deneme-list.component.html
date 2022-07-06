@@ -17,19 +17,24 @@
     <div class="alert alert-warning" id="no-result" *ngIf="denemes?.length === 0">
       <span jhiTranslate="temrinMatikApp.deneme.home.notFound">No denemes found</span>
     </div>
-    <div *ngFor="let deneme of denemes; let last = last">
-      <div class="card" style="width: 18rem">
-        <div class="card-body">
-          <h5 class="card-title">{{ deneme.isim }}</h5>
+    <div class="row">
+      <ng-container *ngFor="let deneme of denemes; let last = last">
+        <div class="col-md-3">
+          <div class="card m-4" style="width: 18rem">
+            <div class="card-body">
+              <h5 class="card-title">{{ deneme.isim }}</h5>
   
-          <h6 class="card-title">olusturan: {{ deneme.olusturan?.login }}</h6>
-          <h6 class="card-subtitle mb-2 text-muted">baslama tarih</h6>
+              <h6 class="card-title">olusturan: {{ deneme.olusturan?.login }}</h6>
+              <h6 class="card-text">baslama tarih:{{ deneme.baslamaTarih!.format('DD/MM/YYYY') }}</h6>
   
-          <p class="card-text">{{ deneme.baslamaTarih }}</p>
-          <p class="card-text">{{ deneme.sure }} süre</p>
+              <p class="card-text">Saat: {{ deneme.baslamaTarih!.get('h') }}:{{ deneme.baslamaTarih!.get('m') }}</p>
+              <p class="card-text">{{ deneme.sure }} süre</p>
   
-          <a [routerLink]="['/deneme', deneme.id, 'basla']" class="card-link">denemeye başla</a>
+              <button class="btn btn-success" (click)="zamanKontrol(deneme)" class="card-link">denemeye başla</button>
+            </div>
+          </div>
         </div>
-      </div>
+      </ng-container>
     </div>
   </div>
+  

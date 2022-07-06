@@ -110,7 +110,7 @@ export class DenemeService {
     if (res.body) {
       res.body.forEach((deneme: IDeneme) => {
         deneme.olusturmaTarih = deneme.olusturmaTarih ? dayjs(deneme.olusturmaTarih) : undefined;
-        deneme.baslamaTarih = deneme.baslamaTarih ? dayjs(deneme.baslamaTarih) : undefined;
+        deneme.baslamaTarih = deneme.baslamaTarih ? dayjs(deneme.baslamaTarih).locale('tr')  : undefined;
       });
     }
     return res;

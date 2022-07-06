@@ -1,50 +1,93 @@
-<div class="d-flex justify-content-center">
-  <div class="col-8">
-    <div *ngIf="denemeAnalizSinif">
-      <h2 data-cy="denemeAnalizSinifDetailsHeading">
-        <span jhiTranslate="temrinMatikApp.denemeAnalizSinif.detail.title">Deneme Analiz Sinif</span>
-      </h2>
+<div>
+  <h2 id="page-heading" data-cy="DenemeAnalizSinifHeading">
+    <span jhiTranslate="temrinMatikApp.denemeAnalizSinif.home.title">Deneme Analiz Sinifs</span>
 
-      <hr />
-
-      <jhi-alert-error></jhi-alert-error>
-
-      <jhi-alert></jhi-alert>
-
-      <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="global.field.id">ID</span></dt>
-        <dd>
-          <span>{{ denemeAnalizSinif.id }}</span>
-        </dd>
-        <dt><span jhiTranslate="temrinMatikApp.denemeAnalizSinif.ortalama">Ortalama</span></dt>
-        <dd>
-          <span>{{ denemeAnalizSinif.ortalama }}</span>
-        </dd>
-        <dt><span jhiTranslate="temrinMatikApp.denemeAnalizSinif.konuAnalizJson">Konu Analiz Json</span></dt>
-        <dd>
-          <span>{{ denemeAnalizSinif.konuAnalizJson }}</span>
-        </dd>
-        <dt><span jhiTranslate="temrinMatikApp.denemeAnalizSinif.deneme">Deneme</span></dt>
-        <dd>
-          <div *ngIf="denemeAnalizSinif.deneme">
-            <a [routerLink]="['/deneme', denemeAnalizSinif.deneme?.id, 'view']">{{ denemeAnalizSinif.deneme?.isim }}</a>
-          </div>
-        </dd>
-        <dt><span jhiTranslate="temrinMatikApp.denemeAnalizSinif.sinif">Sinif</span></dt>
-        <dd>
-          <div *ngIf="denemeAnalizSinif.sinif">
-            <a [routerLink]="['/sinif', denemeAnalizSinif.sinif?.id, 'view']">{{ denemeAnalizSinif.sinif?.isim }}</a>
-          </div>
-        </dd>
-      </dl>
-
-      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
-        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="temrinMatikApp.denemeAnalizSinif.home.refreshListLabel">Refresh List</span>
       </button>
 
-      <button type="button" [routerLink]="['/deneme-analiz-sinif', denemeAnalizSinif.id, 'edit']" class="btn btn-primary">
-        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      <button
+        *jhiHasAnyAuthority="'ROLE_ADMIN'"
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-deneme-analiz-sinif"
+        [routerLink]="['/deneme-analiz-sinif/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="temrinMatikApp.denemeAnalizSinif.home.createLabel"> Create a new Deneme Analiz Sinif </span>
       </button>
     </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="denemeAnalizSinifs?.length === 0">
+    <span jhiTranslate="temrinMatikApp.denemeAnalizSinif.home.notFound">No denemeAnalizSinifs found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="denemeAnalizSinifs && denemeAnalizSinifs.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span jhiTranslate="temrinMatikApp.denemeAnalizSinif.ortalama">Ortalama</span></th>
+          <th scope="col"><span jhiTranslate="temrinMatikApp.denemeAnalizSinif.deneme">Deneme</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let denemeAnalizSinif of denemeAnalizSinifs; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/deneme-analiz-sinif', denemeAnalizSinif.id, 'view']">{{ denemeAnalizSinif.id }}</a>
+          </td>
+          <td>{{ denemeAnalizSinif.ortalama }}</td>
+          <td>
+            <div *ngIf="denemeAnalizSinif.deneme">
+              <a [routerLink]="['/deneme', denemeAnalizSinif.deneme?.id, 'view']">{{ denemeAnalizSinif.deneme?.isim }}</a>
+            </div>
+          </td>
+
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/deneme-analiz-sinif', denemeAnalizSinif.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                *jhiHasAnyAuthority="'ROLE_ADMIN'"
+                type="submit"
+                [routerLink]="['/deneme-analiz-sinif', denemeAnalizSinif.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button
+                *jhiHasAnyAuthority="'ROLE_ADMIN'"
+                type="submit"
+                (click)="delete(denemeAnalizSinif)"
+                class="btn btn-danger btn-sm"
+                data-cy="entityDeleteButton"
+              >
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>

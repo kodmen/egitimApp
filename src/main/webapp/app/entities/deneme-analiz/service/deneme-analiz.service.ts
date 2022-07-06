@@ -20,6 +20,10 @@ export class DenemeAnalizService {
     return this.http.post<IDenemeAnaliz>(this.resourceUrl, denemeAnaliz, { observe: 'response' });
   }
 
+  findDenemeyeGoreAnalizler(id: number): Observable<EntityArrayResponseType> {
+    return this.http.get<IDenemeAnaliz[]>(`${this.resourceUrl}/hoca/${id}`, { observe: 'response' });
+  }
+
   update(denemeAnaliz: IDenemeAnaliz): Observable<EntityResponseType> {
     return this.http.put<IDenemeAnaliz>(`${this.resourceUrl}/${getDenemeAnalizIdentifier(denemeAnaliz) as number}`, denemeAnaliz, {
       observe: 'response',

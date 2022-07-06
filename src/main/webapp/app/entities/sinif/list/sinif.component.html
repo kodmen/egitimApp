@@ -9,6 +9,7 @@
       </button>
 
       <button
+      *jhiHasAnyAuthority="['ROLE_MESUL','ROLE_ADMIN']"
         id="jh-create-entity"
         data-cy="entityCreateButton"
         class="btn btn-primary jh-create-entity create-sinif"
@@ -34,7 +35,6 @@
         <tr>
           <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
           <th scope="col"><span jhiTranslate="temrinMatikApp.sinif.isim">Isim</span></th>
-          <th scope="col"><span jhiTranslate="temrinMatikApp.sinif.konulimizjson">Konulimizjson</span></th>
           <th scope="col"><span jhiTranslate="temrinMatikApp.sinif.yurt">Yurt</span></th>
           <th scope="col"><span jhiTranslate="temrinMatikApp.sinif.grup">Grup</span></th>
           <th scope="col"><span jhiTranslate="temrinMatikApp.sinif.hoca">Hoca</span></th>
@@ -48,7 +48,6 @@
             <a [routerLink]="['/sinif', sinif.id, 'view']">{{ sinif.id }}</a>
           </td>
           <td>{{ sinif.isim }}</td>
-          <td>{{ sinif.konulimizjson }}</td>
           <td>
             <div *ngIf="sinif.yurt">
               <a [routerLink]="['/yurt', sinif.yurt?.id, 'view']">{{ sinif.yurt?.isim }}</a>
@@ -72,12 +71,14 @@
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
               </button>
 
-              <button type="submit" [routerLink]="['/sinif', sinif.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+              <button       *jhiHasAnyAuthority="['ROLE_MESUL','ROLE_ADMIN']"
+              type="submit" [routerLink]="['/sinif', sinif.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
                 <fa-icon icon="pencil-alt"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
               </button>
 
-              <button type="submit" (click)="delete(sinif)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+              <button       *jhiHasAnyAuthority="['ROLE_MESUL','ROLE_ADMIN']"
+              type="submit" (click)="delete(sinif)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
                 <fa-icon icon="times"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
               </button>
