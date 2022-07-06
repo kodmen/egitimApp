@@ -1,0 +1,66 @@
+<div class="row">
+    <jhi-alert-error></jhi-alert-error>
+  
+    <form [formGroup]="form" (submit)="save()">
+      <div class="col-md-12">
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">isim</label>
+          <input formControlName="isim" type="text" class="form-control" id="exampleFormControlInput1" />
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="birthday">tarih:</label>
+          <input formControlName="baslamaTarih" type="datetime-local" class="form-control" id="birthdaytime" f name="birthdaytime" />
+        </div>
+  
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">süre</label>
+          <input formControlName="sure" type="text" class="form-control" id="exampleFormControlInput1" />
+        </div>
+        <div class="form-check">
+          <input formControlName="rastgele" class="form-check-input" type="checkbox" value="true" id="flexCheckDefault" />
+          <label class="form-check-label" for="flexCheckDefault"> Soruları rastgele dağıt </label>
+        </div>
+        <div formArrayName="konudto" *ngFor="let control of cevaplarFieldAsFormArray.controls; let i = index">
+          <form [formGroup]="control">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="exampleFormControlInput1" class="form-label">soru ekle</label>
+                  <select formControlName="konu" class="form-select" aria-label="Konu">
+                    <option selected>Ders seçin</option>
+                    <option [value]="konu.id" *ngFor="let konu of konularSharedCollection">{{ konu.isim }}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="mb-3">
+                  <label for="exampleFormControlInput1" class="form-label">kaç soru</label>
+                  <input formControlName="soruSayisi" type="text" class="form-control" id="exampleFormControlInput1" />
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="mb-3">
+                  <label for="exampleFormControlInput1" class="form-label">Başlangıç</label>
+                  <input formControlName="baslangic" type="text" class="form-control" id="exampleFormControlInput1" />
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="mb-3">
+                  <label for="exampleFormControlInput1" class="form-label">Bitiş</label>
+                  <input formControlName="bitis" type="text" class="form-control" id="exampleFormControlInput1" />
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+  
+        <div class="row">
+          <button class="btn btn-success" type="button" (click)="dersekle()">ders ekle</button>
+        </div>
+        <div class="row">
+          <button class="btn btn-primary" type="submit">Deneme oluştur</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  

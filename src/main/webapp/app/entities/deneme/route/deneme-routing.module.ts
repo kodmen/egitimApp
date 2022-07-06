@@ -6,6 +6,7 @@ import { DenemeComponent } from '../list/deneme.component';
 import { DenemeDetailComponent } from '../detail/deneme-detail.component';
 import { DenemeUpdateComponent } from '../update/deneme-update.component';
 import { DenemeRoutingResolveService } from './deneme-routing-resolve.service';
+import { CreateComponent } from '../create/create.component';
 
 const denemeRoute: Routes = [
   {
@@ -23,7 +24,7 @@ const denemeRoute: Routes = [
   },
   {
     path: 'new',
-    component: DenemeUpdateComponent,
+    component: CreateComponent,
     resolve: {
       deneme: DenemeRoutingResolveService,
     },

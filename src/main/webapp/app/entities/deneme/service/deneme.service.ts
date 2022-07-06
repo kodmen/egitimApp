@@ -9,6 +9,7 @@ import { DATE_FORMAT } from 'app/config/input.constants';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
 import { IDeneme, getDenemeIdentifier } from '../deneme.model';
+import { IDenemeDto } from '../denemeDto.model';
 
 export type EntityResponseType = HttpResponse<IDeneme>;
 export type EntityArrayResponseType = HttpResponse<IDeneme[]>;
@@ -24,6 +25,11 @@ export class DenemeService {
     return this.http
       .post<IDeneme>(this.resourceUrl, copy, { observe: 'response' })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+  }
+
+  createDto(deneme: IDenemeDto): Observable<EntityResponseType> {
+    // const copy = this.convertDateFromClient(deneme);
+    return this.http.post<IDeneme>(this.resourceUrl, deneme, { observe: 'response' });
   }
 
   update(deneme: IDeneme): Observable<EntityResponseType> {
