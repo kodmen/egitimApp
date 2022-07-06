@@ -32,21 +32,31 @@ spring:
       indent-output: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:h2:file:./target/h2db/db/temrinmatik;DB_CLOSE_DELAY=-1
-    username: temrinMatik
+    url: jdbc:postgresql://localhost:5432/temrinyeni
+    username: Gamification
     password:
     hikari:
       poolName: Hikari
       auto-commit: false
-  h2:
-    console:
-      # disable spring boot built-in h2-console since we start it manually with correct configuration
-      enabled: false
+#  datasource:
+#    type: com.zaxxer.hikari.HikariDataSource
+#    url: jdbc:h2:file:./target/h2db/db/temrinmatik;DB_CLOSE_DELAY=-1
+#    username: temrinMatik
+#    password:
+#    hikari:
+#      poolName: Hikari
+#      auto-commit: false
+#  h2:
+#    console:
+#      # disable spring boot built-in h2-console since we start it manually with correct configuration
+#      enabled: false
+#  jpa:
+#    database-platform: tech.jhipster.domain.util.FixedH2Dialect
   jpa:
-    database-platform: tech.jhipster.domain.util.FixedH2Dialect
+    database-platform: tech.jhipster.domain.util.FixedPostgreSQL10Dialect
   liquibase:
     # Remove 'faker' if you do not want the sample data to be loaded automatically
-    contexts: dev, faker
+    contexts: dev
   mail:
     host: localhost
     port: 25
