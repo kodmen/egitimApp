@@ -29,7 +29,8 @@
         </li>
         <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
         <li
-          *ngSwitchCase="true"
+          *jhiHasAnyAuthority="'ROLE_ADMIN'"
+
           ngbDropdown
           class="nav-item dropdown pointer"
           display="dynamic"
@@ -142,6 +143,7 @@
             <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
           </ul>
         </li>
+
         <li
           *jhiHasAnyAuthority="'ROLE_ADMIN'"
           ngbDropdown
@@ -202,6 +204,135 @@
             </li>
           </ul>
         </li>
+
+        <!-- HOCA-->
+        <li
+          *jhiHasAnyAuthority="'ROLE_HOCA'"
+          ngbDropdown
+          class="nav-item dropdown pointer"
+          display="dynamic"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="admin-menu" data-cy="adminMenu">
+          <span>
+            <fa-icon icon="users-cog"></fa-icon>
+            <!-- <span jhiTranslate="global.menu.admin.main">Administration</span> -->
+            <span>Hoca</span>
+          </span>
+          </a>
+          <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="admin-menu">
+            <li>
+              <a class="dropdown-item" routerLink="deneme" routerLinkActive="active" (click)="collapseNavbar()">
+                <fa-icon icon="users" [fixedWidth]="true"></fa-icon>
+                <span>Denemeler</span>
+              </a>
+            </li>
+            <li>
+              <a
+                class="dropdown-item"
+                routerLink="deneme-analiz-sinif"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                (click)="collapseNavbar()"
+              >
+                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                <span jhiTranslate="global.menu.entities.denemeAnalizSinif">Deneme Analiz Sinif</span>
+              </a>
+            </li>
+
+            <li>
+              <a class="dropdown-item" routerLink="sinif" routerLinkActive="active" (click)="collapseNavbar()">
+                <fa-icon icon="users" [fixedWidth]="true"></fa-icon>
+                <span>Sınıf</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <!-- Mesul-->
+        <li
+          *jhiHasAnyAuthority="'ROLE_MESUL'"
+          ngbDropdown
+          class="nav-item dropdown pointer"
+          display="dynamic"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="admin-menu" data-cy="adminMenu">
+          <span>
+            <fa-icon icon="users-cog"></fa-icon>
+            <!-- <span jhiTranslate="global.menu.admin.main">Administration</span> -->
+            <span>MESUL</span>
+          </span>
+          </a>
+          <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="admin-menu">
+            <li>
+              <a class="dropdown-item" routerLink="sinif" routerLinkActive="active" (click)="collapseNavbar()">
+                <fa-icon icon="users" [fixedWidth]="true"></fa-icon>
+                <span>Sınıflar</span>
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" routerLink="grup" routerLinkActive="active" (click)="collapseNavbar()">
+                <fa-icon icon="users" [fixedWidth]="true"></fa-icon>
+                <span>Gruplar </span>
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" routerLink="konu" routerLinkActive="active" (click)="collapseNavbar()">
+                <fa-icon icon="users" [fixedWidth]="true"></fa-icon>
+                <span>Derslar konu </span>
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" routerLink="soru" routerLinkActive="active" (click)="collapseNavbar()">
+                <fa-icon icon="users" [fixedWidth]="true"></fa-icon>
+                <span>Sorular</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <!-- User-->
+        <li
+          *jhiHasAnyAuthority="'ROLE_USER'"
+          ngbDropdown
+          class="nav-item dropdown pointer"
+          display="dynamic"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="admin-menu" data-cy="adminMenu">
+          <span>
+            <fa-icon icon="users-cog"></fa-icon>
+            <!-- <span jhiTranslate="global.menu.admin.main">Administration</span> -->
+            <span>OGRENCİ</span>
+          </span>
+          </a>
+          <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="admin-menu">
+            <li>
+              <a class="dropdown-item" routerLink="sinif" routerLinkActive="active" (click)="collapseNavbar()">
+                <fa-icon icon="users" [fixedWidth]="true"></fa-icon>
+                <span>SINIF</span>
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" routerLink="deneme/ogr" routerLinkActive="active" (click)="collapseNavbar()">
+                <fa-icon icon="users" [fixedWidth]="true"></fa-icon>
+                <span>DENEME</span>
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" routerLink="deneme-analiz" routerLinkActive="active" (click)="collapseNavbar()">
+                <fa-icon icon="users" [fixedWidth]="true"></fa-icon>
+                <span>DENEME ANALİZ</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+
         <li ngbDropdown class="nav-item dropdown pointer" display="dynamic" *ngIf="languages && languages.length > 1">
           <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="languagesnavBarDropdown">
             <span>
