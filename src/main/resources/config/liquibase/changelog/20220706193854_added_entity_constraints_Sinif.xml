@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+    <!--
+        Added the constraints for entity Sinif.
+    -->
+    <changeSet id="20220706193854-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="yurt_id"
+                                 baseTableName="sinif"
+                                 constraintName="fk_sinif__yurt_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="yurt"/>
+
+        <addForeignKeyConstraint baseColumnNames="grup_id"
+                                 baseTableName="sinif"
+                                 constraintName="fk_sinif__grup_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="grup"/>
+
+        <addForeignKeyConstraint baseColumnNames="hoca_id"
+                                 baseTableName="sinif"
+                                 constraintName="fk_sinif__hoca_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="sinif_id"
+                                 baseTableName="rel_sinif__ogrenciler"
+                                 constraintName="fk_rel_sinif__ogrenciler__sinif_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="sinif"/>
+
+        <addForeignKeyConstraint baseColumnNames="ogrenciler_id"
+                                 baseTableName="rel_sinif__ogrenciler"
+                                 constraintName="fk_rel_sinif__ogrenciler__ogrenciler_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+    </changeSet>
+</databaseChangeLog>

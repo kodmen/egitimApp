@@ -1,0 +1,29 @@
+{
+  "temrinMatikApp": {
+    "soru": {
+      "home": {
+        "title": "Sorus",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Soru",
+        "createOrEditLabel": "Create or edit a Soru",
+        "notFound": "No Sorus found"
+      },
+      "created": "A new Soru is created with identifier {{ param }}",
+      "updated": "A Soru is updated with identifier {{ param }}",
+      "deleted": "A Soru is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Soru {{ id }}?"
+      },
+      "detail": {
+        "title": "Soru"
+      },
+      "id": "ID",
+      "isim": "Isim",
+      "cevap": "Cevap",
+      "sira": "Sira",
+      "resimUrl": "Resim Url",
+      "konu": "Konu",
+      "denemeler": "Denemeler"
+    }
+  }
+}

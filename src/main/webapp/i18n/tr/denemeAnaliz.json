@@ -1,0 +1,30 @@
+{
+  "temrinMatikApp": {
+    "denemeAnaliz": {
+      "home": {
+        "title": "Deneme Analizs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Deneme Analiz",
+        "createOrEditLabel": "Create or edit a Deneme Analiz",
+        "notFound": "No Deneme Analizs found"
+      },
+      "created": "A new Deneme Analiz is created with identifier {{ param }}",
+      "updated": "A Deneme Analiz is updated with identifier {{ param }}",
+      "deleted": "A Deneme Analiz is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Deneme Analiz {{ id }}?"
+      },
+      "detail": {
+        "title": "Deneme Analiz"
+      },
+      "id": "ID",
+      "dogru": "Dogru",
+      "yanlis": "Yanlis",
+      "puan": "Puan",
+      "cozuldu": "Cozuldu",
+      "konuAnalizJson": "Konu Analiz Json",
+      "user": "User",
+      "deneme": "Deneme"
+    }
+  }
+}

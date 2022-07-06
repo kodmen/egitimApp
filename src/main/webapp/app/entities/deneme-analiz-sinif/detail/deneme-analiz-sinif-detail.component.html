@@ -1,0 +1,50 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="denemeAnalizSinif">
+      <h2 data-cy="denemeAnalizSinifDetailsHeading">
+        <span jhiTranslate="temrinMatikApp.denemeAnalizSinif.detail.title">Deneme Analiz Sinif</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ denemeAnalizSinif.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="temrinMatikApp.denemeAnalizSinif.ortalama">Ortalama</span></dt>
+        <dd>
+          <span>{{ denemeAnalizSinif.ortalama }}</span>
+        </dd>
+        <dt><span jhiTranslate="temrinMatikApp.denemeAnalizSinif.konuAnalizJson">Konu Analiz Json</span></dt>
+        <dd>
+          <span>{{ denemeAnalizSinif.konuAnalizJson }}</span>
+        </dd>
+        <dt><span jhiTranslate="temrinMatikApp.denemeAnalizSinif.deneme">Deneme</span></dt>
+        <dd>
+          <div *ngIf="denemeAnalizSinif.deneme">
+            <a [routerLink]="['/deneme', denemeAnalizSinif.deneme?.id, 'view']">{{ denemeAnalizSinif.deneme?.isim }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="temrinMatikApp.denemeAnalizSinif.sinif">Sinif</span></dt>
+        <dd>
+          <div *ngIf="denemeAnalizSinif.sinif">
+            <a [routerLink]="['/sinif', denemeAnalizSinif.sinif?.id, 'view']">{{ denemeAnalizSinif.sinif?.isim }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/deneme-analiz-sinif', denemeAnalizSinif.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

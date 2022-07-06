@@ -1,0 +1,22 @@
+{
+  "applications": ["temrinMatik"],
+  "changelogDate": "20220706193654",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "konu",
+  "fields": [
+    {
+      "fieldName": "isim",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "500"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Konu",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [],
+  "service": "no"
+}

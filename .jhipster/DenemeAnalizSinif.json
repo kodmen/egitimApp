@@ -1,0 +1,41 @@
+{
+  "applications": ["temrinMatik"],
+  "changelogDate": "20220706193954",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "deneme_analiz_sinif",
+  "fields": [
+    {
+      "fieldName": "ortalama",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "konuAnalizJson",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "5000"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "DenemeAnalizSinif",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "isim",
+      "otherEntityName": "deneme",
+      "otherEntityRelationshipName": "denemeAnalizSinif",
+      "relationshipName": "deneme",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "isim",
+      "otherEntityName": "sinif",
+      "otherEntityRelationshipName": "denemeAnalizSinif",
+      "relationshipName": "sinif",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

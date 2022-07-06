@@ -1,0 +1,56 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="sinif">
+      <h2 data-cy="sinifDetailsHeading"><span jhiTranslate="temrinMatikApp.sinif.detail.title">Sinif</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ sinif.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="temrinMatikApp.sinif.isim" [ngbTooltip]="'temrinMatikApp.sinif.help.isim' | translate">Isim</span></dt>
+        <dd>
+          <span>{{ sinif.isim }}</span>
+        </dd>
+        <dt><span jhiTranslate="temrinMatikApp.sinif.konulimizjson">Konulimizjson</span></dt>
+        <dd>
+          <span>{{ sinif.konulimizjson }}</span>
+        </dd>
+        <dt><span jhiTranslate="temrinMatikApp.sinif.yurt">Yurt</span></dt>
+        <dd>
+          <div *ngIf="sinif.yurt">
+            <a [routerLink]="['/yurt', sinif.yurt?.id, 'view']">{{ sinif.yurt?.isim }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="temrinMatikApp.sinif.grup">Grup</span></dt>
+        <dd>
+          <div *ngIf="sinif.grup">
+            <a [routerLink]="['/grup', sinif.grup?.id, 'view']">{{ sinif.grup?.isim }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="temrinMatikApp.sinif.hoca">Hoca</span></dt>
+        <dd>
+          <span>{{ sinif.hoca?.login }}</span>
+        </dd>
+        <dt><span jhiTranslate="temrinMatikApp.sinif.ogrenciler">Ogrenciler</span></dt>
+        <dd>
+          <span *ngFor="let ogrenciler of sinif.ogrencilers; let last = last"> {{ ogrenciler.login }}{{ last ? '' : ', ' }} </span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/sinif', sinif.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

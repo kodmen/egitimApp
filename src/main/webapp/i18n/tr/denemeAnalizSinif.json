@@ -1,0 +1,27 @@
+{
+  "temrinMatikApp": {
+    "denemeAnalizSinif": {
+      "home": {
+        "title": "Deneme Analiz Sinifs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Deneme Analiz Sinif",
+        "createOrEditLabel": "Create or edit a Deneme Analiz Sinif",
+        "notFound": "No Deneme Analiz Sinifs found"
+      },
+      "created": "A new Deneme Analiz Sinif is created with identifier {{ param }}",
+      "updated": "A Deneme Analiz Sinif is updated with identifier {{ param }}",
+      "deleted": "A Deneme Analiz Sinif is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Deneme Analiz Sinif {{ id }}?"
+      },
+      "detail": {
+        "title": "Deneme Analiz Sinif"
+      },
+      "id": "ID",
+      "ortalama": "Ortalama",
+      "konuAnalizJson": "Konu Analiz Json",
+      "deneme": "Deneme",
+      "sinif": "Sinif"
+    }
+  }
+}

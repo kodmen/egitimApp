@@ -1,0 +1,87 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-soru-heading" data-cy="SoruCreateUpdateHeading" jhiTranslate="temrinMatikApp.soru.home.createOrEditLabel">
+        Create or edit a Soru
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="temrinMatikApp.soru.isim" for="field_isim">Isim</label>
+          <input type="text" class="form-control" name="isim" id="field_isim" data-cy="isim" formControlName="isim" />
+          <div *ngIf="editForm.get('isim')!.invalid && (editForm.get('isim')!.dirty || editForm.get('isim')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('isim')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 500 }"
+            >
+              This field cannot be longer than 500 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="temrinMatikApp.soru.cevap" for="field_cevap">Cevap</label>
+          <input type="text" class="form-control" name="cevap" id="field_cevap" data-cy="cevap" formControlName="cevap" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="temrinMatikApp.soru.sira" for="field_sira">Sira</label>
+          <input type="number" class="form-control" name="sira" id="field_sira" data-cy="sira" formControlName="sira" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="temrinMatikApp.soru.resimUrl" for="field_resimUrl">Resim Url</label>
+          <input type="text" class="form-control" name="resimUrl" id="field_resimUrl" data-cy="resimUrl" formControlName="resimUrl" />
+          <div *ngIf="editForm.get('resimUrl')!.invalid && (editForm.get('resimUrl')!.dirty || editForm.get('resimUrl')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('resimUrl')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 500 }"
+            >
+              This field cannot be longer than 500 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="temrinMatikApp.soru.konu" for="field_konu">Konu</label>
+          <select class="form-control" id="field_konu" data-cy="konu" name="konu" formControlName="konu">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="konuOption.id === editForm.get('konu')!.value?.id ? editForm.get('konu')!.value : konuOption"
+              *ngFor="let konuOption of konusSharedCollection; trackBy: trackKonuById"
+            >
+              {{ konuOption.isim }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

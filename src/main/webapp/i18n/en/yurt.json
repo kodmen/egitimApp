@@ -1,0 +1,25 @@
+{
+  "temrinMatikApp": {
+    "yurt": {
+      "home": {
+        "title": "Yurts",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Yurt",
+        "createOrEditLabel": "Create or edit a Yurt",
+        "notFound": "No Yurts found"
+      },
+      "created": "A new Yurt is created with identifier {{ param }}",
+      "updated": "A Yurt is updated with identifier {{ param }}",
+      "deleted": "A Yurt is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Yurt {{ id }}?"
+      },
+      "detail": {
+        "title": "Yurt"
+      },
+      "id": "ID",
+      "isim": "Isim",
+      "mesul": "Mesul"
+    }
+  }
+}

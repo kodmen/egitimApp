@@ -1,0 +1,97 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-deneme-analiz-sinif-heading"
+        data-cy="DenemeAnalizSinifCreateUpdateHeading"
+        jhiTranslate="temrinMatikApp.denemeAnalizSinif.home.createOrEditLabel"
+      >
+        Create or edit a Deneme Analiz Sinif
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="temrinMatikApp.denemeAnalizSinif.ortalama" for="field_ortalama">Ortalama</label>
+          <input type="number" class="form-control" name="ortalama" id="field_ortalama" data-cy="ortalama" formControlName="ortalama" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="temrinMatikApp.denemeAnalizSinif.konuAnalizJson" for="field_konuAnalizJson"
+            >Konu Analiz Json</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="konuAnalizJson"
+            id="field_konuAnalizJson"
+            data-cy="konuAnalizJson"
+            formControlName="konuAnalizJson"
+          />
+          <div
+            *ngIf="
+              editForm.get('konuAnalizJson')!.invalid && (editForm.get('konuAnalizJson')!.dirty || editForm.get('konuAnalizJson')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('konuAnalizJson')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 5000 }"
+            >
+              This field cannot be longer than 5000 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="temrinMatikApp.denemeAnalizSinif.deneme" for="field_deneme">Deneme</label>
+          <select class="form-control" id="field_deneme" data-cy="deneme" name="deneme" formControlName="deneme">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="denemeOption.id === editForm.get('deneme')!.value?.id ? editForm.get('deneme')!.value : denemeOption"
+              *ngFor="let denemeOption of denemesSharedCollection; trackBy: trackDenemeById"
+            >
+              {{ denemeOption.isim }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="temrinMatikApp.denemeAnalizSinif.sinif" for="field_sinif">Sinif</label>
+          <select class="form-control" id="field_sinif" data-cy="sinif" name="sinif" formControlName="sinif">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="sinifOption.id === editForm.get('sinif')!.value?.id ? editForm.get('sinif')!.value : sinifOption"
+              *ngFor="let sinifOption of sinifsSharedCollection; trackBy: trackSinifById"
+            >
+              {{ sinifOption.isim }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

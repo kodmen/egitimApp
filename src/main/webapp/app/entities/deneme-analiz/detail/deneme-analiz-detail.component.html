@@ -1,0 +1,58 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="denemeAnaliz">
+      <h2 data-cy="denemeAnalizDetailsHeading"><span jhiTranslate="temrinMatikApp.denemeAnaliz.detail.title">Deneme Analiz</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ denemeAnaliz.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="temrinMatikApp.denemeAnaliz.dogru">Dogru</span></dt>
+        <dd>
+          <span>{{ denemeAnaliz.dogru }}</span>
+        </dd>
+        <dt><span jhiTranslate="temrinMatikApp.denemeAnaliz.yanlis">Yanlis</span></dt>
+        <dd>
+          <span>{{ denemeAnaliz.yanlis }}</span>
+        </dd>
+        <dt><span jhiTranslate="temrinMatikApp.denemeAnaliz.puan">Puan</span></dt>
+        <dd>
+          <span>{{ denemeAnaliz.puan }}</span>
+        </dd>
+        <dt><span jhiTranslate="temrinMatikApp.denemeAnaliz.cozuldu">Cozuldu</span></dt>
+        <dd>
+          <span>{{ denemeAnaliz.cozuldu }}</span>
+        </dd>
+        <dt><span jhiTranslate="temrinMatikApp.denemeAnaliz.konuAnalizJson">Konu Analiz Json</span></dt>
+        <dd>
+          <span>{{ denemeAnaliz.konuAnalizJson }}</span>
+        </dd>
+        <dt><span jhiTranslate="temrinMatikApp.denemeAnaliz.user">User</span></dt>
+        <dd>
+          <span>{{ denemeAnaliz.user?.login }}</span>
+        </dd>
+        <dt><span jhiTranslate="temrinMatikApp.denemeAnaliz.deneme">Deneme</span></dt>
+        <dd>
+          <div *ngIf="denemeAnaliz.deneme">
+            <a [routerLink]="['/deneme', denemeAnaliz.deneme?.id, 'view']">{{ denemeAnaliz.deneme?.isim }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/deneme-analiz', denemeAnaliz.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

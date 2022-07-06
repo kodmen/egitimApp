@@ -1,0 +1,24 @@
+{
+  "temrinMatikApp": {
+    "konu": {
+      "home": {
+        "title": "Konus",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Konu",
+        "createOrEditLabel": "Create or edit a Konu",
+        "notFound": "No Konus found"
+      },
+      "created": "A new Konu is created with identifier {{ param }}",
+      "updated": "A Konu is updated with identifier {{ param }}",
+      "deleted": "A Konu is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Konu {{ id }}?"
+      },
+      "detail": {
+        "title": "Konu"
+      },
+      "id": "ID",
+      "isim": "Isim"
+    }
+  }
+}

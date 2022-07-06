@@ -1,0 +1,63 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="deneme">
+      <h2 data-cy="denemeDetailsHeading"><span jhiTranslate="temrinMatikApp.deneme.detail.title">Deneme</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ deneme.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="temrinMatikApp.deneme.isim">Isim</span></dt>
+        <dd>
+          <span>{{ deneme.isim }}</span>
+        </dd>
+        <dt><span jhiTranslate="temrinMatikApp.deneme.olusturmaTarih">Olusturma Tarih</span></dt>
+        <dd>
+          <span>{{ deneme.olusturmaTarih | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="temrinMatikApp.deneme.baslamaTarih">Baslama Tarih</span></dt>
+        <dd>
+          <span>{{ deneme.baslamaTarih | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="temrinMatikApp.deneme.sure">Sure</span></dt>
+        <dd>
+          <span>{{ deneme.sure }}</span>
+        </dd>
+        <dt><span jhiTranslate="temrinMatikApp.deneme.cevapAnahtar">Cevap Anahtar</span></dt>
+        <dd>
+          <span>{{ deneme.cevapAnahtar }}</span>
+        </dd>
+        <dt><span jhiTranslate="temrinMatikApp.deneme.denemeInfoJson">Deneme Info Json</span></dt>
+        <dd>
+          <span>{{ deneme.denemeInfoJson }}</span>
+        </dd>
+        <dt><span jhiTranslate="temrinMatikApp.deneme.olusturan">Olusturan</span></dt>
+        <dd>
+          <span>{{ deneme.olusturan?.login }}</span>
+        </dd>
+        <dt><span jhiTranslate="temrinMatikApp.deneme.sorular">Sorular</span></dt>
+        <dd>
+          <span *ngFor="let sorular of deneme.sorulars; let last = last">
+            <a [routerLink]="['/soru', sorular?.id, 'view']">{{ sorular.isim }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/deneme', deneme.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

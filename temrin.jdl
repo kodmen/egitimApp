@@ -1,0 +1,83 @@
+application {
+  config {
+    baseName temrinMatik,
+    applicationType monolith,
+    packageName com.temrin,
+    authenticationType jwt,
+    prodDatabaseType postgresql,
+    clientFramework angular,
+    languages [en, tr]
+  }
+  entities *
+}
+
+entity Yurt{
+    isim String maxlength(500)
+}
+
+entity Grup{
+ isim String maxlength(500)
+}
+
+entity Konu{
+  isim String maxlength(500)
+}
+
+entity Soru{
+  isim String maxlength(500)
+  cevap String 
+  sira Integer
+  resimUrl String maxlength(500)
+}
+
+entity Sinif {
+  /** isim */
+  isim String maxlength(500)
+  konulimizjson String maxlength(5000) 
+}
+
+entity DenemeAnalizSinif {
+  ortalama Float
+  konuAnalizJson String maxlength(5000) 
+}
+
+entity DenemeAnaliz {
+  dogru  Integer
+  yanlis  Integer
+  puan Integer
+  cozuldu Boolean
+  konuAnalizJson String maxlength(5000) 
+}
+
+entity Deneme {
+  isim String maxlength(500)
+  olusturmaTarih  LocalDate
+  baslamaTarih  Instant
+  sure  Integer
+  cevapAnahtar String maxlength(500)
+  denemeInfoJson String maxlength(5000) 
+}
+
+/**
+ * Many to one relationship.
+ */
+relationship ManyToOne {
+  Sinif{yurt(isim)} to Yurt
+  Sinif{grup(isim)} to Grup
+  Soru{konu(isim)} to Konu
+  DenemeAnaliz{user(login)} to User
+  DenemeAnaliz{deneme(isim)} to Deneme
+  DenemeAnalizSinif{deneme(isim)} to Deneme
+  DenemeAnalizSinif{sinif(isim)} to Sinif
+  Yurt{mesul(login)} to User
+  Sinif{hoca(login)} to User
+  Deneme{olusturan(login)} to User
+}
+
+/**
+ * Many to many relationship.
+ */
+relationship ManyToMany {
+  Deneme{sorular(isim)} to Soru{denemeler(isim)}
+  Sinif{ogrenciler(login)} to User{siniflar}
+}

@@ -1,0 +1,32 @@
+{
+  "temrinMatikApp": {
+    "sinif": {
+      "home": {
+        "title": "Sinifs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Sinif",
+        "createOrEditLabel": "Create or edit a Sinif",
+        "notFound": "No Sinifs found"
+      },
+      "created": "A new Sinif is created with identifier {{ param }}",
+      "updated": "A Sinif is updated with identifier {{ param }}",
+      "deleted": "A Sinif is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Sinif {{ id }}?"
+      },
+      "detail": {
+        "title": "Sinif"
+      },
+      "id": "ID",
+      "isim": "Isim",
+      "konulimizjson": "Konulimizjson",
+      "yurt": "Yurt",
+      "grup": "Grup",
+      "hoca": "Hoca",
+      "ogrenciler": "Ogrenciler",
+      "help": {
+        "isim": "isim"
+      }
+    }
+  }
+}

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+    <!--
+        Added the constraints for entity DenemeAnalizSinif.
+    -->
+    <changeSet id="20220706193954-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="deneme_id"
+                                 baseTableName="deneme_analiz_sinif"
+                                 constraintName="fk_deneme_analiz_sinif__deneme_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="deneme"/>
+
+        <addForeignKeyConstraint baseColumnNames="sinif_id"
+                                 baseTableName="deneme_analiz_sinif"
+                                 constraintName="fk_deneme_analiz_sinif__sinif_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="sinif"/>
+    </changeSet>
+</databaseChangeLog>

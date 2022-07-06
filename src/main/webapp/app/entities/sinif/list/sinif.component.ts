@@ -1,0 +1,51 @@
+import { Component, OnInit } from '@angular/core';
+import { HttpResponse } from '@angular/common/http';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
+import { ISinif } from '../sinif.model';
+import { SinifService } from '../service/sinif.service';
+import { SinifDeleteDialogComponent } from '../delete/sinif-delete-dialog.component';
+
+@Component({
+  selector: 'jhi-sinif',
+  templateUrl: './sinif.component.html',
+})
+export class SinifComponent implements OnInit {
+  sinifs?: ISinif[];
+  isLoading = false;
+
+  constructor(protected sinifService: SinifService, protected modalService: NgbModal) {}
+
+  loadAll(): void {
+    this.isLoading = true;
+
+    this.sinifService.query().subscribe({
+      next: (res: HttpResponse<ISinif[]>) => {
+        this.isLoading = false;
+        this.sinifs = res.body ?? [];
+      },
+      error: () => {
+        this.isLoading = false;
+      },
+    });
+  }
+
+  ngOnInit(): void {
+    this.loadAll();
+  }
+
+  trackId(_index: number, item: ISinif): number {
+    return item.id!;
+  }
+
+  delete(sinif: ISinif): void {
+    const modalRef = this.modalService.open(SinifDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+    modalRef.componentInstance.sinif = sinif;
+    // unsubscribe not needed because closed completes on modal close
+    modalRef.closed.subscribe(reason => {
+      if (reason === 'deleted') {
+        this.loadAll();
+      }
+    });
+  }
+}

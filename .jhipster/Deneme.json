@@ -1,0 +1,62 @@
+{
+  "applications": ["temrinMatik"],
+  "changelogDate": "20220706194154",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "deneme",
+  "fields": [
+    {
+      "fieldName": "isim",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "500"
+    },
+    {
+      "fieldName": "olusturmaTarih",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "baslamaTarih",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "sure",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "cevapAnahtar",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "500"
+    },
+    {
+      "fieldName": "denemeInfoJson",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "5000"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Deneme",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "login",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "deneme",
+      "relationshipName": "olusturan",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "isim",
+      "otherEntityName": "soru",
+      "otherEntityRelationshipName": "denemeler",
+      "ownerSide": true,
+      "relationshipName": "sorular",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "no"
+}

@@ -1,0 +1,52 @@
+{
+  "applications": ["temrinMatik"],
+  "changelogDate": "20220706193754",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "soru",
+  "fields": [
+    {
+      "fieldName": "isim",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "500"
+    },
+    {
+      "fieldName": "cevap",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "sira",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "resimUrl",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "500"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Soru",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "isim",
+      "otherEntityName": "konu",
+      "otherEntityRelationshipName": "soru",
+      "relationshipName": "konu",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "isim",
+      "otherEntityName": "deneme",
+      "otherEntityRelationshipName": "sorular",
+      "ownerSide": false,
+      "relationshipName": "denemeler",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "no"
+}

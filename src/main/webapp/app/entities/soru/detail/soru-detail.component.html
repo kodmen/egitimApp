@@ -1,0 +1,50 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="soru">
+      <h2 data-cy="soruDetailsHeading"><span jhiTranslate="temrinMatikApp.soru.detail.title">Soru</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ soru.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="temrinMatikApp.soru.isim">Isim</span></dt>
+        <dd>
+          <span>{{ soru.isim }}</span>
+        </dd>
+        <dt><span jhiTranslate="temrinMatikApp.soru.cevap">Cevap</span></dt>
+        <dd>
+          <span>{{ soru.cevap }}</span>
+        </dd>
+        <dt><span jhiTranslate="temrinMatikApp.soru.sira">Sira</span></dt>
+        <dd>
+          <span>{{ soru.sira }}</span>
+        </dd>
+        <dt><span jhiTranslate="temrinMatikApp.soru.resimUrl">Resim Url</span></dt>
+        <dd>
+          <span>{{ soru.resimUrl }}</span>
+        </dd>
+        <dt><span jhiTranslate="temrinMatikApp.soru.konu">Konu</span></dt>
+        <dd>
+          <div *ngIf="soru.konu">
+            <a [routerLink]="['/konu', soru.konu?.id, 'view']">{{ soru.konu?.isim }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/soru', soru.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+{
+  "applications": ["temrinMatik"],
+  "changelogDate": "20220706193454",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "yurt",
+  "fields": [
+    {
+      "fieldName": "isim",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "500"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Yurt",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "login",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "yurt",
+      "relationshipName": "mesul",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

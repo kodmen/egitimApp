@@ -1,0 +1,24 @@
+{
+  "temrinMatikApp": {
+    "grup": {
+      "home": {
+        "title": "Grups",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Grup",
+        "createOrEditLabel": "Create or edit a Grup",
+        "notFound": "No Grups found"
+      },
+      "created": "A new Grup is created with identifier {{ param }}",
+      "updated": "A Grup is updated with identifier {{ param }}",
+      "deleted": "A Grup is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Grup {{ id }}?"
+      },
+      "detail": {
+        "title": "Grup"
+      },
+      "id": "ID",
+      "isim": "Isim"
+    }
+  }
+}

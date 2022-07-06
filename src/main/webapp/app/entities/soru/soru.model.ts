@@ -1,0 +1,28 @@
+import { IKonu } from 'app/entities/konu/konu.model';
+import { IDeneme } from 'app/entities/deneme/deneme.model';
+
+export interface ISoru {
+  id?: number;
+  isim?: string | null;
+  cevap?: string | null;
+  sira?: number | null;
+  resimUrl?: string | null;
+  konu?: IKonu | null;
+  denemelers?: IDeneme[] | null;
+}
+
+export class Soru implements ISoru {
+  constructor(
+    public id?: number,
+    public isim?: string | null,
+    public cevap?: string | null,
+    public sira?: number | null,
+    public resimUrl?: string | null,
+    public konu?: IKonu | null,
+    public denemelers?: IDeneme[] | null
+  ) {}
+}
+
+export function getSoruIdentifier(soru: ISoru): number | undefined {
+  return soru.id;
+}

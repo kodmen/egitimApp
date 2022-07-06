@@ -1,0 +1,53 @@
+{
+  "applications": ["temrinMatik"],
+  "changelogDate": "20220706194054",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "deneme_analiz",
+  "fields": [
+    {
+      "fieldName": "dogru",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "yanlis",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "puan",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "cozuldu",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "konuAnalizJson",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "5000"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "DenemeAnaliz",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "login",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "denemeAnaliz",
+      "relationshipName": "user",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "isim",
+      "otherEntityName": "deneme",
+      "otherEntityRelationshipName": "denemeAnaliz",
+      "relationshipName": "deneme",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

@@ -1,0 +1,59 @@
+{
+  "applications": ["temrinMatik"],
+  "changelogDate": "20220706193854",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "sinif",
+  "fields": [
+    {
+      "fieldName": "isim",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "500",
+      "javadoc": "isim"
+    },
+    {
+      "fieldName": "konulimizjson",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "5000"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Sinif",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "isim",
+      "otherEntityName": "yurt",
+      "otherEntityRelationshipName": "sinif",
+      "relationshipName": "yurt",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "isim",
+      "otherEntityName": "grup",
+      "otherEntityRelationshipName": "sinif",
+      "relationshipName": "grup",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "login",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "sinif",
+      "relationshipName": "hoca",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "login",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "siniflar",
+      "ownerSide": true,
+      "relationshipName": "ogrenciler",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "no"
+}
