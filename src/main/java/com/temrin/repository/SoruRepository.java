@@ -1,5 +1,6 @@
 package com.temrin.repository;
 
+import com.temrin.domain.Konu;
 import com.temrin.domain.Soru;
 import java.util.List;
 import java.util.Optional;
@@ -37,4 +38,6 @@ public interface SoruRepository extends JpaRepository<Soru, Long> {
 
     @Query("select soru from Soru soru left join fetch soru.konu where soru.id =:id")
     Optional<Soru> findOneWithToOneRelationships(@Param("id") Long id);
+
+    List<Soru> findByKonu(Konu konu);
 }

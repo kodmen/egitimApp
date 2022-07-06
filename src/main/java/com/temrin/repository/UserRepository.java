@@ -1,5 +1,6 @@
 package com.temrin.repository;
 
+import com.temrin.domain.Authority;
 import com.temrin.domain.User;
 import java.time.Instant;
 import java.util.List;
@@ -33,4 +34,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findOneWithAuthoritiesByEmailIgnoreCase(String email);
 
     Page<User> findAllByIdNotNullAndActivatedIsTrue(Pageable pageable);
+    List<User> findAllByAuthoritiesContaining(Authority auth);
+
 }

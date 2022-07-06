@@ -3,6 +3,8 @@ package com.temrin.repository;
 import com.temrin.domain.DenemeAnaliz;
 import java.util.List;
 import java.util.Optional;
+
+import com.temrin.domain.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
@@ -44,4 +46,8 @@ public interface DenemeAnalizRepository extends JpaRepository<DenemeAnaliz, Long
         "select denemeAnaliz from DenemeAnaliz denemeAnaliz left join fetch denemeAnaliz.user left join fetch denemeAnaliz.deneme where denemeAnaliz.id =:id"
     )
     Optional<DenemeAnaliz> findOneWithToOneRelationships(@Param("id") Long id);
+
+    List<DenemeAnaliz> findByDeneme_Olusturan(User user);
+
+    List<DenemeAnaliz> findByDeneme_OlusturanAndDeneme_Id(User user, long denemeId);
 }

@@ -1,8 +1,13 @@
 package com.temrin.repository;
 
 import com.temrin.domain.Deneme;
+
+import java.time.Instant;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+
+import com.temrin.domain.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
@@ -40,4 +45,10 @@ public interface DenemeRepository extends DenemeRepositoryWithBagRelationships, 
 
     @Query("select deneme from Deneme deneme left join fetch deneme.olusturan where deneme.id =:id")
     Optional<Deneme> findOneWithToOneRelationships(@Param("id") Long id);
+
+    List<Deneme> findAllByOlusturmaTarihLessThanEqualAndBaslamaTarihGreaterThanEqual(LocalDate d, Instant t);
+
+    List<Deneme> findAllByBaslamaTarihBetween(Instant a, Instant b);
+
+    List<Deneme> findAllByBaslamaTarihBetweenAndOlusturan(Instant a, Instant b, User olusturan);
 }

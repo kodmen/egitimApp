@@ -3,6 +3,9 @@ package com.temrin.repository;
 import com.temrin.domain.Sinif;
 import java.util.List;
 import java.util.Optional;
+
+import com.temrin.domain.User;
+import com.temrin.domain.Yurt;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
@@ -42,4 +45,8 @@ public interface SinifRepository extends SinifRepositoryWithBagRelationships, Jp
         "select sinif from Sinif sinif left join fetch sinif.yurt left join fetch sinif.grup left join fetch sinif.hoca where sinif.id =:id"
     )
     Optional<Sinif> findOneWithToOneRelationships(@Param("id") Long id);
+
+    List<Sinif> findByYurt(Yurt yurt);
+
+    List<Sinif> findByOgrencilersIsContaining(User user);
 }
