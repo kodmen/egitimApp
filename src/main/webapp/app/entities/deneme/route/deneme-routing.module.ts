@@ -7,6 +7,8 @@ import { DenemeDetailComponent } from '../detail/deneme-detail.component';
 import { DenemeUpdateComponent } from '../update/deneme-update.component';
 import { DenemeRoutingResolveService } from './deneme-routing-resolve.service';
 import { CreateComponent } from '../create/create.component';
+import { DenemeGirisComponent } from '../deneme-giris/deneme-giris.component';
+import { OgrDenemeListComponent } from '../ogr-deneme-list/ogr-deneme-list.component';
 
 const denemeRoute: Routes = [
   {
@@ -20,6 +22,16 @@ const denemeRoute: Routes = [
     resolve: {
       deneme: DenemeRoutingResolveService,
     },
+    canActivate: [UserRouteAccessService],
+  },
+  {
+    path: ':id/basla',
+    component: DenemeGirisComponent,
+    canActivate: [UserRouteAccessService],
+  },
+  {
+    path: 'ogr',
+    component: OgrDenemeListComponent,
     canActivate: [UserRouteAccessService],
   },
   {

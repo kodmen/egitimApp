@@ -1,0 +1,35 @@
+<div>
+    <h2 id="page-heading" data-cy="DenemeHeading">
+      <span jhiTranslate="temrinMatikApp.deneme.home.title">Denemes</span>
+  
+      <div class="d-flex justify-content-end">
+        <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+          <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+          <span jhiTranslate="temrinMatikApp.deneme.home.refreshListLabel">Refresh List</span>
+        </button>
+      </div>
+    </h2>
+  
+    <jhi-alert-error></jhi-alert-error>
+  
+    <jhi-alert></jhi-alert>
+  
+    <div class="alert alert-warning" id="no-result" *ngIf="denemes?.length === 0">
+      <span jhiTranslate="temrinMatikApp.deneme.home.notFound">No denemes found</span>
+    </div>
+    <div *ngFor="let deneme of denemes; let last = last">
+      <div class="card" style="width: 18rem">
+        <div class="card-body">
+          <h5 class="card-title">{{ deneme.isim }}</h5>
+  
+          <h6 class="card-title">olusturan: {{ deneme.olusturan?.login }}</h6>
+          <h6 class="card-subtitle mb-2 text-muted">baslama tarih</h6>
+  
+          <p class="card-text">{{ deneme.baslamaTarih }}</p>
+          <p class="card-text">{{ deneme.sure }} süre</p>
+  
+          <a [routerLink]="['/deneme', deneme.id, 'basla']" class="card-link">denemeye başla</a>
+        </div>
+      </div>
+    </div>
+  </div>

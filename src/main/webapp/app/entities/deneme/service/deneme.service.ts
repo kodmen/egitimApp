@@ -10,6 +10,8 @@ import { ApplicationConfigService } from 'app/core/config/application-config.ser
 import { createRequestOption } from 'app/core/request/request-util';
 import { IDeneme, getDenemeIdentifier } from '../deneme.model';
 import { IDenemeDto } from '../denemeDto.model';
+import { DenemeSinavDto } from '../deneme-giris/denemeSinav.model';
+import { DenemeCevapRequest } from '../deneme-giris/denemeCevap.model';
 
 export type EntityResponseType = HttpResponse<IDeneme>;
 export type EntityArrayResponseType = HttpResponse<IDeneme[]>;
@@ -30,6 +32,15 @@ export class DenemeService {
   createDto(deneme: IDenemeDto): Observable<EntityResponseType> {
     // const copy = this.convertDateFromClient(deneme);
     return this.http.post<IDeneme>(this.resourceUrl, deneme, { observe: 'response' });
+  }
+
+
+  getDenemeSinav(id: number): Observable<DenemeSinavDto> {
+    return this.http.get<DenemeSinavDto>(`api/denemeSinva/${id}`);
+  }
+
+  cevaplariGonder(deneme: DenemeCevapRequest): Observable<boolean> {
+    return this.http.post<boolean>(this.resourceUrl + '/cevaplar', deneme);
   }
 
   update(deneme: IDeneme): Observable<EntityResponseType> {
