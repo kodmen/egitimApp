@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { IDenemeAnaliz } from '../deneme-analiz.model';
 
@@ -10,7 +10,7 @@ import { IDenemeAnaliz } from '../deneme-analiz.model';
 export class DenemeAnalizDetailComponent implements OnInit {
   denemeAnaliz: IDenemeAnaliz | null = null;
 
-  constructor(protected activatedRoute: ActivatedRoute) {}
+  constructor(protected activatedRoute: ActivatedRoute,protected router:Router) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ denemeAnaliz }) => {
@@ -19,6 +19,6 @@ export class DenemeAnalizDetailComponent implements OnInit {
   }
 
   previousState(): void {
-    window.history.back();
+    this.router.navigate(['deneme-analiz']);
   }
 }

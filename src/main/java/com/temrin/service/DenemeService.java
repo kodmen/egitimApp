@@ -53,7 +53,12 @@ public class DenemeService {
         this.denemeAnalizService = denemeAnalizService;
     }
 
-    public boolean cevapKontrol(DenemeCevapRequest request) {
+    /**
+     * geri dönüş değeri deneme analiz id
+     * @param request
+     * @return
+     */
+    public long cevapKontrol(DenemeCevapRequest request) {
         Deneme deneme = repository.getById(request.getDenemeId());
         String[] cevaplar = deneme.getCevapAnahtar().split(",");
         DenemeSonuclariDto sonuclar = new DenemeSonuclariDto();
@@ -93,13 +98,13 @@ public class DenemeService {
         denemeAnaliz.setPuan((int) sonuclar.getPuan());
 
         denemeAnaliz.setKonuAnalizJson("yanlis: " + yanlisKonu + "-- Bos: " + bosKonu);
-        denemeAnalizService.create(denemeAnaliz);
+        denemeAnaliz = denemeAnalizService.create(denemeAnaliz);
 
         DenemeAnalizSinif denemeAnalizSinif = denemeAnalizSinifService.getDeneme(deneme);
         denemeAnalizSinif.setOrtalama(sinifOrtalamasiEkle(denemeAnalizSinif, sonuclar.getPuan()));
         denemeAnalizSinifService.updateDenemeAnaliz(denemeAnalizSinif);
 
-        return true;
+        return denemeAnaliz.getId();
     }
 
     public float sinifOrtalamasiEkle(DenemeAnalizSinif denemeAnalizSinif, float puan) {
@@ -137,9 +142,11 @@ public class DenemeService {
         if (dto.getBaslamaTarih() != "") {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
             Date date = (Date) formatter.parse(dto.getBaslamaTarih());
-            ZoneId tzid = ZoneId.systemDefault();
+            ZoneId tzid = ZoneId.of ( "Europe/Istanbul" );
 
             entity.setBaslamaTarih(date.toInstant().atZone(tzid).toInstant());
+        }else{
+            entity.baslamaTarih(Instant.now());
         }
 
         entity.setSorulars(new HashSet<Soru>());

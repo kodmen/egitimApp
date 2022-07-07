@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute,Router } from '@angular/router';
 
 import { DenemeService } from '../service/deneme.service';
@@ -10,6 +10,7 @@ import { KonuService } from 'app/entities/konu/service/konu.service';
 import { DenemeDto } from '../denemeDto.model';
 import dayjs from 'dayjs/esm';
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
+import { AlertService } from 'app/core/util/alert.service';
 
 @Component({
   selector: 'jhi-create',
@@ -38,13 +39,14 @@ export class CreateComponent implements OnInit {
     protected konuService: KonuService,
     protected activatedRoute: ActivatedRoute,
     protected fb: FormBuilder,
-    protected router: Router
+    protected router: Router,
+    protected alertService:AlertService
   ) {
     this.form = this.fb.group({
       baslamaTarih: ['', { validators: [Validators.required] }],
       sure: ['', { validators: [Validators.required] }],
       rastgele: ['false'],
-      isim: [null, [Validators.maxLength(500)]],
+      isim: [null, [Validators.required,Validators.maxLength(500)]],
       konudto: this.fb.array([]),
     });
   }
@@ -57,12 +59,23 @@ export class CreateComponent implements OnInit {
     this.cevaplarFieldAsFormArray.push(this.soruCevap());
   }
 
+  dersleriKontrolet():void{
+
+    this.cevaplarFieldAsFormArray
+  }
+
+  dersSil(id:number):void{
+    this.cevaplarFieldAsFormArray.removeAt(id);
+  }
+
+
+
   soruCevap(): any {
     return this.fb.group({
-      konu: this.fb.control(''),
-      soruSayisi: this.fb.control(''),
-      baslangic: this.fb.control(''),
-      bitis: this.fb.control(''),
+      konu: ['', { validators: [Validators.required] }],
+      soruSayisi: ['', { validators: [Validators.required] }],
+      baslangic: ['', { validators: [Validators.required] }],
+      bitis: ['', { validators: [Validators.required] }],
     });
   }
 
@@ -76,18 +89,33 @@ export class CreateComponent implements OnInit {
     this.getKonu();
   }
 
+  get f(): { [key: string]: AbstractControl } {
+    return this.form.controls;
+  }
+
   save(): void {
-    // console.log(this.form);
-    //       deneme.baslamaTarih = today;
-    this.editForm.get(['baslamaTarih'])?.setValue(dayjs(this.editForm.get(['baslamaTarih'])!.value, DATE_TIME_FORMAT));
-    const deneme = new DenemeDto(this.form.value);
-    console.log(deneme);
-    this.denemeService.createDto(deneme).subscribe(res => {
-      // denemeler sayfasına gitmesi lazım
+
+    if(this.form.status  === 'INVALID'){
+      if(this.f.baslamaTarih.status  === 'INVALID'){
+        this.alertService.addAlert({ type: 'danger', message: 'başlama tarihi boş bırakmayın' });
+      }
+      if(this.f.konudto.status === 'INVALID'){
+        this.alertService.addAlert({ type: 'danger', message: 'konu alanlarını boş bırakmayın' });
+
+      }
+      
+    }else{
+      this.editForm.get(['baslamaTarih'])?.setValue(dayjs(this.editForm.get(['baslamaTarih'])!.value, DATE_TIME_FORMAT));
+      const deneme = new DenemeDto(this.form.value);
+      console.log(deneme);
+      this.denemeService.createDto(deneme).subscribe(res => {
       console.log(res);
 
       this.router.navigate(['deneme']);
     });
+    }
+
+    
   }
 
 }

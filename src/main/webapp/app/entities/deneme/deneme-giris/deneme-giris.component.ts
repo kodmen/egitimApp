@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AlertService } from 'app/core/util/alert.service';
 import { DenemeService } from '../service/deneme.service';
 import { DenemeCevapRequest } from './denemeCevap.model';
 import { DenemeSinavDto } from './denemeSinav.model';
@@ -8,17 +9,16 @@ import { DenemeSinavDto } from './denemeSinav.model';
 @Component({
   selector: 'jhi-deneme-giris',
   templateUrl: './deneme-giris.component.html',
-  styleUrls: ['./deneme-giris.component.scss']
+  styleUrls: ['./deneme-giris.component.scss'],
 })
 export class DenemeGirisComponent implements OnInit {
-
   p: number;
   form: FormGroup;
   denemeId: number;
   sinav: DenemeSinavDto;
   foto: string;
 
-  constructor(private fb: FormBuilder, private denemeService: DenemeService, private route: ActivatedRoute) {
+  constructor(private fb: FormBuilder, private denemeService: DenemeService, private route: ActivatedRoute, protected router: Router,private alertService: AlertService) {
     this.p = 0;
     this.foto = 'https://temrinbucket.s3.eu-central-1.amazonaws.com/';
   }
@@ -67,13 +67,16 @@ export class DenemeGirisComponent implements OnInit {
 
   save(): void {
     const cevapRequest = new DenemeCevapRequest(this.form.value);
-    this.denemeService.cevaplariGonder(cevapRequest).subscribe(res => {
-      console.log(res, 'cevap merak');
-
-      if (res === true) {
-        console.log('gonderim başarıli');
+    this.denemeService.cevaplariGonder(cevapRequest).subscribe(
+      res => {
+        
+          this.router.navigate(['deneme-analiz',res ,'view']);
+        
+      },
+      err => {
+        this.alertService.addAlert({ type: 'danger', message: 'serviste hata olustu' });
+        console.log(err);
       }
-    });
-    console.log(this.form);
+    );
   }
 }

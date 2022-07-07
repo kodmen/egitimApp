@@ -1,5 +1,7 @@
 <div class="row">
     <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
   
     <form [formGroup]="form" (submit)="save()">
       <div class="col-md-12">
@@ -23,12 +25,12 @@
         <div formArrayName="konudto" *ngFor="let control of cevaplarFieldAsFormArray.controls; let i = index">
           <form [formGroup]="control">
             <div class="row">
-              <div class="col-md-6">
+              <div class="col-md-4">
                 <div class="mb-3">
                   <label for="exampleFormControlInput1" class="form-label">soru ekle</label>
                   <select formControlName="konu" class="form-select" aria-label="Konu">
                     <option selected>Ders seçin</option>
-                    <option [value]="konu.id" *ngFor="let konu of konularSharedCollection">{{ konu.isim }}</option>
+                    <option [value]="konu.id" *ngFor="let konu of konularSharedCollection; let i=index">{{ konu.isim }}</option>
                   </select>
                 </div>
               </div>
@@ -48,6 +50,12 @@
                 <div class="mb-3">
                   <label for="exampleFormControlInput1" class="form-label">Bitiş</label>
                   <input formControlName="bitis" type="text" class="form-control" id="exampleFormControlInput1" />
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="mt-4">
+                    
+                    <button class="btn btn-danger" type="button" (click)="dersSil(i)">Ders Sil</button>
                 </div>
               </div>
             </div>

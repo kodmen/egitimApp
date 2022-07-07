@@ -39,8 +39,8 @@ export class DenemeService {
     return this.http.get<DenemeSinavDto>(`api/denemeSinva/${id}`);
   }
 
-  cevaplariGonder(deneme: DenemeCevapRequest): Observable<boolean> {
-    return this.http.post<boolean>(this.resourceUrl + '/cevaplar', deneme);
+  cevaplariGonder(deneme: DenemeCevapRequest): Observable<number> {
+    return this.http.post<number>(this.resourceUrl + '/cevaplar', deneme);
   }
 
   update(deneme: IDeneme): Observable<EntityResponseType> {

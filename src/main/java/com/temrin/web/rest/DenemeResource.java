@@ -192,7 +192,7 @@ public class DenemeResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/denemes/cevaplar")
-    public boolean denemeCevap(@Valid @RequestBody DenemeCevapRequest deneme) throws URISyntaxException, ParseException {
+    public long denemeCevap(@Valid @RequestBody DenemeCevapRequest deneme) throws URISyntaxException, ParseException {
         log.debug("REST request to save Deneme : {}", deneme);
 
         return denemeService.cevapKontrol(deneme);
