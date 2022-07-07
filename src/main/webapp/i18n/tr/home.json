@@ -1,7 +1,7 @@
 {
   "home": {
-    "title": "Merhaba, Java Hipster!",
-    "subtitle": "Burası Ana Sayfanız",
+    "title": "Gölbaşı talebe yurdu",
+    "subtitle": "Gölbaşı katkılarıyla temrin uygulaması",
     "logged": {
       "message": "\"{{username}}\" olarak giriş yaptınız."
     },

@@ -38,20 +38,6 @@ spring:
     hikari:
       poolName: Hikari
       auto-commit: false
-#  datasource:
-#    type: com.zaxxer.hikari.HikariDataSource
-#    url: jdbc:h2:file:./target/h2db/db/temrinmatik;DB_CLOSE_DELAY=-1
-#    username: temrinMatik
-#    password:
-#    hikari:
-#      poolName: Hikari
-#      auto-commit: false
-#  h2:
-#    console:
-#      # disable spring boot built-in h2-console since we start it manually with correct configuration
-#      enabled: false
-#  jpa:
-#    database-platform: tech.jhipster.domain.util.FixedH2Dialect
   jpa:
     database-platform: tech.jhipster.domain.util.FixedPostgreSQL10Dialect
   liquibase:
