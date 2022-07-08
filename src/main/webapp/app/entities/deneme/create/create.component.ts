@@ -99,17 +99,14 @@ export class CreateComponent implements OnInit {
         this.alertService.addAlert({ type: 'danger', message: 'konu alanlarını boş bırakmayın' });
       }
     } else {
-      // this.editForm.get(['baslamaTarih'])?.setValue(dayjs(this.editForm.get(['baslamaTarih'])!.value, DATE_TIME_FORMAT));
-      // const deneme = new DenemeDto(this.form.value);
+    
       const deneme = this.createFromForm();
-      console.log(deneme);
-      console.log('öncesine bak hemen');
+  
+      this.denemeService.createDto(deneme).subscribe(res => {
+        console.log(res);
 
-      // this.denemeService.createDto(deneme).subscribe(res => {
-      //   console.log(res);
-
-      //   this.router.navigate(['deneme']);
-      // });
+        this.router.navigate(['deneme']);
+      });
     }
   }
 
