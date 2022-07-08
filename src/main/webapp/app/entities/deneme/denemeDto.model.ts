@@ -9,13 +9,6 @@ export interface IDenemeDto {
   konudto?: IKonuDto[] | null;
 }
 
-// export class DenemeDto implements IDenemeDto {
-//   public constructor(init?: Partial<DenemeDto>) {
-//     Object.assign(this, init);
-//   }
-// }
-
-
 export class DenemeDto implements IDenemeDto {
   constructor(
     public rastgele?: boolean | null,

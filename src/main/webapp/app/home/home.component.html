@@ -17,6 +17,12 @@
         <span jhiTranslate="global.messages.info.register.noaccount">You don't have an account yet?</span>&nbsp;
         <a class="alert-link" routerLink="account/register" jhiTranslate="global.messages.info.register.link">Register a new account</a>
       </div>
+
+      <div class="alert alert-warning" *ngSwitchCase="false">
+        <span >Üyeliğiniz var mı?</span>&nbsp;
+        <a class="alert-link" routerLink="login" >Giriş yapın</a>
+      </div>
+
     </div>
   </div>
 

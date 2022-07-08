@@ -30,7 +30,6 @@ export class DenemeService {
   }
 
   createDto(deneme: IDenemeDto): Observable<EntityResponseType> {
-    // const copy = this.convertDateFromClient(deneme);
     return this.http.post<IDeneme>(this.resourceUrl, deneme, { observe: 'response' })
     .pipe(map((res: EntityResponseType) => this.convertDateDtoFromServer(res)));
   }

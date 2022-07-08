@@ -21,15 +21,6 @@ import { KonuDto } from '../konuDto.model';
 export class CreateComponent implements OnInit {
   isSaving = false;
   konularSharedCollection: IKonu[] = [];
-
-  // editForm = this.fb.group({
-  //   rastgele: [],
-  //   isim: [null, [Validators.maxLength(500)]],
-  //   baslamaTarih: [],
-  //   sure: [],
-  //   konudto: [],
-  // });
-
   form: FormGroup;
 
   constructor(
