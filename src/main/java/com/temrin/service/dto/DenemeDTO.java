@@ -1,20 +1,21 @@
 package com.temrin.service.dto;
 
+import java.time.Instant;
 import java.util.List;
 
 public class DenemeDTO {
 
     public String isim;
-    public String baslamaTarih;
+    public Instant baslamaTarih;
     public int sure;
     public List<KonuDTO> konudto;
     public boolean rastgele;
 
-    public String getBaslamaTarih() {
+    public Instant getBaslamaTarih() {
         return baslamaTarih;
     }
 
-    public void setBaslamaTarih(String baslamaTarih) {
+    public void setBaslamaTarih(Instant baslamaTarih) {
         this.baslamaTarih = baslamaTarih;
     }
 

@@ -138,16 +138,16 @@ public class DenemeService {
         entity.setOlusturmaTarih(LocalDate.now()); // bunu türkiyeyi göre ayarlamak lazım
         entity.setIsim(dto.getIsim());
         entity.setSure(dto.getSure());
-
-        if (dto.getBaslamaTarih() != "") {
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
-            Date date = (Date) formatter.parse(dto.getBaslamaTarih());
-           // ZoneId tzid = ZoneId.of ( "Europe/Istanbul" );
-
-            entity.setBaslamaTarih(date.toInstant());
-        }else{
-            entity.baslamaTarih(Instant.now());
-        }
+        entity.setBaslamaTarih(dto.getBaslamaTarih());
+//        if (dto.getBaslamaTarih() != "") {
+//            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+//            Date date = (Date) formatter.parse(dto.getBaslamaTarih());
+//           // ZoneId tzid = ZoneId.of ( "Europe/Istanbul" );
+//
+//            entity.setBaslamaTarih(date.toInstant());
+//        }else{
+//            entity.baslamaTarih(Instant.now());
+//        }
 
         entity.setSorulars(new HashSet<Soru>());
         for (KonuDTO konu : dto.getKonudto()) {

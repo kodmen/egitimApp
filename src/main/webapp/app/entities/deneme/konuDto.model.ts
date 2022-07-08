@@ -1,7 +1,3 @@
-import dayjs from 'dayjs/esm';
-import { IUser } from 'app/entities/user/user.model';
-import { ISoru } from 'app/entities/soru/soru.model';
-import { IKonu } from '../konu/konu.model';
 
 export interface IKonuDto {
   soruSayisi?: number;

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute,Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { DenemeService } from '../service/deneme.service';
 import { UserService } from 'app/entities/user/user.service';
@@ -11,24 +11,24 @@ import { DenemeDto } from '../denemeDto.model';
 import dayjs from 'dayjs/esm';
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 import { AlertService } from 'app/core/util/alert.service';
+import { KonuDto } from '../konuDto.model';
 
 @Component({
   selector: 'jhi-create',
   templateUrl: './create.component.html',
-  styleUrls: ['./create.component.scss']
+  styleUrls: ['./create.component.scss'],
 })
 export class CreateComponent implements OnInit {
-
   isSaving = false;
   konularSharedCollection: IKonu[] = [];
 
-  editForm = this.fb.group({
-    rastgele: [],
-    isim: [null, [Validators.maxLength(500)]],
-    baslamaTarih: [],
-    sure: [],
-    konudto: [],
-  });
+  // editForm = this.fb.group({
+  //   rastgele: [],
+  //   isim: [null, [Validators.maxLength(500)]],
+  //   baslamaTarih: [],
+  //   sure: [],
+  //   konudto: [],
+  // });
 
   form: FormGroup;
 
@@ -40,13 +40,13 @@ export class CreateComponent implements OnInit {
     protected activatedRoute: ActivatedRoute,
     protected fb: FormBuilder,
     protected router: Router,
-    protected alertService:AlertService
+    protected alertService: AlertService
   ) {
     this.form = this.fb.group({
       baslamaTarih: ['', { validators: [Validators.required] }],
       sure: ['', { validators: [Validators.required] }],
       rastgele: ['false'],
-      isim: [null, [Validators.required,Validators.maxLength(500)]],
+      isim: [null, [Validators.required, Validators.maxLength(500)]],
       konudto: this.fb.array([]),
     });
   }
@@ -59,16 +59,13 @@ export class CreateComponent implements OnInit {
     this.cevaplarFieldAsFormArray.push(this.soruCevap());
   }
 
-  dersleriKontrolet():void{
-
-    this.cevaplarFieldAsFormArray
+  dersleriKontrolet(): void {
+    this.cevaplarFieldAsFormArray;
   }
 
-  dersSil(id:number):void{
+  dersSil(id: number): void {
     this.cevaplarFieldAsFormArray.removeAt(id);
   }
-
-
 
   soruCevap(): any {
     return this.fb.group({
@@ -94,28 +91,43 @@ export class CreateComponent implements OnInit {
   }
 
   save(): void {
-
-    if(this.form.status  === 'INVALID'){
-      if(this.f.baslamaTarih.status  === 'INVALID'){
+    if (this.form.status === 'INVALID') {
+      if (this.f.baslamaTarih.status === 'INVALID') {
         this.alertService.addAlert({ type: 'danger', message: 'başlama tarihi boş bırakmayın' });
       }
-      if(this.f.konudto.status === 'INVALID'){
+      if (this.f.konudto.status === 'INVALID') {
         this.alertService.addAlert({ type: 'danger', message: 'konu alanlarını boş bırakmayın' });
-
       }
-      
-    }else{
-      this.editForm.get(['baslamaTarih'])?.setValue(dayjs(this.editForm.get(['baslamaTarih'])!.value, DATE_TIME_FORMAT));
-      const deneme = new DenemeDto(this.form.value);
+    } else {
+      // this.editForm.get(['baslamaTarih'])?.setValue(dayjs(this.editForm.get(['baslamaTarih'])!.value, DATE_TIME_FORMAT));
+      // const deneme = new DenemeDto(this.form.value);
+      const deneme = this.createFromForm();
       console.log(deneme);
-      this.denemeService.createDto(deneme).subscribe(res => {
-      console.log(res);
+      console.log('öncesine bak hemen');
 
-      this.router.navigate(['deneme']);
-    });
+      // this.denemeService.createDto(deneme).subscribe(res => {
+      //   console.log(res);
+
+      //   this.router.navigate(['deneme']);
+      // });
     }
-
-    
   }
 
+  protected createFromForm(): DenemeDto {
+    const konular = new Array<KonuDto>();
+    const forkKonular = this.form.get(['konudto'])!.value;
+
+    for (let i = 0; i < forkKonular.length; i++) {
+      const element = forkKonular[i];
+      konular.push(new KonuDto(element.soruSayisi, element.baslangic, element.bitis, element.konu));
+    }
+
+    return new DenemeDto(
+      this.form.get(['rastgele'])!.value,
+      this.form.get(['isim'])!.value,
+      this.form.get(['baslamaTarih'])!.value ? dayjs(this.form.get(['baslamaTarih'])!.value, DATE_TIME_FORMAT) : undefined,
+      this.form.get(['sure'])!.value,
+      konular
+    );
+  }
 }

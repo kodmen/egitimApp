@@ -31,7 +31,8 @@ export class DenemeService {
 
   createDto(deneme: IDenemeDto): Observable<EntityResponseType> {
     // const copy = this.convertDateFromClient(deneme);
-    return this.http.post<IDeneme>(this.resourceUrl, deneme, { observe: 'response' });
+    return this.http.post<IDeneme>(this.resourceUrl, deneme, { observe: 'response' })
+    .pipe(map((res: EntityResponseType) => this.convertDateDtoFromServer(res)));
   }
 
 
@@ -101,6 +102,13 @@ export class DenemeService {
   protected convertDateFromServer(res: EntityResponseType): EntityResponseType {
     if (res.body) {
       res.body.olusturmaTarih = res.body.olusturmaTarih ? dayjs(res.body.olusturmaTarih) : undefined;
+      res.body.baslamaTarih = res.body.baslamaTarih ? dayjs(res.body.baslamaTarih) : undefined;
+    }
+    return res;
+  }
+
+  protected convertDateDtoFromServer(res: EntityResponseType): EntityResponseType {
+    if (res.body) {
       res.body.baslamaTarih = res.body.baslamaTarih ? dayjs(res.body.baslamaTarih) : undefined;
     }
     return res;
