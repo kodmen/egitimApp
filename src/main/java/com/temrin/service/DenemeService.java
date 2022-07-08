@@ -142,9 +142,9 @@ public class DenemeService {
         if (dto.getBaslamaTarih() != "") {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
             Date date = (Date) formatter.parse(dto.getBaslamaTarih());
-            ZoneId tzid = ZoneId.of ( "Europe/Istanbul" );
+           // ZoneId tzid = ZoneId.of ( "Europe/Istanbul" );
 
-            entity.setBaslamaTarih(date.toInstant().atZone(tzid).toInstant());
+            entity.setBaslamaTarih(date.toInstant());
         }else{
             entity.baslamaTarih(Instant.now());
         }
