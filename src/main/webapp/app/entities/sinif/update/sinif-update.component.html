@@ -1,7 +1,8 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
     <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-      <h2 id="jhi-sinif-heading" data-cy="SinifCreateUpdateHeading" jhiTranslate="temrinMatikApp.sinif.home.createOrEditLabel">
+      <h2 id="jhi-sinif-heading" data-cy="SinifCreateUpdateHeading"
+        jhiTranslate="temrinMatikApp.sinif.home.createOrEditLabel">
         Create or edit a Sinif
       </h2>
 
@@ -10,51 +11,32 @@
 
         <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
           <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
-          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id"
+            [readonly]="true" />
         </div>
 
         <div class="row mb-3">
-          <label
-            class="form-label"
-            jhiTranslate="temrinMatikApp.sinif.isim"
-            for="field_isim"
-            [ngbTooltip]="'temrinMatikApp.sinif.help.isim' | translate"
-            >Isim</label
-          >
+          <label class="form-label" jhiTranslate="temrinMatikApp.sinif.isim" for="field_isim"
+            [ngbTooltip]="'temrinMatikApp.sinif.help.isim' | translate">Isim</label>
           <input type="text" class="form-control" name="isim" id="field_isim" data-cy="isim" formControlName="isim" />
           <div *ngIf="editForm.get('isim')!.invalid && (editForm.get('isim')!.dirty || editForm.get('isim')!.touched)">
-            <small
-              class="form-text text-danger"
-              *ngIf="editForm.get('isim')?.errors?.maxlength"
-              jhiTranslate="entity.validation.maxlength"
-              [translateValues]="{ max: 500 }"
-            >
+            <small class="form-text text-danger" *ngIf="editForm.get('isim')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 500 }">
               This field cannot be longer than 500 characters.
             </small>
           </div>
         </div>
 
         <div class="row mb-3">
-          <label class="form-label" jhiTranslate="temrinMatikApp.sinif.konulimizjson" for="field_konulimizjson">Konulimizjson</label>
-          <input
-            type="text"
-            class="form-control"
-            name="konulimizjson"
-            id="field_konulimizjson"
-            data-cy="konulimizjson"
-            formControlName="konulimizjson"
-          />
-          <div
-            *ngIf="
+          <label class="form-label" jhiTranslate="temrinMatikApp.sinif.konulimizjson"
+            for="field_konulimizjson">Konulimizjson</label>
+          <input type="text" class="form-control" name="konulimizjson" id="field_konulimizjson" data-cy="konulimizjson"
+            formControlName="konulimizjson" />
+          <div *ngIf="
               editForm.get('konulimizjson')!.invalid && (editForm.get('konulimizjson')!.dirty || editForm.get('konulimizjson')!.touched)
-            "
-          >
-            <small
-              class="form-text text-danger"
-              *ngIf="editForm.get('konulimizjson')?.errors?.maxlength"
-              jhiTranslate="entity.validation.maxlength"
-              [translateValues]="{ max: 5000 }"
-            >
+            ">
+            <small class="form-text text-danger" *ngIf="editForm.get('konulimizjson')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 5000 }">
               This field cannot be longer than 5000 characters.
             </small>
           </div>
@@ -66,8 +48,7 @@
             <option [ngValue]="null"></option>
             <option
               [ngValue]="yurtOption.id === editForm.get('yurt')!.value?.id ? editForm.get('yurt')!.value : yurtOption"
-              *ngFor="let yurtOption of yurtsSharedCollection; trackBy: trackYurtById"
-            >
+              *ngFor="let yurtOption of yurtsSharedCollection; trackBy: trackYurtById">
               {{ yurtOption.isim }}
             </option>
           </select>
@@ -79,8 +60,7 @@
             <option [ngValue]="null"></option>
             <option
               [ngValue]="grupOption.id === editForm.get('grup')!.value?.id ? editForm.get('grup')!.value : grupOption"
-              *ngFor="let grupOption of grupsSharedCollection; trackBy: trackGrupById"
-            >
+              *ngFor="let grupOption of grupsSharedCollection; trackBy: trackGrupById">
               {{ grupOption.isim }}
             </option>
           </select>
@@ -92,14 +72,13 @@
             <option [ngValue]="null"></option>
             <option
               [ngValue]="userOption.id === editForm.get('hoca')!.value?.id ? editForm.get('hoca')!.value : userOption"
-              *ngFor="let userOption of usersSharedCollection; trackBy: trackUserById"
-            >
+              *ngFor="let userOption of usersSharedCollection; trackBy: trackUserById">
               {{ userOption.login }}
             </option>
           </select>
         </div>
 
-        <div class="row mb-3">
+        <!-- <div class="row mb-3">
           <label jhiTranslate="temrinMatikApp.sinif.ogrenciler" for="field_ogrencilers">Ogrenciler</label>
           <select
             class="form-control"
@@ -115,22 +94,36 @@
             >
               {{ userOption.login }}
             </option>
+
+
           </select>
+        </div> -->
+
+        <div class="mb-3">
+          <h1>ogrenciler</h1>
+          <h3 *ngFor="let o of this.editForm.get('ogrencilers')!.value">
+           - {{o.login}}
+          </h3>
         </div>
+
+        <div class="row mb-3">
+
+          <ng-multiselect-dropdown [placeholder]="'öğrencileri seçiniz'" [settings]="dropdownSettings"
+            [data]="usersSharedCollection" formControlName="ogrencilers">
+          </ng-multiselect-dropdown>
+        </div>
+
+
       </div>
 
       <div>
-        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary"
+          (click)="previousState()">
           <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
         </button>
 
-        <button
-          type="submit"
-          id="save-entity"
-          data-cy="entityCreateSaveButton"
-          [disabled]="editForm.invalid || isSaving"
-          class="btn btn-primary"
-        >
+        <button type="submit" id="save-entity" data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
           <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
         </button>
       </div>

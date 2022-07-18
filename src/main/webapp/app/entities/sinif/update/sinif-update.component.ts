@@ -14,6 +14,8 @@ import { GrupService } from 'app/entities/grup/service/grup.service';
 import { IUser } from 'app/entities/user/user.model';
 import { UserService } from 'app/entities/user/user.service';
 
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
+
 @Component({
   selector: 'jhi-sinif-update',
   templateUrl: './sinif-update.component.html',
@@ -24,6 +26,10 @@ export class SinifUpdateComponent implements OnInit {
   yurtsSharedCollection: IYurt[] = [];
   grupsSharedCollection: IGrup[] = [];
   usersSharedCollection: IUser[] = [];
+
+  dropdownSettings:IDropdownSettings;
+  dropdownList:any[] = [];
+  selectedItems:IUser[] = [];
 
   editForm = this.fb.group({
     id: [],
@@ -50,7 +56,20 @@ export class SinifUpdateComponent implements OnInit {
 
       this.loadRelationshipsOptions();
     });
+
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'id',
+      textField: 'login',
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      enableCheckAll: false,
+      itemsShowLimit: 3,
+      allowSearchFilter: true
+    };
+
   }
+
 
   previousState(): void {
     window.history.back();
