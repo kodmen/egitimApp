@@ -5,6 +5,7 @@ import { DenemeAnalizSinifDetailComponent } from './detail/deneme-analiz-sinif-d
 import { DenemeAnalizSinifUpdateComponent } from './update/deneme-analiz-sinif-update.component';
 import { DenemeAnalizSinifDeleteDialogComponent } from './delete/deneme-analiz-sinif-delete-dialog.component';
 import { DenemeAnalizSinifRoutingModule } from './route/deneme-analiz-sinif-routing.module';
+import { HocaOgrListComponent } from './hoca-ogr-list/hoca-ogr-list.component';
 
 @NgModule({
   imports: [SharedModule, DenemeAnalizSinifRoutingModule],
@@ -13,6 +14,7 @@ import { DenemeAnalizSinifRoutingModule } from './route/deneme-analiz-sinif-rout
     DenemeAnalizSinifDetailComponent,
     DenemeAnalizSinifUpdateComponent,
     DenemeAnalizSinifDeleteDialogComponent,
+    HocaOgrListComponent,
   ],
   entryComponents: [DenemeAnalizSinifDeleteDialogComponent],
 })

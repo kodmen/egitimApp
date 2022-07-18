@@ -35,6 +35,12 @@ public class DenemeAnalizService {
         }
     }
 
+    /**
+     * burda denemeId ve OluşturanId göre denemeleri getiriyoruz
+     * yani hoca denemeye göre sınıfındaki öğrencilerin denemelerini getiriyor
+     * @param denemeId
+     * @return
+     */
     public List<DenemeAnaliz> getHocaDeneme(long denemeId) {
         return repository.findByDeneme_OlusturanAndDeneme_Id(userService.getCurrentUser(), denemeId);
     }

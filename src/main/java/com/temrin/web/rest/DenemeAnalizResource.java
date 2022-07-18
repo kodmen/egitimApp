@@ -170,13 +170,13 @@ public class DenemeAnalizResource {
     /**
      * {@code GET  /deneme-analizs/:id} : get the "id" denemeAnaliz.
      *
-     * @param id the id of the denemeAnaliz to retrieve.
+     * @param denemeId the id of the denemeAnaliz to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the denemeAnaliz, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/deneme-analizs/hoca/{id}")
-    public List<DenemeAnaliz> getDenemeAnalizHoca(@PathVariable Long id) {
-        log.debug("REST request to get DenemeAnaliz : {}", id);
-        List<DenemeAnaliz> denemeAnaliz = denemeAnalizService.getHocaDeneme(id);
+    public List<DenemeAnaliz> getDenemeAnalizHoca(@PathVariable Long denemeId) {
+        log.debug("REST request to get DenemeAnaliz : {}", denemeId);
+        List<DenemeAnaliz> denemeAnaliz = denemeAnalizService.getHocaDeneme(denemeId);
         return denemeAnaliz;
     }
 

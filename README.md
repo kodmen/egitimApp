@@ -1,5 +1,18 @@
 # temrinMatik
 
+
+son durumda 
+
+bazı yetkinlikler eklendiş
+dil düzeltilmiş
+
+şimdi şu yapılcak
+
+hoca sınıfa talebe ekleme düzenlencek
+hoca deneme sınıfa girince denemeye giren öğrencilerin deneme analizlerini görmesi lazım
+
+ikil olarak soruları baştan düzenlemek lazım
+
 This application was generated using JHipster 7.8.1, you can find documentation and help at [https://www.jhipster.tech](https://www.jhipster.tech).
 
 ## Project Structure

@@ -71,6 +71,16 @@
               </button>
 
               <button
+                type="submit"
+                [routerLink]="['/deneme-analiz-sinif', denemeAnalizSinif.id, 'ogr-view']"
+                class="btn btn-info btn-sm m-1"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">ogrenci analiz</span>
+              </button>
+
+              <button
               *jhiHasAnyAuthority="'ROLE_ADMIN'"
                 type="submit"
                 [routerLink]="['/deneme-analiz-sinif', denemeAnalizSinif.id, 'edit']"

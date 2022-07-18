@@ -6,6 +6,7 @@ import { DenemeAnalizSinifComponent } from '../list/deneme-analiz-sinif.componen
 import { DenemeAnalizSinifDetailComponent } from '../detail/deneme-analiz-sinif-detail.component';
 import { DenemeAnalizSinifUpdateComponent } from '../update/deneme-analiz-sinif-update.component';
 import { DenemeAnalizSinifRoutingResolveService } from './deneme-analiz-sinif-routing-resolve.service';
+import { HocaOgrListComponent } from '../hoca-ogr-list/hoca-ogr-list.component';
 
 const denemeAnalizSinifRoute: Routes = [
   {
@@ -16,6 +17,14 @@ const denemeAnalizSinifRoute: Routes = [
   {
     path: ':id/view',
     component: DenemeAnalizSinifDetailComponent,
+    resolve: {
+      denemeAnalizSinif: DenemeAnalizSinifRoutingResolveService,
+    },
+    canActivate: [UserRouteAccessService],
+  },
+  {
+    path: ':id/ogr-view',
+    component: HocaOgrListComponent,
     resolve: {
       denemeAnalizSinif: DenemeAnalizSinifRoutingResolveService,
     },

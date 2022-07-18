@@ -6,6 +6,7 @@ import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
 import { IDenemeAnaliz, getDenemeAnalizIdentifier } from '../deneme-analiz.model';
+import { getDenemeIdentifier, IDeneme } from 'app/entities/deneme/deneme.model';
 
 export type EntityResponseType = HttpResponse<IDenemeAnaliz>;
 export type EntityArrayResponseType = HttpResponse<IDenemeAnaliz[]>;
@@ -20,8 +21,8 @@ export class DenemeAnalizService {
     return this.http.post<IDenemeAnaliz>(this.resourceUrl, denemeAnaliz, { observe: 'response' });
   }
 
-  findDenemeyeGoreAnalizler(id: number): Observable<EntityArrayResponseType> {
-    return this.http.get<IDenemeAnaliz[]>(`${this.resourceUrl}/hoca/${id}`, { observe: 'response' });
+  findDenemeyeGoreAnalizler(deneme:number | null | undefined): Observable<EntityArrayResponseType> {
+    return this.http.get<IDenemeAnaliz[]>(`${this.resourceUrl}/hoca/${deneme}`, { observe: 'response' });
   }
 
   update(denemeAnaliz: IDenemeAnaliz): Observable<EntityResponseType> {
