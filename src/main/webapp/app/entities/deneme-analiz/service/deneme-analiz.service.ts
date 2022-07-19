@@ -6,7 +6,6 @@ import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
 import { IDenemeAnaliz, getDenemeAnalizIdentifier } from '../deneme-analiz.model';
-import { getDenemeIdentifier, IDeneme } from 'app/entities/deneme/deneme.model';
 
 export type EntityResponseType = HttpResponse<IDenemeAnaliz>;
 export type EntityArrayResponseType = HttpResponse<IDenemeAnaliz[]>;

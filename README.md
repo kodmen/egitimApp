@@ -10,7 +10,9 @@ son durumda
 ikil olarak soruları baştan düzenlemek lazım
 - 
 cevaplı olunca nasıl analiz edeceğiz 
-gösterirken de cevaplı diye kontrol ederiz
+önce soruları yazdırayım
+sonra cevapları gönederiym
+sonra cevapları analiz ederim
 
 
 ogrenci denemeye girdiği denemeye tekrar girebiliyor

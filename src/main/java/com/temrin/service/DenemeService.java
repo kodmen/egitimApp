@@ -134,7 +134,11 @@ public class DenemeService {
         List<DenemeSoruDto> sorular = new ArrayList<>();
 
         for (Soru s : deneme.getSorulars()) {
-            sorular.add(new DenemeSoruDto(s.getResimUrl(), s.getId()));
+            if (s.getCevapli()){
+                sorular.add(DenemeSoruDto.creatDenemeSoruDtoCevapli(s.getResimUrl(), s.getId(),s.getA(),s.getB(),s.getC(),s.getD()));
+            }else{
+                sorular.add(DenemeSoruDto.creatDenemeSoruDtoCevapsiz(s.getResimUrl(),s.getId()));
+            }
         }
 
         denemeSinav.setSorular(sorular);
