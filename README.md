@@ -3,15 +3,18 @@
 
 son durumda 
 
-bazı yetkinlikler eklendiş
-dil düzeltilmiş
+
 
 şimdi şu yapılcak
 
-hoca deneme sınıfa girince denemeye giren öğrencilerin deneme analizlerini görmesi lazım
-
-hoca sınıfa talebe ekleme düzenlencek
+ogrenci denemeye girdiği denemeye tekrar girebiliyor
 ikil olarak soruları baştan düzenlemek lazım
+test çözme sayfasını güncelleme
+
+hoca deneme sınıfa girince denemeye giren öğrencilerin deneme analizlerini görmesi lazım
+hoca sınıfa talebe ekleme düzenlencek
+bazı yetkinlikler eklendiş
+dil düzeltilmiş
 
 
 heroku buildpacks:clear

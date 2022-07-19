@@ -28,6 +28,7 @@ export class SinifUpdateComponent implements OnInit {
   usersSharedCollection: IUser[] = [];
 
   dropdownSettings:IDropdownSettings;
+  
   dropdownList:any[] = [];
   selectedItems:IUser[] = [];
 

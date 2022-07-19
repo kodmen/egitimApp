@@ -173,6 +173,18 @@ public class DenemeResource {
 //        return denemeRepository.findAllWithEagerRelationships();
         return denemeService.getAllDeneme();
     }
+
+    /**
+     * {@code GET  /denemes} : get all the denemes.
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of denemes in body.
+     */
+    @GetMapping("/denemes/girmismi/{id}")
+    public boolean getDenemeGirmismi(@PathVariable Long id) {
+        log.debug("REST request to get all Denemes");
+        return denemeService.ogrDenemeyeGirmismi(id);
+    }
+
     /**
      * {@code GET  /denemes/:id} : get the "id" deneme.
      * burda denemeye gireceğimiz soruları getircez

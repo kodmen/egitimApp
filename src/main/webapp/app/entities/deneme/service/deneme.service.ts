@@ -34,6 +34,9 @@ export class DenemeService {
     .pipe(map((res: EntityResponseType) => this.convertDateDtoFromServer(res)));
   }
 
+  denemeyiGirmismi(id:number):Observable<boolean>{
+    return this.http.get<boolean>(this.resourceUrl + `/girmismi/${id}`);
+  }
 
   getDenemeSinav(id: number): Observable<DenemeSinavDto> {
     return this.http.get<DenemeSinavDto>(`api/denemeSinva/${id}`);

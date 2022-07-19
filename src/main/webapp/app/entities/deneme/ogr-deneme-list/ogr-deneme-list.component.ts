@@ -26,7 +26,15 @@ export class OgrDenemeListComponent implements OnInit {
     if (!d.baslamaTarih!.isBefore(dayjs().toDate())) {
       this.alertService.addAlert({ type: 'danger', message: 'deneme giriş yapamazsınız zamanı gelmemiş' });
     } else {
-      this.router.navigate(['/deneme', d.id, 'basla']);
+      // burda ogr denemeye girmismi 
+      this.denemeService.denemeyiGirmismi(d.id!).subscribe(res=>{
+        if(res){
+          this.alertService.addAlert({ type: 'danger', message: 'denemeye daha önce giriş yapmışsınız' });
+        }else{
+                this.router.navigate(['/deneme', d.id, 'basla']);
+
+        }
+      })
     }
   }
 
@@ -43,5 +51,7 @@ export class OgrDenemeListComponent implements OnInit {
       },
     });
   }
+
+
 
 }

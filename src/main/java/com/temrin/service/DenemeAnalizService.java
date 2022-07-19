@@ -1,6 +1,7 @@
 package com.temrin.service;
 
 import com.temrin.domain.DenemeAnaliz;
+import com.temrin.domain.User;
 import com.temrin.repository.DenemeAnalizRepository;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,10 @@ public class DenemeAnalizService {
     public DenemeAnalizService(DenemeAnalizRepository repository, UserService userService) {
         this.repository = repository;
         this.userService = userService;
+    }
+
+    public boolean existDenemeAndUser(long id, User u){
+        return repository.existsByDeneme_IdAndUser(id,u);
     }
 
     public DenemeAnaliz create(DenemeAnaliz denemeAnaliz) {
@@ -44,4 +49,6 @@ public class DenemeAnalizService {
     public List<DenemeAnaliz> getHocaDeneme(long denemeId) {
         return repository.findByDeneme_OlusturanAndDeneme_Id(userService.getCurrentUser(), denemeId);
     }
+
+
 }

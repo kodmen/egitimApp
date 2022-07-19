@@ -54,6 +54,16 @@ public class DenemeService {
     }
 
     /**
+     * eğer öğr deneyi daha önce çözmüşse denemeye giremesin
+     * @param denemeid
+     * @return denemeye girdi mi
+     */
+    public boolean ogrDenemeyeGirmismi(long denemeid){
+        User ogr = userService.getCurrentUser();
+        return denemeAnalizService.existDenemeAndUser(denemeid,ogr);
+    }
+
+    /**
      * geri dönüş değeri deneme analiz id
      * @param request
      * @return
@@ -135,20 +145,10 @@ public class DenemeService {
     public Deneme create(DenemeDTO dto) throws ParseException {
         Deneme entity = new Deneme();
         entity.setOlusturan(userService.getCurrentUser());
-        entity.setOlusturmaTarih(LocalDate.now()); // bunu türkiyeyi göre ayarlamak lazım
+        entity.setOlusturmaTarih(LocalDate.now());
         entity.setIsim(dto.getIsim());
         entity.setSure(dto.getSure());
         entity.setBaslamaTarih(dto.getBaslamaTarih());
-//        if (dto.getBaslamaTarih() != "") {
-//            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
-//            Date date = (Date) formatter.parse(dto.getBaslamaTarih());
-//           // ZoneId tzid = ZoneId.of ( "Europe/Istanbul" );
-//
-//            entity.setBaslamaTarih(date.toInstant());
-//        }else{
-//            entity.baslamaTarih(Instant.now());
-//        }
-
         entity.setSorulars(new HashSet<Soru>());
         for (KonuDTO konu : dto.getKonudto()) {
             entity.getSorulars().addAll(getKonuyaGoreSoru(konu));
