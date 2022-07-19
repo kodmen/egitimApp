@@ -7,10 +7,13 @@ son durumda
 
 şimdi şu yapılcak
 
-ogrenci denemeye girdiği denemeye tekrar girebiliyor
 ikil olarak soruları baştan düzenlemek lazım
 test çözme sayfasını güncelleme
+soruların sayılarını koy
+soruları rastgele dağıt
 
+
+ogrenci denemeye girdiği denemeye tekrar girebiliyor
 hoca deneme sınıfa girince denemeye giren öğrencilerin deneme analizlerini görmesi lazım
 hoca sınıfa talebe ekleme düzenlencek
 bazı yetkinlikler eklendiş

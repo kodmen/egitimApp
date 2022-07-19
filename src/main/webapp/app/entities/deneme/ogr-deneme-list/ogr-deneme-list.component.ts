@@ -31,7 +31,7 @@ export class OgrDenemeListComponent implements OnInit {
         if(res){
           this.alertService.addAlert({ type: 'danger', message: 'denemeye daha önce giriş yapmışsınız' });
         }else{
-                this.router.navigate(['/deneme', d.id, 'basla']);
+           this.router.navigate(['/deneme', d.id, 'basla'],{queryParams:{sure:d.sure}});
 
         }
       })
