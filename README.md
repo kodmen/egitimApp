@@ -8,9 +8,9 @@ son durumda
 şimdi şu yapılcak
 
 ikil olarak soruları baştan düzenlemek lazım
-test çözme sayfasını güncelleme
-soruların sayılarını koy
-soruları rastgele dağıt
+- 
+cevaplı olunca nasıl analiz edeceğiz 
+gösterirken de cevaplı diye kontrol ederiz
 
 
 ogrenci denemeye girdiği denemeye tekrar girebiliyor
@@ -18,6 +18,9 @@ hoca deneme sınıfa girince denemeye giren öğrencilerin deneme analizlerini g
 hoca sınıfa talebe ekleme düzenlencek
 bazı yetkinlikler eklendiş
 dil düzeltilmiş
+test çözme sayfasını güncelleme
+soruların sayılarını koy
+soruları rastgele dağıt
 
 
 heroku buildpacks:clear

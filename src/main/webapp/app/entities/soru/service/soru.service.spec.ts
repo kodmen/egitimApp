@@ -25,6 +25,11 @@ describe('Soru Service', () => {
       cevap: 'AAAAAAA',
       sira: 0,
       resimUrl: 'AAAAAAA',
+      a: 'AAAAAAA',
+      b: 'AAAAAAA',
+      c: 'AAAAAAA',
+      d: 'AAAAAAA',
+      cevapli: false,
     };
   });
 
@@ -64,6 +69,11 @@ describe('Soru Service', () => {
           cevap: 'BBBBBB',
           sira: 1,
           resimUrl: 'BBBBBB',
+          a: 'BBBBBB',
+          b: 'BBBBBB',
+          c: 'BBBBBB',
+          d: 'BBBBBB',
+          cevapli: true,
         },
         elemDefault
       );
@@ -83,6 +93,8 @@ describe('Soru Service', () => {
           isim: 'BBBBBB',
           cevap: 'BBBBBB',
           sira: 1,
+          b: 'BBBBBB',
+          d: 'BBBBBB',
         },
         new Soru()
       );
@@ -106,6 +118,11 @@ describe('Soru Service', () => {
           cevap: 'BBBBBB',
           sira: 1,
           resimUrl: 'BBBBBB',
+          a: 'BBBBBB',
+          b: 'BBBBBB',
+          c: 'BBBBBB',
+          d: 'BBBBBB',
+          cevapli: true,
         },
         elemDefault
       );
@@ -157,7 +174,7 @@ describe('Soru Service', () => {
       });
 
       it('should add only unique Soru to an array', () => {
-        const soruArray: ISoru[] = [{ id: 123 }, { id: 456 }, { id: 14171 }];
+        const soruArray: ISoru[] = [{ id: 123 }, { id: 456 }, { id: 24523 }];
         const soruCollection: ISoru[] = [{ id: 123 }];
         expectedResult = service.addSoruToCollectionIfMissing(soruCollection, ...soruArray);
         expect(expectedResult).toHaveLength(3);

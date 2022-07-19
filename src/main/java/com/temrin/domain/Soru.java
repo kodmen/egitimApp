@@ -39,6 +39,21 @@ public class Soru implements Serializable {
     @Column(name = "resim_url", length = 500)
     private String resimUrl;
 
+    @Column(name = "a")
+    private String a;
+
+    @Column(name = "b")
+    private String b;
+
+    @Column(name = "c")
+    private String c;
+
+    @Column(name = "d")
+    private String d;
+
+    @Column(name = "cevapli")
+    private Boolean cevapli;
+
     @ManyToOne
     private Konu konu;
 
@@ -114,6 +129,71 @@ public class Soru implements Serializable {
         this.resimUrl = resimUrl;
     }
 
+    public String getA() {
+        return this.a;
+    }
+
+    public Soru a(String a) {
+        this.setA(a);
+        return this;
+    }
+
+    public void setA(String a) {
+        this.a = a;
+    }
+
+    public String getB() {
+        return this.b;
+    }
+
+    public Soru b(String b) {
+        this.setB(b);
+        return this;
+    }
+
+    public void setB(String b) {
+        this.b = b;
+    }
+
+    public String getC() {
+        return this.c;
+    }
+
+    public Soru c(String c) {
+        this.setC(c);
+        return this;
+    }
+
+    public void setC(String c) {
+        this.c = c;
+    }
+
+    public String getD() {
+        return this.d;
+    }
+
+    public Soru d(String d) {
+        this.setD(d);
+        return this;
+    }
+
+    public void setD(String d) {
+        this.d = d;
+    }
+
+    public Boolean getCevapli() {
+        return this.cevapli;
+    }
+
+    public Soru cevapli(Boolean cevapli) {
+        this.setCevapli(cevapli);
+        return this;
+    }
+
+    public void setCevapli(Boolean cevapli) {
+        this.cevapli = cevapli;
+    }
+
     public Konu getKonu() {
         return this.konu;
     }
@@ -186,6 +266,11 @@ public class Soru implements Serializable {
             ", cevap='" + getCevap() + "'" +
             ", sira=" + getSira() +
             ", resimUrl='" + getResimUrl() + "'" +
+            ", a='" + getA() + "'" +
+            ", b='" + getB() + "'" +
+            ", c='" + getC() + "'" +
+            ", d='" + getD() + "'" +
+            ", cevapli='" + getCevapli() + "'" +
             "}";
     }
 }

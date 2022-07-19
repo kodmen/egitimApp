@@ -37,6 +37,11 @@
           <th scope="col"><span jhiTranslate="temrinMatikApp.soru.cevap">Cevap</span></th>
           <th scope="col"><span jhiTranslate="temrinMatikApp.soru.sira">Sira</span></th>
           <th scope="col"><span jhiTranslate="temrinMatikApp.soru.resimUrl">Resim Url</span></th>
+          <th scope="col"><span jhiTranslate="temrinMatikApp.soru.a">A</span></th>
+          <th scope="col"><span jhiTranslate="temrinMatikApp.soru.b">B</span></th>
+          <th scope="col"><span jhiTranslate="temrinMatikApp.soru.c">C</span></th>
+          <th scope="col"><span jhiTranslate="temrinMatikApp.soru.d">D</span></th>
+          <th scope="col"><span jhiTranslate="temrinMatikApp.soru.cevapli">Cevapli</span></th>
           <th scope="col"><span jhiTranslate="temrinMatikApp.soru.konu">Konu</span></th>
           <th scope="col"></th>
         </tr>
@@ -50,6 +55,11 @@
           <td>{{ soru.cevap }}</td>
           <td>{{ soru.sira }}</td>
           <td>{{ soru.resimUrl }}</td>
+          <td>{{ soru.a }}</td>
+          <td>{{ soru.b }}</td>
+          <td>{{ soru.c }}</td>
+          <td>{{ soru.d }}</td>
+          <td>{{ soru.cevapli }}</td>
           <td>
             <div *ngIf="soru.konu">
               <a [routerLink]="['/konu', soru.konu?.id, 'view']">{{ soru.konu?.isim }}</a>

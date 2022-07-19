@@ -24,6 +24,26 @@
       "fieldType": "String",
       "fieldValidateRules": ["maxlength"],
       "fieldValidateRulesMaxlength": "500"
+    },
+    {
+      "fieldName": "a",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "b",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "c",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "d",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "cevapli",
+      "fieldType": "Boolean"
     }
   ],
   "fluentMethods": true,

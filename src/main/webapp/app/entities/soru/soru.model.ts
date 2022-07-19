@@ -7,6 +7,11 @@ export interface ISoru {
   cevap?: string | null;
   sira?: number | null;
   resimUrl?: string | null;
+  a?: string | null;
+  b?: string | null;
+  c?: string | null;
+  d?: string | null;
+  cevapli?: boolean | null;
   konu?: IKonu | null;
   imageContentType?: string | null;
   image?: string | null;
@@ -20,11 +25,18 @@ export class Soru implements ISoru {
     public cevap?: string | null,
     public sira?: number | null,
     public resimUrl?: string | null,
+    public a?: string | null,
+    public b?: string | null,
+    public c?: string | null,
+    public d?: string | null,
+    public cevapli?: boolean | null,
     public konu?: IKonu | null,
     public imageContentType?: string | null,
     public image?: string | null,
     public denemelers?: IDeneme[] | null
-  ) {}
+  ) {
+    this.cevapli = this.cevapli ?? false;
+  }
 }
 
 export function getSoruIdentifier(soru: ISoru): number | undefined {

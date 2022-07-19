@@ -30,6 +30,26 @@
         <dd>
           <img class="responsive" [src]="'https://temrinbucket.s3.eu-central-1.amazonaws.com/' + soru.resimUrl" />
         </dd>
+        <dt><span jhiTranslate="temrinMatikApp.soru.a">A</span></dt>
+        <dd>
+          <span>{{ soru.a }}</span>
+        </dd>
+        <dt><span jhiTranslate="temrinMatikApp.soru.b">B</span></dt>
+        <dd>
+          <span>{{ soru.b }}</span>
+        </dd>
+        <dt><span jhiTranslate="temrinMatikApp.soru.c">C</span></dt>
+        <dd>
+          <span>{{ soru.c }}</span>
+        </dd>
+        <dt><span jhiTranslate="temrinMatikApp.soru.d">D</span></dt>
+        <dd>
+          <span>{{ soru.d }}</span>
+        </dd>
+        <dt><span jhiTranslate="temrinMatikApp.soru.cevapli">Cevapli</span></dt>
+        <dd>
+          <span>{{ soru.cevapli }}</span>
+        </dd>
         <dt><span jhiTranslate="temrinMatikApp.soru.konu">Konu</span></dt>
         <dd>
           <div *ngIf="soru.konu">

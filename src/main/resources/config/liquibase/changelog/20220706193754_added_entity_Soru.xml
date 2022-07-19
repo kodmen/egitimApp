@@ -26,6 +26,21 @@
             <column name="resim_url" type="varchar(500)">
                 <constraints nullable="true" />
             </column>
+            <column name="a" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="b" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="c" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="d" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="cevapli" type="boolean">
+                <constraints nullable="true" />
+            </column>
             <column name="konu_id" type="bigint">
                 <constraints nullable="true" />
             </column>
@@ -54,6 +69,11 @@
             <column name="cevap" type="string"/>
             <column name="sira" type="numeric"/>
             <column name="resim_url" type="string"/>
+            <column name="a" type="string"/>
+            <column name="b" type="string"/>
+            <column name="c" type="string"/>
+            <column name="d" type="string"/>
+            <column name="cevapli" type="boolean"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

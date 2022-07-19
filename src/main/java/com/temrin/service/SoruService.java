@@ -47,6 +47,11 @@ public class SoruService {
         soru.setSira(dto.getSira());
         soru.setKonu(dto.getKonu());
         soru.setResimUrl(fileName);
+        soru.setA(dto.getA());
+        soru.setB(dto.getB());
+        soru.setC(dto.getC());
+        soru.setD(dto.getD());
+        soru.setCevapli(dto.getCevapli());
 
         return repository.save(soru);
     }
