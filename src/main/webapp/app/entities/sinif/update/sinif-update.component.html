@@ -9,7 +9,7 @@
       <div>
         <jhi-alert-error></jhi-alert-error>
 
-        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+        <div *jhiHasAnyAuthority="['ROLE_ADMIN','ROLE_MESUL']" class="row mb-3" [hidden]="editForm.get('id')!.value == null">
           <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
           <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id"
             [readonly]="true" />
@@ -27,7 +27,7 @@
           </div>
         </div>
 
-        <div class="row mb-3">
+        <div *jhiHasAnyAuthority="['ROLE_ADMIN','ROLE_MESUL']" class="row mb-3">
           <label class="form-label" jhiTranslate="temrinMatikApp.sinif.konulimizjson"
             for="field_konulimizjson">Konulimizjson</label>
           <input type="text" class="form-control" name="konulimizjson" id="field_konulimizjson" data-cy="konulimizjson"
@@ -42,7 +42,7 @@
           </div>
         </div>
 
-        <div class="row mb-3">
+        <div *jhiHasAnyAuthority="['ROLE_ADMIN','ROLE_MESUL']" class="row mb-3">
           <label class="form-label" jhiTranslate="temrinMatikApp.sinif.yurt" for="field_yurt">Yurt</label>
           <select class="form-control" id="field_yurt" data-cy="yurt" name="yurt" formControlName="yurt">
             <option [ngValue]="null"></option>
@@ -54,7 +54,7 @@
           </select>
         </div>
 
-        <div class="row mb-3">
+        <div *jhiHasAnyAuthority="['ROLE_ADMIN','ROLE_MESUL']" class="row mb-3">
           <label class="form-label" jhiTranslate="temrinMatikApp.sinif.grup" for="field_grup">Grup</label>
           <select class="form-control" id="field_grup" data-cy="grup" name="grup" formControlName="grup">
             <option [ngValue]="null"></option>
@@ -66,7 +66,7 @@
           </select>
         </div>
 
-        <div class="row mb-3">
+        <div *jhiHasAnyAuthority="['ROLE_ADMIN','ROLE_MESUL']" class="row mb-3">
           <label class="form-label" jhiTranslate="temrinMatikApp.sinif.hoca" for="field_hoca">Hoca</label>
           <select class="form-control" id="field_hoca" data-cy="hoca" name="hoca" formControlName="hoca">
             <option [ngValue]="null"></option>

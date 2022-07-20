@@ -9,12 +9,15 @@ son durumda
 
 ikil olarak soruları baştan düzenlemek lazım
 - 
+
+soruları rastgele dağıttı zaman önce daha az sorduğu soruyu getirmesi lazım
+deneme analizde tarih koyulabilir
+
+
 cevaplı olunca nasıl analiz edeceğiz 
 önce soruları yazdırayım
 sonra cevapları gönederiym
 sonra cevapları analiz ederim
-
-
 ogrenci denemeye girdiği denemeye tekrar girebiliyor
 hoca deneme sınıfa girince denemeye giren öğrencilerin deneme analizlerini görmesi lazım
 hoca sınıfa talebe ekleme düzenlencek

@@ -30,6 +30,16 @@ export class DenemeAnalizComponent implements OnInit {
     });
   }
 
+  konuAnalizYanlis(analiz:string):string{
+    const ayri = analiz.split("--");
+    return ayri[0]
+  }
+
+  konuAnalizBos(analiz:string):string{
+    const ayri = analiz.split("--");
+    return ayri[1];
+  }
+
   ngOnInit(): void {
     this.loadAll();
   }

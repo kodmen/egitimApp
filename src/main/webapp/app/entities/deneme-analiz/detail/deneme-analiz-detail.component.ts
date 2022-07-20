@@ -21,4 +21,14 @@ export class DenemeAnalizDetailComponent implements OnInit {
   previousState(): void {
     this.router.navigate(['deneme-analiz']);
   }
+
+  konuAnalizYanlis(analiz:string):string{
+    const ayri = analiz.split("--");
+    return ayri[0]
+  }
+
+  konuAnalizBos(analiz:string):string{
+    const ayri = analiz.split("--");
+    return ayri[1];
+  }
 }

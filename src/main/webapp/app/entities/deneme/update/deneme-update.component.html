@@ -8,7 +8,7 @@
       <div>
         <jhi-alert-error></jhi-alert-error>
 
-        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+        <div *jhiHasAnyAuthority="['ROLE_ADMIN','ROLE_MESUL']" class="row mb-3" [hidden]="editForm.get('id')!.value == null">
           <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
           <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
         </div>
@@ -28,7 +28,7 @@
           </div>
         </div>
 
-        <div class="row mb-3">
+        <div *jhiHasAnyAuthority="['ROLE_ADMIN','ROLE_MESUL']" class="row mb-3">
           <label class="form-label" jhiTranslate="temrinMatikApp.deneme.olusturmaTarih" for="field_olusturmaTarih">Olusturma Tarih</label>
           <div class="input-group">
             <input
@@ -67,7 +67,7 @@
           <input type="number" class="form-control" name="sure" id="field_sure" data-cy="sure" formControlName="sure" />
         </div>
 
-        <div class="row mb-3">
+        <div *jhiHasAnyAuthority="['ROLE_ADMIN','ROLE_MESUL']" class="row mb-3">
           <label class="form-label" jhiTranslate="temrinMatikApp.deneme.cevapAnahtar" for="field_cevapAnahtar">Cevap Anahtar</label>
           <input
             type="text"
@@ -91,7 +91,7 @@
           </div>
         </div>
 
-        <div class="row mb-3">
+        <div *jhiHasAnyAuthority="['ROLE_ADMIN','ROLE_MESUL']" class="row mb-3">
           <label class="form-label" jhiTranslate="temrinMatikApp.deneme.denemeInfoJson" for="field_denemeInfoJson">Deneme Info Json</label>
           <input
             type="text"
@@ -117,7 +117,7 @@
           </div>
         </div>
 
-        <div class="row mb-3">
+        <div *jhiHasAnyAuthority="['ROLE_ADMIN','ROLE_MESUL']" class="row mb-3">
           <label class="form-label" jhiTranslate="temrinMatikApp.deneme.olusturan" for="field_olusturan">Olusturan</label>
           <select class="form-control" id="field_olusturan" data-cy="olusturan" name="olusturan" formControlName="olusturan">
             <option [ngValue]="null"></option>

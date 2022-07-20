@@ -9,6 +9,7 @@
       </button>
 
       <button
+      *jhiHasAnyAuthority="['ROLE_ADMIN']"
         id="jh-create-entity"
         data-cy="entityCreateButton"
         class="btn btn-primary jh-create-entity create-deneme-analiz"
@@ -32,35 +33,37 @@
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
         <tr>
-          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <!-- <th scope="col"><span jhiTranslate="global.field.id">ID</span></th> -->
+                    <th scope="col"><span jhiTranslate="temrinMatikApp.denemeAnaliz.deneme">Deneme</span></th>
+          <th scope="col"><span jhiTranslate="temrinMatikApp.denemeAnaliz.user">User</span></th>
+          <th scope="col"><span jhiTranslate="temrinMatikApp.denemeAnaliz.puan">Puan</span></th>
+
           <th scope="col"><span jhiTranslate="temrinMatikApp.denemeAnaliz.dogru">Dogru</span></th>
           <th scope="col"><span jhiTranslate="temrinMatikApp.denemeAnaliz.yanlis">Yanlis</span></th>
-          <th scope="col"><span jhiTranslate="temrinMatikApp.denemeAnaliz.puan">Puan</span></th>
-          <th scope="col"><span jhiTranslate="temrinMatikApp.denemeAnaliz.cozuldu">Cozuldu</span></th>
-          <th scope="col"><span jhiTranslate="temrinMatikApp.denemeAnaliz.konuAnalizJson">Konu Analiz Json</span></th>
-          <th scope="col"><span jhiTranslate="temrinMatikApp.denemeAnaliz.user">User</span></th>
-          <th scope="col"><span jhiTranslate="temrinMatikApp.denemeAnaliz.deneme">Deneme</span></th>
+          <th scope="col"><span > Analiz Yanlis </span></th>
+          <th scope="col"><span > Analiz bos </span></th>
           <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let denemeAnaliz of denemeAnalizs; trackBy: trackId" data-cy="entityTable">
-          <td>
-            <a [routerLink]="['/deneme-analiz', denemeAnaliz.id, 'view']">{{ denemeAnaliz.id }}</a>
-          </td>
-          <td>{{ denemeAnaliz.dogru }}</td>
-          <td>{{ denemeAnaliz.yanlis }}</td>
-          <td>{{ denemeAnaliz.puan }}</td>
-          <td>{{ denemeAnaliz.cozuldu }}</td>
-          <td>{{ denemeAnaliz.konuAnalizJson }}</td>
-          <td>
-            {{ denemeAnaliz.user?.login }}
-          </td>
-          <td>
+        <td>
             <div *ngIf="denemeAnaliz.deneme">
               <a [routerLink]="['/deneme', denemeAnaliz.deneme?.id, 'view']">{{ denemeAnaliz.deneme?.isim }}</a>
             </div>
-          </td>
+          </td> 
+            <td>
+            {{ denemeAnaliz.user?.login }}
+          </td>      
+           <td>{{ denemeAnaliz.puan }}</td>
+
+          
+
+          <td>{{ denemeAnaliz.dogru }}</td>
+          <td>{{ denemeAnaliz.yanlis }}</td>
+          <td>{{  konuAnalizYanlis(denemeAnaliz.konuAnalizJson!) }}</td>
+          <td>{{  konuAnalizBos(denemeAnaliz.konuAnalizJson!) }}</td>
+          
           <td class="text-end">
             <div class="btn-group">
               <button

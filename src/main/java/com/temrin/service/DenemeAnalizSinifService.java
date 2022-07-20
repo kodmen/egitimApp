@@ -2,6 +2,7 @@ package com.temrin.service;
 
 import com.temrin.domain.Deneme;
 import com.temrin.domain.DenemeAnalizSinif;
+import com.temrin.domain.Sinif;
 import com.temrin.repository.DenemeAnalizSinifRepository;
 import org.springframework.stereotype.Service;
 
@@ -13,14 +14,19 @@ public class DenemeAnalizSinifService {
 
     private final DenemeAnalizSinifRepository repository;
     private final UserService userService;
+    private final SinifService sinifService;
 
-    public DenemeAnalizSinifService(DenemeAnalizSinifRepository repository, UserService userService) {
+    public DenemeAnalizSinifService(DenemeAnalizSinifRepository repository, UserService userService, SinifService sinifService) {
         this.repository = repository;
         this.userService = userService;
+        this.sinifService = sinifService;
     }
 
     public void DenemeAnalizSinifCreate(Deneme d) {
+        // buraya deneme old sınıfı koymak lazım
         DenemeAnalizSinif sinif = new DenemeAnalizSinif();
+        Sinif hocaSinif = sinifService.getCurrentUserSinif();
+        sinif.setSinif(hocaSinif);
         sinif.setDeneme(d);
         sinif.setOrtalama(0f);
 

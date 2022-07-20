@@ -33,10 +33,9 @@
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
         <tr>
-          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
-          <th scope="col"><span jhiTranslate="temrinMatikApp.denemeAnalizSinif.ortalama">Ortalama</span></th>
-          <th scope="col"><span jhiTranslate="temrinMatikApp.denemeAnalizSinif.konuAnalizJson">Konu Analiz Json</span></th>
           <th scope="col"><span jhiTranslate="temrinMatikApp.denemeAnalizSinif.deneme">Deneme</span></th>
+          <th scope="col"><span jhiTranslate="temrinMatikApp.denemeAnalizSinif.ortalama">Ortalama</span></th>
+
           <th scope="col"><span jhiTranslate="temrinMatikApp.denemeAnalizSinif.sinif">Sinif</span></th>
           <th scope="col"></th>
         </tr>
@@ -44,15 +43,12 @@
       <tbody>
         <tr *ngFor="let denemeAnalizSinif of denemeAnalizSinifs; trackBy: trackId" data-cy="entityTable">
           <td>
-            <a [routerLink]="['/deneme-analiz-sinif', denemeAnalizSinif.id, 'view']">{{ denemeAnalizSinif.id }}</a>
-          </td>
-          <td>{{ denemeAnalizSinif.ortalama }}</td>
-          <td>{{ denemeAnalizSinif.konuAnalizJson }}</td>
-          <td>
             <div *ngIf="denemeAnalizSinif.deneme">
               <a [routerLink]="['/deneme', denemeAnalizSinif.deneme?.id, 'view']">{{ denemeAnalizSinif.deneme?.isim }}</a>
             </div>
           </td>
+          <td>{{ denemeAnalizSinif.ortalama }}</td>
+         
           <td>
             <div *ngIf="denemeAnalizSinif.sinif">
               <a [routerLink]="['/sinif', denemeAnalizSinif.sinif?.id, 'view']">{{ denemeAnalizSinif.sinif?.isim }}</a>
@@ -63,7 +59,7 @@
               <button
                 type="submit"
                 [routerLink]="['/deneme-analiz-sinif', denemeAnalizSinif.id, 'view']"
-                class="btn btn-info btn-sm"
+                class="btn btn-info btn-sm m-1"
                 data-cy="entityDetailsButton"
               >
                 <fa-icon icon="eye"></fa-icon>
@@ -73,7 +69,7 @@
               <button
                 type="submit"
                 [routerLink]="['/deneme-analiz-sinif', denemeAnalizSinif.id, 'ogr-view']"
-                class="btn btn-info btn-sm m-1"
+                class="btn btn-success btn-sm m-1"
                 data-cy="entityDetailsButton"
               >
                 <fa-icon icon="eye"></fa-icon>

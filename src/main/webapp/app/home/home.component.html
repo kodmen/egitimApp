@@ -1,5 +1,5 @@
 <div class="row">
-  
+
 
   <div class="col-md-9">
     <h1 class="display-4"><span jhiTranslate="home.title">Gölbaşı talebe yurdu</span> (Temrin Matik)</h1>
@@ -7,20 +7,26 @@
     <p class="lead" jhiTranslate="home.subtitle">Gölbaşı katkılarıyla temrin uygulaması</p>
 
     <div [ngSwitch]="account !== null">
+      <h1>ilk girişte yapmanız gerekenler</h1>
       <div class="alert alert-success" *ngSwitchCase="true">
-        <span id="home-logged-message" *ngIf="account" jhiTranslate="home.logged.message" [translateValues]="{ username: account.login }"
-          >You are logged in as user "{{ account.login }}".</span
-        >
+
+        <h4>öğrenci isen </h4>
+        <h4>hocanıza haber verin sizi sınıfıza dahil etsin</h4>
+      </div>
+      <div class="alert alert-success" *ngSwitchCase="true">
+        <h4>hoca iseniz </h4>
+        <h4>Admin ile iletişime geçin</h4>
       </div>
 
       <div class="alert alert-warning" *ngSwitchCase="false">
         <span jhiTranslate="global.messages.info.register.noaccount">You don't have an account yet?</span>&nbsp;
-        <a class="alert-link" routerLink="account/register" jhiTranslate="global.messages.info.register.link">Register a new account</a>
+        <a class="alert-link" routerLink="account/register" jhiTranslate="global.messages.info.register.link">Register a
+          new account</a>
       </div>
 
       <div class="alert alert-warning" *ngSwitchCase="false">
-        <span >Üyeliğiniz var mı?</span>&nbsp;
-        <a class="alert-link" routerLink="login" >Giriş yapın</a>
+        <span>Üyeliğiniz var mı?</span>&nbsp;
+        <a class="alert-link" routerLink="login">Giriş yapın</a>
       </div>
 
     </div>

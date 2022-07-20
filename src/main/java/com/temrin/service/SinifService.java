@@ -55,4 +55,9 @@ public class SinifService {
 
         return new Sinif();
     }
+
+    public Sinif getCurrentUserSinif(){
+        List<Sinif> sinifList = sinifRepository.findByHocaIsCurrentUser();
+        return sinifList.size() > 0 ? sinifList.get(0) : null;
+    }
 }

@@ -10,18 +10,18 @@
       <jhi-alert></jhi-alert>
 
       <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="global.field.id">ID</span></dt>
-        <dd>
+        <dt *jhiHasAnyAuthority="['ROLE_ADMIN','ROLE_MESUL']"><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd *jhiHasAnyAuthority="['ROLE_ADMIN','ROLE_MESUL']">
           <span>{{ sinif.id }}</span>
         </dd>
         <dt><span jhiTranslate="temrinMatikApp.sinif.isim" [ngbTooltip]="'temrinMatikApp.sinif.help.isim' | translate">Isim</span></dt>
         <dd>
           <span>{{ sinif.isim }}</span>
         </dd>
-        <dt><span jhiTranslate="temrinMatikApp.sinif.konulimizjson">Konulimizjson</span></dt>
+        <!-- <dt><span jhiTranslate="temrinMatikApp.sinif.konulimizjson">Konulimizjson</span></dt>
         <dd>
           <span>{{ sinif.konulimizjson }}</span>
-        </dd>
+        </dd> -->
         <dt><span jhiTranslate="temrinMatikApp.sinif.yurt">Yurt</span></dt>
         <dd>
           <div *ngIf="sinif.yurt">

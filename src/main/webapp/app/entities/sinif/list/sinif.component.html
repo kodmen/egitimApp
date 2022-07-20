@@ -33,18 +33,18 @@
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
         <tr>
-          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <th *jhiHasAnyAuthority="['ROLE_ADMIN','ROLE_MESUL']" scope="col"><span jhiTranslate="global.field.id">ID</span></th>
           <th scope="col"><span jhiTranslate="temrinMatikApp.sinif.isim">Isim</span></th>
           <th scope="col"><span jhiTranslate="temrinMatikApp.sinif.yurt">Yurt</span></th>
           <th scope="col"><span jhiTranslate="temrinMatikApp.sinif.grup">Grup</span></th>
           <th scope="col"><span jhiTranslate="temrinMatikApp.sinif.hoca">Hoca</span></th>
-          <th scope="col"><span jhiTranslate="temrinMatikApp.sinif.ogrenciler">Ogrenciler</span></th>
+          <th *jhiHasAnyAuthority="['ROLE_ADMIN','ROLE_MESUL']" scope="col"><span jhiTranslate="temrinMatikApp.sinif.ogrenciler">Ogrenciler</span></th>
           <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let sinif of sinifs; trackBy: trackId" data-cy="entityTable">
-          <td>
+          <td *jhiHasAnyAuthority="['ROLE_ADMIN','ROLE_MESUL']">
             <a [routerLink]="['/sinif', sinif.id, 'view']">{{ sinif.id }}</a>
           </td>
           <td>{{ sinif.isim }}</td>
@@ -61,9 +61,11 @@
           <td>
             {{ sinif.hoca?.login }}
           </td>
-          <td>
-            <span *ngFor="let ogrenciler of sinif.ogrencilers; let last = last"> {{ ogrenciler.login }}{{ last ? '' : ', ' }} </span>
+
+          <td *jhiHasAnyAuthority="['ROLE_ADMIN','ROLE_MESUL']">
+            <span *ngFor="let ogrenciler of sinif.ogrencilers"> {{ ogrenciler.login }} </span>
           </td>
+
           <td class="text-end">
             <div class="btn-group">
               <button type="submit" [routerLink]="['/sinif', sinif.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">

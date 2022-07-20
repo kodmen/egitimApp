@@ -1,7 +1,7 @@
 import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IDenemeAnaliz } from 'app/entities/deneme-analiz/deneme-analiz.model';
+import {  IDenemeAnaliz } from 'app/entities/deneme-analiz/deneme-analiz.model';
 import { IDeneme } from 'app/entities/deneme/deneme.model';
 import { DenemeAnalizService } from '../../deneme-analiz/service/deneme-analiz.service';
 import { IDenemeAnalizSinif } from '../deneme-analiz-sinif.model';
@@ -45,6 +45,18 @@ export class HocaOgrListComponent implements OnInit {
         this.isLoading = false;
       },
     });
+  }
+
+
+
+  konuAnalizYanlis(analiz:string):string{
+    const ayri = analiz.split("--");
+    return ayri[0]
+  }
+
+  konuAnalizBos(analiz:string):string{
+    const ayri = analiz.split("--");
+    return ayri[1];
   }
 
   trackId(_index: number, item: IDenemeAnaliz): number {

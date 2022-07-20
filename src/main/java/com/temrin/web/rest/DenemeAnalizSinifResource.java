@@ -168,7 +168,7 @@ public class DenemeAnalizSinifResource {
     @GetMapping("/deneme-analiz-sinifs/{id}")
     public ResponseEntity<DenemeAnalizSinif> getDenemeAnalizSinif(@PathVariable Long id) {
         log.debug("REST request to get DenemeAnalizSinif : {}", id);
-        Optional<DenemeAnalizSinif> denemeAnalizSinif = denemeAnalizSinifRepository.findOneWithEagerRelationships(id);
+        Optional<DenemeAnalizSinif> denemeAnalizSinif = denemeAnalizSinifRepository.findOneWithToOneRelationships(id);
         return ResponseUtil.wrapOrNotFound(denemeAnalizSinif);
     }
 

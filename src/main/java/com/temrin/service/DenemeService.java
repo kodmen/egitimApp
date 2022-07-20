@@ -126,6 +126,11 @@ public class DenemeService {
         // sınava giren öğrenciler adedince ort
     }
 
+    /**
+     * oluşturulan denemiyi clentin anlayacağı şekle çeviriyor
+     * @param denemeId
+     * @return
+     */
     public DenemeSinavDto denemeSinavOlustur(long denemeId) {
         Deneme deneme = repository.getById(denemeId);
         DenemeSinavDto denemeSinav = new DenemeSinavDto();
@@ -148,12 +153,15 @@ public class DenemeService {
 
     public Deneme create(DenemeDTO dto) throws ParseException {
         Deneme entity = new Deneme();
+
         entity.setOlusturan(userService.getCurrentUser());
         entity.setOlusturmaTarih(LocalDate.now());
         entity.setIsim(dto.getIsim());
         entity.setSure(dto.getSure());
         entity.setBaslamaTarih(dto.getBaslamaTarih());
+
         entity.setSorulars(new HashSet<Soru>());
+
         for (KonuDTO konu : dto.getKonudto()) {
             entity.getSorulars().addAll(getKonuyaGoreSoru(konu));
         }
@@ -165,10 +173,20 @@ public class DenemeService {
         return entity;
     }
 
+    /**
+     * konuya göre soru getirme
+     * @param konuDTO konu ve soru adedi
+     * @return sorular
+     */
     private List<Soru> getKonuyaGoreSoru(KonuDTO konuDTO) {
+
+        // konu id ile konuyu getirilir
         Konu konu = konuService.getById(Long.valueOf(konuDTO.getKonu()));
+
+        // konuya ait sorular getirilir
         List<Soru> sorular = soruService.getKonubySoru(konu);
 
+        // başlangıç ve bitiş değerlerine göre sorular getirliri
         List<Soru> result = sorular
             .stream()
             .filter(s -> s.getSira() >= konuDTO.baslangic && s.getSira() <= konuDTO.getBitis())
@@ -182,13 +200,14 @@ public class DenemeService {
     }
 
     /**
-     * girilen soru adedince geriye random o kadar soru getircek
-     *
-     * @param sorular
-     * @param kacAdet
-     * @return
+     * soru listesinin içinden soru geri döndürür
+     * @param sorular sorular
+     * @param kacAdet soruların içinden kaç adet soru old
+     * @return seçilmeş sorular
      */
     private List<Soru> belliSoruyuGetir(List<Soru> sorular, int kacAdet) {
+        // benim burda soru adedince
+
         List<Soru> result = new ArrayList<>();
 
         for (int i = 0; kacAdet > i; i++) {
@@ -261,8 +280,8 @@ public class DenemeService {
         List<DenemeAnaliz> denemeAnalizs = denemeAnalizService.getDenemeAnalizByDeneme(d);
         denemeAnalizService.denemeAnalizListSil(denemeAnalizs);
 
+        // sonra denemeyi sil
         repository.delete(d);
 
-        // sonra denemeyi sil
     }
 }

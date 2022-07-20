@@ -10,8 +10,8 @@
       <jhi-alert></jhi-alert>
 
       <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="global.field.id">ID</span></dt>
-        <dd>
+        <dt *jhiHasAnyAuthority="'ROLE_ADMIN'" ><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd *jhiHasAnyAuthority="'ROLE_ADMIN'">
           <span>{{ konu.id }}</span>
         </dd>
         <dt><span jhiTranslate="temrinMatikApp.konu.isim">Isim</span></dt>

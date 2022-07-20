@@ -32,38 +32,38 @@
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
         <tr>
-          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          
           <th scope="col"><span jhiTranslate="temrinMatikApp.deneme.isim">Isim</span></th>
           <th scope="col"><span jhiTranslate="temrinMatikApp.deneme.olusturmaTarih">Olusturma Tarih</span></th>
           <th scope="col"><span jhiTranslate="temrinMatikApp.deneme.baslamaTarih">Baslama Tarih</span></th>
           <th scope="col"><span jhiTranslate="temrinMatikApp.deneme.sure">Sure</span></th>
-          <th scope="col"><span jhiTranslate="temrinMatikApp.deneme.cevapAnahtar">Cevap Anahtar</span></th>
-          <th scope="col"><span jhiTranslate="temrinMatikApp.deneme.denemeInfoJson">Deneme Info Json</span></th>
+          <!-- <th scope="col"><span jhiTranslate="temrinMatikApp.deneme.cevapAnahtar">Cevap Anahtar</span></th> -->
+          <!-- <th scope="col"><span jhiTranslate="temrinMatikApp.deneme.denemeInfoJson">Deneme Info Json</span></th> -->
           <th scope="col"><span jhiTranslate="temrinMatikApp.deneme.olusturan">Olusturan</span></th>
-          <th scope="col"><span jhiTranslate="temrinMatikApp.deneme.sorular">Sorular</span></th>
+          <!-- <th scope="col"><span jhiTranslate="temrinMatikApp.deneme.sorular">Sorular</span></th> -->
           <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let deneme of denemes; trackBy: trackId" data-cy="entityTable">
-          <td>
+          <!-- <td>
             <a [routerLink]="['/deneme', deneme.id, 'view']">{{ deneme.id }}</a>
-          </td>
+          </td> -->
           <td>{{ deneme.isim }}</td>
           <td>{{ deneme.olusturmaTarih | formatMediumDate }}</td>
           <td>{{ deneme.baslamaTarih | formatMediumDatetime }}</td>
           <td>{{ deneme.sure }}</td>
-          <td>{{ deneme.cevapAnahtar }}</td>
-          <td>{{ deneme.denemeInfoJson }}</td>
+          <!-- <td>{{ deneme.cevapAnahtar }}</td> -->
+          <!-- <td>{{ deneme.denemeInfoJson }}</td> -->
           <td>
             {{ deneme.olusturan?.login }}
           </td>
-          <td>
+          <!-- <td>
             <span *ngFor="let sorular of deneme.sorulars; let last = last">
               <a class="form-control-static" [routerLink]="['/soru', sorular.id, 'view']">{{ sorular.isim }}</a
               >{{ last ? '' : ', ' }}
             </span>
-          </td>
+          </td> -->
           <td class="text-end">
             <div class="btn-group">
               <button type="submit" [routerLink]="['/deneme', deneme.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
