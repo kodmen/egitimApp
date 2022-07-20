@@ -1,23 +1,37 @@
-/* ==========================================================================
-Main page styles
-========================================================================== */
+// /* ==========================================================================
+// Main page styles
+// ========================================================================== */
+// $base_mavi: #5cc19e;
+// $base_bordo: #320b06;
+// $base_turuncu: #b1740b;
 
-.hipster {
-  display: inline-block;
-  width: 347px;
-  height: 497px;
-  background: url('https://leverageedu.com/blog/wp-content/uploads/2019/11/Competitive-Exams.png') no-repeat center top;
-  background-size: contain;
+// h1{
+//     font-family: 'Roboto', sans-serif;
+//     // font-family: 
+// }
+
+.responsive {
+  width: 100%;
+  height: auto;
 }
 
-/* wait autoprefixer update to allow simple generation of high pixel density media query */
-@media only screen and (-webkit-min-device-pixel-ratio: 2),
-  only screen and (-moz-min-device-pixel-ratio: 2),
-  only screen and (-o-min-device-pixel-ratio: 2/1),
-  only screen and (min-resolution: 192dpi),
-  only screen and (min-resolution: 2dppx) {
-  .hipster {
-    background: url('https://leverageedu.com/blog/wp-content/uploads/2019/11/Competitive-Exams.png') no-repeat center top;
-    background-size: contain;
-  }
+// /* wait autoprefixer update to allow simple generation of high pixel density media query */
+
+
+.highlight-word {
+  position: relative;
+  z-index: 0;
+/* prevent the highlight from breaking since it is horizontal   */
+  white-space: nowrap;
+}
+.highlight-word:before {
+    content: '';
+    background: url(https://cdn2.hubspot.net/hubfs/1951809/text-highlight.png?t=1542708765973) no-repeat center center;
+    background-size: 100% auto;
+    width: 108%;
+    height: 100%;
+    display: block;
+    position: absolute;
+    z-index: -1;
+    transform: translate(-3%,0);
 }

@@ -10,6 +10,11 @@ Navbar
   color: $navbar-dark-color;
 }
 
+.navbar-title{
+color: #FFC93C;
+font-size: 1.5rem;
+}
+
 .profile-image {
   height: 1.75em;
   width: 1.75em;
@@ -17,7 +22,8 @@ Navbar
 
 .navbar {
   padding: 0.2rem 1rem;
-
+  background-color: #155263;
+  
   a.nav-link {
     font-weight: 400;
   }

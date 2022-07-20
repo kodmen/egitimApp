@@ -1,8 +1,13 @@
-<div class="row">
+<!-- <div class="row">
 
 
-  <div class="col-md-9">
-    <h1 class="display-4"><span jhiTranslate="home.title">Gölbaşı talebe yurdu</span> (Temrin Matik)</h1>
+
+  <div class="col-md-5">
+    <img src="../../content/images/TEMRINPOTO.png" class="rounded mx-auto d-block responsive" alt="">
+  </div>
+
+  <div class="col-md-7">
+    <h1 class="display-4 text-center">Gölbaşı Talebe Yurdu </h1>
 
     <p class="lead" jhiTranslate="home.subtitle">Gölbaşı katkılarıyla temrin uygulaması</p>
 
@@ -32,7 +37,255 @@
     </div>
   </div>
 
-  <div class="col-md-3">
-    <span class="hipster img-fluid rounded"></span>
+
+
+
+</div> -->
+
+
+
+<!-- Design inspired from https://www.hotjar.com/ -->
+<div class="jumbotron mt-5 mb-5">
+  <div class="container text-center text-lg-left">
+
+    <div class="row" [ngSwitch]="account !== null">
+      <div class="col-lg-6 my-auto">
+        <h1 class="display-4">Temrin Uygulaması</h1>
+        <p class="lead">Gölbaşı Talebe Yurdunun tekamül altı talebelerinin hazırlamış olduğu temrin uygulamas</p>
+        <div class="lc-block" *ngSwitchCase="false">
+          <a class="btn  mt-2" style="background-color:#1dc49c ;" routerLink="login" role="button">Giriş Yap</a>
+          <a class="btn btn-outline-primary mt-2" routerLink="account/register" role="button">Üye Ol</a>
+        </div>
+        <div  class="lc-block" *ngSwitchCase="true">
+          <a  *jhiHasAnyAuthority="'ROLE_USER'" class="btn  mt-2" style="background-color:#1dc49c ;" routerLink="deneme/ogr" role="button">Denemeler</a>
+          <a  *jhiHasAnyAuthority="'ROLE_HOCA'" class="btn  mt-2" style="background-color:#1dc49c ;" routerLink="deneme" role="button">Deneme olustur</a>
+
+        </div>
+
+      </div>
+      <div class="col-lg-6 align-items-center d-flex">
+        <img src="../../content/images/TEMRINPOTO.png" alt="" class="img-fluid">
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+
+
+<div class="container py-5">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <div class="lc-block">
+        <span editable="inline" class="small mt-4 d-block">Temrin app</span>
+        <h2 editable="inline" class="display-2 mb-0"><b>Özellikler</b></h2>
+        <p editable="inline">Temrin uygulaması özellikleri</p>
+      </div><!-- /lc-block -->
+    </div>
+  </div>
+  <div class="row justify-content-center mt-3 mt-md-5">
+    <div class="col-md-6 col-lg-5 col-xl-3 mb-4 mb-xl-0">
+      <div class="lc-block p-4 border rounded-3  text-white" style="background-color: #155263;">
+        <div class="lc-block">
+
+          <svg xmlns="http://www.w3.org/2000/svg" width="3em" height="3em" fill="currentColor" class="mb-6"
+            viewBox="0 0 16 16" style="" lc-helper="svg-icon">
+            <path fill-rule="evenodd"
+              d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm10.096 3.146a.5.5 0 1 1 .707.708L6.707 9.95h2.768a.5.5 0 1 1 0 1H5.5a.5.5 0 0 1-.5-.5V6.475a.5.5 0 1 1 1 0v2.768l4.096-4.097z">
+            </path>
+          </svg>
+
+        </div>
+        <div class="lc-block mb-4">
+          <div editable="rich">
+            <h4>Deneme oluşturabiliyorsunuz</h4>
+          </div>
+        </div>
+        <div class="lc-block mb-lg-5 mb-2">
+          <div editable="rich">
+            <p> Temamül altı öğrencileri için soru aralıklarını girerek deneme oluşturabiliyorsunuz</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-lg-5 col-xl-3 mb-4 mb-xl-0">
+      <div class="lc-block p-4 border rounded-3  text-dark" style="background-color: #FF6F3C;">
+        <div class="lc-block">
+
+          <svg xmlns="http://www.w3.org/2000/svg" width="3em" height="3em" fill="currentColor" class="mb-6"
+            viewBox="0 0 16 16" style="" lc-helper="svg-icon">
+            <path fill-rule="evenodd"
+              d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm10.096 3.146a.5.5 0 1 1 .707.708L6.707 9.95h2.768a.5.5 0 1 1 0 1H5.5a.5.5 0 0 1-.5-.5V6.475a.5.5 0 1 1 1 0v2.768l4.096-4.097z">
+            </path>
+          </svg>
+
+        </div>
+        <div class="lc-block mb-4">
+          <div editable="rich">
+            <h4>Talebeler Deneme Çözebiliyor</h4>
+          </div>
+        </div>
+        <div class="lc-block mb-lg-5 mb-2">
+          <div editable="rich">
+            <p> Talebeler telefondan yada bilgisayardan kolayca hocalarının hazırladığı denemeleri çözebiliyorlar</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-lg-5 col-xl-3 mb-4 mb-xl-0">
+      <div class="lc-block p-4 border rounded-3  text-light" style="background-color: #FF9A3C;">
+        <div class="lc-block">
+
+          <svg xmlns="http://www.w3.org/2000/svg" width="3em" height="3em" fill="currentColor" class="mb-6"
+            viewBox="0 0 16 16" style="" lc-helper="svg-icon">
+            <path fill-rule="evenodd"
+              d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm10.096 3.146a.5.5 0 1 1 .707.708L6.707 9.95h2.768a.5.5 0 1 1 0 1H5.5a.5.5 0 0 1-.5-.5V6.475a.5.5 0 1 1 1 0v2.768l4.096-4.097z">
+            </path>
+          </svg>
+
+        </div>
+        <div class="lc-block mb-4">
+          <div editable="rich">
+            <h4>Denemelerin analizleri görüntüleyebilme</h4>
+          </div>
+        </div>
+        <div class="lc-block mb-lg-5 mb-2">
+          <div editable="rich">
+            <p> talebe çözdüğü denemnin analizini kolay bir şeklde görüp hangi sorularda yanlış yaptığını bulabiliyor
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-lg-5 col-xl-3 mb-4 mb-xl-0">
+      <div class="lc-block p-4 border rounded-3  text-white" style="background-color: #FFC93C;">
+        <div class="lc-block">
+
+          <svg xmlns="http://www.w3.org/2000/svg" width="3em" height="3em" fill="currentColor" class="mb-6"
+            viewBox="0 0 16 16" style="" lc-helper="svg-icon">
+            <path fill-rule="evenodd"
+              d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm10.096 3.146a.5.5 0 1 1 .707.708L6.707 9.95h2.768a.5.5 0 1 1 0 1H5.5a.5.5 0 0 1-.5-.5V6.475a.5.5 0 1 1 1 0v2.768l4.096-4.097z">
+            </path>
+          </svg>
+
+        </div>
+        <div class="lc-block mb-4">
+          <div editable="rich">
+            <h4>Sınıf analizi görüntüleyebilme</h4>
+          </div>
+        </div>
+        <div class="lc-block mb-lg-5 mb-2">
+          <div editable="rich">
+            <p> Hoca efendi gurubunun çözdüğü denemeyi kolayca analizini edip hangi eksikleri olduğunu görebiliyor</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container py-5">
+  <div class="row mb-5">
+    <div class="col-md-12">
+      <div class="lc-block text-center">
+        <div editable="rich">
+          <h2 class="fw-bold">FAQ</h2>
+        </div>
+      </div>
+      <div class="lc-block text-center">
+        <div editable="rich">
+          uygulama hakkında sıkça sorulan sorular
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="lc-block mb-5">
+        <div editable="rich">
+          <p class="h4">Üye oldum ama giriş yapamıyorum? </p>
+          <p>Sisteme üye olduktan sonra girdiğiniz mail adresinize onaylama kodu gönderiliyor eğer onaylamazsanız giriş
+            yapamazsınız</p>
+        </div>
+      </div>
+      <div class="lc-block mb-5">
+        <div editable="rich">
+          <p class="h4">Giriş yaptım şimdi napıcam?</p>
+          <p>Giriş yaptıktan sonra hocanıza haber verin sizi sınıfınıza dahil etsin </p>
+        </div>
+      </div>
+      <div class="lc-block mb-5">
+        <div editable="rich">
+          <p class="h4">Denemelere nerden giricem?</p>
+          <p>yukarda menüler kısmında öğrenci->denemeler </p>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="col-md-6">
+        <div class="lc-block mb-5">
+           <div editable="rich">
+              <p class="h4">Duis aute irure dolor in?</p>
+              <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+           </div>
+        </div>
+        <div class="lc-block mb-5">
+           <div editable="rich">
+              <p class="h4">Consequuntur magni dolores eos qui?</p>
+              <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+           </div>
+        </div>
+        <div class="lc-block mb-5">
+           <div editable="rich">
+              <p class="h4">Excepteur sint occaecat cupidatat non? </p>
+              <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+           </div>
+        </div>
+     </div> -->
+  </div>
+</div>
+
+
+<div class="container-fluid bg-dark g-0">
+  <div class="row g-0 align-items-center">
+    <div class="col-lg-6 d-flex justify-content-center">
+      <div class="col-12 col-lg-8 p-4 text-white">
+
+        <div class="lc-block">
+          <div editable="rich">
+            <h2 class="fw-bolder">Address</h2>
+          </div>
+        </div>
+        <div class="lc-block">
+          <div editable="rich">
+            <p> beşköprü mahallesi. 16. cad. no:77 -&nbsp;Serdivan&nbsp;<br>Sakarya/Türkiye</p>
+          </div>
+        </div>
+
+        <div class="lc-block">
+          <div editable="rich">
+            <h2 class="fw-bolder">Phone Numbers</h2>
+          </div>
+        </div>
+
+        <div class="lc-block">
+          <div editable="rich">
+            <p>Yurt Number 05456614436 <br>Proje Yöneticisi Number 5067709744</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="lc-block">
+        <div class="ratio ratio-16x9" lc-helper="gmap-embed">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10811.061224686386!2d30.33916803887!3d40.73440203709105!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14ccadf10a2d752b%3A0xe2437f68ada4776a!2zR8OWTEJBxZ5JIFnDnEtTRUsgw5bEnlJFTsSwTSBFUktFSyDDlsSeUkVOQ8SwIFlVUkRV!5e0!3m2!1str!2str!4v1658350127660!5m2!1str!2str"
+            width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div><!-- /lc-block -->
+    </div>
   </div>
 </div>
