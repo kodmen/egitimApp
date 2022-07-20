@@ -210,12 +210,9 @@ export class DenemeGirisComponent implements OnInit {
       const cevap = cloneCevaplar.sorular![i];
       const gercekSoru = this.sinav.sorular.find(s => s.soruId === cevap.soruId);
 
-      if(gercekSoru?.cevapli){
-                cloneCevaplar.sorular![i].cevap = this.gercekCevapBul(cevap.cevap, gercekSoru);
-
+      if (gercekSoru?.cevapli) {
+        cloneCevaplar.sorular![i].cevap = this.gercekCevapBul(cevap.cevap, gercekSoru);
       }
-
-
     }
 
     return cloneCevaplar;
