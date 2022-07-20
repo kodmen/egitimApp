@@ -1,3 +1,5 @@
+import { Karistir } from "./karistir.model";
+
 export class DenemeSoruDto {
     soruResimUrl?: string;
     soruId?: number;
@@ -6,6 +8,7 @@ export class DenemeSoruDto {
     b?:string;
     c?:string;
     d?:string;
+    kar?:Karistir;
   }
   
   export class DenemeSinavDto {

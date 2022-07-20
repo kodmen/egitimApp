@@ -232,7 +232,8 @@ public class DenemeResource {
     @DeleteMapping("/denemes/{id}")
     public ResponseEntity<Void> deleteDeneme(@PathVariable Long id) {
         log.debug("REST request to delete Deneme : {}", id);
-        denemeRepository.deleteById(id);
+        //denemeRepository.deleteById(id);
+        denemeService.denemeSil(id);
         return ResponseEntity
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))

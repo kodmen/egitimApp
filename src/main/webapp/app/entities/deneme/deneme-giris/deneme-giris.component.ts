@@ -1,45 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import {  NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AlertService } from 'app/core/util/alert.service';
 import { IDeneme } from '../deneme.model';
 import { DenemeService } from '../service/deneme.service';
-import { DenemeCevapRequest } from './denemeCevap.model';
+import { DenemeCevapRequest, IDenemeCevapRequest } from './denemeCevap.model';
 import { DenemeSinavDto, DenemeSoruDto } from './denemeSinav.model';
+import { Karistir } from './karistir.model';
 import { NgbdModalComponent } from './NgbdModalComponent';
-
-// // burası model
-// @Component({
-//   selector: 'jhi-ngbd-modal-content',
-//   template: `
-//     <div class="modal-header">
-//       <h4 class="modal-title">Dikkat!</h4>
-//       <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
-//     </div>
-//     <div class="modal-body">
-//       <p>Testi bitirmek istediğine emin misin!</p>
-//     </div>
-//     <div class="modal-footer">
-//       <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
-//       <button type="submit" class="btn btn-outline-danger" (click)="passBack()">Testi tamamla</button>
-
-//     </div>
-//   `
-// })
-// export class NgbdModalComponent {
-//     @Output() passEntry: EventEmitter<any> = new EventEmitter();
-
-//   constructor(public activeModal: NgbActiveModal) {}
-
-  
-//   passBack():void {
-//     this.passEntry.emit("tamamla");
-//     }
-
-// }
-
-
 
 @Component({
   selector: 'jhi-deneme-giris',
@@ -52,7 +21,7 @@ export class DenemeGirisComponent implements OnInit {
   denemeId: number;
   sinav: DenemeSinavDto;
   foto: string;
-  time:number;
+  time: number;
   deneme: IDeneme | null = null;
 
   constructor(
@@ -60,59 +29,106 @@ export class DenemeGirisComponent implements OnInit {
     private denemeService: DenemeService,
     private route: ActivatedRoute,
     protected router: Router,
-    private alertService: AlertService ,
+    private alertService: AlertService,
     private modalService: NgbModal
-     ) {
+  ) {
     this.p = 0;
     this.foto = 'https://temrinbucket.s3.eu-central-1.amazonaws.com/';
   }
 
-  open():void {
+  shuffleCevaplar(array: any[]): any[] {
+    const karisikdizi: string[] = [];
+    const arrayLength = array.length;
+
+    for (let i = 0; i < arrayLength; i++) {
+      const item = array[Math.floor(Math.random() * array.length)];
+      karisikdizi.push(item);
+      array = array.filter((ele: any) => ele !== item);
+    }
+
+    return karisikdizi;
+  }
+
+  cevapKaristir(soru: DenemeSoruDto): DenemeSoruDto {
+    const cevaplar = [soru.a, soru.b, soru.c, soru.d];
+    const karisikSoru = this.shuffleCevaplar(cevaplar); // burda sorular karıştirildi
+    const karişmisSorular = new Karistir(karisikSoru[0], karisikSoru[1], karisikSoru[2], karisikSoru[3]);
+    soru.kar = karişmisSorular;
+
+    return soru;
+  }
+
+  /**
+   * soruyu tamamlama modal
+   */
+  open(): void {
     const modalRef = this.modalService.open(NgbdModalComponent);
-    modalRef.componentInstance.passEntry.subscribe((receivedEntry:any) => {
+    modalRef.componentInstance.passEntry.subscribe((receivedEntry: any) => {
       console.log(receivedEntry);
       this.save();
       this.modalService.dismissAll();
-      })
-
+    });
   }
 
   getSorular(id: number): void {
     this.denemeService.getDenemeSinav(id).subscribe(res => {
       this.sinav = res;
-      
+
+      // sorular karıştılıyor
       this.sinav.sorular = this.shuffleArray(this.sinav.sorular);
+
       for (let index = 0; index < this.sinav.sorular.length; index++) {
         this.addControl(this.sinav.sorular[index].soruId!);
       }
     });
   }
 
+  /**
+   * soru karıştırma
+   * @param array
+   * @returns
+   */
   shuffleArray(array: DenemeSoruDto[]): DenemeSoruDto[] {
     const karisikdizi: DenemeSoruDto[] = [];
     const arrayLength = array.length;
-    
-    for (let i = 0; i <arrayLength; i++) {
+
+    for (let i = 0; i < arrayLength; i++) {
       const item = array[Math.floor(Math.random() * array.length)];
-      karisikdizi.push(item);
+
+      // cevaplar karisiksa
+      if (item.cevapli) {
+        karisikdizi.push(this.cevapKaristir(item));
+      } else {
+        karisikdizi.push(item);
+      }
+
       array = this.arrayRemove(array, item);
     }
 
     return karisikdizi;
   }
 
-  arrayRemove(arr: DenemeSoruDto[], value: DenemeSoruDto):DenemeSoruDto[] {
+  /**
+   * diziden elemen silme
+   * @param arr
+   * @param value
+   * @returns
+   */
+  arrayRemove(arr: DenemeSoruDto[], value: DenemeSoruDto): DenemeSoruDto[] {
     return arr.filter(function (ele) {
       return ele !== value;
     });
   }
 
   ngOnInit(): void {
+    // parametreleri almak için
     this.route.queryParams.subscribe(params => {
-     if(params['sure']){
-      this.time = params['sure']*60;
-     }
-  });
+      if (params['sure']) {
+        this.time = params['sure'] * 60;
+      }
+    });
+
+    // urlde slash işaretinden sonrasını almak için
     this.route.params.subscribe(params => {
       if (params['id']) {
         this.getSorular(params['id']);
@@ -128,13 +144,13 @@ export class DenemeGirisComponent implements OnInit {
     });
   }
 
-  handleEvent(event:any):any{
-    console.log(event);
-    
-    if(event.action === 'done'){
+  /**
+   * süre bittiği zaman ekrana alert fırlatıyor
+   * @param event gelen durum
+   */
+  handleEvent(event: any): any {
+    if (event.action === 'done') {
       this.alertService.addAlert({ type: 'danger', message: 'Süre bitti' });
-
-      
     }
   }
 
@@ -153,9 +169,63 @@ export class DenemeGirisComponent implements OnInit {
     });
   }
 
+  gercekCevapBul(cevap: any, soru: any): string {
+    let cevapSik;
+    // cevabı alarak cevabın string değerini aldık
+    switch (cevap) {
+      case 'A':
+        cevapSik = soru.kar?.a;
+        break;
+      case 'B':
+        cevapSik = soru.kar?.b;
+        break;
+      case 'C':
+        cevapSik = soru.kar?.c;
+        break;
+      case 'D':
+        cevapSik = soru.kar?.d;
+        break;
+    }
+
+    // cevabın string değeri ile gerçek cevabı getirdik
+    switch (cevapSik) {
+      case soru.a:
+        return 'A';
+      case soru.b:
+        return 'B';
+      case soru.c:
+        return 'C';
+      case soru.d:
+        return 'D';
+
+      default:
+        return '';
+    }
+  }
+
+  cevapDegistir(cevaplar: IDenemeCevapRequest): IDenemeCevapRequest {
+    const cloneCevaplar = cevaplar;
+
+    for (let i = 0; i < this.sinav.sorular.length; i++) {
+      const cevap = cloneCevaplar.sorular![i];
+      const gercekSoru = this.sinav.sorular.find(s => s.soruId === cevap.soruId);
+
+      if(gercekSoru?.cevapli){
+                cloneCevaplar.sorular![i].cevap = this.gercekCevapBul(cevap.cevap, gercekSoru);
+
+      }
+
+
+    }
+
+    return cloneCevaplar;
+  }
+
   save(): void {
     const cevapRequest = new DenemeCevapRequest(this.form.value);
-    this.denemeService.cevaplariGonder(cevapRequest).subscribe(
+    const duzenlenmisCevapRequest = this.cevapDegistir(cevapRequest);
+
+    this.denemeService.cevaplariGonder(duzenlenmisCevapRequest).subscribe(
       res => {
         this.router.navigate(['deneme-analiz', res, 'view']);
       },

@@ -1,5 +1,6 @@
 package com.temrin.service;
 
+import com.temrin.domain.Deneme;
 import com.temrin.domain.DenemeAnaliz;
 import com.temrin.domain.User;
 import com.temrin.repository.DenemeAnalizRepository;
@@ -48,6 +49,14 @@ public class DenemeAnalizService {
      */
     public List<DenemeAnaliz> getHocaDeneme(long denemeId) {
         return repository.findByDeneme_OlusturanAndDeneme_Id(userService.getCurrentUser(), denemeId);
+    }
+
+    public List<DenemeAnaliz> getDenemeAnalizByDeneme(Deneme d){
+        return  repository.findByDeneme(d);
+    }
+
+    public void denemeAnalizListSil(List<DenemeAnaliz> silincek){
+        repository.deleteAll(silincek);
     }
 
 

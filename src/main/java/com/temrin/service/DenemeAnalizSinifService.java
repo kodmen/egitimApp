@@ -49,4 +49,8 @@ public class DenemeAnalizSinifService {
     public DenemeAnalizSinif getDeneme(Deneme d) {
         return repository.findByDeneme(d);
     }
+
+    public void denemeAnalizSinifSil(DenemeAnalizSinif denemeAnalizSinif){
+        repository.delete(denemeAnalizSinif);
+    }
 }

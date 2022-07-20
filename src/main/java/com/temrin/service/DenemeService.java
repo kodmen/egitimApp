@@ -249,4 +249,20 @@ public class DenemeService {
 
         return repository.findAllByBaslamaTarihBetweenAndOlusturan(tt, dd, u);
     }
+
+    public void denemeSil(long denemId){
+        // önce deneme analiz sınıfı bul
+        Deneme d = repository.getById(denemId);
+
+        DenemeAnalizSinif denemeAnalizSinif = denemeAnalizSinifService.getDeneme(d);
+        denemeAnalizSinifService.denemeAnalizSinifSil(denemeAnalizSinif);
+
+        // deneme analizleri bul
+        List<DenemeAnaliz> denemeAnalizs = denemeAnalizService.getDenemeAnalizByDeneme(d);
+        denemeAnalizService.denemeAnalizListSil(denemeAnalizs);
+
+        repository.delete(d);
+
+        // sonra denemeyi sil
+    }
 }

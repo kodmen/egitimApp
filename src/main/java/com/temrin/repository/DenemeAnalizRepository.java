@@ -1,5 +1,6 @@
 package com.temrin.repository;
 
+import com.temrin.domain.Deneme;
 import com.temrin.domain.DenemeAnaliz;
 import java.util.List;
 import java.util.Optional;
@@ -52,4 +53,6 @@ public interface DenemeAnalizRepository extends JpaRepository<DenemeAnaliz, Long
     List<DenemeAnaliz> findByDeneme_OlusturanAndDeneme_Id(User user, long denemeId);
 
     boolean existsByDeneme_IdAndUser(long id,User u);
+
+    List<DenemeAnaliz> findByDeneme(Deneme deneme);
 }
