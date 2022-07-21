@@ -229,3 +229,18 @@ angular-cli removes postcss-rtl processed inline css, processed rules must be ad
   }
 }
 /* jhipster-needle-scss-add-main JHipster will add new css style */
+
+
+.btn-tema{
+  background-color: $tkoyumavi;
+  color: #fff;
+}
+
+.alert-tema{
+  background-color:$tacikturuncu;
+}
+
+@font-face {
+  font-family: "Osmanlica";
+  src: local("Osmanlica"), url(./../font/ArabicRegular.ttf) format("truetype");
+}

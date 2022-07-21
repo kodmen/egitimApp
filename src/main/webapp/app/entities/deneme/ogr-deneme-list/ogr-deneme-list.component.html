@@ -3,7 +3,7 @@
       <span jhiTranslate="temrinMatikApp.deneme.home.title">Denemes</span>
   
       <div class="d-flex justify-content-end">
-        <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <button class="btn btn-tema mr-2" (click)="loadAll()" [disabled]="isLoading">
           <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
           <span jhiTranslate="temrinMatikApp.deneme.home.refreshListLabel">Refresh List</span>
         </button>
@@ -20,17 +20,39 @@
     <div class="row">
       <ng-container *ngFor="let deneme of denemes; let last = last">
         <div class="col-md-3">
-          <div class="card m-4" style="width: 18rem">
+          <div class="card m-4 " style="width: 18rem; border: 2px solid #155263 ">
             <div class="card-body">
-              <h5 class="card-title">{{ deneme.isim }}</h5>
+              <div class="alert text-uppercase" style="background-color: #FFC93C; color: #155263;" role="alert">
+                {{ deneme.isim }}
+              </div>
+              <table class="table">
+                <tbody>
+                  <tr>
+                    <th scope="row">olusturan:</th>
+                    <td>{{ deneme.olusturan?.login }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">baslama tarih:</th>
+                    <td>{{ deneme.baslamaTarih!.format('DD/MM/YYYY') }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Saat:</th>
+                    <td>{{ deneme.baslamaTarih!.get('h') }}:{{ deneme.baslamaTarih!.get('m') }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Süre::</th>
+                    <td> {{ deneme.sure }} dk</td>
+                  </tr>
+                </tbody>
+              </table>
   
-              <h6 class="card-title">olusturan: {{ deneme.olusturan?.login }}</h6>
+              <!-- <h6 class="card-title">olusturan: {{ deneme.olusturan?.login }}</h6>
               <h6 class="card-text">baslama tarih:{{ deneme.baslamaTarih!.format('DD/MM/YYYY') }}</h6>
-  
+
               <p class="card-text">Saat: {{ deneme.baslamaTarih!.get('h') }}:{{ deneme.baslamaTarih!.get('m') }}</p>
-              <p class="card-text">{{ deneme.sure }} süre</p>
-  
-              <button class="btn btn-success" (click)="zamanKontrol(deneme)" class="card-link">denemeye başla</button>
+              <p class="card-text">süre: {{ deneme.sure }} dk</p>
+   -->
+              <button class="btn text-white" style="background-color: #155263;" (click)="zamanKontrol(deneme)">denemeye başla</button>
             </div>
           </div>
         </div>

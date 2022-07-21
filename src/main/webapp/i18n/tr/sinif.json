@@ -2,8 +2,8 @@
   "temrinMatikApp": {
     "sinif": {
       "home": {
-        "title": "Sinifs",
-        "refreshListLabel": "Refresh list",
+        "title": "Sinif",
+        "refreshListLabel": "Yenile",
         "createLabel": "Create a new Sinif",
         "createOrEditLabel": "Create or edit a Sinif",
         "notFound": "No Sinifs found"

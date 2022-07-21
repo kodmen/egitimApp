@@ -2,8 +2,8 @@
   "temrinMatikApp": {
     "deneme": {
       "home": {
-        "title": "Denemes",
-        "refreshListLabel": "Refresh list",
+        "title": "Denemeler",
+        "refreshListLabel": "Listeyi yenile",
         "createLabel": "Create a new Deneme",
         "createOrEditLabel": "Create or edit a Deneme",
         "notFound": "No Denemes found"

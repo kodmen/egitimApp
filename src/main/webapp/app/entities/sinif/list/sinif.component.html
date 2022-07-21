@@ -3,7 +3,7 @@
     <span jhiTranslate="temrinMatikApp.sinif.home.title">Sinifs</span>
 
     <div class="d-flex justify-content-end">
-      <button class="btn btn-info me-2" (click)="loadAll()" [disabled]="isLoading">
+      <button class="btn btn-tema me-2" (click)="loadAll()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
         <span jhiTranslate="temrinMatikApp.sinif.home.refreshListLabel">Refresh List</span>
       </button>
@@ -68,7 +68,7 @@
 
           <td class="text-end">
             <div class="btn-group">
-              <button type="submit" [routerLink]="['/sinif', sinif.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+              <button type="submit" [routerLink]="['/sinif', sinif.id, 'view']" class="btn btn-tema btn-sm" data-cy="entityDetailsButton">
                 <fa-icon icon="eye"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
               </button>
