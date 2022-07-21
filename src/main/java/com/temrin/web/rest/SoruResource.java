@@ -3,24 +3,30 @@ package com.temrin.web.rest;
 import com.temrin.domain.Soru;
 import com.temrin.repository.SoruRepository;
 import com.temrin.service.SoruService;
+import com.temrin.service.dto.AdminUserDTO;
 import com.temrin.service.dto.SoruDto;
 import com.temrin.web.rest.errors.BadRequestAlertException;
 
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import tech.jhipster.web.util.HeaderUtil;
+import tech.jhipster.web.util.PaginationUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
 /**
@@ -154,22 +160,24 @@ public class SoruResource {
     }
 
     /**
-     * {@code GET  /sorus} : get all the sorus.
+     * {@code GET /admin/users} : get all users with all the details - calling this are only allowed for the administrators.
      *
-     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of sorus in body.
+     * @param pageable the pagination information.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body all users.
      */
     @GetMapping("/sorus")
-    public List<Soru> getAllSorus(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
-        log.debug("REST request to get all Sorus");
-        return soruRepository.findAllWithEagerRelationships();
+    public ResponseEntity<List<Soru>> getAllSoru(@org.springdoc.api.annotations.ParameterObject Pageable pageable) {
+        log.debug("REST request to get all Soru for an admin");
+
+        final Page<Soru> page = soruService.getAllManagedSoru(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
     /**
-     * {@code GET  /sorus/:id} : get the "id" soru.
-     *
-     * @param id the id of the soru to retrieve.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the soru, or with status {@code 404 (Not Found)}.
+     * bütün soruları pageable şeklinde getiriyoruz
+     * @param id
+     * @return
      */
     @GetMapping("/sorus/{id}")
     public ResponseEntity<Soru> getSoru(@PathVariable Long id) {
@@ -187,7 +195,6 @@ public class SoruResource {
     @DeleteMapping("/sorus/{id}")
     public ResponseEntity<Void> deleteSoru(@PathVariable Long id) {
         log.debug("REST request to delete Soru : {}", id);
-//        soruRepository.deleteById(id);
         soruService.delete(id);
         return ResponseEntity
             .noContent()

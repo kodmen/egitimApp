@@ -4,7 +4,12 @@ package com.temrin.service;
 import com.temrin.domain.Konu;
 import com.temrin.domain.Soru;
 import com.temrin.repository.SoruRepository;
+import com.temrin.service.dto.AdminUserDTO;
 import com.temrin.service.dto.SoruDto;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -77,5 +82,12 @@ public class SoruService {
     public String findBySoruIdGetIsim(long id) {
         Optional<Soru> soru = repository.findById(id);
         return soru.isPresent() ? soru.get().getIsim() : "yanlis";
+    }
+
+    public Page<Soru> getAllManagedSoru(Pageable pageable) {
+
+        Pageable p = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("konu"));
+
+        return repository.findAllWithEagerRelationships(p);
     }
 }
