@@ -4,7 +4,6 @@ package com.temrin.service;
 import com.temrin.domain.Konu;
 import com.temrin.domain.Soru;
 import com.temrin.repository.SoruRepository;
-import com.temrin.service.dto.AdminUserDTO;
 import com.temrin.service.dto.SoruDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,8 +14,6 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -26,13 +23,20 @@ public class SoruService {
 
     private final SoruRepository repository;
     private final AwsService awsService;
-    private final Path root = Paths.get("uploads");
+    private final KonuService konuService;
 
-    public SoruService(SoruRepository repository, AwsService awsService) {
+    public SoruService(SoruRepository repository, AwsService awsService, KonuService konuService) {
         this.repository = repository;
         this.awsService = awsService;
+        this.konuService = konuService;
     }
 
+    /**
+     * soru creat
+     * @param dto
+     * @return
+     * @throws IOException
+     */
     public Soru create(SoruDto dto) throws IOException {
         String key = UUID.randomUUID().toString();
         String pathToFile = "./" + key + ".";
@@ -72,6 +76,10 @@ public class SoruService {
 
     public List<Soru> getKonubySoru(Konu konu) {
         return repository.findByKonu(konu);
+    }
+
+    public List<Soru> getAllSoruByKonu(long konuId){
+        return getKonubySoru(konuService.getById(konuId));
     }
 
     public String findBySoruIdGetCevap(long id) {

@@ -244,3 +244,11 @@ angular-cli removes postcss-rtl processed inline css, processed rules must be ad
   font-family: "Osmanlica";
   src: local("Osmanlica"), url(./../font/ArabicRegular.ttf) format("truetype");
 }
+
+html, body, app-root {
+  height: 100%;
+}
+body {
+  margin-bottom: 0;
+  margin-top: 0;
+}

@@ -90,13 +90,13 @@ public class DenemeService {
             if (kullaniciCevap.equals("") || kullaniciCevap.equals(" ")) {
                 sonuclar.bosArttir();
                 String isim = soruService.findBySoruIdGetIsim(key);
-                bosKonu += isim + " ";
+                bosKonu += isim + ", ";
             } else if (cevap.equals(kullaniciCevap)) {
                 sonuclar.dogruArttir();
             } else {
                 sonuclar.yanlisArttir();
                 String isim = soruService.findBySoruIdGetIsim(key);
-                yanlisKonu += isim + " ";
+                yanlisKonu += isim + ", ";
             }
         }
 
@@ -115,6 +115,28 @@ public class DenemeService {
         denemeAnalizSinifService.updateDenemeAnaliz(denemeAnalizSinif);
 
         return denemeAnaliz.getId();
+    }
+
+    /**
+     * karıxık olan soru analizleri düzenli şekle getiren fonks
+     * @param analiz
+     * @return
+     */
+    public String soruAnalizDuzenle(String analiz){
+
+        Set<String> konular = new HashSet<>();
+        String sorular[] = analiz.split(",");
+        // her soruyu tekrar ikiye ayırmam lazım
+        for (String soru:sorular){
+            var konusayi = soru.split(" ");
+            var soruKonu = konusayi[0];
+            var sorusayi = konusayi[1];
+            konular.add(soruKonu);
+        }
+
+
+
+        return null;
     }
 
     public float sinifOrtalamasiEkle(DenemeAnalizSinif denemeAnalizSinif, float puan) {

@@ -12,7 +12,11 @@ ikil olarak soruları baştan düzenlemek lazım
 
 soruları rastgele dağıttı zaman önce daha az sorduğu soruyu getirmesi lazım
 deneme analizde tarih koyulabilir
-
+türkçe ing düzenlenebilir
+analizler daha düzenli olabilir
+mesul girişlerini kontrol edilmeli ->sınıfı ve yurdun sınıflarını görebilmeli
+hoca ve mesule ait tema değişmeli 
+talebe çalşası için deneme yerine ders çalışma ve deneme çözmek için yer olmalı
 
 cevaplı olunca nasıl analiz edeceğiz 
 önce soruları yazdırayım

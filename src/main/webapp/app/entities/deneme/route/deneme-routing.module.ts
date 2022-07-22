@@ -9,6 +9,7 @@ import { DenemeRoutingResolveService } from './deneme-routing-resolve.service';
 import { CreateComponent } from '../create/create.component';
 import { DenemeGirisComponent } from '../deneme-giris/deneme-giris.component';
 import { OgrDenemeListComponent } from '../ogr-deneme-list/ogr-deneme-list.component';
+import { DersCalisComponent } from '../ders-calis/ders-calis.component';
 
 const denemeRoute: Routes = [
   {
@@ -27,6 +28,11 @@ const denemeRoute: Routes = [
   {
     path: ':id/basla',
     component: DenemeGirisComponent,
+    canActivate: [UserRouteAccessService],
+  },
+  {
+    path: 'ders-calis',
+    component: DersCalisComponent,
     canActivate: [UserRouteAccessService],
   },
   {

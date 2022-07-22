@@ -52,6 +52,15 @@ public class SoruResource {
         this.soruService = soruService;
     }
 
+    @GetMapping("/sorus/konu/{id}")
+    public ResponseEntity<List<Soru>> getAllSoruByKonu(@PathVariable Long id) {
+        log.debug("REST request to get all Soru for an admin");
+
+        final List<Soru> soruList = soruService.getAllSoruByKonu(id);
+        return new ResponseEntity<>(soruList, HttpStatus.OK);
+    }
+
+
     /**
      * {@code POST  /sorus} : Create a new soru.
      *
@@ -65,7 +74,6 @@ public class SoruResource {
         if (soru.getId() != null) {
             throw new BadRequestAlertException("A new soru cannot already have an ID", ENTITY_NAME, "idexists");
         }
-//        Soru result = soruRepository.save(soru);
         Soru result = soruService.create(soru);
         return ResponseEntity
             .created(new URI("/api/sorus/" + result.getId()))

@@ -12,11 +12,12 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { OgrDenemeListComponent } from './ogr-deneme-list/ogr-deneme-list.component';
 import { CountdownModule } from 'ngx-countdown';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DersCalisComponent } from './ders-calis/ders-calis.component';
 
 
 @NgModule({
   imports: [SharedModule, DenemeRoutingModule,NgxPaginationModule,CountdownModule,NgbModule],
-  declarations: [DenemeComponent, DenemeDetailComponent, DenemeUpdateComponent, DenemeDeleteDialogComponent, CreateComponent, DenemeGirisComponent, OgrDenemeListComponent,NgbdModalComponent],
+  declarations: [DenemeComponent, DenemeDetailComponent, DenemeUpdateComponent, DenemeDeleteDialogComponent, CreateComponent, DenemeGirisComponent, OgrDenemeListComponent,NgbdModalComponent, DersCalisComponent],
   entryComponents: [DenemeDeleteDialogComponent],
   bootstrap: [DenemeGirisComponent]
 })

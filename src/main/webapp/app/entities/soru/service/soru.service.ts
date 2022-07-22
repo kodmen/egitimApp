@@ -16,6 +16,11 @@ export class SoruService {
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
+  getSoruByKonu(konuID:number):Observable<EntityArrayResponseType>{
+    return this.http.get<ISoru[]>(this.resourceUrl + `/konu/${konuID}`, {  observe: 'response' });
+
+  }
+
   create(soru: ISoru): Observable<EntityResponseType> {
     return this.http.post<ISoru>(this.resourceUrl, soru, { observe: 'response' });
   }

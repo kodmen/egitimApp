@@ -1,0 +1,95 @@
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-md-6 col-xs-12" *ngIf="!soruVarmi">
+            <form [formGroup]="form" (submit)="soruGetir()">
+                <div class="row">
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Ders seçin</label>
+                        <select formControlName="konu" class="form-select" aria-label="Konu">
+                            <option selected>Ders seçin</option>
+                            <option [value]="konu.id" *ngFor="let konu of konularSharedCollection; let i=index">{{
+                                konu.isim }}</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <button class="btn btn-primary" type="submit">Soruları getir</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-md-6 col-xs-12" *ngIf="soruVarmi">
+
+            <div class="container ">
+                <div *ngFor="let s of soruList! | paginate: { itemsPerPage: 1, currentPage: p }">
+                    <div class="question-holder row">
+                        <div class="col-12">
+                            <!-- <h4 id="question">{{item.soruText}}</h4> -->
+                            <img [src]="foto + s.resimUrl" class="rounded mx-auto d-block responsive" alt="..." />
+
+                        </div>
+                    </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="answer-container card " [ngClass]="cevaprenkDegistirA()"
+                                    (click)="cevapSoru(s, 'A')">
+                                    <p class="answer-text text-end" data-answer="a">{{s.a}}</p>
+
+                                    <p class="answer-prefix">A</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="answer-container card" [ngClass]="cevaprenkDegistirB()"
+                                    (click)="cevapSoru(s, 'B')">
+                                    <p class="answer-text text-end" data-answer="b">{{s.b}}</p>
+
+                                    <p class="answer-prefix">B</p>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="answer-container card" [ngClass]="cevaprenkDegistirC()"
+                                    (click)="cevapSoru(s, 'C')">
+                                    <p class="answer-text text-end" data-answer="c">{{s.c}}</p>
+
+                                    <p class="answer-prefix">C</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="answer-container card" [ngClass]="cevaprenkDegistirD()"
+                                    (click)="cevapSoru(s, 'D')">
+                                    <p class="answer-text text-end" data-answer="d">{{s.d}}</p>
+
+                                    <p class="answer-prefix">D</p>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                </div>
+
+                <div class="row">
+                    <div class="d-flex justify-content-center">
+                        <pagination-controls previousLabel="geri" nextLabel="ileri" (pageChange)="p = $event"
+                            (click)="pageChanged($event)" class="float-right">
+                        </pagination-controls>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
