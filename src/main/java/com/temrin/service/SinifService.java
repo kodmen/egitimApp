@@ -60,4 +60,9 @@ public class SinifService {
         List<Sinif> sinifList = sinifRepository.findByHocaIsCurrentUser();
         return sinifList.size() > 0 ? sinifList.get(0) : null;
     }
+
+    public boolean ogrenciSinifIceriyormu(String login){
+        Optional<User> u = userService.findByLogin(login);
+        return sinifRepository.existsByOgrencilersContains(u.get());
+    }
 }

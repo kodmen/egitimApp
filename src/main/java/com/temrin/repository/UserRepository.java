@@ -37,4 +37,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
     List<User> findAllByAuthoritiesContaining(Authority auth);
 
     List<User> findByAuthorities(Authority a);
+    Optional<User> findByLogin(String l);
 }

@@ -49,4 +49,7 @@ public interface SinifRepository extends SinifRepositoryWithBagRelationships, Jp
     List<Sinif> findByYurt(Yurt yurt);
 
     List<Sinif> findByOgrencilersIsContaining(User user);
+
+    // öğrenciyi içeriyor mu
+    boolean existsByOgrencilersContains(User u);
 }

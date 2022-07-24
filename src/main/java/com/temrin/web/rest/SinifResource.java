@@ -1,7 +1,9 @@
 package com.temrin.web.rest;
 
+import com.temrin.config.Constants;
 import com.temrin.domain.Sinif;
 import com.temrin.repository.SinifRepository;
+import com.temrin.security.AuthoritiesConstants;
 import com.temrin.service.SinifService;
 import com.temrin.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
@@ -11,10 +13,13 @@ import java.util.Objects;
 import java.util.Optional;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import tech.jhipster.web.util.HeaderUtil;
@@ -182,5 +187,12 @@ public class SinifResource {
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
+    }
+
+
+    @GetMapping("/sinif/user/{login}")
+    public ResponseEntity<Boolean> getUserbysinif(@PathVariable String login) {
+        log.debug("REST request to get User : {}", login);
+        return ResponseEntity.ok(sinifService.ogrenciSinifIceriyormu(login));
     }
 }
