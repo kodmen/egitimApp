@@ -94,7 +94,7 @@ public class SoruService {
 
     public Page<Soru> getAllManagedSoru(Pageable pageable) {
 
-        Pageable p = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("konu"));
+        Pageable p = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("konu").and(Sort.by("sira")));
 
         return repository.findAllWithEagerRelationships(p);
     }

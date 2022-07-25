@@ -1,0 +1,43 @@
+<!-- <p *ngFor="let a of auth">{{a.name}}</p> -->
+<table class="table">
+    <tbody>
+        <tr *ngFor="let a of auth">
+            <ng-container *ngIf="a">
+                <td>{{a.name}}</td>
+
+                <td><button class="btn btn-danger" (click)="delete(a)">sil</button></td>
+
+            </ng-container>
+        </tr>
+    </tbody>
+</table>
+
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+
+    <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input type="text" class="form-control" name="name" formControlName="name" />
+
+            <div
+                *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+                <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required"
+                    jhiTranslate="entity.validation.required">
+                    This field is required.
+                </small>
+            </div>
+        </div>
+
+
+        <div>
+            <button type="submit" id="save-entity" data-cy="entityCreateSaveButton"
+                [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+            </button>
+        </div>
+    </div>
+</form>

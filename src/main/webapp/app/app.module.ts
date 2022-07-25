@@ -26,6 +26,7 @@ import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
 import { ActiveMenuDirective } from './layouts/navbar/active-menu.directive';
 import { ErrorComponent } from './layouts/error/error.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { AuthorityComponent } from './admin/authority/authority.component';
 
 @NgModule({
   imports: [
@@ -47,7 +48,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     { provide: NgbDateAdapter, useClass: NgbDateDayjsAdapter },
     httpInterceptorProviders,
   ],
-  declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent],
+  declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent, AuthorityComponent],
   bootstrap: [MainComponent],
 })
 export class AppModule {
