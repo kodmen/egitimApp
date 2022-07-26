@@ -8,34 +8,20 @@
         <span jhiTranslate="temrinMatikApp.sinif.home.refreshListLabel">Refresh List</span>
       </button>
 
-      <button
-      *jhiHasAnyAuthority="['ROLE_MESUL','ROLE_ADMIN']"
-        id="jh-create-entity"
-        data-cy="entityCreateButton"
-        class="btn btn-primary jh-create-entity create-sinif"
-        [routerLink]="['/sinif/new']"
-      >
+      <button *jhiHasAnyAuthority="['ROLE_MESUL','ROLE_ADMIN']" id="jh-create-entity" data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-sinif" [routerLink]="['/sinif/new']">
         <fa-icon icon="plus"></fa-icon>
         <span jhiTranslate="temrinMatikApp.sinif.home.createLabel"> Create a new Sinif </span>
       </button>
-<ng-container  *ngIf="!isSinif">
-     <button
-      
-        
-        *jhiHasAnyAuthority="['ROLE_USER']"
+      <ng-container *ngIf="!isSinif">
+        <button *jhiHasAnyAuthority="['ROLE_USER']" id="jh-create-entity" data-cy="entityCreateButton"
+          class="btn btn-primary jh-create-entity create-sinif" [routerLink]="['/sinif/ogr-sinif-ekle']">
+          <fa-icon icon="plus"></fa-icon>
+          <span> Sinif seç </span>
+        </button>
+      </ng-container>
 
-        
-        id="jh-create-entity"
-        data-cy="entityCreateButton"
-        class="btn btn-primary jh-create-entity create-sinif"
-        [routerLink]="['/sinif/ogr-sinif-ekle']"
-      >
-        <fa-icon icon="plus"></fa-icon>
-        <span > Sinif Ekle </span>
-      </button>
-</ng-container>
 
- 
     </div>
   </h2>
 
@@ -43,20 +29,33 @@
 
   <jhi-alert></jhi-alert>
 
-  <div class="alert alert-warning" id="no-result" *ngIf="sinifs?.length === 0">
+  <ng-container *ngIf="!isSinif">
+    <ng-container  *jhiHasAnyAuthority="['ROLE_USER']">
+
+      <div class="alert alert-warning" >
+        <span >Sınıfınız yoktur lütfen ait olduğunuz sınıfı seçiniz eğer sınıfınız sistemde kayıtlı değil ise hocanız sisteme kayıt yaptırmalı yanlış sınıfa katıy olduysanız tekrar sınıfa kayıt olmazın uzun sürer</span>
+      </div>
+
+    </ng-container>
+    
+  </ng-container>
+
+  <!-- <div class="alert alert-warning" id="no-result" *ngIf="sinifs?.length === 0">
     <span jhiTranslate="temrinMatikApp.sinif.home.notFound">No sinifs found</span>
-  </div>
+  </div> -->
 
   <div class="table-responsive" id="entities" *ngIf="sinifs && sinifs.length > 0">
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
         <tr>
-          <th *jhiHasAnyAuthority="['ROLE_ADMIN','ROLE_MESUL']" scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <th *jhiHasAnyAuthority="['ROLE_ADMIN','ROLE_MESUL']" scope="col"><span
+              jhiTranslate="global.field.id">ID</span></th>
           <th scope="col"><span jhiTranslate="temrinMatikApp.sinif.isim">Isim</span></th>
           <th scope="col"><span jhiTranslate="temrinMatikApp.sinif.yurt">Yurt</span></th>
           <th scope="col"><span jhiTranslate="temrinMatikApp.sinif.grup">Grup</span></th>
           <th scope="col"><span jhiTranslate="temrinMatikApp.sinif.hoca">Hoca</span></th>
-          <th *jhiHasAnyAuthority="['ROLE_ADMIN','ROLE_MESUL']" scope="col"><span jhiTranslate="temrinMatikApp.sinif.ogrenciler">Ogrenciler</span></th>
+          <th *jhiHasAnyAuthority="['ROLE_ADMIN','ROLE_MESUL']" scope="col"><span
+              jhiTranslate="temrinMatikApp.sinif.ogrenciler">Ogrenciler</span></th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -86,19 +85,20 @@
 
           <td class="text-end">
             <div class="btn-group">
-              <button type="submit" [routerLink]="['/sinif', sinif.id, 'view']" class="btn btn-tema btn-sm" data-cy="entityDetailsButton">
+              <button type="submit" [routerLink]="['/sinif', sinif.id, 'view']" class="btn btn-tema btn-sm"
+                data-cy="entityDetailsButton">
                 <fa-icon icon="eye"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
               </button>
 
-              <button       *jhiHasAnyAuthority="['ROLE_ADMIN','ROLE_HOCA','ROLE_MESUL']"
-              type="submit" [routerLink]="['/sinif', sinif.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+              <button *jhiHasAnyAuthority="['ROLE_ADMIN','ROLE_HOCA','ROLE_MESUL']" type="submit"
+                [routerLink]="['/sinif', sinif.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
                 <fa-icon icon="pencil-alt"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
               </button>
 
-              <button      *jhiHasAnyAuthority="['ROLE_ADMIN','ROLE_MESUL']"
-              type="submit" (click)="delete(sinif)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+              <button *jhiHasAnyAuthority="['ROLE_ADMIN','ROLE_MESUL']" type="submit" (click)="delete(sinif)"
+                class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
                 <fa-icon icon="times"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
               </button>
@@ -109,5 +109,5 @@
     </table>
   </div>
 
-  
+
 </div>

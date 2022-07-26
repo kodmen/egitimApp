@@ -1,6 +1,6 @@
 import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { YurtService } from 'app/entities/yurt/service/yurt.service';
 import { IYurt } from 'app/entities/yurt/yurt.model';
@@ -19,8 +19,8 @@ export class OgrSinifEkleComponent implements OnInit {
   isSaving = false;
 
   editForm = this.fb.group({
-    yurt: [],
-    sinif: [],
+    yurt: ["",[Validators.required]],
+    sinif: ["",[Validators.required]],
   });
 
   constructor(private router:Router,private yurtService: YurtService, private sinifService: SinifService, private fb: FormBuilder) {}
@@ -28,10 +28,7 @@ export class OgrSinifEkleComponent implements OnInit {
   onChange(deviceValue:any):void {
     console.log(deviceValue);
     const yurt = this.editForm.get(['yurt'])!.value;
-    console.log("yurt getirdi");
-    
-    console.log(yurt);
-    
+  
     //burda secilen sinifin yurtlarını getirmeliyiz
     if(this.editForm.get(['yurt'])!.value){
       this.sinifService.getSinifByYurtId(yurt.id).subscribe(res=>{
@@ -40,6 +37,8 @@ export class OgrSinifEkleComponent implements OnInit {
         console.log(this.sinifsSharedCollection);
         
       })
+    }else{
+      this.sinifsSharedCollection = [];
     }
 }
 
@@ -58,13 +57,17 @@ export class OgrSinifEkleComponent implements OnInit {
   save():void{
     console.log("eklendi");
 
-    const yurt = this.editForm.get(['yurt'])!.value;
+    if(this.editForm.invalid){
+        const yurt = this.editForm.get(['yurt'])!.value;
     const sinif = this.editForm.get(['sinif'])!.value;
 
     this.sinifService.ogrSinifAta(sinif.id).subscribe(res=>{
       console.log("ogrenci sinifa eklendi");
       this.router.navigate(['sinif']);
     })
+    }
+
+  
     
   }
 

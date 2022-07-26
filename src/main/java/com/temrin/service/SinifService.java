@@ -77,5 +77,6 @@ public class SinifService {
         return sinifRepository.findByYurt_Id(y);
     }
 
+    // öğrenci sınıftan çıkabilir mi ?
 
 }
