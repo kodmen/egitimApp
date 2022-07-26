@@ -27,16 +27,22 @@ export class DersCalisComponent implements OnInit {
   soruList?: ISoru[] | null = null;
   soruVarmi = false;
 
+
   cevapA: string;
   cevapB: string;
   cevapC: string;
   cevapD: string;
 
-  constructor(protected karistirService:DenemeKaristirService,protected fb: FormBuilder, protected konuService: KonuService, protected soruService: SoruService) {
+  constructor(
+    protected karistirService: DenemeKaristirService,
+    protected fb: FormBuilder,
+    protected konuService: KonuService,
+    protected soruService: SoruService
+  ) {
     this.form = this.fb.group({
       konu: ['', Validators.required],
-      soruKaristir:[false],
-      cevapKaristir:[false]
+      soruKaristir: [false],
+      cevapKaristir: [false],
     });
     this.p = 0;
     this.foto = 'https://temrinbucket.s3.eu-central-1.amazonaws.com/';
@@ -55,19 +61,25 @@ export class DersCalisComponent implements OnInit {
     const konuId = this.form.get(['konu'])!.value;
     const soruKaristir = this.form.get(['soruKaristir'])!.value;
     const cevapKaristir = this.form.get(['cevapKaristir'])!.value;
-    this.soruService.getSoruByKonu(konuId).subscribe(res => {
 
-      if(soruKaristir){        
-        this.soruList =   this.karistirService.soruKaristir(res.body!,cevapKaristir)
-      }else if(cevapKaristir){
-        this.soruList =   this.karistirService.yanlizCevapKaristir(res.body!)
-      }
-      else{        
-        this.soruList = res.body?.sort((a,b) =>  a.sira! - b.sira!)
+    this.soruService.getSoruByKonu(konuId).subscribe(res => {
+      if (soruKaristir) {
+        this.soruList = this.karistirService.soruKaristir(res.body!, cevapKaristir);
+      } else if (cevapKaristir) {
+        this.soruList = this.karistirService.yanlizCevapKaristir(res.body!);
+      } else {
+        this.soruList = res.body?.sort((a, b) => a.sira! - b.sira!);
       }
 
       this.soruVarmi = true;
     });
+  }
+
+  geri():void{
+    this.form.get(['konu'])!.setValue("")
+    this.form.get(['soruKaristir'])!.setValue(false)
+     this.form.get(['cevapKaristir'])!.setValue(false)
+     this.soruVarmi= false
   }
 
   getKonu(): any {
@@ -79,7 +91,6 @@ export class DersCalisComponent implements OnInit {
   ngOnInit(): void {
     this.count = 0;
     this.getKonu();
-   
   }
 
   cevapSoru(soru: ISoru, c: string): void {
@@ -156,8 +167,7 @@ export class DersCalisComponent implements OnInit {
     this.cevapB = b;
     this.cevapC = c;
     this.cevapD = d;
-    console.log("cevaplar ",this.cevapA,this.cevapB,this.cevapC,this.cevapD);
-    
+    console.log('cevaplar ', this.cevapA, this.cevapB, this.cevapC, this.cevapD);
   }
 
   statusDegistir(c: string): void {
