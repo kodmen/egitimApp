@@ -189,10 +189,25 @@ public class SinifResource {
             .build();
     }
 
-
-    @GetMapping("/sinif/user/{login}")
-    public ResponseEntity<Boolean> getUserbysinif(@PathVariable String login) {
-        log.debug("REST request to get User : {}", login);
-        return ResponseEntity.ok(sinifService.ogrenciSinifIceriyormu(login));
+    @GetMapping("/sinifs/user")
+    public ResponseEntity<Boolean> getUserbysinif() {
+        log.debug("REST request to get User : {}" );
+        boolean varmi = sinifService.ogrenciSinifIceriyormu();
+        return ResponseEntity.ok(varmi);
     }
+
+    @GetMapping("/sinifs/yurt/{id}")
+    public ResponseEntity<List<Sinif>> getSinifByYurt(@PathVariable long id) {
+        log.debug("REST request to get Sinif by yurt : {}", id);
+        return ResponseEntity.ok(sinifService.getSinifByYurt(id));
+    }
+
+    @GetMapping("/sinifs/yurt-ekle/{id}")
+    public ResponseEntity ogrSinifEkle(@PathVariable long id) {
+        log.debug("REST request to get Sinif by yurt : {}", id);
+        sinifService.ogrenciSinifaEkle(id);
+        return ResponseEntity.ok().build();
+    }
+
+
 }

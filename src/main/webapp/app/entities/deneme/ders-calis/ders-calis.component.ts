@@ -34,6 +34,8 @@ export class DersCalisComponent implements OnInit {
   constructor(protected fb: FormBuilder, protected konuService: KonuService, protected soruService: SoruService) {
     this.form = this.fb.group({
       konu: ['', Validators.required],
+      soruKaristir:[false],
+      cevapKaristir:[false]
     });
     this.p = 0;
     this.foto = 'https://temrinbucket.s3.eu-central-1.amazonaws.com/';

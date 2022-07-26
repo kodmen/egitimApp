@@ -6,6 +6,7 @@ import { SinifComponent } from '../list/sinif.component';
 import { SinifDetailComponent } from '../detail/sinif-detail.component';
 import { SinifUpdateComponent } from '../update/sinif-update.component';
 import { SinifRoutingResolveService } from './sinif-routing-resolve.service';
+import { OgrSinifEkleComponent } from '../ogr-sinif-ekle/ogr-sinif-ekle.component';
 
 const sinifRoute: Routes = [
   {
@@ -16,6 +17,14 @@ const sinifRoute: Routes = [
   {
     path: ':id/view',
     component: SinifDetailComponent,
+    resolve: {
+      sinif: SinifRoutingResolveService,
+    },
+    canActivate: [UserRouteAccessService],
+  },
+  {
+    path: 'ogr-sinif-ekle',
+    component: OgrSinifEkleComponent,
     resolve: {
       sinif: SinifRoutingResolveService,
     },

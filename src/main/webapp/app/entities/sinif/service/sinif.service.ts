@@ -16,6 +16,18 @@ export class SinifService {
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
+  getSinifByYurtId(id:number):Observable<EntityArrayResponseType> {
+    return this.http.get<ISinif[]>(this.resourceUrl + `/yurt/${id}`, { observe: 'response' });
+  }
+
+  ogrSinifAta(id: number): Observable<EntityResponseType> {
+    return this.http.get(this.resourceUrl+ `/yurt-ekle/${id}`, { observe: 'response' });
+  }
+
+  ogrenciSinifVarMi(): Observable<boolean> {
+    return this.http.get<boolean>(this.resourceUrl+ `/user`);
+  }
+
   create(sinif: ISinif): Observable<EntityResponseType> {
     return this.http.post<ISinif>(this.resourceUrl, sinif, { observe: 'response' });
   }

@@ -14,7 +14,18 @@ export class SinifComponent implements OnInit {
   sinifs?: ISinif[];
   isLoading = false;
 
+  isSinif = false;
+
   constructor(protected sinifService: SinifService, protected modalService: NgbModal) {}
+
+  ogrenciSinifVarmi():void{
+    this.sinifService.ogrenciSinifVarMi().subscribe(res=>{
+      this.isSinif = res;
+      console.log("ogrencinin sinifi varmi ",this.isSinif);
+      console.log(res);
+      
+    })
+  }
 
   loadAll(): void {
     this.isLoading = true;
@@ -32,6 +43,7 @@ export class SinifComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadAll();
+    this.ogrenciSinifVarmi();
   }
 
   trackId(_index: number, item: ISinif): number {

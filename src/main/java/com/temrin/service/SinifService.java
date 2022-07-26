@@ -61,8 +61,21 @@ public class SinifService {
         return sinifList.size() > 0 ? sinifList.get(0) : null;
     }
 
-    public boolean ogrenciSinifIceriyormu(String login){
-        Optional<User> u = userService.findByLogin(login);
-        return sinifRepository.existsByOgrencilersContains(u.get());
+    public boolean ogrenciSinifIceriyormu(){
+        User current = userService.getCurrentUser();
+//        Optional<User> u = userService.findByLogin(login);
+        return sinifRepository.existsByOgrencilersContains(current);
     }
+
+    public void ogrenciSinifaEkle(long id){
+        User current = userService.getCurrentUser();
+        Sinif sinif = sinifRepository.getById(id);
+        sinif.getOgrencilers().add(current);
+    }
+
+    public List<Sinif> getSinifByYurt(long y){
+        return sinifRepository.findByYurt_Id(y);
+    }
+
+
 }
