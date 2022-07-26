@@ -4,6 +4,9 @@
 
         <div class="col-md-6 col-xs-12" *ngIf="!soruVarmi">
             <form [formGroup]="form" (submit)="soruGetir()">
+
+                
+
                 <div class="row">
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Ders seçin</label>
@@ -14,6 +17,26 @@
                         </select>
                     </div>
                 </div>
+
+                <div class="row mb-3">
+
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="defaultCheck1" formControlName="soruKaristir">
+                      <label class="form-check-label" for="defaultCheck1">
+                        Soru kariştir
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="defaultCheck2" formControlName="cevapKaristir">
+                      <label class="form-check-label" for="defaultCheck2">
+                        Cevap kariştir
+                      </label>
+                    </div>
+                  </div>
 
                 <div class="row">
                     <button class="btn btn-primary" type="submit">Soruları getir</button>

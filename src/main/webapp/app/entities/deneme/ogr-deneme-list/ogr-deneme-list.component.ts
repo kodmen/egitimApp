@@ -1,6 +1,6 @@
 import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AlertService } from 'app/core/util/alert.service';
 import dayjs from 'dayjs';
 import { IDeneme } from '../deneme.model';
@@ -16,10 +16,19 @@ export class OgrDenemeListComponent implements OnInit {
   denemes?: IDeneme[];
 
 
-  constructor(private denemeService: DenemeService, private alertService: AlertService, private router: Router) {}
+  constructor(    private activeRoute: ActivatedRoute,
+    private denemeService: DenemeService, private alertService: AlertService, private router: Router) {}
 
   ngOnInit(): void {
     this.loadAll();
+     // parametreleri almak için
+     this.activeRoute.queryParams.subscribe(params => {
+      if (params['dahaOnceGirmis']) {
+        this.alertService.addAlert({ type: 'danger', message: 'denemeye daha önce giriş yapmışsınız' });
+
+      }
+    });
+
   }
 
   zamanKontrol(d: IDeneme): void {

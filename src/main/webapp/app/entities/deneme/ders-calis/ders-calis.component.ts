@@ -4,6 +4,7 @@ import { IKonu } from 'app/entities/konu/konu.model';
 import { KonuService } from 'app/entities/konu/service/konu.service';
 import { SoruService } from 'app/entities/soru/service/soru.service';
 import { ISoru } from 'app/entities/soru/soru.model';
+import { DenemeKaristirService } from '../service/deneme-karistir.service';
 
 @Component({
   selector: 'jhi-ders-calis',
@@ -31,7 +32,7 @@ export class DersCalisComponent implements OnInit {
   cevapC: string;
   cevapD: string;
 
-  constructor(protected fb: FormBuilder, protected konuService: KonuService, protected soruService: SoruService) {
+  constructor(protected karistirService:DenemeKaristirService,protected fb: FormBuilder, protected konuService: KonuService, protected soruService: SoruService) {
     this.form = this.fb.group({
       konu: ['', Validators.required],
       soruKaristir:[false],
@@ -52,10 +53,20 @@ export class DersCalisComponent implements OnInit {
 
   soruGetir(): void {
     const konuId = this.form.get(['konu'])!.value;
+    const soruKaristir = this.form.get(['soruKaristir'])!.value;
+    const cevapKaristir = this.form.get(['cevapKaristir'])!.value;
     this.soruService.getSoruByKonu(konuId).subscribe(res => {
-      console.log(res);
+
+      if(soruKaristir){        
+        this.soruList =   this.karistirService.soruKaristir(res.body!,cevapKaristir)
+      }else if(cevapKaristir){
+        this.soruList =   this.karistirService.yanlizCevapKaristir(res.body!)
+      }
+      else{        
+        this.soruList = res.body?.sort((a,b) =>  a.sira! - b.sira!)
+      }
+
       this.soruVarmi = true;
-      this.soruList = res.body;
     });
   }
 

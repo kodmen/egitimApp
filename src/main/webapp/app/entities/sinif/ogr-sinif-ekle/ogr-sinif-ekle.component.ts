@@ -29,7 +29,6 @@ export class OgrSinifEkleComponent implements OnInit {
     console.log(deviceValue);
     const yurt = this.editForm.get(['yurt'])!.value;
   
-    //burda secilen sinifin yurtlarını getirmeliyiz
     if(this.editForm.get(['yurt'])!.value){
       this.sinifService.getSinifByYurtId(yurt.id).subscribe(res=>{
         this.sinifsSharedCollection = res.body!;
@@ -56,16 +55,20 @@ export class OgrSinifEkleComponent implements OnInit {
 
   save():void{
     console.log("eklendi");
+console.log(!this.editForm.invalid);
 
-    if(this.editForm.invalid){
-        const yurt = this.editForm.get(['yurt'])!.value;
-    const sinif = this.editForm.get(['sinif'])!.value;
+    // if(this.editForm.invalid){
+      const sinif = this.editForm.get(['sinif'])!.value;
 
-    this.sinifService.ogrSinifAta(sinif.id).subscribe(res=>{
-      console.log("ogrenci sinifa eklendi");
-      this.router.navigate(['sinif']);
-    })
-    }
+      this.sinifService.ogrSinifAta(sinif.id).subscribe(res=>{
+        console.log("ogrenci sinifa eklendi");
+        this.router.navigate(['sinif']);
+        console.log(res);
+        
+      })
+
+
+    // }
 
   
     

@@ -4,10 +4,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AlertService } from 'app/core/util/alert.service';
 import { IDeneme } from '../deneme.model';
+import { DenemeKaristirService } from '../service/deneme-karistir.service';
 import { DenemeService } from '../service/deneme.service';
-import { DenemeCevapRequest, IDenemeCevapRequest } from './denemeCevap.model';
-import { DenemeSinavDto, DenemeSoruDto } from './denemeSinav.model';
-import { Karistir } from './karistir.model';
+import { DenemeCevapRequest } from './denemeCevap.model';
+import { DenemeSinavDto } from './denemeSinav.model';
 import { NgbdModalComponent } from './NgbdModalComponent';
 
 @Component({
@@ -30,33 +30,52 @@ export class DenemeGirisComponent implements OnInit {
     private route: ActivatedRoute,
     protected router: Router,
     private alertService: AlertService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private karistirService:DenemeKaristirService
   ) {
     this.p = 0;
     this.foto = 'https://temrinbucket.s3.eu-central-1.amazonaws.com/';
   }
 
-  shuffleCevaplar(array: any[]): any[] {
-    const karisikdizi: string[] = [];
-    const arrayLength = array.length;
 
-    for (let i = 0; i < arrayLength; i++) {
-      const item = array[Math.floor(Math.random() * array.length)];
-      karisikdizi.push(item);
-      array = array.filter((ele: any) => ele !== item);
-    }
+  ngOnInit(): void {
 
-    return karisikdizi;
+  
+
+    // parametreleri almak için
+    this.route.queryParams.subscribe(params => {
+      if (params['sure']) {
+        this.time = params['sure'] * 60;
+      }
+    });
+
+    // urlde slash işaretinden sonrasını almak için
+    this.route.params.subscribe(params => {
+      if (params['id']) {
+        this.getSorular(params['id']);
+        this.denemeId = params['id'];
+
+        this.denemeService.denemeyiGirmismi(this.denemeId).subscribe(res=>{
+          if(res){
+            this.alertService.addAlert({ type: 'danger', message: 'denemeye daha önce giriş yapmışsınız' });
+            this.router.navigate(['/deneme/ogr'],{queryParams:{dahaOnceGirmis:true}});
+            this.alertService.addAlert({ type: 'danger', message: 'denemeye daha önce giriş yapmışsınız' });
+
+          }
+        })
+
+
+      } else {
+        console.log('geldim hata');
+      }
+    });
+
+    this.form = this.fb.group({
+      denemeId: [this.denemeId, { validators: [Validators.required] }],
+      sorular: this.fb.array([]),
+    });
   }
 
-  cevapKaristir(soru: DenemeSoruDto): DenemeSoruDto {
-    const cevaplar = [soru.a, soru.b, soru.c, soru.d];
-    const karisikSoru = this.shuffleCevaplar(cevaplar); // burda sorular karıştirildi
-    const karişmisSorular = new Karistir(karisikSoru[0], karisikSoru[1], karisikSoru[2], karisikSoru[3]);
-    soru.kar = karişmisSorular;
-
-    return soru;
-  }
 
   /**
    * soruyu tamamlama modal
@@ -70,77 +89,20 @@ export class DenemeGirisComponent implements OnInit {
     });
   }
 
+  /**
+   * soruları backenden getiriyor
+   * @param id 
+   */
   getSorular(id: number): void {
     this.denemeService.getDenemeSinav(id).subscribe(res => {
       this.sinav = res;
 
       // sorular karıştılıyor
-      this.sinav.sorular = this.shuffleArray(this.sinav.sorular);
+      this.sinav.sorular = this.karistirService.shuffleArray(this.sinav.sorular);
 
       for (let index = 0; index < this.sinav.sorular.length; index++) {
         this.addControl(this.sinav.sorular[index].soruId!);
       }
-    });
-  }
-
-  /**
-   * soru karıştırma
-   * @param array
-   * @returns
-   */
-  shuffleArray(array: DenemeSoruDto[]): DenemeSoruDto[] {
-    const karisikdizi: DenemeSoruDto[] = [];
-    const arrayLength = array.length;
-
-    for (let i = 0; i < arrayLength; i++) {
-      const item = array[Math.floor(Math.random() * array.length)];
-
-      // cevaplar karisiksa
-      if (item.cevapli) {
-        karisikdizi.push(this.cevapKaristir(item));
-      } else {
-        karisikdizi.push(item);
-      }
-
-      array = this.arrayRemove(array, item);
-    }
-
-    return karisikdizi;
-  }
-
-  /**
-   * diziden elemen silme
-   * @param arr
-   * @param value
-   * @returns
-   */
-  arrayRemove(arr: DenemeSoruDto[], value: DenemeSoruDto): DenemeSoruDto[] {
-    return arr.filter(function (ele) {
-      return ele !== value;
-    });
-  }
-
-  ngOnInit(): void {
-    // parametreleri almak için
-    this.route.queryParams.subscribe(params => {
-      if (params['sure']) {
-        this.time = params['sure'] * 60;
-      }
-    });
-
-    // urlde slash işaretinden sonrasını almak için
-    this.route.params.subscribe(params => {
-      if (params['id']) {
-        this.getSorular(params['id']);
-        this.denemeId = params['id'];
-      } else {
-        console.log('geldim hata');
-      }
-    });
-
-    this.form = this.fb.group({
-      denemeId: [this.denemeId, { validators: [Validators.required] }],
-      sorular: this.fb.array([]),
     });
   }
 
@@ -169,58 +131,9 @@ export class DenemeGirisComponent implements OnInit {
     });
   }
 
-  gercekCevapBul(cevap: any, soru: any): string {
-    let cevapSik;
-    // cevabı alarak cevabın string değerini aldık
-    switch (cevap) {
-      case 'A':
-        cevapSik = soru.kar?.a;
-        break;
-      case 'B':
-        cevapSik = soru.kar?.b;
-        break;
-      case 'C':
-        cevapSik = soru.kar?.c;
-        break;
-      case 'D':
-        cevapSik = soru.kar?.d;
-        break;
-    }
-
-    // cevabın string değeri ile gerçek cevabı getirdik
-    switch (cevapSik) {
-      case soru.a:
-        return 'A';
-      case soru.b:
-        return 'B';
-      case soru.c:
-        return 'C';
-      case soru.d:
-        return 'D';
-
-      default:
-        return '';
-    }
-  }
-
-  cevapDegistir(cevaplar: IDenemeCevapRequest): IDenemeCevapRequest {
-    const cloneCevaplar = cevaplar;
-
-    for (let i = 0; i < this.sinav.sorular.length; i++) {
-      const cevap = cloneCevaplar.sorular![i];
-      const gercekSoru = this.sinav.sorular.find(s => s.soruId === cevap.soruId);
-
-      if (gercekSoru?.cevapli) {
-        cloneCevaplar.sorular![i].cevap = this.gercekCevapBul(cevap.cevap, gercekSoru);
-      }
-    }
-
-    return cloneCevaplar;
-  }
-
   save(): void {
     const cevapRequest = new DenemeCevapRequest(this.form.value);
-    const duzenlenmisCevapRequest = this.cevapDegistir(cevapRequest);
+    const duzenlenmisCevapRequest = this.karistirService.cevapDegistir(cevapRequest,this.sinav);
 
     this.denemeService.cevaplariGonder(duzenlenmisCevapRequest).subscribe(
       res => {
