@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
 
@@ -15,6 +15,7 @@ import { IUser } from 'app/entities/user/user.model';
 import { UserService } from 'app/entities/user/user.service';
 
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { ASC, DESC, ITEMS_PER_PAGE } from 'app/config/pagination.constants';
 
 @Component({
   selector: 'jhi-sinif-update',
@@ -26,6 +27,7 @@ export class SinifUpdateComponent implements OnInit {
   yurtsSharedCollection: IYurt[] = [];
   grupsSharedCollection: IGrup[] = [];
   usersSharedCollection: IUser[] = [];
+  hocasSharedCollection: IUser[] = [];
 
   dropdownSettings:IDropdownSettings;
   
@@ -41,6 +43,13 @@ export class SinifUpdateComponent implements OnInit {
     hoca: [],
     ogrencilers: [],
   });
+  
+
+  itemsPerPage = ITEMS_PER_PAGE;
+  page!: number;
+  predicate!: string;
+  ascending!: boolean;
+  totalItems = 0;
 
   constructor(
     protected sinifService: SinifService,
@@ -48,7 +57,8 @@ export class SinifUpdateComponent implements OnInit {
     protected grupService: GrupService,
     protected userService: UserService,
     protected activatedRoute: ActivatedRoute,
-    protected fb: FormBuilder
+    protected fb: FormBuilder,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -109,6 +119,16 @@ export class SinifUpdateComponent implements OnInit {
     return option;
   }
 
+  // transition(): void {
+  //   this.router.navigate(['./'], {
+  //     relativeTo: this.activatedRoute.parent,
+  //     queryParams: {
+  //       page: this.page,
+  //       sort: `${this.predicate},${this.ascending ? ASC : DESC}`,
+  //     },
+  //   });
+  // }
+
   protected subscribeToSaveResponse(result: Observable<HttpResponse<ISinif>>): void {
     result.pipe(finalize(() => this.onSaveFinalize())).subscribe({
       next: () => this.onSaveSuccess(),
@@ -162,7 +182,7 @@ export class SinifUpdateComponent implements OnInit {
       .subscribe((grups: IGrup[]) => (this.grupsSharedCollection = grups));
 
     this.userService
-      .query()
+      .getOgrenci()
       .pipe(map((res: HttpResponse<IUser[]>) => res.body ?? []))
       .pipe(
         map((users: IUser[]) =>
@@ -174,7 +194,23 @@ export class SinifUpdateComponent implements OnInit {
         )
       )
       .subscribe((users: IUser[]) => (this.usersSharedCollection = users));
+
+      this.userService
+      .getHoca()
+      .pipe(map((res: HttpResponse<IUser[]>) => res.body ?? []))
+      .pipe(
+        map((users: IUser[]) =>
+          this.userService.addUserToCollectionIfMissing(
+            users,
+            this.editForm.get('hoca')!.value,
+            ...(this.editForm.get('ogrencilers')!.value ?? [])
+          )
+        )
+      )
+      .subscribe((users: IUser[]) => (this.hocasSharedCollection = users));
   }
+
+
 
   protected createFromForm(): ISinif {
     return {
@@ -188,4 +224,13 @@ export class SinifUpdateComponent implements OnInit {
       ogrencilers: this.editForm.get(['ogrencilers'])!.value,
     };
   }
+
+  private sort(): string[] {
+    const result = [`${this.predicate},${this.ascending ? ASC : DESC}`];
+    if (this.predicate !== 'id') {
+      result.push('id');
+    }
+    return result;
+  }
+
 }

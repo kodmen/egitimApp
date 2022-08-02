@@ -12,11 +12,25 @@ import { IUser, getUserIdentifier } from './user.model';
 export class UserService {
   private resourceUrl = this.applicationConfigService.getEndpointFor('api/users');
 
+  
+
   constructor(private http: HttpClient, private applicationConfigService: ApplicationConfigService) {}
 
   query(req?: Pagination): Observable<HttpResponse<IUser[]>> {
     const options = createRequestOption(req);
     return this.http.get<IUser[]>(this.resourceUrl, { params: options, observe: 'response' });
+  }
+
+  getHoca(): Observable<HttpResponse<IUser[]>> {
+    return this.http.get<IUser[]>(this.resourceUrl + "/hoca", {  observe: 'response' });
+  }
+
+  getMesul(): Observable<HttpResponse<IUser[]>> {
+    return this.http.get<IUser[]>(this.resourceUrl + "/mesul", {  observe: 'response' });
+  }
+
+  getOgrenci(): Observable<HttpResponse<IUser[]>> {
+    return this.http.get<IUser[]>(this.resourceUrl + "/ogrenci", {  observe: 'response' });
   }
 
   addUserToCollectionIfMissing(userCollection: IUser[], ...usersToCheck: (IUser | null | undefined)[]): IUser[] {

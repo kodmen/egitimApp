@@ -27,7 +27,7 @@
           </div>
         </div>
 
-        <div *jhiHasAnyAuthority="['ROLE_ADMIN','ROLE_MESUL']" class="row mb-3">
+        <div *jhiHasAnyAuthority="['ROLE_ADMIN']" class="row mb-3">
           <label class="form-label" jhiTranslate="temrinMatikApp.sinif.konulimizjson"
             for="field_konulimizjson">Konulimizjson</label>
           <input type="text" class="form-control" name="konulimizjson" id="field_konulimizjson" data-cy="konulimizjson"
@@ -72,7 +72,7 @@
             <option [ngValue]="null"></option>
             <option
               [ngValue]="userOption.id === editForm.get('hoca')!.value?.id ? editForm.get('hoca')!.value : userOption"
-              *ngFor="let userOption of usersSharedCollection; trackBy: trackUserById">
+              *ngFor="let userOption of hocasSharedCollection; trackBy: trackUserById">
               {{ userOption.login }}
             </option>
           </select>
@@ -107,10 +107,24 @@
         </div>
 
         <div class="row mb-3">
-
-          <ng-multiselect-dropdown [placeholder]="'öğrencileri seçiniz'" [settings]="dropdownSettings"
+<div class="col-md-6">
+  <ng-multiselect-dropdown [placeholder]="'öğrencileri seçiniz'" [settings]="dropdownSettings"
             [data]="usersSharedCollection" formControlName="ogrencilers">
           </ng-multiselect-dropdown>
+</div>
+          <!-- <div class="col-md-3">
+            <div class="d-flex justify-content-center">
+              <ngb-pagination
+                [collectionSize]="totalItems"
+                [(page)]="page"
+                [pageSize]="itemsPerPage"
+                [maxSize]="5"
+                [rotate]="true"
+                [boundaryLinks]="true"
+              ></ngb-pagination>
+            </div>
+          </div> -->
+
         </div>
 
 

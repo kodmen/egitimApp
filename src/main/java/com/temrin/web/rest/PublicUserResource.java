@@ -54,6 +54,30 @@ public class PublicUserResource {
         return pageable.getSort().stream().map(Sort.Order::getProperty).allMatch(ALLOWED_ORDERED_PROPERTIES::contains);
     }
 
+    @GetMapping("/users/hoca")
+    public ResponseEntity<List<UserDTO>> getAllPublicUsersHoca() {
+        final List<UserDTO> page = userService.getAllHoca();
+        return new ResponseEntity<>(page, HttpStatus.OK);
+    }
+
+    @GetMapping("/users/mesul")
+    public ResponseEntity<List<UserDTO>> getAllPublicUsersMesul() {
+        final List<UserDTO> page = userService.getAllMesul();
+        return new ResponseEntity<>(page, HttpStatus.OK);
+    }
+
+    @GetMapping("/users/ogrenci")
+    public ResponseEntity<List<UserDTO>> getAllPublicUsersOgrenci(@org.springdoc.api.annotations.ParameterObject Pageable pageable) {
+        log.debug("REST request to get all public User names");
+        if (!onlyContainsAllowedProperties(pageable)) {
+            return ResponseEntity.badRequest().build();
+        }
+        // burda ogrenciler hepsi birden gelmesi sistemi yorar
+        final List<UserDTO> page = userService.getAllOgrenci(pageable);
+        return new ResponseEntity<>(page, HttpStatus.OK);
+    }
+
+
     /**
      * Gets a list of all roles.
      * @return a string list of all roles.

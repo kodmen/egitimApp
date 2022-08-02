@@ -77,6 +77,10 @@ public class SinifService {
         return sinifRepository.findByYurt_Id(y);
     }
 
+    public List<Sinif> getAllSinifByYurt(Yurt y){
+        return sinifRepository.findByYurt(y);
+    }
+
     // öğrenci sınıftan çıkabilir mi ?
 
 }

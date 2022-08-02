@@ -54,4 +54,6 @@ public interface SinifRepository extends SinifRepositoryWithBagRelationships, Jp
 
     // öğrenciyi içeriyor mu
     boolean existsByOgrencilersContains(User u);
+
+    List<Sinif> findAllByYurt(Yurt y);
 }

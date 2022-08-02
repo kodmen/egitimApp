@@ -9,10 +9,12 @@ import com.temrin.security.AuthoritiesConstants;
 import com.temrin.security.SecurityUtils;
 import com.temrin.service.dto.AdminUserDTO;
 import com.temrin.service.dto.UserDTO;
+
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.stream.Collectors;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.CacheManager;
@@ -312,6 +314,7 @@ public class UserService {
 
     /**
      * Gets a list of all the authorities.
+     *
      * @return a list of all the authorities.
      */
     @Transactional(readOnly = true)
@@ -369,6 +372,27 @@ public class UserService {
         return "ROLE_USER";
     }
 
+    @Transactional(readOnly = true)
+    public List<UserDTO> getAllHoca() {
+        //return userRepository.findAll(pageable).map(AdminUserDTO::new);
+        List<User> hocalar = getAuthUser(authorityRepository.findByName("ROLE_HOCA"));
+        return hocalar.stream().map(UserDTO::new).collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<UserDTO> getAllMesul() {
+        //return userRepository.findAll(pageable).map(AdminUserDTO::new);
+        List<User> mesuller = getAuthUser(authorityRepository.findByName("ROLE_MESUL"));
+        return mesuller.stream().map(UserDTO::new).collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<UserDTO> getAllOgrenci(Pageable pageable) {
+        //return userRepository.findAll(pageable).map(AdminUserDTO::new);
+        List<User> ogrenciler = userRepository.findAllByAuthoritiesContaining(authorityRepository.findByName("ROLE_USER"),pageable);
+        return ogrenciler.stream().map(UserDTO::new).collect(Collectors.toList());
+    }
+
     public List<User> getAuthUser(Authority auth) {
         return userRepository.findAllByAuthoritiesContaining(auth);
     }
@@ -379,7 +403,7 @@ public class UserService {
     }
 
 
-    public Optional<User> findByLogin(String login){
+    public Optional<User> findByLogin(String login) {
         return userRepository.findByLogin(login);
     }
 

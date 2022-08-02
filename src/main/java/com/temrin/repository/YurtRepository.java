@@ -1,5 +1,6 @@
 package com.temrin.repository;
 
+import com.temrin.domain.User;
 import com.temrin.domain.Yurt;
 import java.util.List;
 import java.util.Optional;
@@ -40,4 +41,6 @@ public interface YurtRepository extends JpaRepository<Yurt, Long> {
 
     @Query("select yurt from Yurt yurt left join fetch yurt.mesul where yurt.id =:id")
     Optional<Yurt> findOneWithToOneRelationships(@Param("id") Long id);
+
+    Yurt findByMesul(User u);
 }

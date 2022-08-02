@@ -1,5 +1,6 @@
 package com.temrin.service;
 
+import com.temrin.domain.User;
 import com.temrin.domain.Yurt;
 import com.temrin.repository.YurtRepository;
 import org.springframework.stereotype.Service;
@@ -17,5 +18,9 @@ public class YurtService {
         if (yurtRepository.findByMesulIsCurrentUser().size() != 0) return yurtRepository.findByMesulIsCurrentUser().get(0);
 
         return null;
+    }
+
+    public Yurt getYurtByMesul(User u){
+        return yurtRepository.findByMesul(u);
     }
 }

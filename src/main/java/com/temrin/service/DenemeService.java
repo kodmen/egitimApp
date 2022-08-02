@@ -12,7 +12,6 @@ import com.temrin.service.dto.deneme.DenemeSoruDto;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -32,6 +31,7 @@ public class DenemeService {
     private final SoruService soruService;
     private final DenemeAnalizSinifService denemeAnalizSinifService;
     private final DenemeAnalizService denemeAnalizService;
+    private final YurtService yurtService;
 
     public DenemeService(
         DenemeRepository repository,
@@ -41,8 +41,8 @@ public class DenemeService {
         KonuService konuService,
         SoruService soruService,
         DenemeAnalizSinifService denemeAnalizSinifService,
-        DenemeAnalizService denemeAnalizService
-    ) {
+        DenemeAnalizService denemeAnalizService,
+        YurtService yurtService) {
         this.repository = repository;
         this.userService = userService;
         this.sinifService = sinifService;
@@ -51,6 +51,7 @@ public class DenemeService {
         this.soruService = soruService;
         this.denemeAnalizSinifService = denemeAnalizSinifService;
         this.denemeAnalizService = denemeAnalizService;
+        this.yurtService = yurtService;
     }
 
     /**
@@ -271,8 +272,15 @@ public class DenemeService {
     }
 
     private List<Deneme> getMesulDeneme() {
+        // ait old yurdun denemelri degil
         Authority authority = authorityService.getAuthorityByName("ROLE_HOCA");
-        List<User> hocalar = userService.getAuthUser(authority);
+        // yurdu getir
+        Yurt y = yurtService.getYurtByMesul(userService.getCurrentUser());
+        List<Sinif> siniflar = sinifService.getAllSinifByYurt(y);
+        List<User> hocalar = new ArrayList<>();
+        for (Sinif s: siniflar){
+            hocalar.add(s.getHoca());
+        }
         List<Deneme> yurtGenelDeneme = new ArrayList<>();
         for (User h : hocalar) {
             yurtGenelDeneme.addAll(getOgrDeneme(h));
