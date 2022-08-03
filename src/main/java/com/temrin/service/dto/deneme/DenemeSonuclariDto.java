@@ -26,6 +26,9 @@ public class DenemeSonuclariDto {
     public float getPuan() {
         int toplanSoru = dogru + yanlis + bos;
         float tekSoru = 100 / toplanSoru;
+        if (toplanSoru == dogru){
+            return 100;
+        }
         return tekSoru * dogru;
     }
 

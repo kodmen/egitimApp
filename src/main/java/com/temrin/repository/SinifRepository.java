@@ -50,6 +50,8 @@ public interface SinifRepository extends SinifRepositoryWithBagRelationships, Jp
 
     List<Sinif> findByYurt_Id(long id);
 
+
+
     List<Sinif> findByOgrencilersIsContaining(User user);
 
     // öğrenciyi içeriyor mu

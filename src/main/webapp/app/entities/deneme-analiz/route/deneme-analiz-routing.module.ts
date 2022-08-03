@@ -6,6 +6,7 @@ import { DenemeAnalizComponent } from '../list/deneme-analiz.component';
 import { DenemeAnalizDetailComponent } from '../detail/deneme-analiz-detail.component';
 import { DenemeAnalizUpdateComponent } from '../update/deneme-analiz-update.component';
 import { DenemeAnalizRoutingResolveService } from './deneme-analiz-routing-resolve.service';
+import { SiralamaComponent } from '../siralama/siralama.component';
 
 const denemeAnalizRoute: Routes = [
   {
@@ -16,6 +17,14 @@ const denemeAnalizRoute: Routes = [
   {
     path: ':id/view',
     component: DenemeAnalizDetailComponent,
+    resolve: {
+      denemeAnaliz: DenemeAnalizRoutingResolveService,
+    },
+    canActivate: [UserRouteAccessService],
+  },
+  {
+    path: 'siralama',
+    component: SiralamaComponent,
     resolve: {
       denemeAnaliz: DenemeAnalizRoutingResolveService,
     },

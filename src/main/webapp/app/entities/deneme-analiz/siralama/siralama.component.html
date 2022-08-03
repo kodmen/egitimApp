@@ -1,0 +1,111 @@
+<section class="main-content">
+    <div class="container">
+        <h1>Liderlik Tablosu</h1>
+        <br>
+        <div class="row" *ngIf="page === 1">
+            <ng-container *ngFor="let analiz of this.denemeAnalizs?.slice(0, 3)">
+
+                <div class="col-sm-4">
+                    <div class="leaderboard-card">
+                        <div class="leaderboard-card__top">
+                            <h3 class="text-center">{{analiz.puan}}</h3>
+                        </div>
+                        <div class="leaderboard-card__body">
+                            <div class="text-center">
+                                <!-- <img src="img/user2.jpg" class="circle-img mb-2" alt="User Img"> -->
+                                <ng-container *ngIf="analiz.user?.firstName">
+                                    <h5 class="mb-0">{{analiz.user?.firstName}} {{analiz.user?.lastName}}</h5>
+                                    <p class="text-muted mb-0">@{{analiz.user?.login}}</p>
+                                </ng-container>
+                                <ng-container *ngIf="!analiz.user?.firstName">
+                                    <h5 class="mb-0">@{{analiz.user?.login}}</h5>
+                                </ng-container>
+                                <!-- <p class="text-muted mb-0">@{{analiz.user?.login}}</p> -->
+                                <hr>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span><i class="fa fa-map-marker"></i> {{analiz.yurt}}</span>
+                                    <h4>{{sureHesapla(analiz.sure!)}}</h4>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </ng-container>
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Öğrenci</th>
+                    <th>Süre</th>
+                    <th>Puan</th>
+                    <th>Yurt</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngIf="page === 1">
+                    <ng-container *ngFor="let analiz of this.denemeAnalizs?.slice(3, this.denemeAnalizs?.length)">
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <div class="user-info__basic">
+                                        <ng-container *ngIf="analiz.user?.firstName">
+                                            <h5 class="mb-0">{{analiz.user?.firstName}} {{analiz.user?.lastName}}</h5>
+                                            <p class="text-muted mb-0">@{{analiz.user?.login}}</p>
+                                        </ng-container>
+                                        <ng-container *ngIf="!analiz.user?.firstName">
+                                            <h5 class="mb-0">@{{analiz.user?.login}}</h5>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>{{sureHesapla(analiz.sure!)}}</td>
+                            <td>{{analiz.puan}}</td>
+                            <td>{{analiz.yurt}}</td>
+                        </tr>
+                    </ng-container>
+                </ng-container>
+                <ng-container *ngIf="page !== 1">
+                    <ng-container *ngFor="let analiz of this.denemeAnalizs">
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <div class="user-info__basic">
+                                        <ng-container *ngIf="analiz.user?.firstName">
+                                            <h5 class="mb-0">{{analiz.user?.firstName}} {{analiz.user?.lastName}}</h5>
+                                            <p class="text-muted mb-0">@{{analiz.user?.login}}</p>
+                                        </ng-container>
+                                        <ng-container *ngIf="!analiz.user?.firstName">
+                                            <h5 class="mb-0">@{{analiz.user?.login}}</h5>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>{{sureHesapla(analiz.sure!)}}</td>
+                            <td>{{analiz.puan}}</td>
+                            <td>{{analiz.yurt}}</td>
+                        </tr>
+                    </ng-container>
+                </ng-container>
+
+
+
+            </tbody>
+        </table>
+
+        <div *ngIf="denemeAnalizs">
+            <div class="d-flex justify-content-center">
+                <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }">
+                </jhi-item-count>
+            </div>
+
+            <div class="d-flex justify-content-center">
+                <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5"
+                    [rotate]="true" [boundaryLinks]="true" (pageChange)="transition()"></ngb-pagination>
+            </div>
+        </div>
+
+    </div>
+</section>

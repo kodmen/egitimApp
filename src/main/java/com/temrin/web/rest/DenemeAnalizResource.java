@@ -1,8 +1,10 @@
 package com.temrin.web.rest;
 
 import com.temrin.domain.DenemeAnaliz;
+import com.temrin.domain.Soru;
 import com.temrin.repository.DenemeAnalizRepository;
 import com.temrin.service.DenemeAnalizService;
+import com.temrin.service.dto.DenemeAnalizSiralamaDto;
 import com.temrin.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -14,10 +16,16 @@ import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import tech.jhipster.web.util.HeaderUtil;
+import tech.jhipster.web.util.PaginationUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
 /**
@@ -194,6 +202,16 @@ public class DenemeAnalizResource {
         log.debug("REST request to get DenemeAnaliz : {}", id);
         Optional<DenemeAnaliz> denemeAnaliz = denemeAnalizRepository.findOneWithEagerRelationships(id);
         return ResponseUtil.wrapOrNotFound(denemeAnaliz);
+    }
+
+
+    @GetMapping("/deneme-analizs/siralama")
+    public ResponseEntity<List<DenemeAnalizSiralamaDto>> getAllAnaliz(@org.springdoc.api.annotations.ParameterObject Pageable pageable) {
+
+        final Page<DenemeAnalizSiralamaDto> page = denemeAnalizService.getAllAnaliz(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+
     }
 
     /**

@@ -272,7 +272,7 @@ public class DenemeService {
      *
      * @return
      */
-    private Deneme getGunlukDeneme() {
+    public Deneme getGunlukDeneme() {
         Optional<User> admin = userService.getUserLogin("admin");
         return repository.findTopByOlusturanOrderByIdDesc(admin.get());
     }

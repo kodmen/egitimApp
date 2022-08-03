@@ -48,12 +48,14 @@ public class SinifService {
     }
 
     public Sinif getOrgSinif(User user) {
+        // burda gelen sınıf ilişkisiz bunu ilişkili yapmak lazım
         List<Sinif> sinifList = sinifRepository.findByOgrencilersIsContaining(user);
-        if (sinifList.size() > 2) return sinifList.get(0);
 
-        if (sinifList.size() >= 1) return sinifList.get(0);
+        if (sinifList.isEmpty()){
+            return new Sinif();
+        }
+        return sinifList.get(0);
 
-        return new Sinif();
     }
 
     public Sinif getCurrentUserSinif(){
