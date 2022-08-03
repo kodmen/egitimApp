@@ -18,6 +18,7 @@ import java.time.ZoneId;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static com.temrin.security.AuthoritiesConstants.*;
 import static com.temrin.security.SecurityUtils.getCurrentUserLogin;
 
 @Service
@@ -56,16 +57,18 @@ public class DenemeService {
 
     /**
      * eğer öğr deneyi daha önce çözmüşse denemeye giremesin
+     *
      * @param denemeid
      * @return denemeye girdi mi
      */
-    public boolean ogrDenemeyeGirmismi(long denemeid){
+    public boolean ogrDenemeyeGirmismi(long denemeid) {
         User ogr = userService.getCurrentUser();
-        return denemeAnalizService.existDenemeAndUser(denemeid,ogr);
+        return denemeAnalizService.existDenemeAndUser(denemeid, ogr);
     }
 
     /**
      * geri dönüş değeri deneme analiz id
+     *
      * @param request
      * @return
      */
@@ -120,21 +123,21 @@ public class DenemeService {
 
     /**
      * karıxık olan soru analizleri düzenli şekle getiren fonks
+     *
      * @param analiz
      * @return
      */
-    public String soruAnalizDuzenle(String analiz){
+    public String soruAnalizDuzenle(String analiz) {
 
         Set<String> konular = new HashSet<>();
         String sorular[] = analiz.split(",");
         // her soruyu tekrar ikiye ayırmam lazım
-        for (String soru:sorular){
+        for (String soru : sorular) {
             var konusayi = soru.split(" ");
             var soruKonu = konusayi[0];
             var sorusayi = konusayi[1];
             konular.add(soruKonu);
         }
-
 
 
         return null;
@@ -151,6 +154,7 @@ public class DenemeService {
 
     /**
      * oluşturulan denemiyi clentin anlayacağı şekle çeviriyor
+     *
      * @param denemeId
      * @return
      */
@@ -162,10 +166,10 @@ public class DenemeService {
         List<DenemeSoruDto> sorular = new ArrayList<>();
 
         for (Soru s : deneme.getSorulars()) {
-            if (s.getCevapli()){
-                sorular.add(DenemeSoruDto.creatDenemeSoruDtoCevapli(s.getResimUrl(), s.getId(),s.getA(),s.getB(),s.getC(),s.getD()));
-            }else{
-                sorular.add(DenemeSoruDto.creatDenemeSoruDtoCevapsiz(s.getResimUrl(),s.getId()));
+            if (s.getCevapli()) {
+                sorular.add(DenemeSoruDto.creatDenemeSoruDtoCevapli(s.getResimUrl(), s.getId(), s.getA(), s.getB(), s.getC(), s.getD()));
+            } else {
+                sorular.add(DenemeSoruDto.creatDenemeSoruDtoCevapsiz(s.getResimUrl(), s.getId()));
             }
         }
 
@@ -198,6 +202,7 @@ public class DenemeService {
 
     /**
      * konuya göre soru getirme
+     *
      * @param konuDTO konu ve soru adedi
      * @return sorular
      */
@@ -224,6 +229,7 @@ public class DenemeService {
 
     /**
      * soru listesinin içinden soru geri döndürür
+     *
      * @param sorular sorular
      * @param kacAdet soruların içinden kaç adet soru old
      * @return seçilmeş sorular
@@ -243,17 +249,28 @@ public class DenemeService {
 
     public List<Deneme> getAllDeneme() {
         switch (userService.getAuth()) {
-            case "ROLE_ADMIN":
+            case ADMIN:
                 return repository.findAllWithEagerRelationships();
-            case "ROLE_MESUL":
+            case MESUL:
                 return getMesulDeneme();
-            case "ROLE_HOCA":
+            case HOCA:
                 return repository.findByOlusturanIsCurrentUser();
-            case "ROLE_USER":
+            case USER:
                 return getOgrDeneme();
             default:
                 return Collections.emptyList();
         }
+    }
+
+    /**
+     * burda adminin olusturudğu günlük denemeleri getircek
+     * en son hangi denemeyi oluşturduysa onu getircek
+     *
+     * @return
+     */
+    private Deneme getGunlukDeneme() {
+        Optional<User> admin = userService.getUserLogin("admin");
+        return repository.findTopByOlusturanOrderByIdDesc(admin.get());
     }
 
     private List<Deneme> getOgrDeneme() {
@@ -266,9 +283,12 @@ public class DenemeService {
 
         Optional<User> u = userService.getUserLogin(getCurrentUserLogin().get());
         Sinif s = sinifService.getOrgSinif(u.get());
-        return repository.findAllByBaslamaTarihBetweenAndOlusturan(tt, dd, s.getHoca());
-        //        List<Deneme> denemes = repository.findAllByBaslamaTarihBetween(tt, dd);
-        //        return denemes.stream().filter(d -> d.getOlusturan() == s.getHoca()).collect(Collectors.toList());
+        List<Deneme> userAitDenemeler = repository.findAllByBaslamaTarihBetweenAndOlusturan(tt, dd, s.getHoca());
+        if (userAitDenemeler.size() > 0){
+            userAitDenemeler.add(getGunlukDeneme());
+            return userAitDenemeler;
+        }
+        return Collections.singletonList(getGunlukDeneme());
     }
 
     private List<Deneme> getMesulDeneme() {
@@ -278,7 +298,7 @@ public class DenemeService {
         Yurt y = yurtService.getYurtByMesul(userService.getCurrentUser());
         List<Sinif> siniflar = sinifService.getAllSinifByYurt(y);
         List<User> hocalar = new ArrayList<>();
-        for (Sinif s: siniflar){
+        for (Sinif s : siniflar) {
             hocalar.add(s.getHoca());
         }
         List<Deneme> yurtGenelDeneme = new ArrayList<>();
@@ -299,7 +319,7 @@ public class DenemeService {
         return repository.findAllByBaslamaTarihBetweenAndOlusturan(tt, dd, u);
     }
 
-    public void denemeSil(long denemId){
+    public void denemeSil(long denemId) {
         // önce deneme analiz sınıfı bul
         Deneme d = repository.getById(denemId);
 

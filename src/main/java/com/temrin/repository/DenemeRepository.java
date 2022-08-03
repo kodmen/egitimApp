@@ -51,4 +51,15 @@ public interface DenemeRepository extends DenemeRepositoryWithBagRelationships, 
     List<Deneme> findAllByBaslamaTarihBetween(Instant a, Instant b);
 
     List<Deneme> findAllByBaslamaTarihBetweenAndOlusturan(Instant a, Instant b, User olusturan);
+
+    /**
+     * girilen useren son olusturduğu denemeyi getiriyor
+     * @param olusturan
+     * @return
+     */
+    Deneme findTopByOlusturanOrderByIdDesc(User olusturan);
+
+
+
+
 }

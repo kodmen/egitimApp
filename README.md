@@ -9,6 +9,10 @@ son durumda
 
 ikil olarak soruları baştan düzenlemek lazım
 - 
+deneme analize süre eklenebelir kaç saniyede çözdü diye yada salise
+günlük deneme oluşabilir
+günlük denemenin analizi sıralama yapılabilir
+yurt oluşturma yerine sadece yurt mesullelirini getirmek lazım
 
 mesul girişinde hatalar var gibi 
 mesul birden fazla yurda mesulluk yapması gerekebilir yada bir mesul yurduda olmalı
