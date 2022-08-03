@@ -4,8 +4,17 @@ import java.util.List;
 
 public class DenemeSinavDto {
 
+    public String olusturan;
     public long denemeId;
     public List<DenemeSoruDto> sorular;
+
+    public String getOlusturan() {
+        return olusturan;
+    }
+
+    public void setOlusturan(String olusturan) {
+        this.olusturan = olusturan;
+    }
 
     public long getDenemeId() {
         return denemeId;

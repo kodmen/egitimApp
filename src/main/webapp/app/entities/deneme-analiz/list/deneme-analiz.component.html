@@ -51,19 +51,19 @@
             <div *ngIf="denemeAnaliz.deneme">
               <a [routerLink]="['/deneme', denemeAnaliz.deneme?.id, 'view']">{{ denemeAnaliz.deneme?.isim }}</a>
             </div>
-          </td> 
+          </td>
             <td>
             {{ denemeAnaliz.user?.login }}
-          </td>      
+          </td>
            <td>{{ denemeAnaliz.puan }}</td>
 
-          
+
 
           <td>{{ denemeAnaliz.dogru }}</td>
           <td>{{ denemeAnaliz.yanlis }}</td>
           <td>{{  konuAnalizYanlis(denemeAnaliz.konuAnalizJson!) }}</td>
           <td>{{  konuAnalizBos(denemeAnaliz.konuAnalizJson!) }}</td>
-          
+
           <td class="text-end">
             <div class="btn-group">
               <button

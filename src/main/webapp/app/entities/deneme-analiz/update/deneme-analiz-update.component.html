@@ -66,6 +66,11 @@
         </div>
 
         <div class="row mb-3">
+          <label class="form-label" jhiTranslate="temrinMatikApp.denemeAnaliz.sure" for="field_sure">Sure</label>
+          <input type="number" class="form-control" name="sure" id="field_sure" data-cy="sure" formControlName="sure" />
+        </div>
+
+        <div class="row mb-3">
           <label class="form-label" jhiTranslate="temrinMatikApp.denemeAnaliz.user" for="field_user">User</label>
           <select class="form-control" id="field_user" data-cy="user" name="user" formControlName="user">
             <option [ngValue]="null"></option>

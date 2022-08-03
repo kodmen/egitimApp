@@ -143,6 +143,9 @@ public class DenemeAnalizResource {
                 if (denemeAnaliz.getKonuAnalizJson() != null) {
                     existingDenemeAnaliz.setKonuAnalizJson(denemeAnaliz.getKonuAnalizJson());
                 }
+                if (denemeAnaliz.getSure() != null) {
+                    existingDenemeAnaliz.setSure(denemeAnaliz.getSure());
+                }
 
                 return existingDenemeAnaliz;
             })

@@ -29,6 +29,7 @@ export class DenemeAnalizUpdateComponent implements OnInit {
     puan: [],
     cozuldu: [],
     konuAnalizJson: [null, [Validators.maxLength(5000)]],
+    sure: [],
     user: [],
     deneme: [],
   });
@@ -98,6 +99,7 @@ export class DenemeAnalizUpdateComponent implements OnInit {
       puan: denemeAnaliz.puan,
       cozuldu: denemeAnaliz.cozuldu,
       konuAnalizJson: denemeAnaliz.konuAnalizJson,
+      sure: denemeAnaliz.sure,
       user: denemeAnaliz.user,
       deneme: denemeAnaliz.deneme,
     });
@@ -129,6 +131,7 @@ export class DenemeAnalizUpdateComponent implements OnInit {
       puan: this.editForm.get(['puan'])!.value,
       cozuldu: this.editForm.get(['cozuldu'])!.value,
       konuAnalizJson: this.editForm.get(['konuAnalizJson'])!.value,
+      sure: this.editForm.get(['sure'])!.value,
       user: this.editForm.get(['user'])!.value,
       deneme: this.editForm.get(['deneme'])!.value,
     };

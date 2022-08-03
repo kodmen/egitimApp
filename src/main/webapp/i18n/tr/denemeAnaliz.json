@@ -3,7 +3,7 @@
     "denemeAnaliz": {
       "home": {
         "title": "Deneme Analizs",
-        "refreshListLabel": "Listeyi yenile",
+        "refreshListLabel": "Refresh list",
         "createLabel": "Create a new Deneme Analiz",
         "createOrEditLabel": "Create or edit a Deneme Analiz",
         "notFound": "No Deneme Analizs found"
@@ -23,7 +23,8 @@
       "puan": "Puan",
       "cozuldu": "Cozuldu",
       "konuAnalizJson": "Konu Analiz Json",
-      "user": "kullanıcı",
+      "sure": "Sure",
+      "user": "User",
       "deneme": "Deneme"
     }
   }

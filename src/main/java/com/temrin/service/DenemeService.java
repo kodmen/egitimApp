@@ -69,10 +69,12 @@ public class DenemeService {
     /**
      * geri dönüş değeri deneme analiz id
      *
+     * heh dogru senaryoyu test ediyorum yanlış senaryoda
      * @param request
      * @return
      */
     public long cevapKontrol(DenemeCevapRequest request) {
+
         Deneme deneme = repository.getById(request.getDenemeId());
         String[] cevaplar = deneme.getCevapAnahtar().split(",");
         DenemeSonuclariDto sonuclar = new DenemeSonuclariDto();
@@ -110,6 +112,7 @@ public class DenemeService {
         denemeAnaliz.setDogru(sonuclar.getDogru());
         denemeAnaliz.setYanlis(sonuclar.getYanlis());
         denemeAnaliz.setPuan((int) sonuclar.getPuan());
+        denemeAnaliz.setSure(request.getSure());
 
         denemeAnaliz.setKonuAnalizJson("yanlis: " + yanlisKonu + "-- Bos: " + bosKonu);
         denemeAnaliz = denemeAnalizService.create(denemeAnaliz);
@@ -162,6 +165,7 @@ public class DenemeService {
         Deneme deneme = repository.getById(denemeId);
         DenemeSinavDto denemeSinav = new DenemeSinavDto();
 
+        denemeSinav.setOlusturan(deneme.getOlusturan().getLogin());
         denemeSinav.setDenemeId(deneme.getId());
         List<DenemeSoruDto> sorular = new ArrayList<>();
 

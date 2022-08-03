@@ -26,6 +26,10 @@
       "fieldType": "String",
       "fieldValidateRules": ["maxlength"],
       "fieldValidateRulesMaxlength": "5000"
+    },
+    {
+      "fieldName": "sure",
+      "fieldType": "Integer"
     }
   ],
   "fluentMethods": true,

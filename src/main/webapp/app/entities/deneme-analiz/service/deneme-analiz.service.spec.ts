@@ -26,6 +26,7 @@ describe('DenemeAnaliz Service', () => {
       puan: 0,
       cozuldu: false,
       konuAnalizJson: 'AAAAAAA',
+      sure: 0,
     };
   });
 
@@ -66,6 +67,7 @@ describe('DenemeAnaliz Service', () => {
           puan: 1,
           cozuldu: true,
           konuAnalizJson: 'BBBBBB',
+          sure: 1,
         },
         elemDefault
       );
@@ -83,6 +85,7 @@ describe('DenemeAnaliz Service', () => {
       const patchObject = Object.assign(
         {
           cozuldu: true,
+          sure: 1,
         },
         new DenemeAnaliz()
       );
@@ -107,6 +110,7 @@ describe('DenemeAnaliz Service', () => {
           puan: 1,
           cozuldu: true,
           konuAnalizJson: 'BBBBBB',
+          sure: 1,
         },
         elemDefault
       );
@@ -158,7 +162,7 @@ describe('DenemeAnaliz Service', () => {
       });
 
       it('should add only unique DenemeAnaliz to an array', () => {
-        const denemeAnalizArray: IDenemeAnaliz[] = [{ id: 123 }, { id: 456 }, { id: 89233 }];
+        const denemeAnalizArray: IDenemeAnaliz[] = [{ id: 123 }, { id: 456 }, { id: 48689 }];
         const denemeAnalizCollection: IDenemeAnaliz[] = [{ id: 123 }];
         expectedResult = service.addDenemeAnalizToCollectionIfMissing(denemeAnalizCollection, ...denemeAnalizArray);
         expect(expectedResult).toHaveLength(3);

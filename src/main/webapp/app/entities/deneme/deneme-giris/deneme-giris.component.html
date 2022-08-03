@@ -1,9 +1,24 @@
 <div class="container">
   <div class="row">
-    <div class="d-flex justify-content-center">
+    <ng-container *ngIf="olusturan !== 'admin'">
+ <div class="d-flex justify-content-center">
       <countdown class="custom-style" [config]="{ leftTime: time, format: 'mm:ss' }" (event)="handleEvent($event)">
       </countdown>
     </div>
+    </ng-container>
+   
+    <ng-container *ngIf="olusturan === 'admin'">
+      <p id="output" class="text-center">
+        <span>{{ hr < 10 ? "0" :""}}{{hr}} : </span>
+        <span>{{ min < 10 ? "0" :""}}{{min}} : </span>
+        <span>{{ sec < 10 ? "0" :""}}{{sec}} : </span>
+        <span> {{(ms % 100 - ms % 10) === 0 ? "00" : (ms % 100 - ms % 10)}} </span>
+      </p>
+    </ng-container>
+
+
+
+
 
     <jhi-alert-error></jhi-alert-error>
 

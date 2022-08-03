@@ -39,6 +39,9 @@ public class DenemeAnaliz implements Serializable {
     @Column(name = "konu_analiz_json", length = 5000)
     private String konuAnalizJson;
 
+    @Column(name = "sure")
+    private Integer sure;
+
     @ManyToOne
     private User user;
 
@@ -126,6 +129,19 @@ public class DenemeAnaliz implements Serializable {
         this.konuAnalizJson = konuAnalizJson;
     }
 
+    public Integer getSure() {
+        return this.sure;
+    }
+
+    public DenemeAnaliz sure(Integer sure) {
+        this.setSure(sure);
+        return this;
+    }
+
+    public void setSure(Integer sure) {
+        this.sure = sure;
+    }
+
     public User getUser() {
         return this.user;
     }
@@ -181,6 +197,7 @@ public class DenemeAnaliz implements Serializable {
             ", puan=" + getPuan() +
             ", cozuldu='" + getCozuldu() + "'" +
             ", konuAnalizJson='" + getKonuAnalizJson() + "'" +
+            ", sure=" + getSure() +
             "}";
     }
 }

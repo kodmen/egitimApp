@@ -8,6 +8,7 @@ export interface IDenemeAnaliz {
   puan?: number | null;
   cozuldu?: boolean | null;
   konuAnalizJson?: string | null;
+  sure?: number | null;
   user?: IUser | null;
   deneme?: IDeneme | null;
 }
@@ -20,6 +21,7 @@ export class DenemeAnaliz implements IDenemeAnaliz {
     public puan?: number | null,
     public cozuldu?: boolean | null,
     public konuAnalizJson?: string | null,
+    public sure?: number | null,
     public user?: IUser | null,
     public deneme?: IDeneme | null
   ) {

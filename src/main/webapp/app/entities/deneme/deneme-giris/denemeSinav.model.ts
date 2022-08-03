@@ -12,6 +12,7 @@ export class DenemeSoruDto {
   }
   
   export class DenemeSinavDto {
+    olusturan?:string;
     denemeId?: number;
     sorular: DenemeSoruDto[];
   }

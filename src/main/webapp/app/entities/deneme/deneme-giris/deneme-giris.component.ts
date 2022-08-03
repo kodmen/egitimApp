@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -15,7 +15,18 @@ import { NgbdModalComponent } from './NgbdModalComponent';
   templateUrl: './deneme-giris.component.html',
   styleUrls: ['./deneme-giris.component.scss'],
 })
-export class DenemeGirisComponent implements OnInit {
+export class DenemeGirisComponent implements OnInit,AfterViewInit {
+
+  ms:any =  0;
+  sec:any =  0;
+  min:any =  0;
+  hr:any =  0;
+  timer = 0;
+
+  startTime:any;
+  olusturan:string;
+
+
   p: number;
   form: FormGroup;
   denemeId: number;
@@ -37,10 +48,32 @@ export class DenemeGirisComponent implements OnInit {
     this.foto = 'https://temrinbucket.s3.eu-central-1.amazonaws.com/';
   }
 
+  ngAfterViewInit():void {
+    this.startTime = setInterval(()=>{
+      this.timer++;
+      this.ms++;
+      this.ms = this.ms < 10 ?  this.ms : this.ms;
+
+      if(this.ms === 100){
+        this.sec ++;
+        this.sec = this.sec < 10 ?   this.sec % 10 : this.sec;
+        this.ms = 0;
+      }
+
+      if(this.sec === 60){
+        this.min++;
+        this.min = this.min < 10 ?  this.min : this.min;
+        this.sec = 0;
+      }
+      if(this.min === 60){
+        this.hr++;
+        this.hr = this.hr < 10 ?  this.hr: this.hr;
+        this.min = 0;
+      }
+    },10);
+  }
 
   ngOnInit(): void {
-
-  
 
     // parametreleri almak için
     this.route.queryParams.subscribe(params => {
@@ -71,6 +104,7 @@ export class DenemeGirisComponent implements OnInit {
     });
 
     this.form = this.fb.group({
+      sure:[],
       denemeId: [this.denemeId, { validators: [Validators.required] }],
       sorular: this.fb.array([]),
     });
@@ -96,7 +130,7 @@ export class DenemeGirisComponent implements OnInit {
   getSorular(id: number): void {
     this.denemeService.getDenemeSinav(id).subscribe(res => {
       this.sinav = res;
-
+      this.olusturan = res.olusturan!;
       // sorular karıştılıyor
       this.sinav.sorular = this.karistirService.shuffleArray(this.sinav.sorular);
 
@@ -132,6 +166,9 @@ export class DenemeGirisComponent implements OnInit {
   }
 
   save(): void {
+    const sure = this.timer;
+    this.form.get(['sure'])!.setValue(sure);
+    
     const cevapRequest = new DenemeCevapRequest(this.form.value);
     const duzenlenmisCevapRequest = this.karistirService.cevapDegistir(cevapRequest,this.sinav);
 

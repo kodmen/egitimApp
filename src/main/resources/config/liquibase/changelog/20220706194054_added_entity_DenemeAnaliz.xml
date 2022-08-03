@@ -29,6 +29,9 @@
             <column name="konu_analiz_json" type="varchar(5000)">
                 <constraints nullable="true" />
             </column>
+            <column name="sure" type="integer">
+                <constraints nullable="true" />
+            </column>
             <column name="user_id" type="bigint">
                 <constraints nullable="true" />
             </column>
@@ -61,6 +64,7 @@
             <column name="puan" type="numeric"/>
             <column name="cozuldu" type="boolean"/>
             <column name="konu_analiz_json" type="string"/>
+            <column name="sure" type="numeric"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

@@ -4,6 +4,7 @@ export interface DenemeCevapDto {
   }
   
   export interface IDenemeCevapRequest {
+    sure?:number;
     denemeId?: number;
     sorular?: DenemeCevapDto[];
   }
