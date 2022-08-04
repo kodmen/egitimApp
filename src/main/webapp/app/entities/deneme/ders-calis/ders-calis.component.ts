@@ -81,6 +81,7 @@ export class DersCalisComponent implements OnInit {
     this.form.get(['soruKaristir'])!.setValue(false)
      this.form.get(['cevapKaristir'])!.setValue(false)
      this.soruVarmi= false
+     this.p = 1;
   }
 
   getKonu(): any {

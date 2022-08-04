@@ -32,7 +32,6 @@ export class SiralamaComponent implements OnInit {
   constructor(private denemeAnalizService: DenemeAnalizService,private activatedRoute:ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
-    
     this.handleNavigation()
   }
 
@@ -58,10 +57,12 @@ export class SiralamaComponent implements OnInit {
     });
   }
 
+
   sureHesapla(millis: number): string {
     const seconds = Math.floor((millis / 100) % 60);
     const minutes = Math.floor((millis / 100 / 60) % 60);
-    const kusurat = millis - (seconds * 100 + minutes * seconds * 60 * 100) 
+    const kusurat = millis - ((minutes * 60 + seconds) * 100)
+    
     if(minutes === 0){
       return `  ${seconds} sn : ${kusurat} ms` ;
     }
