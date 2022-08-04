@@ -89,6 +89,7 @@
     "@popperjs/core": "2.11.5",
     "bootstrap": "5.1.3",
     "dayjs": "1.11.0",
+    "ng-lazyload-image": "^9.1.2",
     "ng-multiselect-dropdown": "^0.3.8",
     "ngx-countdown": "^13.0.0",
     "ngx-infinite-scroll": "13.0.1",

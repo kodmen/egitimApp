@@ -16,6 +16,7 @@ export class DersCalisComponent implements OnInit {
 
   form: FormGroup;
 
+  defaultImage = '../../../../content/images/loading.gif';
   tekCevap = false;
   tekCevapYazi = '';
   score = 0;
