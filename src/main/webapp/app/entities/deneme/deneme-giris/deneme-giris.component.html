@@ -1,24 +1,20 @@
 <div class="container">
   <div class="row">
     <ng-container *ngIf="olusturan !== 'admin'">
- <div class="d-flex justify-content-center">
-      <countdown class="custom-style" [config]="{ leftTime: time, format: 'mm:ss' }" (event)="handleEvent($event)">
-      </countdown>
-    </div>
+      <div class="d-flex justify-content-center">
+        <countdown class="custom-style" [config]="{ leftTime: time, format: 'mm:ss' }" (event)="handleEvent($event)">
+        </countdown>
+      </div>
     </ng-container>
-   
+
     <ng-container *ngIf="olusturan === 'admin'">
       <p id="output" class="text-center">
         <span>{{ hr < 10 ? "0" :""}}{{hr}} : </span>
-        <span>{{ min < 10 ? "0" :""}}{{min}} : </span>
-        <span>{{ sec < 10 ? "0" :""}}{{sec}} : </span>
-        <span> {{(ms % 100 - ms % 10) === 0 ? "00" : (ms % 100 - ms % 10)}} </span>
+            <span>{{ min < 10 ? "0" :""}}{{min}} : </span>
+                <span>{{ sec < 10 ? "0" :""}}{{sec}} : </span>
+                    <span> {{(ms % 100 - ms % 10) === 0 ? "00" : (ms % 100 - ms % 10)}} </span>
       </p>
     </ng-container>
-
-
-
-
 
     <jhi-alert-error></jhi-alert-error>
 
@@ -102,11 +98,7 @@
                     <input type="radio" value="D" id="cevapD" [id]="'cevapD' + i" name="cevap"
                       formControlName="cevap" /><label [for]="'cevapD' + i">D</label>
                   </td>
-                  <td scope="col">
-                    <input type="radio" value="E" id="cevapE" [id]="'cevapE' + i" name="cevap"
-                      formControlName="cevap" /><label [for]="'cevapE' + i">E</label>
-                  </td>
-
+      
                   <td scope="col">
                     <input type="radio" value="" [id]="'cevapBos' + i" name="cevap" formControlName="cevap" checked />
                     <label [for]="'cevapBos' + i">Bos</label>
@@ -118,16 +110,12 @@
         </form>
       </div>
 
-      <div class="row">
+      <div class="row mt-4 mb-4">
         <div class="d-flex justify-content-center">
-          <pagination-controls previousLabel="geri" nextLabel="ileri" (pageChange)="p = $event" class="float-right">
+          <pagination-controls previousLabel="geri" nextLabel="ileri" [responsive]="true"  (pageChange)="p = $event" class="float-right">
           </pagination-controls>
         </div>
       </div>
-
-      <!-- <div class="d-flex justify-content-center">
-        <button class="btn btn-primary m" type="submit" [disabled]="form.invalid">Testi tamamla</button>
-      </div> -->
 
       <div class="d-flex justify-content-center">
         <button type="button" class="btn btn-lg btn-outline-primary" (click)="open()">Testi Tamamla</button>
@@ -136,9 +124,4 @@
     </form>
 
   </div>
-
-  <div class="row">
-  </div>
-
-
 </div>

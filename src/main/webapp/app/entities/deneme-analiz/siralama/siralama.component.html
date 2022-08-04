@@ -3,7 +3,7 @@
         <h1>Liderlik Tablosu</h1>
         <br>
         <div class="row" *ngIf="page === 1">
-            <ng-container *ngFor="let analiz of this.denemeAnalizs?.slice(0, 3)">
+            <ng-container *ngFor="let analiz of this.denemeAnalizs?.slice(0, 3) ;index as i">
 
                 <div class="col-sm-4">
                     <div class="leaderboard-card">
@@ -18,15 +18,15 @@
                                     <p class="text-muted mb-0">@{{analiz.user?.login}}</p>
                                 </ng-container>
                                 <ng-container *ngIf="!analiz.user?.firstName">
-                                    <h5 class="mb-0">@{{analiz.user?.login}}</h5>
+                                    <h5 class="mb-0">{{i+1}}-) @{{analiz.user?.login}}</h5>
                                 </ng-container>
                                 <!-- <p class="text-muted mb-0">@{{analiz.user?.login}}</p> -->
                                 <hr>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <span><i class="fa fa-map-marker"></i> {{analiz.yurt}}</span>
-                                    <h4 >{{sureHesapla(analiz.sure!)}}</h4>
+                                    <h4>{{sureHesapla(analiz.sure!)}}</h4>
                                 </div>
-                               
+
                             </div>
                         </div>
                     </div>
@@ -45,30 +45,30 @@
                 </tr>
             </thead>
             <tbody>
-<ng-container *ngIf="page === 1">
-<ng-container  *ngFor="let analiz of this.denemeAnalizs?.slice(3, this.denemeAnalizs?.length)">
-                    <tr>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <div class="user-info__basic">
-                                    <ng-container *ngIf="analiz.user?.firstName">
-                                        <h5 class="mb-0">{{analiz.user?.firstName}} {{analiz.user?.lastName}}</h5>
-                                        <p class="text-muted mb-0">@{{analiz.user?.login}}</p>
-                                    </ng-container>
-                                    <ng-container *ngIf="!analiz.user?.firstName">
-                                        <h5 class="mb-0">@{{analiz.user?.login}}</h5>
-                                    </ng-container>
+                <ng-container *ngIf="page === 1">
+                    <ng-container *ngFor="let analiz of this.denemeAnalizs?.slice(3, this.denemeAnalizs?.length);index as i">
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <div class="user-info__basic">
+                                        <ng-container *ngIf="analiz.user?.firstName">
+                                            <h5 class="mb-0">{{i+4}}-){{analiz.user?.firstName}} {{analiz.user?.lastName}}</h5>
+                                            <p class="text-muted mb-0">@{{analiz.user?.login}}</p>
+                                        </ng-container>
+                                        <ng-container *ngIf="!analiz.user?.firstName">
+                                            <h5 class="mb-0">{{i+4}}-)@{{analiz.user?.login}}</h5>
+                                        </ng-container>
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
-                        <td>{{sureHesapla(analiz.sure!)}}</td>
-                        <td>{{analiz.puan}}</td>
-                        <td>{{analiz.yurt}}</td>
-                    </tr>
+                            </td>
+                            <td>{{sureHesapla(analiz.sure!)}}</td>
+                            <td>{{analiz.puan}}</td>
+                            <td>{{analiz.yurt}}</td>
+                        </tr>
+                    </ng-container>
                 </ng-container>
-</ng-container>
-<ng-container *ngIf="page !== 1">
-    <ng-container  *ngFor="let analiz of this.denemeAnalizs">
+                <ng-container *ngIf="page !== 1">
+                    <ng-container *ngFor="let analiz of this.denemeAnalizs">
                         <tr>
                             <td>
                                 <div class="d-flex align-items-center">
@@ -88,8 +88,8 @@
                             <td>{{analiz.yurt}}</td>
                         </tr>
                     </ng-container>
-    </ng-container>
-                
+                </ng-container>
+
 
 
             </tbody>
@@ -97,21 +97,15 @@
 
         <div *ngIf="denemeAnalizs">
             <div class="d-flex justify-content-center">
-              <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+                <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }">
+                </jhi-item-count>
             </div>
-        
+
             <div class="d-flex justify-content-center">
-              <ngb-pagination
-                [collectionSize]="totalItems"
-                [(page)]="page"
-                [pageSize]="itemsPerPage"
-                [maxSize]="5"
-                [rotate]="true"
-                [boundaryLinks]="true"
-                (pageChange)="transition()"
-              ></ngb-pagination>
+                <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5"
+                    [rotate]="true" [boundaryLinks]="true" (pageChange)="transition()"></ngb-pagination>
             </div>
-          </div>
+        </div>
 
     </div>
 </section>
