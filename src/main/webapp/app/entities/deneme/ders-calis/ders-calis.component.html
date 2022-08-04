@@ -113,7 +113,7 @@
 
             <div class="row">
                 <div class="d-flex justify-content-center">
-                    <pagination-controls previousLabel="geri" nextLabel="ileri" (pageChange)="p = $event"
+                    <pagination-controls previousLabel="geri" nextLabel="ileri" [responsive]="true" (pageChange)="p = $event"
                         (click)="pageChanged($event)" class="float-right">
                     </pagination-controls>
                 </div>
