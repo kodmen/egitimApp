@@ -56,6 +56,27 @@ export class DenemeAnalizComponent implements OnInit {
     return ayri[1];
   }
 
+  konuAnalizYanlisSayi(analiz:string):number{
+    const yanlisSorularStr = analiz.slice(7);
+    console.log("slice 7 sonra");
+    
+    console.log(yanlisSorularStr);
+    if(yanlisSorularStr.length > 1 ){
+      const yanlisSorular = yanlisSorularStr.split(",");
+      return yanlisSorular.length -1;
+    }
+    return 0
+  }
+
+  konuAnalizBosSayi(analiz:string):number{
+    const yanlisSorularStr = analiz.slice(5);
+    if(yanlisSorularStr.length > 1 ){
+      const yanlisSorular = yanlisSorularStr.split(",");
+      return yanlisSorular.length -1;
+    }
+    return 0
+  }
+
   ngOnInit(): void {
     this.handleNavigation();
   }

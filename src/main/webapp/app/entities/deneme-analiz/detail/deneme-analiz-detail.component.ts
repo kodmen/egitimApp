@@ -31,4 +31,27 @@ export class DenemeAnalizDetailComponent implements OnInit {
     const ayri = analiz.split("--");
     return ayri[1];
   }
+
+  konuAnalizYanlisSayi(analiz:string):string[]{
+    const yanlisSorularStr = analiz.slice(7);
+    if(yanlisSorularStr.length > 1 ){
+      const yanlisSorular = yanlisSorularStr.split(",");
+      yanlisSorular.pop();
+      return yanlisSorular
+    }
+    return []
+  }
+
+  konuAnalizBosSayi(analiz:string):string[]{
+    const bosSorularStr = analiz.slice(5);
+    if(bosSorularStr.length > 1 ){
+      const bosSorular = bosSorularStr.split(",");
+      bosSorular.pop();
+      console.log(bosSorular);
+      console.log("buraya girdim");
+      
+      return bosSorular
+    }
+    return [  ]
+  }
 }

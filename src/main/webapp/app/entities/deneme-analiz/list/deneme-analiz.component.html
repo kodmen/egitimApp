@@ -40,7 +40,7 @@
 
           <th scope="col"><span jhiTranslate="temrinMatikApp.denemeAnaliz.dogru">Dogru</span></th>
           <th scope="col"><span jhiTranslate="temrinMatikApp.denemeAnaliz.yanlis">Yanlis</span></th>
-          <th scope="col"><span > Analiz Yanlis </span></th>
+          <!-- <th scope="col"><span > Analiz Yanlis </span></th> -->
           <th scope="col"><span > Analiz bos </span></th>
           <th scope="col"></th>
         </tr>
@@ -61,8 +61,9 @@
 
           <td>{{ denemeAnaliz.dogru }}</td>
           <td>{{ denemeAnaliz.yanlis }}</td>
-          <td>{{  konuAnalizYanlis(denemeAnaliz.konuAnalizJson!) }}</td>
-          <td>{{  konuAnalizBos(denemeAnaliz.konuAnalizJson!) }}</td>
+          <!-- <td>{{  konuAnalizYanlisSayi(konuAnalizYanlis(denemeAnaliz.konuAnalizJson!)) > 0 ? konuAnalizYanlisSayi(konuAnalizYanlis(denemeAnaliz.konuAnalizJson!)) + " soru" : "yanlis yok "  }} </td> -->
+
+          <td>{{  konuAnalizBosSayi(konuAnalizBos(denemeAnaliz.konuAnalizJson!)) > 0 ? konuAnalizBosSayi(konuAnalizBos(denemeAnaliz.konuAnalizJson!)) +" soru" : "boş yok"   }}</td>
 
           <td class="text-end">
             <div class="btn-group">
