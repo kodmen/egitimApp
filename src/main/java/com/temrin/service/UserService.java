@@ -357,17 +357,24 @@ public class UserService {
     }
 
     public String getBuyukRole(List<String> role) {
-        for (String r : role) {
-            if (r.equals("ROLE_MESUL")) {
-                return "ROLE_MESUL";
-            }
-        }
 
         for (String r : role) {
             if (r.equals("ROLE_ADMIN")) {
                 return "ROLE_ADMIN";
             }
         }
+        for (String r : role) {
+            if (r.equals("ROLE_MESUL")) {
+                return "ROLE_MESUL";
+            }
+        }
+        for (String r : role) {
+            if (r.equals(AuthoritiesConstants.HOCA)) {
+                return "ROLE_HOCA";
+            }
+        }
+
+
 
         return "ROLE_USER";
     }

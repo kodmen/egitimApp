@@ -9,6 +9,13 @@ son durumda
 
 ikil olarak soruları baştan düzenlemek lazım
 - 
+DENEME ANALİZLERİNİ PAGEABLE YAPAYIM 
+Deneme analiz listelerken boş yanlış sadece sayısı olsun detaya girinci hangi sorular old gösterilsin
+Ders çalışma yerinde doğru ise doğru yazsın yanış ise yanlış yazabilir
+sınıfı hocasız açarsak ne olur
+konu entitiye soru sayisi eklenmeli
+
+
 deneme analize süre eklenebelir kaç saniyede çözdü diye yada salise
 günlük deneme oluşabilir
 günlük denemenin analizi sıralama yapılabilir

@@ -172,10 +172,12 @@ public class DenemeAnalizResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of denemeAnalizs in body.
      */
     @GetMapping("/deneme-analizs")
-    public List<DenemeAnaliz> getAllDenemeAnalizs(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
+    public ResponseEntity<List<DenemeAnaliz>> getAllDenemeAnalizs(@org.springdoc.api.annotations.ParameterObject Pageable pageable) {
         log.debug("REST request to get all DenemeAnalizs");
-//        return denemeAnalizRepository.findAllWithEagerRelationships();
-        return denemeAnalizService.getAllDeneme();
+
+        final Page<DenemeAnaliz> page = denemeAnalizService.getAllDeneme(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
     /**

@@ -18,7 +18,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface DenemeAnalizRepository extends JpaRepository<DenemeAnaliz, Long> {
     @Query("select denemeAnaliz from DenemeAnaliz denemeAnaliz where denemeAnaliz.user.login = ?#{principal.username}")
-    List<DenemeAnaliz> findByUserIsCurrentUser();
+    Page<DenemeAnaliz> findByUserIsCurrentUser(Pageable pageable);
 
     default Optional<DenemeAnaliz> findOneWithEagerRelationships(Long id) {
         return this.findOneWithToOneRelationships(id);
@@ -48,7 +48,7 @@ public interface DenemeAnalizRepository extends JpaRepository<DenemeAnaliz, Long
     )
     Optional<DenemeAnaliz> findOneWithToOneRelationships(@Param("id") Long id);
 
-    List<DenemeAnaliz> findByDeneme_Olusturan(User user);
+    Page<DenemeAnaliz> findByDeneme_Olusturan(User user,Pageable p);
 
     List<DenemeAnaliz> findByDeneme_OlusturanAndDeneme_Id(User user, long denemeId);
 

@@ -76,16 +76,16 @@ public class DenemeAnalizService {
         return repository.save(denemeAnaliz);
     }
 
-    public List<DenemeAnaliz> getAllDeneme() {
+    public Page<DenemeAnaliz> getAllDeneme(Pageable pageable) {
         switch (userService.getAuth()) {
             case "ROLE_ADMIN":
-                return repository.findAll();
+                return repository.findAllWithEagerRelationships(pageable);
             case "ROLE_HOCA":
-                return repository.findByDeneme_Olusturan(userService.getCurrentUser());
+                return repository.findByDeneme_Olusturan(userService.getCurrentUser(),pageable);
             case "ROLE_USER":
-                return repository.findByUserIsCurrentUser();
+                return repository.findByUserIsCurrentUser(pageable);
             default:
-                return Collections.emptyList();
+                return null;
         }
     }
 

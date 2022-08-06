@@ -15,7 +15,7 @@
                                 <!-- <img src="img/user2.jpg" class="circle-img mb-2" alt="User Img"> -->
                                 <ng-container *ngIf="analiz.user?.firstName">
                                     <h5 class="mb-0">{{analiz.user?.firstName}} {{analiz.user?.lastName}}</h5>
-                                    <p class="text-muted mb-0">@{{analiz.user?.login}}</p>
+                                    <p class="text-muted mb-0">{{i+1}}-) @{{analiz.user?.login}}</p>
                                 </ng-container>
                                 <ng-container *ngIf="!analiz.user?.firstName">
                                     <h5 class="mb-0">{{i+1}}-) @{{analiz.user?.login}}</h5>
