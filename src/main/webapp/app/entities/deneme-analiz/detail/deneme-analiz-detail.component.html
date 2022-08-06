@@ -36,37 +36,33 @@
           <span>{{ denemeAnaliz.yanlis }}</span>
         </dd>
 
-        <dt><span > Yanliş sorular  </span></dt>
+        <dt><span> Yanliş sorular </span></dt>
         <dd>
           <ng-container *ngIf="konuAnalizYanlisSayi(konuAnalizYanlis(denemeAnaliz.konuAnalizJson!)).length >= 1">
-               <ng-container *ngFor="let yanlis of konuAnalizYanlisSayi(konuAnalizYanlis(denemeAnaliz.konuAnalizJson!));index as i">
-                  <span>{{ i+1}}-) {{yanlis }}</span><br>
+            <ng-container
+              *ngFor="let yanlis of konuAnalizYanlisSayi(konuAnalizYanlis(denemeAnaliz.konuAnalizJson!));index as i">
+              <span>{{ i+1}}-)  <a [routerLink]="['/soru/isim/',yanlis]">{{ yanlis }}</a></span><br>
 
-                </ng-container>
+            </ng-container>
           </ng-container>
           <ng-container *ngIf="konuAnalizYanlisSayi(konuAnalizYanlis(denemeAnaliz.konuAnalizJson!)).length < 1">
             <span>yanlış sayi yok</span>
-       </ng-container>
-         
-          
+          </ng-container>
         </dd>
 
-        <dt><span > Boş sorular  </span></dt>
+        <dt><span> Boş sorular </span></dt>
         <dd>
           <ng-container *ngIf="konuAnalizBosSayi(konuAnalizBos(denemeAnaliz.konuAnalizJson!)).length >= 1">
-            <ng-container  *ngFor="let bos of konuAnalizBosSayi(konuAnalizBos(denemeAnaliz.konuAnalizJson!));index as i">
-              <span>{{ i+1}}-) {{bos }}</span><br>
-
+            <ng-container *ngFor="let bos of konuAnalizBosSayi(konuAnalizBos(denemeAnaliz.konuAnalizJson!));index as i">
+              <span>{{ i+1}}-)  <a [routerLink]="['/soru/isim',bos]">{{ bos }}</a></span><br>
+             
             </ng-container>
           </ng-container>
           <ng-container *ngIf="konuAnalizBosSayi(konuAnalizBos(denemeAnaliz.konuAnalizJson!)).length < 1">
             <span>bos soru yok</span>
           </ng-container>
-          
-          
-          
         </dd>
-        
+
       </dl>
 
       <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">

@@ -18,7 +18,10 @@ export class SoruService {
 
   getSoruByKonu(konuID:number):Observable<EntityArrayResponseType>{
     return this.http.get<ISoru[]>(this.resourceUrl + `/konu/${konuID}`, {  observe: 'response' });
+  }
 
+  getSoruByIsim(isim:string):Observable<EntityResponseType>{
+    return this.http.get<ISoru>(this.resourceUrl + `/isim/${isim}`, {  observe: 'response' });
   }
 
   create(soru: ISoru): Observable<EntityResponseType> {

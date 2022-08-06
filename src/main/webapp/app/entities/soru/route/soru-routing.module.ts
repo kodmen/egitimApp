@@ -6,6 +6,7 @@ import { SoruComponent } from '../list/soru.component';
 import { SoruDetailComponent } from '../detail/soru-detail.component';
 import { SoruUpdateComponent } from '../update/soru-update.component';
 import { SoruRoutingResolveService } from './soru-routing-resolve.service';
+import { TekSoruComponent } from '../tek-soru/tek-soru.component';
 
 const soruRoute: Routes = [
   {
@@ -16,6 +17,14 @@ const soruRoute: Routes = [
   {
     path: ':id/view',
     component: SoruDetailComponent,
+    resolve: {
+      soru: SoruRoutingResolveService,
+    },
+    canActivate: [UserRouteAccessService],
+  },
+  {
+    path: 'isim/:isim',
+    component: TekSoruComponent,
     resolve: {
       soru: SoruRoutingResolveService,
     },

@@ -194,6 +194,11 @@ public class SoruResource {
         return ResponseUtil.wrapOrNotFound(soru);
     }
 
+    @GetMapping("/sorus/isim/{isim}")
+    public ResponseEntity<Soru> getSoruByName(@PathVariable String isim) {
+        return ResponseUtil.wrapOrNotFound(soruService.getByName(isim));
+    }
+
     /**
      * {@code DELETE  /sorus/:id} : delete the "id" soru.
      *

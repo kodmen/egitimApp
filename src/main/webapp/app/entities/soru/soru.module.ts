@@ -5,10 +5,12 @@ import { SoruDetailComponent } from './detail/soru-detail.component';
 import { SoruUpdateComponent } from './update/soru-update.component';
 import { SoruDeleteDialogComponent } from './delete/soru-delete-dialog.component';
 import { SoruRoutingModule } from './route/soru-routing.module';
+import { TekSoruComponent } from './tek-soru/tek-soru.component';
+import { LazyLoadImageModule } from 'ng-lazyload-image'; // <-- import it
 
 @NgModule({
-  imports: [SharedModule, SoruRoutingModule],
-  declarations: [SoruComponent, SoruDetailComponent, SoruUpdateComponent, SoruDeleteDialogComponent],
+  imports: [SharedModule, SoruRoutingModule,LazyLoadImageModule],
+  declarations: [SoruComponent, SoruDetailComponent, SoruUpdateComponent, SoruDeleteDialogComponent, TekSoruComponent],
   entryComponents: [SoruDeleteDialogComponent],
 })
 export class SoruModule {}

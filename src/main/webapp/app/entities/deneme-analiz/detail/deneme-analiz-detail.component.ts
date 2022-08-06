@@ -23,7 +23,7 @@ export class DenemeAnalizDetailComponent implements OnInit {
   }
 
   konuAnalizYanlis(analiz:string):string{
-    const ayri = analiz.split("--");
+    const ayri = analiz.split(`--`);
     return ayri[0]
   }
 

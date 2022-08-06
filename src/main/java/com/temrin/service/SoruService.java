@@ -92,10 +92,19 @@ public class SoruService {
         return soru.isPresent() ? soru.get().getIsim() : "yanlis";
     }
 
+    /**
+     * soruları sıralayarak ve page olarak getiriyor
+     * @param pageable
+     * @return
+     */
     public Page<Soru> getAllManagedSoru(Pageable pageable) {
 
         Pageable p = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("konu").and(Sort.by("sira")));
 
         return repository.findAllWithEagerRelationships(p);
+    }
+
+    public Optional<Soru> getByName(String isim){
+        return repository.findByIsim(isim);
     }
 }

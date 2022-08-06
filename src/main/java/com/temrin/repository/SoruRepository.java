@@ -40,4 +40,6 @@ public interface SoruRepository extends JpaRepository<Soru, Long> {
     Optional<Soru> findOneWithToOneRelationships(@Param("id") Long id);
 
     List<Soru> findByKonu(Konu konu);
+
+    Optional<Soru> findByIsim(String isim);
 }
