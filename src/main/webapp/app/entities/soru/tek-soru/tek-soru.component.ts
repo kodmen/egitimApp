@@ -19,10 +19,10 @@ export class TekSoruComponent implements OnInit {
     // paramdan gelen soru id al
     this.route.params.subscribe(params => {
       if (params['isim']) {
-        console.log("gelen isim");
+        console.log('gelen isim');
         console.log(params['isim']);
-        
-        this.getSoru(params['isim'].trim())
+
+        this.getSoru(params['isim'].trim());
       }
     });
   }
@@ -33,13 +33,13 @@ export class TekSoruComponent implements OnInit {
     });
   }
 
-  getCevapClassAta(sik:string):string{
-    //sık girilcek eğer cevapsa doğru dönsün değilse yanlış dönsün
-    if(sik === this.soru?.cevap ){
+  /**
+   * sık girilcek eğer cevapsa doğru dönsün değilse yanlış dönsün
+   */
+  getCevapClassAta(sik: string): string {
+    if (sik === this.soru?.cevap) {
       return 'bg-success';
     }
-  return ""
-   
+    return '';
   }
-
 }

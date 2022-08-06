@@ -198,15 +198,7 @@ export class SinifUpdateComponent implements OnInit {
       this.userService
       .getHoca()
       .pipe(map((res: HttpResponse<IUser[]>) => res.body ?? []))
-      .pipe(
-        map((users: IUser[]) =>
-          this.userService.addUserToCollectionIfMissing(
-            users,
-            this.editForm.get('hoca')!.value,
-            ...(this.editForm.get('ogrencilers')!.value ?? [])
-          )
-        )
-      )
+      .pipe(map((users: IUser[]) =>this.userService.addUserToCollectionIfMissing(users, this.editForm.get('hoca')!.value)))
       .subscribe((users: IUser[]) => (this.hocasSharedCollection = users));
   }
 
