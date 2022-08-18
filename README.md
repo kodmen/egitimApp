@@ -9,13 +9,16 @@ son durumda
 
 ikil olarak soruları baştan düzenlemek lazım
 - 
+DERS ÇALIŞ SAYFASINA SORUYA GİT EKLENEBİLİR
+DENEME SAYFASINI PAGEABLE YAPILMALI
+konu entitiye soru sayisi eklenmeli
+DENEME ANALİZİNDE YAPILAN DENEME ANALİZ SINIFTADA YAPILABİLİR
+DENEME ANALİZ SINFI PAGEABLE OLMALI
 
-DENEME ANALİZLERİNİ PAGEABLE YAPAYIM 
+DENEME ANALİZLERİNİ PAGEABLE YAPAYIM
 Deneme analiz listelerken boş yanlış sadece sayısı olsun detaya girinci hangi sorular old gösterilsin
 Ders çalışma yerinde doğru ise doğru yazsın yanış ise yanlış yazabilir
 sınıfı hocasız açarsak ne olur
-konu entitiye soru sayisi eklenmeli
-
 
 deneme analize süre eklenebelir kaç saniyede çözdü diye yada salise
 günlük deneme oluşabilir
@@ -35,18 +38,9 @@ mesul girişlerini kontrol edilmeli ->sınıfı ve yurdun sınıflarını göreb
 hoca ve mesule ait tema değişmeli 
 talebe çalşası için deneme yerine ders çalışma ve deneme çözmek için yer olmalı
 
-cevaplı olunca nasıl analiz edeceğiz 
-önce soruları yazdırayım
-sonra cevapları gönederiym
-sonra cevapları analiz ederim
-ogrenci denemeye girdiği denemeye tekrar girebiliyor
-hoca deneme sınıfa girince denemeye giren öğrencilerin deneme analizlerini görmesi lazım
-hoca sınıfa talebe ekleme düzenlencek
-bazı yetkinlikler eklendiş
-dil düzeltilmiş
-test çözme sayfasını güncelleme
-soruların sayılarını koy
-soruları rastgele dağıt
+
+burda bu projeyi nasıl daha güzel tanıtabilirim 
+veya bu projeyi yeniden oluşturayım ve nasıl bir yol izleyerek bu projeyi yeniden yayayım
 
 
 heroku buildpacks:clear

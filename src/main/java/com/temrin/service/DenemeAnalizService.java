@@ -81,6 +81,7 @@ public class DenemeAnalizService {
             case "ROLE_ADMIN":
                 return repository.findAllWithEagerRelationships(pageable);
             case "ROLE_HOCA":
+                // BURDA EĞER HEM ÖĞRENCİ HEM ÖRETMENSE BURDA HATA VERİY
                 return repository.findByDeneme_Olusturan(userService.getCurrentUser(),pageable);
             case "ROLE_USER":
                 return repository.findByUserIsCurrentUser(pageable);
