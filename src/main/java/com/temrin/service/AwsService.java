@@ -20,7 +20,7 @@ public class AwsService {
 
     static {
         //put your accesskey and secretkey here
-        credentials = new BasicAWSCredentials("AKIAXJ6BKKZ6HOSW36HU", "XPtfFweNOSEF1DkEUQ03uLHomNGEFrqWo6k76ccQ");
+        credentials = new BasicAWSCredentials("AKIAXJ6BKKZ6HLQBKIDA", "uqKFtAi+GNPoI0NlvQUOYrCZnbNdhg2sKBSOGHka");
     }
 
     AwsService() {
