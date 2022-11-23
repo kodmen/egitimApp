@@ -5,7 +5,7 @@
         "title": "Sorus",
         "refreshListLabel": "Refresh list",
         "createLabel": "Create a new Soru",
-        "createOrEditLabel": "Create or edit a Soru",
+        "createOrEditLabel": "Soru oluşturma yada düzenleme",
         "notFound": "No Sorus found"
       },
       "created": "A new Soru is created with identifier {{ param }}",

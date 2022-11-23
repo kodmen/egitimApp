@@ -27,6 +27,23 @@
             </small>
           </div>
         </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_soruSayisi">soruSayisi</label>
+          <input type="text" class="form-control" name="soruSayisi" id="field_soruSayisi" data-cy="soruSayisi" formControlName="soruSayisi" />
+          <div *ngIf="editForm.get('soruSayisi')!.invalid && (editForm.get('soruSayisi')!.dirty || editForm.get('soruSayisi')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('soruSayisi')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 500 }"
+            >
+              This field cannot be longer than 500 characters.
+            </small>
+          </div>
+        </div>
+
+
       </div>
 
       <div>

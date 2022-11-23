@@ -19,6 +19,16 @@ public class KonuService {
         return repository.getById(id);
     }
 
+    public Konu konuSayisiArttir(Konu k){
+        k.setSoruSayisi(k.getSoruSayisi() + 1);
+        return repository.save(k);
+    }
+
+    public Konu konuSayisiAzalt(Konu k){
+        k.setSoruSayisi(k.getSoruSayisi() - 1);
+        return repository.save(k);
+    }
+
     public List<Konu> getAllKonu() {
         return repository.findAll();
     }

@@ -9,8 +9,30 @@
       <div>
         <jhi-alert-error></jhi-alert-error>
 
-        <div class="form-group">
-          <label class="form-control-label" jhiTranslate="temrinMatikApp.resim.image" for="field_image">Image</label>
+        <!-- <div class="form-group">
+          <label class="form-control-label"  for="field_image">Image</label>
+          <div>
+            <img [src]="'data:' + editForm.get('imageContentType')!.value + ';base64,' + editForm.get('image')!.value"
+              style="max-height: 100px" *ngIf="editForm.get('image')!.value" alt="resim image" />
+            <div *ngIf="editForm.get('image')!.value" class="form-text text-danger clearfix">
+              <span class="pull-left">{{ editForm.get('imageContentType')!.value }}, {{
+                byteSize(editForm.get('image')!.value) }}</span>
+              <button type="button" (click)="clearInputImage('image', 'imageContentType', 'file_image')"
+                class="btn btn-secondary btn-xs pull-right">
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input type="file" id="file_image" data-cy="image" (change)="setFileData($event, 'image', true)"
+              accept="image/*" jhiTranslate="entity.action.addimage" />
+          </div>
+          <input type="hidden" class="form-control" name="image" id="field_image" data-cy="image"
+            formControlName="image" />
+          <input type="hidden" class="form-control" name="imageContentType" id="field_imageContentType"
+            formControlName="imageContentType" />
+        </div> -->
+
+        <div class="row mb-3" >
+          <label class="form-label" for="field_image">Resim</label>
           <div>
             <img [src]="'data:' + editForm.get('imageContentType')!.value + ';base64,' + editForm.get('image')!.value"
               style="max-height: 100px" *ngIf="editForm.get('image')!.value" alt="resim image" />

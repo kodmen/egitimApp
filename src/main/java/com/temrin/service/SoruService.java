@@ -62,6 +62,7 @@ public class SoruService {
         soru.setD(dto.getD());
         soru.setCevapli(dto.getCevapli());
 
+        konuService.konuSayisiArttir(dto.getKonu());
         return repository.save(soru);
     }
 
@@ -71,7 +72,9 @@ public class SoruService {
         Soru s = repository.getById(id);
         if (s.getResimUrl() != null) awsService.deleteFile(s.getResimUrl());
 
+
         repository.delete(s);
+        konuService.konuSayisiAzalt(s.getKonu());
     }
 
     public List<Soru> getKonubySoru(Konu konu) {

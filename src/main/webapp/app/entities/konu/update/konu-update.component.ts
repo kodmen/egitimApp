@@ -18,6 +18,7 @@ export class KonuUpdateComponent implements OnInit {
   editForm = this.fb.group({
     id: [],
     isim: [null, [Validators.maxLength(500)]],
+    soruSayisi:[]
   });
 
   constructor(protected konuService: KonuService, protected activatedRoute: ActivatedRoute, protected fb: FormBuilder) {}
@@ -65,6 +66,7 @@ export class KonuUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: konu.id,
       isim: konu.isim,
+      soruSayisi: konu.soruSayisi
     });
   }
 
@@ -73,6 +75,7 @@ export class KonuUpdateComponent implements OnInit {
       ...new Konu(),
       id: this.editForm.get(['id'])!.value,
       isim: this.editForm.get(['isim'])!.value,
+      soruSayisi: this.editForm.get(['soruSayisi'])!.value
     };
   }
 }

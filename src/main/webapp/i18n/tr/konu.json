@@ -18,7 +18,8 @@
         "title": "Konu"
       },
       "id": "ID",
-      "isim": "Isim"
+      "isim": "Isim",
+      "sayi":"Soru sayisi"
     }
   }
 }

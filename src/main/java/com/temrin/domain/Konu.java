@@ -26,6 +26,9 @@ public class Konu implements Serializable {
     @Column(name = "isim", length = 500)
     private String isim;
 
+    @Column(name = "sayi")
+    private int soruSayisi;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
     public Long getId() {
@@ -48,6 +51,14 @@ public class Konu implements Serializable {
     public Konu isim(String isim) {
         this.setIsim(isim);
         return this;
+    }
+
+    public int getSoruSayisi() {
+        return soruSayisi;
+    }
+
+    public void setSoruSayisi(int soruSayisi) {
+        this.soruSayisi = soruSayisi;
     }
 
     public void setIsim(String isim) {
