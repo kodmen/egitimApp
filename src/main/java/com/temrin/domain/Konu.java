@@ -26,8 +26,13 @@ public class Konu implements Serializable {
     @Column(name = "isim", length = 500)
     private String isim;
 
-    @Column(name = "sayi")
-    private int soruSayisi;
+    /**
+     * burdaki defalut değeri girmezsek ilk oluştuğunda db
+     * deki veriler null olarak giricek eğer öyle olursa eski verilerde
+     * hata oluşcak o yüzden default değeri 0 yaptık
+     */
+    @Column(name = "sayi",columnDefinition = "integer default 0")
+    private Integer soruSayisi = 0;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
