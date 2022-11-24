@@ -42,6 +42,15 @@ export class CreateComponent implements OnInit {
     });
   }
 
+  selectDegisti(formgurup:FormGroup):void{
+    
+    const kId:number = formgurup.value.konu;
+    const k = this.konularSharedCollection.find(konu => konu.id === Number(kId));
+    formgurup.get("secildi")?.setValue(true);
+    formgurup.get("konuSoruSayisi")?.setValue(k?.soruSayisi);
+    formgurup.get("bitis")?.setValue(k?.soruSayisi);
+  }
+
   get cevaplarFieldAsFormArray(): any {
     return this.form.get('konudto') as FormArray;
   }
@@ -62,10 +71,14 @@ export class CreateComponent implements OnInit {
     return this.fb.group({
       konu: ['', { validators: [Validators.required] }],
       soruSayisi: ['', { validators: [Validators.required] }],
-      baslangic: ['', { validators: [Validators.required] }],
+      baslangic: [0, { validators: [Validators.required] }],
       bitis: ['', { validators: [Validators.required] }],
+      secildi:[ false ],
+      konuSoruSayisi:[0]
     });
   }
+
+
 
   getKonu(): any {
     this.konuService.query().subscribe(res => {
@@ -90,9 +103,9 @@ export class CreateComponent implements OnInit {
         this.alertService.addAlert({ type: 'danger', message: 'konu alanlarını boş bırakmayın' });
       }
     } else {
-    
+
       const deneme = this.createFromForm();
-  
+
       this.denemeService.createDto(deneme).subscribe(res => {
         console.log(res);
 
