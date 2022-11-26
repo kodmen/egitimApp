@@ -143,6 +143,18 @@
             </option>
           </select>
         </div>
+
+        <div class="row mb-3">
+          <label class="form-label"  for="field_donem">Donem</label>
+          <select class="form-control" id="field_donem" data-cy="donem" name="donem" formControlName="donem">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="donemOption.id === editForm.get('donem')!.value?.id ? editForm.get('donem')!.value : donemOption"
+              *ngFor="let donemOption of donemsSharedCollection; trackBy: trackDonemById">
+              {{ donemOption.isim }}
+            </option>
+          </select>
+        </div>
       </div>
 
       <div>

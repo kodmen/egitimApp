@@ -1,5 +1,6 @@
 package com.temrin.service.dto;
 
+import com.temrin.domain.Donem;
 import com.temrin.domain.Konu;
 
 import javax.persistence.Column;
@@ -13,6 +14,7 @@ public class SoruDto {
     public Integer sira;
     public String resimUrl;
     public Konu konu;
+    public Donem donem;
 
     private String a;
     private String b;
@@ -127,5 +129,13 @@ public class SoruDto {
 
     public void setKonu(Konu konu) {
         this.konu = konu;
+    }
+
+    public Donem getDonem() {
+        return donem;
+    }
+
+    public void setDonem(Donem donem) {
+        this.donem = donem;
     }
 }

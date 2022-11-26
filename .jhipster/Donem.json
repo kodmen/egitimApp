@@ -1,0 +1,14 @@
+{
+  "changelogDate": "20221124201252",
+  "fields": [
+    {
+      "fieldName": "isim",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Donem",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [],
+  "service": "no"
+}

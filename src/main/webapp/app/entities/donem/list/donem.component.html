@@ -1,0 +1,68 @@
+<div>
+  <h2 id="page-heading" data-cy="DonemHeading">
+    <span jhiTranslate="temrinMatikApp.donem.home.title">Donems</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="temrinMatikApp.donem.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-donem"
+        [routerLink]="['/donem/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="temrinMatikApp.donem.home.createLabel"> Create a new Donem </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="donems?.length === 0">
+    <span jhiTranslate="temrinMatikApp.donem.home.notFound">No donems found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="donems && donems.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span jhiTranslate="temrinMatikApp.donem.isim">Isim</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let donem of donems; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/donem', donem.id, 'view']">{{ donem.id }}</a>
+          </td>
+          <td>{{ donem.isim }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/donem', donem.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/donem', donem.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(donem)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

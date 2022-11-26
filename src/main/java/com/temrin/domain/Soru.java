@@ -57,6 +57,9 @@ public class Soru implements Serializable {
     @ManyToOne
     private Konu konu;
 
+    @ManyToOne
+    private Donem donem;
+
     @ManyToMany(mappedBy = "sorulars")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "olusturan", "sorulars" }, allowSetters = true)
@@ -204,6 +207,19 @@ public class Soru implements Serializable {
 
     public Soru konu(Konu konu) {
         this.setKonu(konu);
+        return this;
+    }
+
+    public Donem getDonem() {
+        return this.donem;
+    }
+
+    public void setDonem(Donem donem) {
+        this.donem = donem;
+    }
+
+    public Soru donem(Donem donem) {
+        this.setDonem(donem);
         return this;
     }
 

@@ -38,29 +38,39 @@ public class SoruService {
      * @throws IOException
      */
     public Soru create(SoruDto dto) throws IOException {
-        String key = UUID.randomUUID().toString();
-        String pathToFile = "./" + key + ".";
-        String[] s = dto.getImageContentType().split("/");
-        pathToFile += s[1];
-        String fileName = key + "." + s[1];
-
-        File f = new File(pathToFile);
-        FileOutputStream fos = new FileOutputStream(f);
-        fos.write(dto.getImage());
-        awsService.uploadFile(fileName, new File(pathToFile));
-        f.delete();
+        // eğer sorunun içinde soru resmi yoksa resim ekleme
 
         Soru soru = new Soru();
         soru.setCevap(dto.getCevap());
         soru.setIsim(dto.getIsim());
         soru.setSira(dto.getSira());
         soru.setKonu(dto.getKonu());
-        soru.setResimUrl(fileName);
+        soru.setDonem(dto.getDonem());
+
+        if (dto.getImage() != null && dto.getImageContentType() != null){
+            String key = UUID.randomUUID().toString();
+            String pathToFile = "./" + key + ".";
+            String[] s = dto.getImageContentType().split("/");
+            pathToFile += s[1];
+            String fileName = key + "." + s[1];
+
+            File f = new File(pathToFile);
+            FileOutputStream fos = new FileOutputStream(f);
+            fos.write(dto.getImage());
+            awsService.uploadFile(fileName, new File(pathToFile));
+            f.delete();
+            soru.setResimUrl(fileName);
+        }
+
+
+
+
         soru.setA(dto.getA());
         soru.setB(dto.getB());
         soru.setC(dto.getC());
         soru.setD(dto.getD());
         soru.setCevapli(dto.getCevapli());
+
 
         konuService.konuSayisiArttir(dto.getKonu());
         return repository.save(soru);

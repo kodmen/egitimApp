@@ -1,5 +1,6 @@
 import { IKonu } from 'app/entities/konu/konu.model';
 import { IDeneme } from 'app/entities/deneme/deneme.model';
+import { IDonem } from '../donem/donem.model';
 
 export interface ISoru {
   id?: number;
@@ -13,6 +14,7 @@ export interface ISoru {
   d?: string | null;
   cevapli?: boolean | null;
   konu?: IKonu | null;
+  donem?: IDonem |null;
   imageContentType?: string | null;
   image?: string | null;
   denemelers?: IDeneme[] | null;
@@ -31,6 +33,7 @@ export class Soru implements ISoru {
     public d?: string | null,
     public cevapli?: boolean | null,
     public konu?: IKonu | null,
+    public donem?: IDonem | null,
     public imageContentType?: string | null,
     public image?: string | null,
     public denemelers?: IDeneme[] | null

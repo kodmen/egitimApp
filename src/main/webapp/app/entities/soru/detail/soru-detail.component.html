@@ -56,6 +56,12 @@
             <a [routerLink]="['/konu', soru.konu?.id, 'view']">{{ soru.konu?.isim }}</a>
           </div>
         </dd>
+        <dt><span >Donem</span></dt>
+        <dd>
+          <div *ngIf="soru.donem">
+            <a [routerLink]="['/donem', soru.donem?.id, 'view']">{{ soru.donem?.isim }}</a>
+          </div>
+        </dd>
       </dl>
 
       <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">

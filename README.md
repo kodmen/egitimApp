@@ -7,8 +7,12 @@ son durumda
 
 şimdi şu yapılcak
 
-ikil olarak soruları baştan düzenlemek lazım
+ilk olarak soruları baştan düzenlemek lazım
 - 
+
+sorular güncellencek
+-donem eklendi guncelleme yapılmalı 
+
 DERS ÇALIŞ SAYFASINA SORUYA GİT EKLENEBİLİR
 DENEME SAYFASINI PAGEABLE YAPILMALI
 konu entitiye soru sayisi eklenmeli
@@ -45,7 +49,6 @@ veya bu projeyi yeniden oluşturayım ve nasıl bir yol izleyerek bu projeyi yen
 
 heroku buildpacks:clear
 
-This application was generated using JHipster 7.8.1, you can find documentation and help at [https://www.jhipster.tech](https://www.jhipster.tech).
 
 ## Project Structure
 

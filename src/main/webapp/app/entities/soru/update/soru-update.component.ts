@@ -12,6 +12,8 @@ import { KonuService } from 'app/entities/konu/service/konu.service';
 import { DataUtils, FileLoadError } from 'app/core/util/data-util.service';
 import { EventManager, EventWithContent } from 'app/core/util/event-manager.service';
 import { AlertError } from 'app/shared/alert/alert-error.model';
+import { IDonem } from 'app/entities/donem/donem.model';
+import { DonemService } from 'app/entities/donem/service/donem.service';
 
 @Component({
   selector: 'jhi-soru-update',
@@ -21,6 +23,7 @@ export class SoruUpdateComponent implements OnInit {
   isSaving = false;
 
   konusSharedCollection: IKonu[] = [];
+  donemsSharedCollection: IDonem[] = [];
 
   editForm = this.fb.group({
     id: [],
@@ -34,6 +37,7 @@ export class SoruUpdateComponent implements OnInit {
     d: [],
     cevapli: [],
     konu: [],
+    donem: [],
     imageContentType: [],
     image: [],
   });
@@ -41,6 +45,7 @@ export class SoruUpdateComponent implements OnInit {
   constructor(
     protected soruService: SoruService,
     protected konuService: KonuService,
+    protected donemService: DonemService,
     protected activatedRoute: ActivatedRoute,
     protected fb: FormBuilder,
     protected dataUtils: DataUtils,
@@ -95,6 +100,10 @@ export class SoruUpdateComponent implements OnInit {
     return item.id!;
   }
 
+  trackDonemById(_index: number, item: IDonem): number {
+    return item.id!;
+  }
+
   protected subscribeToSaveResponse(result: Observable<HttpResponse<ISoru>>): void {
     result.pipe(finalize(() => this.onSaveFinalize())).subscribe({
       next: () => this.onSaveSuccess(),
@@ -127,9 +136,11 @@ export class SoruUpdateComponent implements OnInit {
       d: soru.d,
       cevapli: soru.cevapli,
       konu: soru.konu,
+      donem: soru.donem
     });
 
     this.konusSharedCollection = this.konuService.addKonuToCollectionIfMissing(this.konusSharedCollection, soru.konu);
+    this.donemsSharedCollection = this.donemService.addDonemToCollectionIfMissing(this.donemsSharedCollection, soru.donem);
   }
 
   protected loadRelationshipsOptions(): void {
@@ -138,6 +149,14 @@ export class SoruUpdateComponent implements OnInit {
       .pipe(map((res: HttpResponse<IKonu[]>) => res.body ?? []))
       .pipe(map((konus: IKonu[]) => this.konuService.addKonuToCollectionIfMissing(konus, this.editForm.get('konu')!.value)))
       .subscribe((konus: IKonu[]) => (this.konusSharedCollection = konus));
+
+      this.donemService
+      .query()
+      .pipe(map((res: HttpResponse<IDonem[]>) => res.body ?? []))
+      .pipe(map((donems: IDonem[]) => this.donemService.addDonemToCollectionIfMissing(donems, this.editForm.get('donem')!.value)))
+      .subscribe((donems: IDonem[]) => (this.donemsSharedCollection = donems));
+
+
   }
 
   protected createFromForm(): ISoru {
@@ -154,6 +173,7 @@ export class SoruUpdateComponent implements OnInit {
       d: this.editForm.get(['d'])!.value,
       cevapli: this.editForm.get(['cevapli'])!.value,
       konu: this.editForm.get(['konu'])!.value,
+      donem: this.editForm.get(['donem'])!.value,
       imageContentType: this.editForm.get(['imageContentType'])!.value,
       image: this.editForm.get(['image'])!.value,
     };
