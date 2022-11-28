@@ -39,6 +39,10 @@ public class Soru implements Serializable {
     @Column(name = "resim_url", length = 500)
     private String resimUrl;
 
+    @Size(max = 2000)
+    @Column(name = "metin")
+    private String metin;
+
     @Column(name = "a")
     private String a;
 
@@ -78,6 +82,14 @@ public class Soru implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getMetin() {
+        return metin;
+    }
+
+    public void setMetin(String metin) {
+        this.metin = metin;
     }
 
     public String getIsim() {

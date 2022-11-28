@@ -3,6 +3,7 @@ package com.temrin.service.dto.deneme;
 public class DenemeSoruDto {
 
     public String soruResimUrl;
+    public String metin;
     public long soruId;
     public boolean cevapli;
     public String a;
@@ -15,9 +16,10 @@ public class DenemeSoruDto {
         soruResimUrl = url;
     }
 
-    public DenemeSoruDto(String url, long id,boolean c) {
+    public DenemeSoruDto(String url, String m, long id,boolean c) {
         soruId = id;
         soruResimUrl = url;
+        metin = m;
         cevapli = c;
     }
 
@@ -31,12 +33,32 @@ public class DenemeSoruDto {
         this.d = d;
     }
 
-    public static DenemeSoruDto creatDenemeSoruDtoCevapsiz(String url, long id){
-        return new DenemeSoruDto(url,id,false);
+    public DenemeSoruDto(String soruResimUrl,String metin, long soruId, boolean cevapli, String a, String b, String c, String d) {
+        this(soruResimUrl,soruId,cevapli,a,b,c,d);
+        this.metin = metin;
     }
 
-    public static DenemeSoruDto creatDenemeSoruDtoCevapli(String url, long id, String a, String b, String c, String d){
-        return new DenemeSoruDto(url,id,true,a,b,c,d);
+    /**
+     * burda dto resim olabilir yada metin olabililir
+     * @param url
+     * @param id
+     * @return
+     */
+
+    public static DenemeSoruDto creatDenemeSoruDtoCevapsiz(String url,String metin, long id){
+        return new DenemeSoruDto(url,metin,id,false);
+    }
+
+    public static DenemeSoruDto creatDenemeSoruDtoCevapli(String url,String metin, long id, String a, String b, String c, String d){
+        return new DenemeSoruDto(url,metin,id,true,a,b,c,d);
+    }
+
+    public String getMetin() {
+        return metin;
+    }
+
+    public void setMetin(String metin) {
+        this.metin = metin;
     }
 
     public boolean isCevapli() {

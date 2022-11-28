@@ -30,8 +30,14 @@
         <h1 class="mt-4">{{ p === 0 ? 1 : p }}-)</h1>
 
         <div class="col-xs-12 col-md-6">
+          <ng-container *ngIf="d.soruResimUrl !== null">
+              <img [src]="foto + d.soruResimUrl" class="rounded mx-auto d-block responsive" alt="..." />
+          </ng-container>
+          <ng-container *ngIf="d.metin !== null">
+            <h1 class="question-text answer-text text-end" data-answer="a">{{d.metin}}</h1>
+          </ng-container>
 
-          <img [src]="foto + d.soruResimUrl" class="rounded mx-auto d-block responsive" alt="..." />
+
           <ng-container *ngIf="d.cevapli">
             <table class="table table-borderless">
 

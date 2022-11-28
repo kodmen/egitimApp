@@ -50,7 +50,7 @@ export class DersCalisComponent implements OnInit {
     this.p = 1;
   }
 
-  pageChanged(event: any): void {
+  pageChanged(): void {
     this.tekCevap = false;
     this.cevapA = 'b';
     this.cevapB = 'b';

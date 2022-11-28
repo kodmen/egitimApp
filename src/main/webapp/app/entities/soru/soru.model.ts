@@ -5,6 +5,7 @@ import { IDonem } from '../donem/donem.model';
 export interface ISoru {
   id?: number;
   isim?: string | null;
+  metin?: string | null;
   cevap?: string | null;
   sira?: number | null;
   resimUrl?: string | null;
@@ -24,6 +25,7 @@ export class Soru implements ISoru {
   constructor(
     public id?: number,
     public isim?: string | null,
+    public metin?: string | null,
     public cevap?: string | null,
     public sira?: number | null,
     public resimUrl?: string | null,

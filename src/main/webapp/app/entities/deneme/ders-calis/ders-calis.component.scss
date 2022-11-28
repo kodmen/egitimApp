@@ -3,7 +3,7 @@
   body,
   h1, h5, h4 {
     font-weight: 200;
-    background-color: #eee;
+    //background-color: #0fc7ff;
   }
   
   #intro {
@@ -26,6 +26,10 @@
     display: flex;
     text-align: center;
     align-items: center;
+  }
+
+  .question-text{
+    font-weight: bold;
   }
   
   .answer-container {

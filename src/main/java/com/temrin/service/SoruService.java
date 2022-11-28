@@ -38,14 +38,16 @@ public class SoruService {
      * @throws IOException
      */
     public Soru create(SoruDto dto) throws IOException {
-        // eğer sorunun içinde soru resmi yoksa resim ekleme
-
         Soru soru = new Soru();
         soru.setCevap(dto.getCevap());
         soru.setIsim(dto.getIsim());
         soru.setSira(dto.getSira());
         soru.setKonu(dto.getKonu());
         soru.setDonem(dto.getDonem());
+
+        if (dto.getMetin() != null){
+            soru.setMetin(dto.getMetin());
+        }
 
         if (dto.getImage() != null && dto.getImageContentType() != null){
             String key = UUID.randomUUID().toString();
@@ -61,9 +63,6 @@ public class SoruService {
             f.delete();
             soru.setResimUrl(fileName);
         }
-
-
-
 
         soru.setA(dto.getA());
         soru.setB(dto.getB());

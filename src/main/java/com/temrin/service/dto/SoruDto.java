@@ -10,6 +10,7 @@ public class SoruDto {
 
     public Long id;
     public String isim;
+    public String metin;
     public String cevap;
     public Integer sira;
     public String resimUrl;
@@ -26,6 +27,14 @@ public class SoruDto {
     private byte[] image;
 
     private String imageContentType;
+
+    public String getMetin() {
+        return metin;
+    }
+
+    public void setMetin(String metin) {
+        this.metin = metin;
+    }
 
     public String getA() {
         return a;

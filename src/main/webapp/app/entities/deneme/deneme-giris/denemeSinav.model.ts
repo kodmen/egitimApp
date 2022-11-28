@@ -2,6 +2,7 @@ import { Karistir } from "./karistir.model";
 
 export class DenemeSoruDto {
     soruResimUrl?: string;
+    metin?: string;
     soruId?: number;
     cevapli?:boolean;
     a?:string;

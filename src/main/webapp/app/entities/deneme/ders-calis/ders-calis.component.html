@@ -74,17 +74,28 @@
                         </div>
                     </div>
 
-                    <div class="question-holder row">
-                        <div class="col-12">
-
-                            <!-- <h4 id="question">{{item.soruText}}</h4> -->
-                            <!-- <img [src]="foto + s.resimUrl" class="rounded mx-auto d-block responsive" alt="..." /> -->
-                            <img class="rounded mx-auto d-block responsive" [defaultImage]="defaultImage"
-                                [lazyLoad]="foto + s.resimUrl" />
-
-
+                    <ng-container *ngIf="s.resimUrl !== null">
+                        <div class="question-holder row">
+                            <div class="col-12">
+                                <img class="rounded mx-auto d-block responsive" [defaultImage]="defaultImage"
+                                    [lazyLoad]="foto + s.resimUrl" />
+                            </div>
                         </div>
-                    </div>
+                    </ng-container>
+
+
+
+                    <ng-container *ngIf="s.metin !== null">
+                        <div class="row">
+                            <div class="col-12">
+
+                                <h1 class="question-text answer-text text-end" data-answer="a">{{s.metin}}</h1>
+
+                            </div>
+                        </div>
+                    </ng-container>
+
+
 
                     <div class="row">
                         <div class="col-12">
@@ -133,7 +144,7 @@
                 <div class="row">
                     <div class="d-flex justify-content-center">
                         <pagination-controls previousLabel="geri" nextLabel="ileri" [responsive]="true"
-                            (pageChange)="p = $event" (click)="pageChanged($event)" class="float-right">
+                            (pageChange)="p = $event" (click)="pageChanged()" class="float-right">
                         </pagination-controls>
                     </div>
                 </div>

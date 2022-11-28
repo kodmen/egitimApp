@@ -11,7 +11,11 @@ ilk olarak soruları baştan düzenlemek lazım
 - 
 
 sorular güncellencek
--donem eklendi guncelleme yapılmalı 
+- donem eklendi guncelleme yapılmalı 
+- soruya yanlızca metin de eklenmeli
+
+- soru guncelleme
+- deneme olustururken eger fazla soru sayisi girersek hata veriyor ve hatayı söylemiyor
 
 DERS ÇALIŞ SAYFASINA SORUYA GİT EKLENEBİLİR
 DENEME SAYFASINI PAGEABLE YAPILMALI

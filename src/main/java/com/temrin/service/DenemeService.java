@@ -171,9 +171,10 @@ public class DenemeService {
 
         for (Soru s : deneme.getSorulars()) {
             if (s.getCevapli()) {
-                sorular.add(DenemeSoruDto.creatDenemeSoruDtoCevapli(s.getResimUrl(), s.getId(), s.getA(), s.getB(), s.getC(), s.getD()));
+
+                sorular.add(DenemeSoruDto.creatDenemeSoruDtoCevapli(s.getResimUrl(),s.getMetin(), s.getId(), s.getA(), s.getB(), s.getC(), s.getD()));
             } else {
-                sorular.add(DenemeSoruDto.creatDenemeSoruDtoCevapsiz(s.getResimUrl(), s.getId()));
+                sorular.add(DenemeSoruDto.creatDenemeSoruDtoCevapsiz(s.getResimUrl(),s.getMetin(), s.getId()));
             }
         }
 

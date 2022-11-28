@@ -71,6 +71,17 @@
         </div>
 
         <div class="row mb-3">
+          <label class="form-label" for="field_metin">metin</label>
+          <input type="text" class="form-control" name="metin" id="field_metin" data-cy="metin" formControlName="metin" />
+          <div *ngIf="editForm.get('metin')!.invalid && (editForm.get('metin')!.dirty || editForm.get('metin')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('metin')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 2000 }">
+              This field cannot be longer than 2000 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
           <label class="form-label" jhiTranslate="temrinMatikApp.soru.cevap" for="field_cevap">Cevap</label>
           <input type="text" class="form-control" name="cevap" id="field_cevap" data-cy="cevap"
             formControlName="cevap" />

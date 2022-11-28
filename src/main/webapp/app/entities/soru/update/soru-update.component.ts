@@ -28,6 +28,7 @@ export class SoruUpdateComponent implements OnInit {
   editForm = this.fb.group({
     id: [],
     isim: [null, [Validators.maxLength(500)]],
+    metin: [null,[Validators.maxLength(2000)]],
     cevap: [],
     sira: [],
     resimUrl: [null, [Validators.maxLength(500)]],
@@ -127,6 +128,7 @@ export class SoruUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: soru.id,
       isim: soru.isim,
+      metin: soru.metin,
       cevap: soru.cevap,
       sira: soru.sira,
       resimUrl: soru.resimUrl,
@@ -164,6 +166,7 @@ export class SoruUpdateComponent implements OnInit {
       ...new Soru(),
       id: this.editForm.get(['id'])!.value,
       isim: this.editForm.get(['isim'])!.value,
+      metin: this.editForm.get(['metin'])?.value,
       cevap: this.editForm.get(['cevap'])!.value,
       sira: this.editForm.get(['sira'])!.value,
       resimUrl: this.editForm.get(['resimUrl'])!.value,
