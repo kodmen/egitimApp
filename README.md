@@ -1,21 +1,17 @@
-# temrinMatik
+## ilk öncelik
+- döneme ait sorular gözükmeli
 
+- soru güncelleyince bazı veriler siliniyor gözükebilme null oluyor(çüknkü soru entitisinde get set yapmadım)
+- soruya göster(boolean) diye bir alan daha eklenmeli ve döneme bu soruları gösterme diye fonksiyon eklenebilir
 
-son durumda 
-
-
-
-şimdi şu yapılcak
-
-ilk olarak soruları baştan düzenlemek lazım
-- 
-
-sorular güncellencek
-- donem eklendi guncelleme yapılmalı 
-- soruya yanlızca metin de eklenmeli
-
-- soru guncelleme
+## ikinci öncelik
+- soru guncelleme( olusturulan soruyu güncellerken resim güncellenmiyor)
 - deneme olustururken eger fazla soru sayisi girersek hata veriyor ve hatayı söylemiyor
+
+## yapılanlar
+- konulara göre soru sıralama yapıldı ve orda soruya ait bilgiler gösterildi
+- sorulara üç alan eklendi 1-metin, 2-gözükme, 3-dönem 
+
 
 DERS ÇALIŞ SAYFASINA SORUYA GİT EKLENEBİLİR
 DENEME SAYFASINI PAGEABLE YAPILMALI

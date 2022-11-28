@@ -14,6 +14,7 @@ export interface ISoru {
   c?: string | null;
   d?: string | null;
   cevapli?: boolean | null;
+  gozuksun?: boolean | null;
   konu?: IKonu | null;
   donem?: IDonem |null;
   imageContentType?: string | null;
@@ -34,6 +35,7 @@ export class Soru implements ISoru {
     public c?: string | null,
     public d?: string | null,
     public cevapli?: boolean | null,
+    public gozuksun?: boolean | null,
     public konu?: IKonu | null,
     public donem?: IDonem | null,
     public imageContentType?: string | null,
@@ -41,6 +43,7 @@ export class Soru implements ISoru {
     public denemelers?: IDeneme[] | null
   ) {
     this.cevapli = this.cevapli ?? false;
+    this.gozuksun = this.gozuksun ?? false;
   }
 }
 

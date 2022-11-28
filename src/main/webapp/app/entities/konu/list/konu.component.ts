@@ -5,6 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { IKonu } from '../konu.model';
 import { KonuService } from '../service/konu.service';
 import { KonuDeleteDialogComponent } from '../delete/konu-delete-dialog.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'jhi-konu',
@@ -14,7 +15,7 @@ export class KonuComponent implements OnInit {
   konus?: IKonu[];
   isLoading = false;
 
-  constructor(protected konuService: KonuService, protected modalService: NgbModal) {}
+  constructor(protected konuService: KonuService, protected modalService: NgbModal,private router:Router) {}
 
   loadAll(): void {
     this.isLoading = true;
@@ -47,5 +48,11 @@ export class KonuComponent implements OnInit {
         this.loadAll();
       }
     });
+  }
+
+  sorularagit(id:any):any{
+    console.log("gidiyorum");
+    
+    this.router.navigate([`soru/konu/`,id]);
   }
 }

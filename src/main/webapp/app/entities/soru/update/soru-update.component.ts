@@ -32,11 +32,13 @@ export class SoruUpdateComponent implements OnInit {
     cevap: [],
     sira: [],
     resimUrl: [null, [Validators.maxLength(500)]],
+
     a: [],
     b: [],
     c: [],
     d: [],
     cevapli: [],
+    gozuksun: [true],
     konu: [],
     donem: [],
     imageContentType: [],
@@ -56,6 +58,10 @@ export class SoruUpdateComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ soru }) => {
+      console.log(soru);
+      console.log("burası izleniyor");
+      
+      
       this.updateForm(soru);
 
       this.loadRelationshipsOptions();
@@ -137,6 +143,7 @@ export class SoruUpdateComponent implements OnInit {
       c: soru.c,
       d: soru.d,
       cevapli: soru.cevapli,
+      gozuksun: soru.gozuksun,
       konu: soru.konu,
       donem: soru.donem
     });
@@ -175,6 +182,7 @@ export class SoruUpdateComponent implements OnInit {
       c: this.editForm.get(['c'])!.value,
       d: this.editForm.get(['d'])!.value,
       cevapli: this.editForm.get(['cevapli'])!.value,
+      gozuksun: this.editForm.get(['gozuksun'])!.value,
       konu: this.editForm.get(['konu'])!.value,
       donem: this.editForm.get(['donem'])!.value,
       imageContentType: this.editForm.get(['imageContentType'])!.value,

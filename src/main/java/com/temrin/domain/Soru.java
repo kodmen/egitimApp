@@ -58,6 +58,9 @@ public class Soru implements Serializable {
     @Column(name = "cevapli")
     private Boolean cevapli;
 
+    @Column(name = "gozuksun", columnDefinition = "boolean default true")
+    private Boolean gozuksun;
+
     @ManyToOne
     private Konu konu;
 
@@ -70,6 +73,15 @@ public class Soru implements Serializable {
     private Set<Deneme> denemelers = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
+
+
+    public Boolean getGozuksun() {
+        return gozuksun;
+    }
+
+    public void setGozuksun(Boolean gozuksun) {
+        this.gozuksun = gozuksun;
+    }
 
     public Long getId() {
         return this.id;

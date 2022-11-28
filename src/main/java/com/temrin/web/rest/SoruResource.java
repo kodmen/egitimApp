@@ -56,7 +56,7 @@ public class SoruResource {
     public ResponseEntity<List<Soru>> getAllSoruByKonu(@PathVariable Long id) {
         log.debug("REST request to get all Soru for an admin");
 
-        final List<Soru> soruList = soruService.getAllSoruByKonu(id);
+        final List<Soru> soruList = soruService.getAllSoruByKonuByGozukme(id);
         return new ResponseEntity<>(soruList, HttpStatus.OK);
     }
 
@@ -178,6 +178,17 @@ public class SoruResource {
         log.debug("REST request to get all Soru for an admin");
 
         final Page<Soru> page = soruService.getAllManagedSoru(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+
+    @GetMapping("/sorus/konu/gozuksuz/{id}")
+    public ResponseEntity<List<Soru>> getAllSoruBykonuandgozuksuz(@PathVariable Long id,@org.springdoc.api.annotations.ParameterObject Pageable pageable) {
+        log.debug("REST request to get all Soru for an admin");
+
+//        final Page<Soru> page = soruService.getKonubySoruByGozukme(id,pageable);
+        final Page<Soru> page = soruService.getKonubySoru(id,pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

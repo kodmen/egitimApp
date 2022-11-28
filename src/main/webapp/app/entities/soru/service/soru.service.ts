@@ -45,6 +45,11 @@ export class SoruService {
     return this.http.get<ISoru[]>(this.resourceUrl, { params: options, observe: 'response' });
   }
 
+  queryBykonu(id:number,req?: any): Observable<EntityArrayResponseType> {
+    const options = createRequestOption(req);
+    return this.http.get<ISoru[]>(`${this.resourceUrl}/konu/gozuksuz/${id}`, { params: options, observe: 'response' });
+  }
+
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }

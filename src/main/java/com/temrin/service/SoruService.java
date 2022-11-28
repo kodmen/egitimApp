@@ -90,8 +90,25 @@ public class SoruService {
         return repository.findByKonu(konu);
     }
 
+    public Page<Soru> getKonubySoruByGozukme(long konuId,Pageable pageable) {
+        Konu konu = konuService.getById(konuId);
+        Pageable p = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("konu").and(Sort.by("sira")));
+        return repository.findByKonuAndGozuksun(konu,true,p);
+    }
+
+    public Page<Soru> getKonubySoru(long konuId,Pageable pageable) {
+        Konu konu = konuService.getById(konuId);
+        Pageable p = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("konu").and(Sort.by("sira")));
+        return repository.findByKonu(konu,p);
+    }
+
+
     public List<Soru> getAllSoruByKonu(long konuId){
         return getKonubySoru(konuService.getById(konuId));
+    }
+
+    public List<Soru> getAllSoruByKonuByGozukme(long konuId){
+        return repository.findByKonuAndGozuksun(konuService.getById(konuId),true);
     }
 
     public String findBySoruIdGetCevap(long id) {

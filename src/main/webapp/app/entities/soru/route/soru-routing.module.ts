@@ -7,6 +7,7 @@ import { SoruDetailComponent } from '../detail/soru-detail.component';
 import { SoruUpdateComponent } from '../update/soru-update.component';
 import { SoruRoutingResolveService } from './soru-routing-resolve.service';
 import { TekSoruComponent } from '../tek-soru/tek-soru.component';
+import { ListKonuComponent } from '../list-konu/list-konu.component';
 
 const soruRoute: Routes = [
   {
@@ -25,6 +26,14 @@ const soruRoute: Routes = [
   {
     path: 'isim/:isim',
     component: TekSoruComponent,
+    resolve: {
+      soru: SoruRoutingResolveService,
+    },
+    canActivate: [UserRouteAccessService],
+  },
+  {
+    path: 'konu/:konuId',
+    component: ListKonuComponent,
     resolve: {
       soru: SoruRoutingResolveService,
     },

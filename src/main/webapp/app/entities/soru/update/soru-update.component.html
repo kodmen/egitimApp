@@ -92,20 +92,15 @@
           <input type="number" class="form-control" name="sira" id="field_sira" data-cy="sira" formControlName="sira" />
         </div>
 
-        <!-- <div class="row mb-3">
-          <label class="form-label" jhiTranslate="temrinMatikApp.soru.resimUrl" for="field_resimUrl">Resim Url</label>
-          <input type="text" class="form-control" name="resimUrl" id="field_resimUrl" data-cy="resimUrl" formControlName="resimUrl" />
-          <div *ngIf="editForm.get('resimUrl')!.invalid && (editForm.get('resimUrl')!.dirty || editForm.get('resimUrl')!.touched)">
-            <small
-              class="form-text text-danger"
-              *ngIf="editForm.get('resimUrl')?.errors?.maxlength"
-              jhiTranslate="entity.validation.maxlength"
-              [translateValues]="{ max: 500 }"
-            >
-              This field cannot be longer than 500 characters.
-            </small>
+        <div class="row mb-3">
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="defaultCheck2" formControlName="gozuksun">
+            <label class="form-check-label" for="defaultCheck2">
+             Soru gösterilsin
+            </label>
           </div>
-        </div> -->
+        </div>
 
         <div class="row mb-3">
 
@@ -116,6 +111,8 @@
             </label>
           </div>
         </div>
+
+        
 
         <ng-container *ngIf="this.editForm.get(['cevapli'])!.value">
           <div class="row mb-3">
