@@ -11,12 +11,23 @@
       <button
         id="jh-create-entity"
         data-cy="entityCreateButton"
-        class="btn btn-primary jh-create-entity create-soru"
+        class="btn btn-primary jh-create-entity create-soru me-2"
         [routerLink]="['/soru/new']"
       >
         <fa-icon icon="plus"></fa-icon>
         <span jhiTranslate="temrinMatikApp.soru.home.createLabel"> Create a new Soru </span>
       </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-success jh-create-entity create-soru"
+        [routerLink]="['/soru/toplu-soru-ekle']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span > Toplu soru ekle </span>
+      </button>
+
     </div>
   </h2>
 

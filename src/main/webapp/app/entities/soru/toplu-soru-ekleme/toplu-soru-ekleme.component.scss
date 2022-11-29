@@ -1,0 +1,22 @@
+.resim{
+    width: 100px;
+    height: 200px;
+}
+
+img {
+    float: left;
+    width:  100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.bg {
+    // width: 100%;
+    // height: auto;
+    background-image: url('https://media.tenor.com/In8c2digq1MAAAAC/claudio-claudin.gif');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    width: 100vw;
+  }

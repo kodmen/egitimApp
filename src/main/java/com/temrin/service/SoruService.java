@@ -5,6 +5,8 @@ import com.temrin.domain.Konu;
 import com.temrin.domain.Soru;
 import com.temrin.repository.SoruRepository;
 import com.temrin.service.dto.SoruDto;
+import com.temrin.service.dto.topluSoru.TekliSoru;
+import com.temrin.service.dto.topluSoru.TopluSoru;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -14,9 +16,12 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+
+import static java.lang.Integer.parseInt;
 
 @Service
 public class SoruService {
@@ -33,6 +38,7 @@ public class SoruService {
 
     /**
      * soru creat
+     *
      * @param dto
      * @return
      * @throws IOException
@@ -45,11 +51,11 @@ public class SoruService {
         soru.setKonu(dto.getKonu());
         soru.setDonem(dto.getDonem());
 
-        if (dto.getMetin() != null){
+        if (dto.getMetin() != null) {
             soru.setMetin(dto.getMetin());
         }
 
-        if (dto.getImage() != null && dto.getImageContentType() != null){
+        if (dto.getImage() != null && dto.getImageContentType() != null) {
             String key = UUID.randomUUID().toString();
             String pathToFile = "./" + key + ".";
             String[] s = dto.getImageContentType().split("/");
@@ -90,25 +96,25 @@ public class SoruService {
         return repository.findByKonu(konu);
     }
 
-    public Page<Soru> getKonubySoruByGozukme(long konuId,Pageable pageable) {
+    public Page<Soru> getKonubySoruByGozukme(long konuId, Pageable pageable) {
         Konu konu = konuService.getById(konuId);
         Pageable p = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("konu").and(Sort.by("sira")));
-        return repository.findByKonuAndGozuksun(konu,true,p);
+        return repository.findByKonuAndGozuksun(konu, true, p);
     }
 
-    public Page<Soru> getKonubySoru(long konuId,Pageable pageable) {
+    public Page<Soru> getKonubySoru(long konuId, Pageable pageable) {
         Konu konu = konuService.getById(konuId);
         Pageable p = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("konu").and(Sort.by("sira")));
-        return repository.findByKonu(konu,p);
+        return repository.findByKonu(konu, p);
     }
 
 
-    public List<Soru> getAllSoruByKonu(long konuId){
+    public List<Soru> getAllSoruByKonu(long konuId) {
         return getKonubySoru(konuService.getById(konuId));
     }
 
-    public List<Soru> getAllSoruByKonuByGozukme(long konuId){
-        return repository.findByKonuAndGozuksun(konuService.getById(konuId),true);
+    public List<Soru> getAllSoruByKonuByGozukme(long konuId) {
+        return repository.findByKonuAndGozuksun(konuService.getById(konuId), true);
     }
 
     public String findBySoruIdGetCevap(long id) {
@@ -123,6 +129,7 @@ public class SoruService {
 
     /**
      * soruları sıralayarak ve page olarak getiriyor
+     *
      * @param pageable
      * @return
      */
@@ -133,7 +140,42 @@ public class SoruService {
         return repository.findAllWithEagerRelationships(p);
     }
 
-    public Optional<Soru> getByName(String isim){
+    public Optional<Soru> getByName(String isim) {
         return repository.findByIsim(isim);
+    }
+
+    public String uploadAwsImage(String type, byte[] image) throws IOException {
+
+        String key = UUID.randomUUID().toString();
+
+        String pathToFile = "./" + key + ".";
+        String[] s = type.split("/");
+        pathToFile += s[1];
+        String fileName = key + "." + s[1];
+
+        File f = new File(pathToFile);
+        FileOutputStream fos = new FileOutputStream(f);
+        fos.write(image);
+        awsService.uploadFile(fileName, new File(pathToFile));
+        f.delete();
+        return fileName;
+    }
+
+    // TODO: 29.11.2022 burda gelen değerlerin içleri kontrol edilmeli dtodan boş değer gelmemesi lazım resim ismi yanlış gelirsi konu boş gelirse kontrol yapılmalı
+    public List<Soru> topluSoruKaydet(TopluSoru sorular) throws IOException {
+        List<Soru> soruList = new ArrayList<>();
+        Soru soru = new Soru();
+
+        for (TekliSoru s : sorular.getSorular()) {
+            String[] textYazi = s.getType().split("/");
+            String yazi = s.getName().substring(0,s.getName().length()-(textYazi[1].length() + 1));
+            String[] text = yazi.toString().split("-",2);
+            String url = uploadAwsImage(s.getType(), s.getImage());
+            String isim = sorular.getKonu().getIsim() + " " + text[0];
+
+            soruList.add(Soru.createSoru(url, parseInt(text[0]), text[1],isim, sorular.getKonu(), sorular.getDonem()));
+        }
+
+        return repository.saveAll(soruList);
     }
 }

@@ -8,6 +8,7 @@ import { SoruUpdateComponent } from '../update/soru-update.component';
 import { SoruRoutingResolveService } from './soru-routing-resolve.service';
 import { TekSoruComponent } from '../tek-soru/tek-soru.component';
 import { ListKonuComponent } from '../list-konu/list-konu.component';
+import { TopluSoruEklemeComponent } from '../toplu-soru-ekleme/toplu-soru-ekleme.component';
 
 const soruRoute: Routes = [
   {
@@ -18,6 +19,14 @@ const soruRoute: Routes = [
   {
     path: ':id/view',
     component: SoruDetailComponent,
+    resolve: {
+      soru: SoruRoutingResolveService,
+    },
+    canActivate: [UserRouteAccessService],
+  },
+  {
+    path: 'toplu-soru-ekle',
+    component: TopluSoruEklemeComponent,
     resolve: {
       soru: SoruRoutingResolveService,
     },

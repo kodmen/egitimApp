@@ -32,7 +32,6 @@ export class SoruUpdateComponent implements OnInit {
     cevap: [],
     sira: [],
     resimUrl: [null, [Validators.maxLength(500)]],
-
     a: [],
     b: [],
     c: [],

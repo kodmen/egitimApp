@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { Observable, Observer } from 'rxjs';
 
 export type FileLoadErrorType = 'not.image' | 'could.not.extract';
@@ -89,6 +89,48 @@ export class DataUtils {
         observer.error(error);
       }
     });
+  }
+
+  loadFileToFormArray(event: Event, editForm: FormArray, fb:FormBuilder, field: string, isImage: boolean): Observable<void> {
+    return new Observable((observer: Observer<void>) => {
+      const eventTarget: HTMLInputElement | null = event.target as HTMLInputElement | null;
+      if (eventTarget?.files?.length !== undefined) {
+      for (let index = 0; index < eventTarget?.files?.length; index++) {
+        // const element = eventTarget?.files?[index];
+        if (eventTarget?.files?.[index]) {
+          const file: File = eventTarget.files[index];
+          if (isImage && !file.type.startsWith('image/')) {
+            const error: FileLoadError = {
+              message: `File was expected to be an image but was found to be '${file.type}'`,
+              key: 'not.image',
+              params: { fileType: file.type },
+            };
+            observer.error(error);
+          } else {
+            const fieldContentType: string = field + 'ContentType';
+            this.toBase64(file, (base64Data: string) => {
+              
+              editForm.push(fb.group({
+                type:[file.type],
+                resim:[base64Data],
+                name:[file.name]
+              }))
+        
+              observer.next();
+              observer.complete();
+            });
+          }
+        } else {
+          const error: FileLoadError = {
+            message: 'Could not extract file',
+            key: 'could.not.extract',
+            params: { event },
+          };
+          observer.error(error);
+        }
+      }
+     
+    }});
   }
 
   /**

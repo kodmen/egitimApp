@@ -33,6 +33,7 @@
 
         <div class="row mb-3" >
           <label class="form-label" for="field_image">Resim</label>
+
           <div>
             <img [src]="'data:' + editForm.get('imageContentType')!.value + ';base64,' + editForm.get('image')!.value"
               style="max-height: 100px" *ngIf="editForm.get('image')!.value" alt="resim image" />
@@ -112,7 +113,7 @@
           </div>
         </div>
 
-        
+
 
         <ng-container *ngIf="this.editForm.get(['cevapli'])!.value">
           <div class="row mb-3">

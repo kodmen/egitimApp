@@ -19,6 +19,19 @@ public class Soru implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    public static Soru createSoru(String url,int sira, String cevap,String isim,Konu konu, Donem donem){
+        Soru soru = new Soru();
+        soru.setResimUrl(url);
+        soru.setSira(sira);
+        soru.setCevap(cevap);
+        soru.setKonu(konu);
+        soru.setDonem(donem);
+        soru.setIsim(isim);
+        soru.setGozuksun(true);
+        soru.setCevapli(true);
+        return soru;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")

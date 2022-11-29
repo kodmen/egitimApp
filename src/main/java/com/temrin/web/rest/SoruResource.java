@@ -5,6 +5,7 @@ import com.temrin.repository.SoruRepository;
 import com.temrin.service.SoruService;
 import com.temrin.service.dto.AdminUserDTO;
 import com.temrin.service.dto.SoruDto;
+import com.temrin.service.dto.topluSoru.TopluSoru;
 import com.temrin.web.rest.errors.BadRequestAlertException;
 
 import java.io.IOException;
@@ -78,6 +79,16 @@ public class SoruResource {
         return ResponseEntity
             .created(new URI("/api/sorus/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+            .body(result);
+    }
+
+    @PostMapping("/sorus/toplu-soru")
+    public ResponseEntity<List<Soru>> createSoru(@Valid @RequestBody TopluSoru sorular) throws URISyntaxException, IOException {
+
+        List<Soru> result = soruService.topluSoruKaydet(sorular);
+        return ResponseEntity
+            .created(new URI("/api/sorus/" + String.valueOf(result.size())))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME,String.valueOf(result.size())))
             .body(result);
     }
 

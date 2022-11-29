@@ -1,173 +1,250 @@
 <div>
-    <h2 id="page-heading" data-cy="SoruHeading">
-      <span jhiTranslate="temrinMatikApp.soru.home.title">Sorus</span>
-  
-      <div class="d-flex justify-content-end">
-        <button class="btn btn-info me-2" (click)="loadAll(konuId)" [disabled]="isLoading">
-          <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
-          <span jhiTranslate="temrinMatikApp.soru.home.refreshListLabel">Refresh List</span>
-        </button>
-  
-        <button
-          id="jh-create-entity"
-          data-cy="entityCreateButton"
-          class="btn btn-primary jh-create-entity create-soru"
-          [routerLink]="['/soru/new']"
-        >
-          <fa-icon icon="plus"></fa-icon>
-          <span jhiTranslate="temrinMatikApp.soru.home.createLabel"> Create a new Soru </span>
-        </button>
-      </div>
-    </h2>
-  
-    <jhi-alert-error></jhi-alert-error>
-  
-    <jhi-alert></jhi-alert>
-  
-    <div class="alert alert-warning" id="no-result" *ngIf="sorus?.length === 0">
-      <span jhiTranslate="temrinMatikApp.soru.home.notFound">No sorus found</span>
+  <h2 id="page-heading" data-cy="SoruHeading">
+    <span jhiTranslate="temrinMatikApp.soru.home.title">Sorus</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadAll(konuId)" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="temrinMatikApp.soru.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button id="jh-create-entity" data-cy="entityCreateButton" class="btn btn-primary jh-create-entity create-soru"
+        [routerLink]="['/soru/new']">
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="temrinMatikApp.soru.home.createLabel"> Create a new Soru </span>
+      </button>
     </div>
-  
-    <div class="table-responsive" id="entities" *ngIf="sorus && sorus.length > 0">
-      <table class="table table-striped" aria-describedby="page-heading">
-        <thead>
-          <tr>
-            <th scope="col"><span class="text-uppar">ID</span></th>
-            <th scope="col"><span >İSİM</span></th>
-            <th scope="col"><span >METİN</span></th> 
-            <th scope="col"><span >RESİM</span></th>
-            <th scope="col"><span >SIRA</span></th>
-            <th scope="col"><span >CEVAP</span></th>
-            <th scope="col"><span >KONU</span></th>
-            <th scope="col"><span >DONEM</span></th>
-            <th scope="col"><span >GÖZÜKÜYOR</span></th>
-            <!-- <th scope="col"><span jhiTranslate="temrinMatikApp.soru.cevapli">Cevapli</span></th>
-            <th scope="col"><span jhiTranslate="temrinMatikApp.soru.a">A</span></th>
-            <th scope="col"><span jhiTranslate="temrinMatikApp.soru.b">B</span></th>
-            <th scope="col"><span jhiTranslate="temrinMatikApp.soru.c">C</span></th>
-            <th scope="col"><span jhiTranslate="temrinMatikApp.soru.d">D</span></th> -->
+  </h2>
 
-            <th scope="col"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let soru of sorus; trackBy: trackId" data-cy="entityTable">
+  <jhi-alert-error></jhi-alert-error>
 
-            <td>
-              <a [routerLink]="['/soru', soru.id, 'view']">{{ soru.id }}</a>
-            </td>
+  <jhi-alert></jhi-alert>
 
-            <ng-container *ngIf="soru.isim !== null">
-                <td><h1>{{soru.isim}}</h1></td>
-            </ng-container>
-            <ng-container *ngIf="soru.isim === null">
-                <td><h1><fa-icon style="color:red ;" icon="times"></fa-icon></h1></td>
-            </ng-container>
-
-            <ng-container *ngIf="soru.metin !== null">
-                <td><h1><fa-icon style="color:green ;" icon="check"></fa-icon></h1></td>
-            </ng-container>
-            <ng-container *ngIf="soru.metin === null">
-                <td><h1><fa-icon style="color:red ;" icon="times"></fa-icon></h1></td>
-            </ng-container>
-
-            <ng-container *ngIf="soru.resimUrl !== null">
-                <td><h1><fa-icon style="color:green ;" icon="check"></fa-icon></h1></td>
-            </ng-container>
-            <ng-container *ngIf="soru.resimUrl === null">
-                <td><h1><fa-icon style="color:red ;" icon="times"></fa-icon></h1></td>
-            </ng-container>
-         
-            <ng-container *ngIf="soru.sira !== null">
-                <td><h1><fa-icon style="color:green ;" icon="check"></fa-icon></h1></td>
-            </ng-container>
-            <ng-container *ngIf="soru.sira === null">
-                <td><h1><fa-icon style="color:red ;" icon="times"></fa-icon></h1></td>
-            </ng-container>
-
-            <ng-container *ngIf="soru.cevap !== null">
-                <td><h1><fa-icon style="color:green ;" icon="check"></fa-icon></h1></td>
-            </ng-container>
-            <ng-container *ngIf="soru.cevap === null">
-                <td><h1><fa-icon style="color:red ;" icon="times"></fa-icon></h1></td>
-            </ng-container>
-
-            <ng-container *ngIf="soru.konu?.isim !== null">
-                <td><h1><fa-icon style="color:green ;" icon="check"></fa-icon></h1></td>
-            </ng-container>
-            <ng-container *ngIf="soru.konu?.isim === null">
-                <td><h1><fa-icon style="color:red ;" icon="times"></fa-icon></h1></td>
-            </ng-container>
-       
-            <ng-container *ngIf="soru.donem?.isim !== null">
-                <td><h1><fa-icon style="color:green ;" icon="check"></fa-icon></h1></td>
-            </ng-container>
-            <ng-container *ngIf="soru.donem?.isim === null">
-                <td><h1><fa-icon style="color:red ;" icon="times"></fa-icon></h1></td>
-            </ng-container>
-
-            <ng-container *ngIf="soru.gozuksun === true">
-                <td><h1><fa-icon style="color:green ;" icon="check"></fa-icon></h1></td>
-            </ng-container>
-            <ng-container *ngIf="soru.gozuksun !== true">
-                <td><h1><fa-icon style="color:red ;" icon="times"></fa-icon></h1></td>
-            </ng-container>
-
-            <!-- <td>{{ soru.isim }}</td>
-            <td>{{ soru.cevap }}</td>
-            <td>{{ soru.sira }}</td>
-            <td>{{ soru.resimUrl }}</td>
-            <td>{{ soru.a }}</td>
-            <td>{{ soru.b }}</td>
-            <td>{{ soru.c }}</td>
-            <td>{{ soru.d }}</td>
-            <td>{{ soru.cevapli }}</td>
-            <td>
-              <div *ngIf="soru.konu">
-                <a [routerLink]="['/konu', soru.konu?.id, 'view']">{{ soru.konu?.isim }}</a>
-              </div>
-            </td> -->
-
-            <td class="text-end">
-              <div class="btn-group">
-                <button type="submit" [routerLink]="['/soru', soru.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
-                  <fa-icon icon="eye"></fa-icon>
-                  <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                </button>
-  
-                <button  *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit" [routerLink]="['/soru', soru.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
-                  <fa-icon icon="pencil-alt"></fa-icon>
-                  <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                </button>
-  
-                <button  *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit" (click)="delete(soru)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
-                  <fa-icon icon="times"></fa-icon>
-                  <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                </button>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  
-    <div *ngIf="sorus">
-      <div class="d-flex justify-content-center">
-        <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
-      </div>
-  
-      <div class="d-flex justify-content-center">
-        <ngb-pagination
-          [collectionSize]="totalItems"
-          [(page)]="page"
-          [pageSize]="itemsPerPage"
-          [maxSize]="5"
-          [rotate]="true"
-          [boundaryLinks]="true"
-          (pageChange)="transition()"
-        ></ngb-pagination>
-      </div>
-    </div>
-  
+  <div class="alert alert-warning" id="no-result" *ngIf="sorus?.length === 0">
+    <span jhiTranslate="temrinMatikApp.soru.home.notFound">No sorus found</span>
   </div>
-  
+
+  <div class="table-responsive" id="entities" *ngIf="sorus && sorus.length > 0">
+    <table class="table table-striped " aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span class="text-uppar">ID</span></th>
+          <th scope="col"><span>İSİM</span></th>
+          <th scope="col"><span>METİN</span></th>
+          <th scope="col"><span>RESİM</span></th>
+          <th scope="col"><span>SIRA</span></th>
+          <th scope="col"><span>CEVAP</span></th>
+          <th scope="col"><span>KONU</span></th>
+          <th scope="col"><span>DONEM</span></th>
+          <th scope="col"><span>GÖZÜKÜYOR</span></th>
+          <th class="text-center" scope="col"><span>CEVAPLI</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let soru of sorus; trackBy: trackId" data-cy="entityTable">
+
+          <td>
+            <a [routerLink]="['/soru', soru.id, 'view']">{{ soru.id }}</a>
+          </td>
+
+          <ng-container *ngIf="soru.isim !== null">
+            <td>
+              <h3>{{soru.isim}}</h3>
+            </td>
+          </ng-container>
+          <ng-container *ngIf="soru.isim === null">
+            <td>
+              <h1>
+                <fa-icon style="color:red ;" icon="times"></fa-icon>
+              </h1>
+            </td>
+          </ng-container>
+
+          <ng-container *ngIf="soru.metin !== null">
+            <td>
+              <h1>
+                <fa-icon style="color:green ;" icon="check"></fa-icon>
+              </h1>
+            </td>
+          </ng-container>
+          <ng-container *ngIf="soru.metin === null">
+            <td>
+              <h1>
+                <fa-icon style="color:red ;" icon="times"></fa-icon>
+              </h1>
+            </td>
+          </ng-container>
+
+          <ng-container *ngIf="soru.resimUrl !== null">
+            <td>
+              <h1>
+                <fa-icon style="color:green ;" icon="check"></fa-icon>
+              </h1>
+            </td>
+          </ng-container>
+          <ng-container *ngIf="soru.resimUrl === null">
+            <td>
+              <h1>
+                <fa-icon style="color:red ;" icon="times"></fa-icon>
+              </h1>
+            </td>
+          </ng-container>
+
+          <ng-container *ngIf="soru.sira !== null">
+            <td>
+              <h1>
+                <fa-icon style="color:green ;" icon="check"></fa-icon>
+              </h1>
+            </td>
+          </ng-container>
+          <ng-container *ngIf="soru.sira === null">
+            <td>
+              <h1>
+                <fa-icon style="color:red ;" icon="times"></fa-icon>
+              </h1>
+            </td>
+          </ng-container>
+
+          <ng-container *ngIf="soru.cevap !== null">
+            <td>
+              <h1>
+                <fa-icon style="color:green ;" icon="check"></fa-icon>
+              </h1>
+            </td>
+          </ng-container>
+          <ng-container *ngIf="soru.cevap === null">
+            <td>
+              <h1>
+                <fa-icon style="color:red ;" icon="times"></fa-icon>
+              </h1>
+            </td>
+          </ng-container>
+
+          <ng-container *ngIf="soru.konu?.isim !== null">
+            <td>
+              <h1>
+                <fa-icon style="color:green ;" icon="check"></fa-icon>
+              </h1>
+            </td>
+          </ng-container>
+          <ng-container *ngIf="soru.konu?.isim === null">
+            <td>
+              <h1>
+                <fa-icon style="color:red ;" icon="times"></fa-icon>
+              </h1>
+            </td>
+          </ng-container>
+
+          <ng-container *ngIf="soru.donem?.isim !== null">
+            <td>
+              <h1>
+                <fa-icon style="color:green ;" icon="check"></fa-icon>
+              </h1>
+            </td>
+          </ng-container>
+          <ng-container *ngIf="soru.donem?.isim === null">
+            <td>
+              <h1>
+                <fa-icon style="color:red ;" icon="times"></fa-icon>
+              </h1>
+            </td>
+          </ng-container>
+
+          <ng-container *ngIf="soru.gozuksun === true">
+            <td>
+              <h1>
+                <fa-icon style="color:green ;" icon="check"></fa-icon>
+              </h1>
+            </td>
+          </ng-container>
+          <ng-container *ngIf="soru.gozuksun !== true">
+            <td>
+              <h1>
+                <fa-icon style="color:red ;" icon="times"></fa-icon>
+              </h1>
+            </td>
+          </ng-container>
+
+          <ng-container *ngIf="soru.cevapli === true">
+            <td>
+              <ul class="list-group list-group-horizontal">
+                <ng-container *ngIf="soru.a !== null &&  soru.a!==''">
+                  <li class="list-group-item bg-success">A</li>
+                </ng-container>
+                <ng-container *ngIf="soru.a === null ||  soru.a===''">
+                  <li class="list-group-item bg-danger">A</li>
+                </ng-container>
+
+                <ng-container *ngIf="soru.b !== null&&  soru.b!==''">
+                  <li class="list-group-item bg-success">B</li>
+                </ng-container>
+                <ng-container *ngIf="soru.b === null||  soru.b===''">
+                  <li class="list-group-item bg-danger">B</li>
+                </ng-container>
+
+                <ng-container *ngIf="soru.c !== null&&  soru.c!==''">
+                  <li class="list-group-item bg-success">C</li>
+                </ng-container>
+                <ng-container *ngIf="soru.c === null||  soru.c===''">
+                  <li class="list-group-item bg-danger">C</li>
+                </ng-container>
+
+                <ng-container *ngIf="soru.d !== null&&  soru.d!==''">
+                  <li class="list-group-item bg-success">D</li>
+                </ng-container>
+                <ng-container *ngIf="soru.d === null||  soru.d===''">
+                  <li class="list-group-item bg-danger">D</li>
+                </ng-container>
+
+              </ul>
+            </td>
+
+          </ng-container>
+          <ng-container *ngIf="soru.cevapli !== true">
+            <td>
+              <h1 class="text-center">
+                <fa-icon style="color:red ;" icon="times"></fa-icon>
+              </h1>
+            </td>
+          </ng-container>
+
+
+          <td class="text-end">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/soru', soru.id, 'view']" class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit" [routerLink]="['/soru', soru.id, 'edit']"
+                class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit" (click)="delete(soru)"
+                class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="sorus">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5"
+        [rotate]="true" [boundaryLinks]="true" (pageChange)="transition()"></ngb-pagination>
+    </div>
+  </div>
+
+</div>

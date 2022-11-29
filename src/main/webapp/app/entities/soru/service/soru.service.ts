@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
 import { ISoru, getSoruIdentifier } from '../soru.model';
+import { ITopluSoru } from '../TopluSoru.model';
 
 export type EntityResponseType = HttpResponse<ISoru>;
 export type EntityArrayResponseType = HttpResponse<ISoru[]>;
@@ -16,6 +17,10 @@ export class SoruService {
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
+  topluResimYukle(sorular:ITopluSoru): Observable<EntityResponseType>{
+    return this.http.post<ISoru>(this.resourceUrl+"/toplu-soru", sorular, { observe: 'response' });
+
+  }
   getSoruByKonu(konuID:number):Observable<EntityArrayResponseType>{
     return this.http.get<ISoru[]>(this.resourceUrl + `/konu/${konuID}`, {  observe: 'response' });
   }
