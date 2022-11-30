@@ -1,6 +1,8 @@
 package com.temrin.domain;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import org.hibernate.annotations.Cache;
@@ -26,7 +28,39 @@ public class Grup implements Serializable {
     @Column(name = "isim", length = 500)
     private String isim;
 
+    @ManyToMany
+    @JoinTable(
+        name = "rel_gurup__konular",
+        joinColumns = @JoinColumn(name = "gurup_id"),
+        inverseJoinColumns = @JoinColumn(name = "konular_id")
+    )
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    private Set<Konu> konular = new HashSet<>();
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
+
+
+    public Set<Konu> getKonular() {
+        return konular;
+    }
+
+    public void setKonular(Set<Konu> konular) {
+        this.konular = konular;
+    }
+
+    public Grup konular(Set<Konu> konular){
+        this.setKonular(konular);
+        return this;
+    }
+    public Grup addKonular(Konu konu){
+        this.konular.add(konu);
+        return this;
+    }
+
+    public Grup removeKonular(Konu konu){
+        this.konular.remove(konu);
+        return this;
+    }
 
     public Long getId() {
         return this.id;

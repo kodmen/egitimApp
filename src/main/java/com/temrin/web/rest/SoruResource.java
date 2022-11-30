@@ -56,7 +56,11 @@ public class SoruResource {
 
     @GetMapping("/sorus/konu/{id}")
     public ResponseEntity<List<Soru>> getAllSoruByKonu(@PathVariable Long id) {
-        log.debug("REST request to get all Soru for an admin");
+        if (id == null){
+            throw new BadRequestAlertException("konu id null", ENTITY_NAME, "id null");
+
+        }
+
 
         final List<Soru> soruList = soruService.getAllSoruByKonuByGozukme(id);
         return new ResponseEntity<>(soruList, HttpStatus.OK);

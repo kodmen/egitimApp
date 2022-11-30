@@ -1,6 +1,7 @@
 package com.temrin.domain;
 
 import java.io.Serializable;
+import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import org.hibernate.annotations.Cache;
@@ -25,6 +26,9 @@ public class Konu implements Serializable {
     @Size(max = 500)
     @Column(name = "isim", length = 500)
     private String isim;
+
+    @ManyToMany(mappedBy = "konular")
+    Set<Grup> gruplar;
 
     /**
      * burdaki defalut değeri girmezsek ilk oluştuğunda db

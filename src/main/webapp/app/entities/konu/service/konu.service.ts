@@ -16,6 +16,10 @@ export class KonuService {
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
+  findByGrupId(id: number): Observable<EntityArrayResponseType> {
+    return this.http.get<IKonu[]>(`${this.resourceUrl}/grup/${id}`, { observe: 'response' });
+  }
+
   create(konu: IKonu): Observable<EntityResponseType> {
     return this.http.post<IKonu>(this.resourceUrl, konu, { observe: 'response' });
   }

@@ -2,6 +2,7 @@ package com.temrin.web.rest;
 
 import com.temrin.domain.Konu;
 import com.temrin.repository.KonuRepository;
+import com.temrin.service.KonuService;
 import com.temrin.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -35,9 +36,11 @@ public class KonuResource {
     private String applicationName;
 
     private final KonuRepository konuRepository;
+    private final KonuService konuService;
 
-    public KonuResource(KonuRepository konuRepository) {
+    public KonuResource(KonuRepository konuRepository, KonuService konuService) {
         this.konuRepository = konuRepository;
+        this.konuService = konuService;
     }
 
     /**
@@ -146,6 +149,15 @@ public class KonuResource {
     public List<Konu> getAllKonus() {
         log.debug("REST request to get all Konus");
         return konuRepository.findAll();
+    }
+
+    @GetMapping("/konus/grup/{id}")
+    public List<Konu> getAllKonusByGrupId(@PathVariable Long id) {
+        if (id == null){
+            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "id null");
+        }
+        log.debug("REST request to get all Konus");
+        return konuService.getKonuByGrupId(id);
     }
 
     /**

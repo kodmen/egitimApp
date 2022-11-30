@@ -145,7 +145,7 @@ public class GrupResource {
     @GetMapping("/grups")
     public List<Grup> getAllGrups() {
         log.debug("REST request to get all Grups");
-        return grupRepository.findAll();
+        return grupRepository.findAllWithEagerRelationships();
     }
 
     /**

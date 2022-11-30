@@ -34,6 +34,8 @@
         <tr>
           <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
           <th scope="col"><span jhiTranslate="temrinMatikApp.grup.isim">Isim</span></th>
+          <th scope="col"><span >Konular</span></th>
+
           <th scope="col"></th>
         </tr>
       </thead>
@@ -43,6 +45,12 @@
             <a [routerLink]="['/grup', grup.id, 'view']">{{ grup.id }}</a>
           </td>
           <td>{{ grup.isim }}</td>
+          <td>
+            <ng-container *ngFor="let konu of grup.konular">
+              {{konu.isim}},
+            </ng-container>
+            
+          </td>
           <td class="text-end">
             <div class="btn-group">
               <button type="submit" [routerLink]="['/grup', grup.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">

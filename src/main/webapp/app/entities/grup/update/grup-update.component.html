@@ -29,6 +29,27 @@
         </div>
       </div>
 
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <ng-multiselect-dropdown [placeholder]="'konuları seçiniz'" [settings]="dropdownSettings"
+            [data]="konusSharedCollection" formControlName="konular">
+          </ng-multiselect-dropdown>
+        </div>
+        <!-- <div class="col-md-3">
+          <div class="d-flex justify-content-center">
+            <ngb-pagination
+              [collectionSize]="totalItems"
+              [(page)]="page"
+              [pageSize]="itemsPerPage"
+              [maxSize]="5"
+              [rotate]="true"
+              [boundaryLinks]="true"
+            ></ngb-pagination>
+          </div>
+        </div> -->
+
+      </div>
+
       <div>
         <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
           <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>

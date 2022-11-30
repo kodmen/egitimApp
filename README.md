@@ -2,9 +2,14 @@
 - döneme ait sorular gözükmeli
 
 - soru güncelleyince bazı veriler siliniyor gözükebilme null oluyor(çüknkü soru entitisinde get set yapmadım)
-- soruya göster(boolean) diye bir alan daha eklenmeli ve döneme bu soruları gösterme diye fonksiyon eklenebilir
+- + soruya göster(boolean) diye bir alan daha eklenmeli ve döneme bu soruları gösterme diye fonksiyon eklenebilir
 
 ## ikinci öncelik
+- kahoot sitesindeki documantasyon sayfası gibi sayfa yalılabilir
+- iletişim sayfası
+- destek sayfası 
+  
+- deneme sayafa tasarımı ve giriş tarasımı güncellenmeli
 - soru guncelleme( olusturulan soruyu güncellerken resim güncellenmiyor)
 - deneme olustururken eger fazla soru sayisi girersek hata veriyor ve hatayı söylemiyor
 
@@ -15,19 +20,11 @@
 
 DERS ÇALIŞ SAYFASINA SORUYA GİT EKLENEBİLİR
 DENEME SAYFASINI PAGEABLE YAPILMALI
-konu entitiye soru sayisi eklenmeli
 DENEME ANALİZİNDE YAPILAN DENEME ANALİZ SINIFTADA YAPILABİLİR
 DENEME ANALİZ SINFI PAGEABLE OLMALI
 
 DENEME ANALİZLERİNİ PAGEABLE YAPAYIM
-Deneme analiz listelerken boş yanlış sadece sayısı olsun detaya girinci hangi sorular old gösterilsin
-Ders çalışma yerinde doğru ise doğru yazsın yanış ise yanlış yazabilir
 sınıfı hocasız açarsak ne olur
-
-deneme analize süre eklenebelir kaç saniyede çözdü diye yada salise
-günlük deneme oluşabilir
-günlük denemenin analizi sıralama yapılabilir
-yurt oluşturma yerine sadece yurt mesullelirini getirmek lazım
 
 mesul girişinde hatalar var gibi 
 mesul birden fazla yurda mesulluk yapması gerekebilir yada bir mesul yurduda olmalı
@@ -41,11 +38,6 @@ analizler daha düzenli olabilir
 mesul girişlerini kontrol edilmeli ->sınıfı ve yurdun sınıflarını görebilmeli
 hoca ve mesule ait tema değişmeli 
 talebe çalşası için deneme yerine ders çalışma ve deneme çözmek için yer olmalı
-
-
-burda bu projeyi nasıl daha güzel tanıtabilirim 
-veya bu projeyi yeniden oluşturayım ve nasıl bir yol izleyerek bu projeyi yeniden yayayım
-
 
 heroku buildpacks:clear
 

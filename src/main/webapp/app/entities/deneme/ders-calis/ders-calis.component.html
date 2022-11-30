@@ -1,48 +1,119 @@
 <div class="container">
+    <jhi-alert-error></jhi-alert-error>
 
+    <jhi-alert></jhi-alert>
     <div class="row">
 
         <div class="col-md-6 col-xs-12" *ngIf="!soruVarmi">
             <form [formGroup]="form" (submit)="soruGetir()">
 
 
-
                 <div class="row">
                     <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Ders seçin</label>
-                        <select formControlName="konu" class="form-select" aria-label="Konu">
-                            <option selected>Ders seçin</option>
-                            <option [value]="konu.id" *ngFor="let konu of konularSharedCollection; let i=index">{{
-                                konu.isim }}</option>
+                        <label for="exampleFormControlInput1" class="form-label">Ders grubu seçin</label>
+                        <select formControlName="grup" class="form-select" aria-label="Konu" (change)="onSelected()">
+                            <option selected value="0">grup seçin</option>
+                            <option [value]="grup.id" *ngFor="let grup of gruplarSharedCollection; let i=index">{{
+                                grup.isim }}</option>
                         </select>
                     </div>
                 </div>
-
-                <div class="row ">
-                    <div class="mb-3">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="defaultCheck1"
-                                formControlName="soruKaristir">
-                            <label class="form-check-label" for="defaultCheck1">
-                                Soru kariştir
-                            </label>
+                <ng-container *ngIf="konuVar">
+                    <div class="row">
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Ders seçin</label>
+                            
+                                <select formControlName="konu" class="form-select" aria-label="Konu">
+                                    <option selected value="">Ders seçin</option>
+                                    <option [value]="konu.id" *ngFor="let konu of konularSharedCollection; let i=index">
+                                        {{
+                                        konu.isim }}</option>
+                                </select>
+                            
                         </div>
                     </div>
 
-                </div>
+                    <div class="row ">
+                        <div class="mb-3">
+                            <div class="form-check">
+                               
+                                    <input class="form-check-input" type="checkbox" id="defaultCheck1"
+                                        formControlName="soruKaristir">
 
-                <div class="row">
-                    <div class="mb-3">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="defaultCheck2"
-                                formControlName="cevapKaristir">
-                            <label class="form-check-label" for="defaultCheck2">
-                                Cevap kariştir
-                            </label>
+                                    <label class="form-check-label" for="defaultCheck1">
+                                        Soru kariştir
+                                    </label>
+                                
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="mb-3">
+                            <div class="form-check">
+                                
+                                    <input class="form-check-input" type="checkbox" id="defaultCheck2"
+                                        formControlName="cevapKaristir">
+
+                                    <label class="form-check-label" for="defaultCheck2">
+                                        Cevap kariştir
+                                    </label>
+                                
+                            </div>
+                        </div>
+
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="!konuVar">
+                    <div class="row">
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Ders seçin</label>
+                            <fieldset disabled>
+                                <select formControlName="konu" class="form-select" aria-label="Konu">
+                                    <option selected>Ders seçin</option>
+                                    <option [value]="konu.id" *ngFor="let konu of konularSharedCollection; let i=index">
+                                        {{
+                                        konu.isim }}</option>
+                                </select>
+                            </fieldset>
                         </div>
                     </div>
 
-                </div>
+                    <div class="row ">
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <fieldset disabled>
+                                    <input class="form-check-input" type="checkbox" id="defaultCheck1"
+                                        formControlName="soruKaristir">
+
+                                    <label class="form-check-label" for="defaultCheck1">
+                                        Soru kariştir
+                                    </label>
+                                </fieldset>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <fieldset disabled>
+                                    <input class="form-check-input" type="checkbox" id="defaultCheck2"
+                                        formControlName="cevapKaristir">
+
+                                    <label class="form-check-label" for="defaultCheck2">
+                                        Cevap kariştir
+                                    </label>
+                                </fieldset>
+                            </div>
+                        </div>
+
+                    </div>
+                </ng-container>
+
+
 
                 <div class="row">
                     <button class="btn btn-primary" type="submit">Soruları getir</button>

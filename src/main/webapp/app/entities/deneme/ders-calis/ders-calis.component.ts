@@ -1,5 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { IGrup } from 'app/entities/grup/grup.model';
+import { GrupService } from 'app/entities/grup/service/grup.service';
 import { IKonu } from 'app/entities/konu/konu.model';
 import { KonuService } from 'app/entities/konu/service/konu.service';
 import { SoruService } from 'app/entities/soru/service/soru.service';
@@ -26,8 +28,12 @@ export class DersCalisComponent implements OnInit {
   count: number;
   bekleDurum = true;
 
+  konuVar = false;
+
   p: number;
   konularSharedCollection: IKonu[] = [];
+  gruplarSharedCollection: IGrup[] = [];
+
   soruList?: ISoru[] | null = null;
   soruVarmi = false;
 
@@ -40,9 +46,11 @@ export class DersCalisComponent implements OnInit {
     protected karistirService: DenemeKaristirService,
     protected fb: FormBuilder,
     protected konuService: KonuService,
-    protected soruService: SoruService
+    protected soruService: SoruService,
+    protected grupService: GrupService
   ) {
     this.form = this.fb.group({
+      grup: ['', Validators.required],
       konu: ['', Validators.required],
       soruKaristir: [false],
       cevapKaristir: [false],
@@ -58,22 +66,37 @@ export class DersCalisComponent implements OnInit {
     this.cevapD = 'b';
   }
 
+  onSelected(): void {
+    const grupId = this.form.get(['grup'])!.value;
+    if (grupId !== '0') {
+      this.konuService.findByGrupId(grupId).subscribe(res => {
+        this.konularSharedCollection = res.body!;
+        this.konuVar = true;
+      });
+    } else {
+      this.konuVar = false;
+    }
+  }
+
   soruGetir(): void {
+    // const grupId = this.form.get(['grup'])!.value;
+
     const konuId = this.form.get(['konu'])!.value;
     const soruKaristir = this.form.get(['soruKaristir'])!.value;
     const cevapKaristir = this.form.get(['cevapKaristir'])!.value;
+    if (konuId !== '') {
+      this.soruService.getSoruByKonu(konuId).subscribe(res => {
+        if (soruKaristir) {
+          this.soruList = this.karistirService.soruKaristir(res.body!, cevapKaristir);
+        } else if (cevapKaristir) {
+          this.soruList = this.karistirService.yanlizCevapKaristir(res.body!);
+        } else {
+          this.soruList = res.body?.sort((a, b) => a.sira! - b.sira!);
+        }
 
-    this.soruService.getSoruByKonu(konuId).subscribe(res => {
-      if (soruKaristir) {
-        this.soruList = this.karistirService.soruKaristir(res.body!, cevapKaristir);
-      } else if (cevapKaristir) {
-        this.soruList = this.karistirService.yanlizCevapKaristir(res.body!);
-      } else {
-        this.soruList = res.body?.sort((a, b) => a.sira! - b.sira!);
-      }
-
-      this.soruVarmi = true;
-    });
+        this.soruVarmi = true;
+      });
+    }
   }
 
   geri(): void {
@@ -81,18 +104,26 @@ export class DersCalisComponent implements OnInit {
     this.form.get(['soruKaristir'])!.setValue(false);
     this.form.get(['cevapKaristir'])!.setValue(false);
     this.soruVarmi = false;
+    this.konuVar = false;
     this.p = 1;
   }
 
-  getKonu(): any {
-    this.konuService.query().subscribe(res => {
-      this.konularSharedCollection = res.body ?? [];
+  // getKonu(): any {
+  //   this.konuService.query().subscribe(res => {
+  //     this.konularSharedCollection = res.body ?? [];
+  //   });
+  // }
+
+  getGruplar(): any {
+    this.grupService.query().subscribe(res => {
+      this.gruplarSharedCollection = res.body ?? [];
     });
   }
 
   ngOnInit(): void {
     this.count = 0;
-    this.getKonu();
+    // this.getKonu();
+    this.getGruplar();
   }
 
   cevapSoru(soru: ISoru, c: string): void {

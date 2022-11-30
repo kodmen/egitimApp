@@ -9,7 +9,8 @@
       <div>
         <jhi-alert-error></jhi-alert-error>
 
-        <div *jhiHasAnyAuthority="['ROLE_ADMIN','ROLE_MESUL']" class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+        <div *jhiHasAnyAuthority="['ROLE_ADMIN','ROLE_MESUL']" class="row mb-3"
+          [hidden]="editForm.get('id')!.value == null">
           <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
           <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id"
             [readonly]="true" />
@@ -102,16 +103,16 @@
         <div class="mb-3">
           <h1>ogrenciler</h1>
           <h3 *ngFor="let o of this.editForm.get('ogrencilers')!.value">
-           - {{o.login}}
+            - {{o.login}}
           </h3>
         </div>
 
         <div class="row mb-3">
-<div class="col-md-6">
-  <ng-multiselect-dropdown [placeholder]="'öğrencileri seçiniz'" [settings]="dropdownSettings"
-            [data]="usersSharedCollection" formControlName="ogrencilers">
-          </ng-multiselect-dropdown>
-</div>
+          <div class="col-md-6">
+            <ng-multiselect-dropdown [placeholder]="'öğrencileri seçiniz'" [settings]="dropdownSettings"
+              [data]="usersSharedCollection" formControlName="ogrencilers">
+            </ng-multiselect-dropdown>
+          </div>
           <!-- <div class="col-md-3">
             <div class="d-flex justify-content-center">
               <ngb-pagination
