@@ -9,13 +9,14 @@
       </button>
 
       <button *jhiHasAnyAuthority="['ROLE_MESUL','ROLE_ADMIN']" id="jh-create-entity" data-cy="entityCreateButton"
-        class="btn btn-primary jh-create-entity create-sinif" [routerLink]="['/sinif/new']">
+        class=" me-2 btn btn-primary jh-create-entity create-sinif" [routerLink]="['/sinif/new']">
         <fa-icon icon="plus"></fa-icon>
         <span jhiTranslate="temrinMatikApp.sinif.home.createLabel"> Create a new Sinif </span>
       </button>
+
       <ng-container *ngIf="!isSinif">
         <button *jhiHasAnyAuthority="['ROLE_USER']" id="jh-create-entity" data-cy="entityCreateButton"
-          class="btn btn-primary jh-create-entity create-sinif" [routerLink]="['/sinif/ogr-sinif-ekle']">
+          class=" me-2 btn btn-primary jh-create-entity create-sinif" [routerLink]="['/sinif/ogr-sinif-ekle']">
           <fa-icon icon="plus"></fa-icon>
           <span> Sinif seç </span>
         </button>
@@ -33,7 +34,7 @@
     <ng-container  *jhiHasAnyAuthority="['ROLE_USER']">
 
       <div class="alert alert-warning" >
-        <span >Sınıfınız yoktur lütfen ait olduğunuz sınıfı seçiniz eğer sınıfınız sistemde kayıtlı değil ise hocanız sisteme kayıt yaptırmalı yanlış sınıfa katıy olduysanız tekrar sınıfa kayıt olmazın uzun sürer</span>
+        <span >Sınıfınız yoktur lütfen ait olduğunuz sınıfı seçiniz eğer sınıfınız sistemde kayıtlı değil ise hocanız sisteme kayıt yaptırmalı </span>
       </div>
 
     </ng-container>

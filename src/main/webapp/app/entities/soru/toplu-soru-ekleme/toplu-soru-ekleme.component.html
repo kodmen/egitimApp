@@ -2,11 +2,7 @@
     <jhi-alert-error></jhi-alert-error>
 
     <jhi-alert></jhi-alert>
-<ng-container *ngIf="yukleniyor">
-    <!-- <img class="responsive" src="https://media.tenor.com/In8c2digq1MAAAAC/claudio-claudin.gif" alt=""> -->
-    <div class="bg"></div>
-</ng-container>
-<ng-container *ngIf="!yukleniyor">
+
       <form [formGroup]="topluSoru" (submit)="save()">
         <div class="col-md-12">
 
@@ -87,9 +83,16 @@
             <div class="row">
                 <button class="btn btn-primary" type="submit">Deneme oluştur</button>
             </div>
+            <ng-container *ngIf="yukleniyor">
+                <!-- <img class="responsive"  alt=""> -->
+                <div class="bg"></div>
+                <div class="imgbox">
+                    <img class="center-fit" src="https://media.tenor.com/In8c2digq1MAAAAC/claudio-claudin.gif">
+                </div>
+                
+            </ng-container>
         </div>
     </form>
-</ng-container>
   
 
 </div>

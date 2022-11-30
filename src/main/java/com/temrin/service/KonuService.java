@@ -19,6 +19,10 @@ public class KonuService {
         return repository.getById(id);
     }
 
+    public void konuGuncelle(Konu konu){
+        repository.save(konu);
+    }
+
     public Konu konuSayisiArttir(Konu k){
         k.setSoruSayisi(k.getSoruSayisi() + 1);
         return repository.save(k);

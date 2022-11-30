@@ -14,6 +14,7 @@ import java.net.URISyntaxException;
 import java.util.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -83,19 +84,27 @@ public class SoruResource {
     }
 
     @PostMapping("/sorus/toplu-soru")
-    public ResponseEntity<List<Soru>> createSoru(@Valid @RequestBody TopluSoru sorular) throws URISyntaxException, IOException {
+    public ResponseEntity<List<Soru>> createSoru(@Valid @RequestBody TopluSoru sorular) throws IOException, URISyntaxException {
+
+        if (sorular.getKonu() == null) {
+            throw new BadRequestAlertException("konu null", ENTITY_NAME, "Konu secilmemiş");
+        }
+
+        if (sorular.getDonem() == null) {
+            throw new BadRequestAlertException("donem null", ENTITY_NAME, "Donem secilmemis");
+        }
 
         List<Soru> result = soruService.topluSoruKaydet(sorular);
         return ResponseEntity
             .created(new URI("/api/sorus/" + String.valueOf(result.size())))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME,String.valueOf(result.size())))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, String.valueOf(result.size())))
             .body(result);
     }
 
     /**
      * {@code PUT  /sorus/:id} : Updates an existing soru.
      *
-     * @param id the id of the soru to save.
+     * @param id   the id of the soru to save.
      * @param soru the soru to update.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated soru,
      * or with status {@code 400 (Bad Request)} if the soru is not valid,
@@ -127,7 +136,7 @@ public class SoruResource {
     /**
      * {@code PATCH  /sorus/:id} : Partial updates given fields of an existing soru, field will ignore if it is null
      *
-     * @param id the id of the soru to save.
+     * @param id   the id of the soru to save.
      * @param soru the soru to update.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated soru,
      * or with status {@code 400 (Bad Request)} if the soru is not valid,
@@ -135,7 +144,7 @@ public class SoruResource {
      * or with status {@code 500 (Internal Server Error)} if the soru couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @PatchMapping(value = "/sorus/{id}", consumes = { "application/json", "application/merge-patch+json" })
+    @PatchMapping(value = "/sorus/{id}", consumes = {"application/json", "application/merge-patch+json"})
     public ResponseEntity<Soru> partialUpdateSoru(
         @PathVariable(value = "id", required = false) final Long id,
         @NotNull @RequestBody Soru soru
@@ -195,17 +204,18 @@ public class SoruResource {
 
 
     @GetMapping("/sorus/konu/gozuksuz/{id}")
-    public ResponseEntity<List<Soru>> getAllSoruBykonuandgozuksuz(@PathVariable Long id,@org.springdoc.api.annotations.ParameterObject Pageable pageable) {
+    public ResponseEntity<List<Soru>> getAllSoruBykonuandgozuksuz(@PathVariable Long id, @org.springdoc.api.annotations.ParameterObject Pageable pageable) {
         log.debug("REST request to get all Soru for an admin");
 
 //        final Page<Soru> page = soruService.getKonubySoruByGozukme(id,pageable);
-        final Page<Soru> page = soruService.getKonubySoru(id,pageable);
+        final Page<Soru> page = soruService.getKonubySoru(id, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
     /**
      * bütün soruları pageable şeklinde getiriyoruz
+     *
      * @param id
      * @return
      */
