@@ -58,6 +58,10 @@ public class SinifService {
 
     }
 
+    public Sinif getSinifByHoca(User hoca){
+        return sinifRepository.findByHoca(hoca);
+    }
+
     public Sinif getCurrentUserSinif(){
         List<Sinif> sinifList = sinifRepository.findByHocaIsCurrentUser();
         return sinifList.size() > 0 ? sinifList.get(0) : null;

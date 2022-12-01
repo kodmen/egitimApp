@@ -157,7 +157,7 @@ public class GrupResource {
     @GetMapping("/grups/{id}")
     public ResponseEntity<Grup> getGrup(@PathVariable Long id) {
         log.debug("REST request to get Grup : {}", id);
-        Optional<Grup> grup = grupRepository.findById(id);
+        Optional<Grup> grup = grupRepository.findByIdWithEagerRelationships(id);
         return ResponseUtil.wrapOrNotFound(grup);
     }
 

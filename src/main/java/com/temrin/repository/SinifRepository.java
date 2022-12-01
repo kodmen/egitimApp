@@ -50,7 +50,7 @@ public interface SinifRepository extends SinifRepositoryWithBagRelationships, Jp
 
     List<Sinif> findByYurt_Id(long id);
 
-
+    Sinif findByHoca(User hoca);
 
     List<Sinif> findByOgrencilersIsContaining(User user);
 

@@ -183,6 +183,7 @@ public class SinifResource {
     public ResponseEntity<Void> deleteSinif(@PathVariable Long id) {
         log.debug("REST request to delete Sinif : {}", id);
         sinifRepository.deleteById(id);
+        // burda ne oluyor
         return ResponseEntity
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))

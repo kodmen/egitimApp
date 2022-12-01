@@ -148,7 +148,8 @@ public class KonuResource {
     @GetMapping("/konus")
     public List<Konu> getAllKonus() {
         log.debug("REST request to get all Konus");
-        return konuRepository.findAll();
+
+        return konuService.getAll();
     }
 
     @GetMapping("/konus/grup/{id}")

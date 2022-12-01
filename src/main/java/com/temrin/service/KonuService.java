@@ -2,20 +2,29 @@ package com.temrin.service;
 
 import com.temrin.domain.Grup;
 import com.temrin.domain.Konu;
+import com.temrin.domain.Sinif;
 import com.temrin.repository.KonuRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
+
+import static com.temrin.security.AuthoritiesConstants.ADMIN;
+import static com.temrin.security.AuthoritiesConstants.HOCA;
 
 @Service
 public class KonuService {
 
     private final KonuRepository repository;
     private final GrupService grupService;
+    private final UserService userService;
+    private final SinifService sinifService;
 
-    public KonuService(KonuRepository repository, GrupService grupService) {
+    public KonuService(KonuRepository repository, GrupService grupService, UserService userService, SinifService sinifService) {
         this.repository = repository;
         this.grupService = grupService;
+        this.userService = userService;
+        this.sinifService = sinifService;
     }
 
     public Konu getById(Long id) {
@@ -24,6 +33,22 @@ public class KonuService {
 
     public void konuGuncelle(Konu konu){
         repository.save(konu);
+    }
+
+
+    public List<Konu> getAll(){
+        // farklı roller geldiği zaman buraya ekleme yapılabilir mesela editor gibi
+        switch (userService.getAuth()){
+            case HOCA:
+                // bir hocanın birden fazla sınıfı olursa burası patlıyor
+                Sinif sinif = sinifService.getSinifByHoca(userService.getCurrentUser());
+                return repository.findAllByGruplar(sinif.getGrup());
+            case ADMIN:
+                return repository.findAll();
+            default:
+                return Collections.emptyList();
+        }
+
     }
 
     public Konu konuSayisiArttir(Konu k){
@@ -36,12 +61,10 @@ public class KonuService {
         return repository.save(k);
     }
 
+
     public List<Konu> getKonuByGrupId(long grupId){
         Grup grup = grupService.getGrupById(grupId);
         return repository.findAllByGruplar(grup);
     }
 
-    public List<Konu> getAllKonu() {
-        return repository.findAll();
-    }
 }
