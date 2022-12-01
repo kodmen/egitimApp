@@ -22,4 +22,6 @@ public interface GrupRepository extends GrupRepositoryWithBagRelationships, JpaR
     default Optional<Grup> findByIdWithEagerRelationships(long id){
         return fetchBagRelationships(this.findById(id));
     }
+
+    List<Grup> findAllByGozuksun(boolean gozuksun);
 }

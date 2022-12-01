@@ -25,6 +25,7 @@ export class GrupUpdateComponent implements OnInit {
     id: [],
     isim: [null, [Validators.maxLength(500)]],
     konular: [],
+    gozuksun: [true],
   });
 
   constructor(protected konuService:KonuService,protected grupService: GrupService, protected activatedRoute: ActivatedRoute, protected fb: FormBuilder) {}
@@ -99,7 +100,8 @@ export class GrupUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: grup.id,
       isim: grup.isim,
-      konular: grup.konular
+      konular: grup.konular,
+      gozuksun: grup.gozuksun
     });
     this.konusSharedCollection = this.konuService.addKonuToCollectionIfMissing(
       this.konusSharedCollection,
@@ -112,7 +114,8 @@ export class GrupUpdateComponent implements OnInit {
       ...new Grup(),
       id: this.editForm.get(['id'])!.value,
       isim: this.editForm.get(['isim'])!.value,
-      konular: this.editForm.get(['konular'])!.value
+      konular: this.editForm.get(['konular'])!.value,
+      gozuksun: this.editForm.get(['gozuksun'])!.value
     };
   }
 

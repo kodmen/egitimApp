@@ -115,7 +115,7 @@ export class DersCalisComponent implements OnInit {
   // }
 
   getGruplar(): any {
-    this.grupService.query().subscribe(res => {
+    this.grupService.getAllGrupByGozuksun().subscribe(res => {
       this.gruplarSharedCollection = res.body ?? [];
     });
   }

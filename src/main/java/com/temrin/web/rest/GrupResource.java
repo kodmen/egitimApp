@@ -2,6 +2,7 @@ package com.temrin.web.rest;
 
 import com.temrin.domain.Grup;
 import com.temrin.repository.GrupRepository;
+import com.temrin.service.GrupService;
 import com.temrin.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -35,9 +36,11 @@ public class GrupResource {
     private String applicationName;
 
     private final GrupRepository grupRepository;
+    private final GrupService grupService;
 
-    public GrupResource(GrupRepository grupRepository) {
+    public GrupResource(GrupRepository grupRepository, GrupService grupService) {
         this.grupRepository = grupRepository;
+        this.grupService = grupService;
     }
 
     /**
@@ -146,6 +149,17 @@ public class GrupResource {
     public List<Grup> getAllGrups() {
         log.debug("REST request to get all Grups");
         return grupRepository.findAllWithEagerRelationships();
+    }
+
+    /**
+     * {@code GET  /grups} : get all the grups.
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of grups in body.
+     */
+    @GetMapping("/grups/gozuksun")
+    public List<Grup> getAllGrupsByGozuksun() {
+        log.debug("REST request to get all Grups");
+        return grupService.getFindAllByGozuksun();
     }
 
     /**

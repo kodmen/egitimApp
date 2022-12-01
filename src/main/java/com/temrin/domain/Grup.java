@@ -37,8 +37,18 @@ public class Grup implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private Set<Konu> konular = new HashSet<>();
 
+    @Column(name = "gozuksun", columnDefinition = "boolean default true")
+    private Boolean gozuksun;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
+    public Boolean getGozuksun() {
+        return gozuksun;
+    }
+
+    public void setGozuksun(Boolean gozuksun) {
+        this.gozuksun = gozuksun;
+    }
 
     public Set<Konu> getKonular() {
         return konular;

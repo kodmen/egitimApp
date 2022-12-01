@@ -5,7 +5,7 @@ import com.temrin.domain.Grup;
 import com.temrin.repository.GrupRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.List;
 
 @Service
 public class GrupService {
@@ -22,5 +22,9 @@ public class GrupService {
 
     public Grup getGrupById(long id){
         return repository.getById(id);
+    }
+
+    public List<Grup> getFindAllByGozuksun(){
+        return repository.findAllByGozuksun(true);
     }
 }

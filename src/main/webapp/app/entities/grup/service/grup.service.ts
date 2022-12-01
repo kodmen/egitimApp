@@ -37,6 +37,10 @@ export class GrupService {
     return this.http.get<IGrup[]>(this.resourceUrl, { params: options, observe: 'response' });
   }
 
+  getAllGrupByGozuksun(): Observable<EntityArrayResponseType> {
+    return this.http.get<IGrup[]>(this.resourceUrl+"/gozuksun", {  observe: 'response' });
+  }
+
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }

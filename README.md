@@ -4,8 +4,6 @@
 - yada grup ve konuya dönem eklenebilir 
 - konuya yeni veri eklerken soru sayisini default 0 yap
 - konular pageable olmalı +++
-- deneme oluşturun da güncellenmesi lazım (hocanın grubuna göre getirmesi lazım olabilir)
-- grup güncelleme yaparken konular seçili gelmiyor 
 
 
 - soru güncelleyince bazı veriler siliniyor gözükebilme null oluyor(çüknkü soru entitisinde get set yapmadım)
