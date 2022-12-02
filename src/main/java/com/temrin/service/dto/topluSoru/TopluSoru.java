@@ -10,6 +10,15 @@ public class TopluSoru {
     private Donem donem;
     private boolean cevapli;
     private List<TekliSoru> sorular;
+    private String metinliSorular;
+
+    public String getMetinliSorular() {
+        return metinliSorular;
+    }
+
+    public void setMetinliSorular(String metinliSorular) {
+        this.metinliSorular = metinliSorular;
+    }
 
     public Konu getKonu() {
         return konu;

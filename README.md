@@ -2,8 +2,13 @@
 - döneme ait sorular gözükmeli
 - gruplara gözükebilme eklenebilir yada konulara +++++
 - yada grup ve konuya dönem eklenebilir 
-- konuya yeni veri eklerken soru sayisini default 0 yap
 - konular pageable olmalı +++
+  
+- toplu soruda cevaplı olcağı yazmıyor
+- konulardan soruya gidince orda yeni soru ekleme var ordan ekleyince konuyu otomatik ekleyebilir
+- konulardan soru ekleyince soru gösterilsin false ekliyor(güncelleyince düzeliyor)(güzuksun null gidiyor)
+- yeni soru eklerken bir sürü konu içinden seçmek yerine önce grup secilir o gurubun konusu gelir sonra
+
 
 
 - soru güncelleyince bazı veriler siliniyor gözükebilme null oluyor(çüknkü soru entitisinde get set yapmadım)

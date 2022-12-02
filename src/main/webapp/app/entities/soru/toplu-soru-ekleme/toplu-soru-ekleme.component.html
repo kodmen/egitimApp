@@ -32,8 +32,14 @@
             </div>
 
             <div class=" mb-3">
+                <label class="form-label"  for="field_cevap">metinliSorular</label>
+                <input type="text" class="form-control" name="metinliSorular" id="field_cevap" data-cy="cevap"
+                  formControlName="metinliSorular" />
+              </div>
+
+            <div class=" mb-3">
                 <div class="form-check">
-                    <input formControlName="rastgele" class="form-check-input" type="checkbox" value="true"
+                    <input formControlName="cevapli" class="form-check-input" type="checkbox" value="true"
                         id="flexCheckDefault" />
                     <label class="form-check-label" for="flexCheckDefault"> cevaplı sorular </label>
                 </div>

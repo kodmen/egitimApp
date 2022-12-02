@@ -31,7 +31,7 @@
             formControlName="imageContentType" />
         </div> -->
 
-        <div class="row mb-3" >
+        <div class="row mb-3">
           <label class="form-label" for="field_image">Resim</label>
 
           <div>
@@ -54,6 +54,15 @@
             formControlName="imageContentType" />
         </div>
 
+        <div class="row mb-3" [hidden]="editForm.get('resimUrl')!.value == null">
+          <img style="
+            width: 100%;
+            height: auto;
+          " 
+            [src]="'https://temrinbucket.s3.eu-central-1.amazonaws.com/' + editForm.get('resimUrl')!.value" />
+
+        </div>
+
         <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
           <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
           <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id"
@@ -73,8 +82,10 @@
 
         <div class="row mb-3">
           <label class="form-label" for="field_metin">metin</label>
-          <input type="text" class="form-control" name="metin" id="field_metin" data-cy="metin" formControlName="metin" />
-          <div *ngIf="editForm.get('metin')!.invalid && (editForm.get('metin')!.dirty || editForm.get('metin')!.touched)">
+          <input type="text" class="form-control" name="metin" id="field_metin" data-cy="metin"
+            formControlName="metin" />
+          <div
+            *ngIf="editForm.get('metin')!.invalid && (editForm.get('metin')!.dirty || editForm.get('metin')!.touched)">
             <small class="form-text text-danger" *ngIf="editForm.get('metin')?.errors?.maxlength"
               jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 2000 }">
               This field cannot be longer than 2000 characters.
@@ -98,7 +109,7 @@
           <div class="form-check">
             <input class="form-check-input" type="checkbox" id="defaultCheck2" formControlName="gozuksun">
             <label class="form-check-label" for="defaultCheck2">
-             Soru gösterilsin
+              Soru gösterilsin
             </label>
           </div>
         </div>
@@ -154,7 +165,7 @@
         </div>
 
         <div class="row mb-3">
-          <label class="form-label"  for="field_donem">Donem</label>
+          <label class="form-label" for="field_donem">Donem</label>
           <select class="form-control" id="field_donem" data-cy="donem" name="donem" formControlName="donem">
             <option [ngValue]="null"></option>
             <option

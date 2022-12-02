@@ -161,11 +161,12 @@ public class SoruService {
         return fileName;
     }
 
-    // TODO: 29.11.2022 burda gelen değerlerin içleri kontrol edilmeli dtodan boş değer gelmemesi lazım resim ismi yanlış gelirsi konu boş gelirse kontrol yapılmalı
+    // TODO: 2.12.2022 buraya refaktoring lazım
     public List<Soru> topluSoruKaydet(TopluSoru sorular) throws IOException {
         int soruSayisi = 0;
         List<Soru> soruList = new ArrayList<>();
         Soru soru = new Soru();
+
         for (TekliSoru s : sorular.getSorular()) {
             if(s.getName() != "" && s.getType() != "" ){
                 String[] textYazi = s.getType().split("/");
@@ -174,11 +175,25 @@ public class SoruService {
                 String url = uploadAwsImage(s.getType(), s.getImage());
                 String isim = sorular.getKonu().getIsim() + " " + text[0];
 
-                soruList.add(Soru.createSoru(url, parseInt(text[0]), text[1],isim, sorular.getKonu(), sorular.getDonem()));
+                soruList.add(Soru.createSoru(url, parseInt(text[0]), text[1].toUpperCase(),isim, sorular.getKonu(), sorular.getDonem(),sorular.isCevapli()));
                 soruSayisi++;
             }
 
         }
+
+        if ( sorular.getMetinliSorular() != null){
+            String[] metinliSoru = sorular.getMetinliSorular().split(",");
+            for (String s : metinliSoru) {
+                String[] tekSoru = s.split("-", 2);
+                String sira = tekSoru[0];
+                String cevap = tekSoru[1];
+                String isim = sorular.getKonu().getIsim() + " " + sira;
+                soruList.add(Soru.createSoru(parseInt(sira), cevap.toUpperCase(), isim, sorular.getKonu(), sorular.getDonem(),sorular.isCevapli()));
+                soruSayisi++;
+            }
+        }
+
+
         Konu konu = konuService.getById(sorular.getKonu().getId());
         konu.setSoruSayisi(konu.getSoruSayisi() + soruSayisi);
         konuService.konuGuncelle(konu);

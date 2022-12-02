@@ -7,6 +7,7 @@ export interface ITopluSoru {
     konu?: IKonu | null;
     donem?: IDonem | null;
     sorular?: ITekliSoru[] | null;
+    metinliSorular?: string | null;
 }
 
 export class TopluSoru implements ITopluSoru {
@@ -15,5 +16,6 @@ export class TopluSoru implements ITopluSoru {
         public konu?: IKonu | null,
         public donem?: IDonem | null,
         public sorular?: ITekliSoru[] | null,
+        public metinliSorular?: string |null
     ) { }
 }

@@ -220,6 +220,14 @@ public class DenemeService {
         List<Soru> sorular = soruService.getKonubySoru(konu);
 
         // başlangıç ve bitiş değerlerine göre sorular getirliri
+        // yeni eklediğim konulara göre sıra sayısı farklı olacak bunu
+        // sorunun ismini değiştiriyim ama
+
+        // soruları sıraya göre sıralı sonra ilk ve son sorunun değerini al konunun ilk 20  ve son so 30
+
+       // burda soruları sıralarken comporeable kullanacam ilk sorunu ve son sorunun sıralarını alacam ve ekleyeceğim
+
+        //int baslangic = konuDTO.baslangic +
         List<Soru> result = sorular
             .stream()
             .filter(s -> s.getSira() >= konuDTO.baslangic && s.getSira() <= konuDTO.getBitis())

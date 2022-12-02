@@ -19,7 +19,7 @@ public class Soru implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public static Soru createSoru(String url,int sira, String cevap,String isim,Konu konu, Donem donem){
+    public static Soru createSoru(String url,int sira, String cevap,String isim,Konu konu, Donem donem, boolean cevapli){
         Soru soru = new Soru();
         soru.setResimUrl(url);
         soru.setSira(sira);
@@ -28,7 +28,19 @@ public class Soru implements Serializable {
         soru.setDonem(donem);
         soru.setIsim(isim);
         soru.setGozuksun(true);
-        soru.setCevapli(true);
+        soru.setCevapli(cevapli);
+        return soru;
+    }
+
+    public static Soru createSoru(int sira, String cevap,String isim,Konu konu, Donem donem,boolean cevapli){
+        Soru soru = new Soru();
+        soru.setSira(sira);
+        soru.setCevap(cevap);
+        soru.setKonu(konu);
+        soru.setDonem(donem);
+        soru.setIsim(isim);
+        soru.setGozuksun(true);
+        soru.setCevapli(cevapli);
         return soru;
     }
 

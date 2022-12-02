@@ -25,6 +25,7 @@ export class TopluSoruEklemeComponent implements OnInit {
     cevapli: [],
     konu: [],
     donem: [],
+    metinliSorular:[]
   });
   konusSharedCollection: IKonu[] = [];
   donemsSharedCollection: IDonem[] = [];
@@ -113,7 +114,8 @@ export class TopluSoruEklemeComponent implements OnInit {
       this.topluSoru.get(['cevapli'])!.value,
       this.topluSoru.get(['konu'])!.value,
       this.topluSoru.get(['donem'])!.value,
-      konular
+      konular,
+      this.topluSoru.get(['metinliSorular'])!.value
     );
   }
 
