@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * A Soru.
@@ -15,7 +16,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Entity
 @Table(name = "soru")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class Soru implements Serializable {
+public class Soru implements Serializable,Comparable<Soru> {
 
     private static final long serialVersionUID = 1L;
 
@@ -337,5 +338,10 @@ public class Soru implements Serializable {
             ", d='" + getD() + "'" +
             ", cevapli='" + getCevapli() + "'" +
             "}";
+    }
+
+    @Override
+    public int compareTo(@NotNull Soru o) {
+        return Integer.compare(getSira(), o.getSira());
     }
 }

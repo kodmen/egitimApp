@@ -4,11 +4,11 @@
 - yada grup ve konuya dönem eklenebilir 
 - konular pageable olmalı +++
   
-- toplu soruda cevaplı olcağı yazmıyor
 - konulardan soruya gidince orda yeni soru ekleme var ordan ekleyince konuyu otomatik ekleyebilir
 - konulardan soru ekleyince soru gösterilsin false ekliyor(güncelleyince düzeliyor)(güzuksun null gidiyor)
 - yeni soru eklerken bir sürü konu içinden seçmek yerine önce grup secilir o gurubun konusu gelir sonra
 
+- admin denemeye pageable yapılmalı
 
 
 - soru güncelleyince bazı veriler siliniyor gözükebilme null oluyor(çüknkü soru entitisinde get set yapmadım)

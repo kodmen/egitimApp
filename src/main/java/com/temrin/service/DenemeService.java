@@ -219,18 +219,20 @@ public class DenemeService {
         // konuya ait sorular getirilir
         List<Soru> sorular = soruService.getKonubySoru(konu);
 
-        // başlangıç ve bitiş değerlerine göre sorular getirliri
-        // yeni eklediğim konulara göre sıra sayısı farklı olacak bunu
-        // sorunun ismini değiştiriyim ama
 
-        // soruları sıraya göre sıralı sonra ilk ve son sorunun değerini al konunun ilk 20  ve son so 30
+        Collections.sort(sorular,Collections.reverseOrder());
+        int bitis = sorular.get(0).getSira();
+        int baslangic ;
 
-       // burda soruları sıralarken comporeable kullanacam ilk sorunu ve son sorunun sıralarını alacam ve ekleyeceğim
+        if (sorular.get(sorular.size()-1).getSira() == 1){
+            baslangic = konuDTO.baslangic;
+        }else{
+            baslangic = konuDTO.baslangic + sorular.get(sorular.size()-1).getSira();
+        }
 
-        //int baslangic = konuDTO.baslangic +
         List<Soru> result = sorular
             .stream()
-            .filter(s -> s.getSira() >= konuDTO.baslangic && s.getSira() <= konuDTO.getBitis())
+            .filter(s -> s.getSira() >= (baslangic) && s.getSira() <= (konuDTO.getBitis() + baslangic ))
             .collect(Collectors.toList());
 
         return belliSoruyuGetir(result, konuDTO.getSoruSayisi());
