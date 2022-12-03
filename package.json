@@ -151,6 +151,7 @@
     "reportFile": "TESTS-results-sonar.xml"
   },
   "overrides": {
-    "webpack": "5.71.0"
+    "webpack": "5.71.0",
+    "autoprefixer": "10.4.5"
   }
 }
