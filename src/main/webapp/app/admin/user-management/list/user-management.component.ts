@@ -10,6 +10,7 @@ import { Account } from 'app/core/auth/account.model';
 import { UserManagementService } from '../service/user-management.service';
 import { User } from '../user-management.model';
 import { UserManagementDeleteDialogComponent } from '../delete/user-management-delete-dialog.component';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'jhi-user-mgmt',
@@ -25,17 +26,33 @@ export class UserManagementComponent implements OnInit {
   predicate!: string;
   ascending!: boolean;
 
+  seacrhUser: User | null = null;
+
+  search = this.fb.group({
+    text: [],
+  });
+
   constructor(
     private userService: UserManagementService,
     private accountService: AccountService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
     this.accountService.identity().subscribe(account => (this.currentAccount = account));
     this.handleNavigation();
+  }
+
+  searchText(): void {
+    const seacrh = this.search.get(['text'])!.value;
+    this.userService.seacrh(seacrh).subscribe(res => {
+      if (res.body) {
+        this.seacrhUser = res.body;
+      }
+    });
   }
 
   setActive(user: User, isActivated: boolean): void {

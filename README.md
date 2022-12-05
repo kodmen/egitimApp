@@ -3,13 +3,20 @@
 - gruplara gözükebilme eklenebilir yada konulara +++++
 - yada grup ve konuya dönem eklenebilir 
 - konular pageable olmalı +++
+
+- toplu soru eklenirken metin silinmiyor 
+- soru olarak göster diye bir şey koyulabilir soru liste
+
+- ders çalış sayfasına soruları çağırınca drapdown koymak lazım istediğiimiz soruya gitme eklenmeli
+- grup da listte gozuksun yeri yanlış
+- deneme oluştuurken toplam soru sayısı gözüksün 
+- hocalarda denemeler kısmı pageable olmalı
   
 - konulardan soruya gidince orda yeni soru ekleme var ordan ekleyince konuyu otomatik ekleyebilir
 - konulardan soru ekleyince soru gösterilsin false ekliyor(güncelleyince düzeliyor)(güzuksun null gidiyor)
 - yeni soru eklerken bir sürü konu içinden seçmek yerine önce grup secilir o gurubun konusu gelir sonra
 
 - admin denemeye pageable yapılmalı
-
 
 - soru güncelleyince bazı veriler siliniyor gözükebilme null oluyor(çüknkü soru entitisinde get set yapmadım)
 - + soruya göster(boolean) diye bir alan daha eklenmeli ve döneme bu soruları gösterme diye fonksiyon eklenebilir

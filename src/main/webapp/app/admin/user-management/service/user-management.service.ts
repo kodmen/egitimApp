@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
@@ -28,6 +28,17 @@ export class UserManagementService {
   query(req?: Pagination): Observable<HttpResponse<IUser[]>> {
     const options = createRequestOption(req);
     return this.http.get<IUser[]>(this.resourceUrl, { params: options, observe: 'response' });
+  }
+
+  seacrh(seacrh?:string): Observable<HttpResponse<IUser>> {
+   // const options = createRequestOption(seacrh);
+           let queryParams = new HttpParams();
+
+   if(seacrh){
+    queryParams = queryParams.append("seacrh",seacrh);
+   }
+
+    return this.http.get<IUser>(this.resourceUrl+"/search", { params: queryParams, observe: 'response' });
   }
 
   delete(login: string): Observable<{}> {

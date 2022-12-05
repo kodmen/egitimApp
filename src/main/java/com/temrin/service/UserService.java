@@ -15,6 +15,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import org.checkerframework.checker.nullness.Opt;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.CacheManager;
@@ -279,6 +280,16 @@ public class UserService {
     @Transactional(readOnly = true)
     public Page<AdminUserDTO> getAllManagedUsers(Pageable pageable) {
         return userRepository.findAll(pageable).map(AdminUserDTO::new);
+    }
+
+    @Transactional(readOnly = true)
+    public AdminUserDTO getUserSeacrh(String login) {
+        Optional<User> user = userRepository.findOneByLogin(login);
+        if (user.isPresent()){
+            return new AdminUserDTO(user.get());
+        }else{
+            return null;
+        }
     }
 
     @Transactional(readOnly = true)
