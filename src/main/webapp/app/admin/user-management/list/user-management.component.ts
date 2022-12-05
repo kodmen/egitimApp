@@ -89,6 +89,8 @@ export class UserManagementComponent implements OnInit {
         },
         error: () => (this.isLoading = false),
       });
+
+      this.seacrhUser = null;
   }
 
   transition(): void {

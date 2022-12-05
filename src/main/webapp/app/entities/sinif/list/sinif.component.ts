@@ -5,6 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ISinif } from '../sinif.model';
 import { SinifService } from '../service/sinif.service';
 import { SinifDeleteDialogComponent } from '../delete/sinif-delete-dialog.component';
+import { Clipboard } from '@angular/cdk/clipboard';
 
 @Component({
   selector: 'jhi-sinif',
@@ -16,7 +17,7 @@ export class SinifComponent implements OnInit {
 
   isSinif = false;
 
-  constructor(protected sinifService: SinifService, protected modalService: NgbModal) {}
+  constructor(protected sinifService: SinifService, protected modalService: NgbModal,private clipboard: Clipboard) {}
 
   ogrenciSinifVarmi():void{
     this.sinifService.ogrenciSinifVarMi().subscribe(res=>{
@@ -40,6 +41,10 @@ export class SinifComponent implements OnInit {
       },
     });
   }
+
+  copyText(textToCopy: string):void {
+    this.clipboard.copy(textToCopy);
+}
 
   ngOnInit(): void {
     this.loadAll();

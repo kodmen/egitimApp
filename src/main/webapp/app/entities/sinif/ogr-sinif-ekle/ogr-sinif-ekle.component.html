@@ -1,36 +1,30 @@
 <div class="d-flex justify-content-center">
     <div class="col-8">
 
-        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+        <ng-container *ngIf="isError">
+            <div class="alert alert-danger" role="alert">
+               {{this.ErrorMessage}}
+              </div>
+        </ng-container>
+        
+
+        <form name="yurtKodForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="yurtKodForm">
 
             <div class="row mb-3">
-                <label class="form-label" jhiTranslate="temrinMatikApp.sinif.yurt" for="field_yurt">Yurt</label>
-                <select (change)="onChange($event.target)" class="form-control" id="field_yurt" data-cy="yurt"
-                    name="yurt" formControlName="yurt">
-                    <option [ngValue]="null"></option>
-                    <option
-                        [ngValue]="yurtOption.id === editForm.get('yurt')!.value?.id ? editForm.get('yurt')!.value : yurtOption"
-                        *ngFor="let yurtOption of yurtsSharedCollection; trackBy: trackYurtById">
-                        {{ yurtOption.isim }}
-                    </option>
-                </select>
-            </div>
-
-            <div *ngIf="sinifsSharedCollection.length >0" class="row mb-3">
-                <label class="form-label" for="field_yurt">sinif</label>
-                <select (change)="onChange($event.target)" class="form-control" id="field_yurt" data-cy="yurt"
-                    name="yurt" formControlName="sinif">
-                    <option [ngValue]="null"></option>
-                    <option
-                        [ngValue]="sinifOption.id === editForm.get('sinif')!.value?.id ? editForm.get('sinif')!.value : sinifOption"
-                        *ngFor="let sinifOption of sinifsSharedCollection; trackBy: trackSinifById">
-                        {{ sinifOption.isim }}
-                    </option>
-                </select>
-            </div>
+                <label class="form-label"  for="field_isim"
+                  [ngbTooltip]="'temrinMatikApp.sinif.help.isim' | translate">Sınıf kodu</label>
+                <input type="text" class="form-control" name="sinifKod" id="field_isim" data-cy="isim" formControlName="sinifKod" />
+                <div *ngIf="yurtKodForm.get('sinifKod')!.invalid && (yurtKodForm.get('sinifKod')!.dirty || yurtKodForm.get('sinifKod')!.touched)">
+                  <small class="form-text text-danger" *ngIf="yurtKodForm.get('sinifKod')?.errors?.maxlength"
+                    jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 500 }">
+                    This field cannot be longer than 500 characters.
+                  </small>
+                </div>
+              </div>
+      
 
             <button type="submit" id="save-entity" data-cy="entityCreateSaveButton"
-                [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                 class="btn btn-primary">
                 <fa-icon icon="save"></fa-icon>&nbsp;<span>Sinif kaydet</span>
             </button>
 

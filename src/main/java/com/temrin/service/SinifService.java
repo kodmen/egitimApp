@@ -5,11 +5,13 @@ import com.temrin.domain.Sinif;
 import com.temrin.domain.User;
 import com.temrin.domain.Yurt;
 import com.temrin.repository.SinifRepository;
+import com.temrin.web.rest.errors.BadRequestAlertException;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static com.temrin.security.SecurityUtils.getCurrentUserLogin;
 
@@ -19,11 +21,13 @@ public class SinifService {
     public final SinifRepository sinifRepository;
     public final YurtService yurtService;
     public final UserService userService;
+    public final EncryptAndDecryptService encryptAndDecryptService;
 
-    public SinifService(SinifRepository sinifRepository, YurtService yurtService, UserService userService) {
+    public SinifService(SinifRepository sinifRepository, YurtService yurtService, UserService userService, EncryptAndDecryptService encryptAndDecryptService) {
         this.sinifRepository = sinifRepository;
         this.yurtService = yurtService;
         this.userService = userService;
+        this.encryptAndDecryptService = encryptAndDecryptService;
     }
 
     public List<Sinif> getAllSinif() {
@@ -35,7 +39,12 @@ public class SinifService {
                 if (y != null) return sinifRepository.findByYurt(y);
                 return Collections.emptyList();
             case "ROLE_HOCA":
-                return sinifRepository.findByHocaIsCurrentUser();
+                List<Sinif> sinifList = sinifRepository.findByHocaIsCurrentUser();
+                sinifList.stream().map(sinif -> {
+                    sinif.setKonulimizjson(encryptAndDecryptService.encodeToBase64(sinif.getId().toString()));
+                    return sinif;
+                }).collect(Collectors.toList());
+                return sinifList;
             case "ROLE_USER":
                 Optional<User> u = userService.getUserLogin(getCurrentUserLogin().get());
 
@@ -73,10 +82,19 @@ public class SinifService {
         return sinifRepository.existsByOgrencilersContains(current);
     }
 
-    public void ogrenciSinifaEkle(long id){
+    public Sinif ogrenciSinifaEkle(String kod){
+        String sinifId;
+        try{
+             sinifId = encryptAndDecryptService.decodeFromBase64(kod);
+        }catch (IllegalArgumentException e){
+            throw new BadRequestAlertException("Entity not found", "sinif", "geçersiz id");
+        }
+
+
         User current = userService.getCurrentUser();
-        Sinif sinif = sinifRepository.getById(id);
+        Sinif sinif = sinifRepository.getById(Long.parseLong(sinifId));
         sinif.getOgrencilers().add(current);
+        return sinif;
     }
 
     public List<Sinif> getSinifByYurt(long y){

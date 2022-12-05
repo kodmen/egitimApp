@@ -13,74 +13,30 @@ import { ISinif } from '../sinif.model';
   templateUrl: './ogr-sinif-ekle.component.html',
   styleUrls: ['./ogr-sinif-ekle.component.scss'],
 })
-export class OgrSinifEkleComponent implements OnInit {
-  yurtsSharedCollection: IYurt[] = [];
-  sinifsSharedCollection: ISinif[] = [];
-  isSaving = false;
+export class OgrSinifEkleComponent {
+  isError = false;
+  ErrorMessage: string;
 
-  editForm = this.fb.group({
-    yurt: ["",[Validators.required]],
-    sinif: ["",[Validators.required]],
+  yurtKodForm = this.fb.group({
+    sinifKod: ['', [Validators.required]],
   });
 
-  constructor(private router:Router,private yurtService: YurtService, private sinifService: SinifService, private fb: FormBuilder) {}
+  constructor(private router: Router, private sinifService: SinifService, private fb: FormBuilder) {}
 
-  onChange(deviceValue:any):void {
-    console.log(deviceValue);
-    const yurt = this.editForm.get(['yurt'])!.value;
-  
-    if(this.editForm.get(['yurt'])!.value){
-      this.sinifService.getSinifByYurtId(yurt.id).subscribe(res=>{
-        this.sinifsSharedCollection = res.body!;
-        console.log("sinif geldi");
-        console.log(this.sinifsSharedCollection);
-        
-      })
-    }else{
-      this.sinifsSharedCollection = [];
+  save(): void {
+    const kod: string = this.yurtKodForm.get(['sinifKod'])!.value;
+
+    if (this.yurtKodForm.status === 'VALID') {
+      this.sinifService.ogrSinifAta(kod).subscribe(
+        res => {
+          this.router.navigate(['sinif']);
+        },
+        err => {
+          console.log('error');
+          this.ErrorMessage = err.error.errorKey;
+          this.isError = true;
+        }
+      );
     }
-}
-
-  ngOnInit(): void {
-    this.loadRelationshipsOptions();
   }
-
-  trackYurtById(_index: number, item: IYurt): number {
-    return item.id!;
-  }
-
-  trackSinifById(_index: number, item: ISinif): number {
-    return item.id!;
-  }
-
-  save():void{
-    console.log("eklendi");
-console.log(!this.editForm.invalid);
-
-    // if(this.editForm.invalid){
-      const sinif = this.editForm.get(['sinif'])!.value;
-
-      this.sinifService.ogrSinifAta(sinif.id).subscribe(res=>{
-        console.log("ogrenci sinifa eklendi");
-        this.router.navigate(['sinif']);
-        console.log(res);
-        
-      })
-
-
-    // }
-
-  
-    
-  }
-
-  protected loadRelationshipsOptions(): void {
-       this.yurtService
-      .query()
-      .pipe(map((res: HttpResponse<IYurt[]>) => res.body ?? []))
-      .pipe(map((yurts: IYurt[]) => this.yurtService.addYurtToCollectionIfMissing(yurts, this.editForm.get('yurt')!.value)))
-      .subscribe((yurts: IYurt[]) => (this.yurtsSharedCollection = yurts));
-  }
-
-
 }

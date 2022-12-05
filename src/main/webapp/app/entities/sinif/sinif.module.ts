@@ -7,9 +7,10 @@ import { SinifDeleteDialogComponent } from './delete/sinif-delete-dialog.compone
 import { SinifRoutingModule } from './route/sinif-routing.module';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { OgrSinifEkleComponent } from './ogr-sinif-ekle/ogr-sinif-ekle.component';
+import { ClipboardModule } from '@angular/cdk/clipboard';
 
 @NgModule({
-  imports: [SharedModule, SinifRoutingModule,NgMultiSelectDropDownModule.forRoot()],
+  imports: [SharedModule, SinifRoutingModule,NgMultiSelectDropDownModule.forRoot(),ClipboardModule],
   declarations: [SinifComponent, SinifDetailComponent, SinifUpdateComponent, SinifDeleteDialogComponent, OgrSinifEkleComponent],
   entryComponents: [SinifDeleteDialogComponent],
 })

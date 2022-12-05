@@ -6,6 +6,7 @@ import com.temrin.repository.SinifRepository;
 import com.temrin.security.AuthoritiesConstants;
 import com.temrin.service.SinifService;
 import com.temrin.web.rest.errors.BadRequestAlertException;
+
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -71,7 +72,7 @@ public class SinifResource {
     /**
      * {@code PUT  /sinifs/:id} : Updates an existing sinif.
      *
-     * @param id the id of the sinif to save.
+     * @param id    the id of the sinif to save.
      * @param sinif the sinif to update.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated sinif,
      * or with status {@code 400 (Bad Request)} if the sinif is not valid,
@@ -103,7 +104,7 @@ public class SinifResource {
     /**
      * {@code PATCH  /sinifs/:id} : Partial updates given fields of an existing sinif, field will ignore if it is null
      *
-     * @param id the id of the sinif to save.
+     * @param id    the id of the sinif to save.
      * @param sinif the sinif to update.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated sinif,
      * or with status {@code 400 (Bad Request)} if the sinif is not valid,
@@ -111,7 +112,7 @@ public class SinifResource {
      * or with status {@code 500 (Internal Server Error)} if the sinif couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @PatchMapping(value = "/sinifs/{id}", consumes = { "application/json", "application/merge-patch+json" })
+    @PatchMapping(value = "/sinifs/{id}", consumes = {"application/json", "application/merge-patch+json"})
     public ResponseEntity<Sinif> partialUpdateSinif(
         @PathVariable(value = "id", required = false) final Long id,
         @NotNull @RequestBody Sinif sinif
@@ -157,8 +158,9 @@ public class SinifResource {
     @GetMapping("/sinifs")
     public List<Sinif> getAllSinifs(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get all Sinifs");
-//        return sinifRepository.findAllWithEagerRelationships();
-        return sinifService.getAllSinif();    }
+        return sinifService.getAllSinif();
+
+    }
 
     /**
      * {@code GET  /sinifs/:id} : get the "id" sinif.
@@ -192,7 +194,7 @@ public class SinifResource {
 
     @GetMapping("/sinifs/user")
     public ResponseEntity<Boolean> getUserbysinif() {
-        log.debug("REST request to get User : {}" );
+        log.debug("REST request to get User : {}");
         boolean varmi = sinifService.ogrenciSinifIceriyormu();
         return ResponseEntity.ok(varmi);
     }
@@ -203,11 +205,12 @@ public class SinifResource {
         return ResponseEntity.ok(sinifService.getSinifByYurt(id));
     }
 
-    @GetMapping("/sinifs/yurt-ekle/{id}")
-    public ResponseEntity ogrSinifEkle(@PathVariable long id) {
-        log.debug("REST request to get Sinif by yurt : {}", id);
-        sinifService.ogrenciSinifaEkle(id);
-        return ResponseEntity.ok().build();
+    @GetMapping("/sinifs/yurt-ekle/{kod}")
+    public ResponseEntity<Sinif> ogrSinifEkle(@PathVariable String kod) {
+        log.debug("REST request to get Sinif by yurt : {}", kod);
+        Sinif s = sinifService.ogrenciSinifaEkle(kod);
+
+        return ResponseEntity.ok(s);
     }
 
 

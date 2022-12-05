@@ -20,8 +20,8 @@ export class SinifService {
     return this.http.get<ISinif[]>(this.resourceUrl + `/yurt/${id}`, { observe: 'response' });
   }
 
-  ogrSinifAta(id: number): Observable<EntityResponseType> {
-    return this.http.get(this.resourceUrl+ `/yurt-ekle/${id}`, { observe: 'response' });
+  ogrSinifAta(kod: string): Observable<EntityResponseType> {
+    return this.http.get(this.resourceUrl+ `/yurt-ekle/${kod}`, { observe: 'response' });
   }
 
   ogrenciSinifVarMi(): Observable<boolean> {
