@@ -111,6 +111,12 @@
     <dependencies>
 
         <dependency>
+            <groupId>io.github.eisop</groupId>
+            <artifactId>checker-qual</artifactId>
+            <version>3.0.0-b2</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>
             <version>16.0.1</version>

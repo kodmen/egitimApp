@@ -8,6 +8,7 @@ import com.temrin.repository.SinifRepository;
 import com.temrin.web.rest.errors.BadRequestAlertException;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -60,48 +61,59 @@ public class SinifService {
         // burda gelen sınıf ilişkisiz bunu ilişkili yapmak lazım
         List<Sinif> sinifList = sinifRepository.findByOgrencilersIsContaining(user);
 
-        if (sinifList.isEmpty()){
+        if (sinifList.isEmpty()) {
             return new Sinif();
         }
         return sinifList.get(0);
 
     }
 
-    public Sinif getSinifByHoca(User hoca){
+    public Sinif getSinifByHoca(User hoca) {
         return sinifRepository.findByHoca(hoca);
     }
 
-    public Sinif getCurrentUserSinif(){
+    public Sinif getCurrentUserSinif() {
         List<Sinif> sinifList = sinifRepository.findByHocaIsCurrentUser();
         return sinifList.size() > 0 ? sinifList.get(0) : null;
     }
 
-    public boolean ogrenciSinifIceriyormu(){
+    public boolean ogrenciSinifIceriyormu() {
         User current = userService.getCurrentUser();
 //        Optional<User> u = userService.findByLogin(login);
         return sinifRepository.existsByOgrencilersContains(current);
     }
 
-    public Sinif ogrenciSinifaEkle(String kod){
+    public Sinif ogrenciSinifaEkle(String kod) {
         String sinifId;
-        try{
-             sinifId = encryptAndDecryptService.decodeFromBase64(kod);
-        }catch (IllegalArgumentException e){
-            throw new BadRequestAlertException("Entity not found", "sinif", "geçersiz id");
+        Sinif sinif;
+        long id;
+
+        try {
+            sinifId = encryptAndDecryptService.decodeFromBase64(kod);
+            id = Long.parseLong(sinifId);
+            sinif = sinifRepository.getById(id);
+        } catch (IllegalArgumentException e) {
+            throw new BadRequestAlertException("kod çevrilemedi", "sinif", "geçersiz kod");
+        } catch (EntityNotFoundException e) {
+            sinif = null;
+            throw new BadRequestAlertException("girilen kod ile sinif bulunamadı", "sinif", "geçersiz kod");
+        } catch (Exception e) {
+            throw new BadRequestAlertException("girilen kod yanlis", "sinif", "geçersiz kod");
         }
 
-
         User current = userService.getCurrentUser();
-        Sinif sinif = sinifRepository.getById(Long.parseLong(sinifId));
-        sinif.getOgrencilers().add(current);
+
+        if (sinif != null)
+            sinif.getOgrencilers().add(current);
+
         return sinif;
     }
 
-    public List<Sinif> getSinifByYurt(long y){
+    public List<Sinif> getSinifByYurt(long y) {
         return sinifRepository.findByYurt_Id(y);
     }
 
-    public List<Sinif> getAllSinifByYurt(Yurt y){
+    public List<Sinif> getAllSinifByYurt(Yurt y) {
         return sinifRepository.findByYurt(y);
     }
 

@@ -25,25 +25,26 @@ public class EncryptAndDecryptService {
         return decodedString;
     }
 
-//    public static void main(String[] args) {
-//        String sifre = encodeToBase64("2056");
-//        System.out.println(sifre);
-//        System.out.println("duzentme");
-//        System.out.println(decodeFromBase64(sifre));
-//        try{
-//            System.out.println(decodeFromBase64("MjAE1Ng=="));
-//
-//        }catch (IllegalArgumentException e){
-//            System.out.println("sifre patlıyor");
-//        }catch (Exception e){
-//            System.out.println("farklı hata");
-//        }
-//        /**
-//         * MzQxOA==
-//         * duzentme
-//         * 3418
-//         */
-//    }
+    public static void main(String[] args) {
+        EncryptAndDecryptService e = new EncryptAndDecryptService();
+        String sifre = e.encodeToBase64("20A56");
+        System.out.println(sifre);
+        System.out.println("duzentme");
+        System.out.println(e.decodeFromBase64(sifre));
+        try{
+            System.out.println(e.decodeFromBase64("MjAE1Ng=="));
+
+        }catch (IllegalArgumentException e1){
+            System.out.println("sifre patlıyor");
+        }catch (Exception e1){
+            System.out.println("farklı hata");
+        }
+        /**
+         * MzQxOA==
+         * duzentme
+         * 3418
+         */
+    }
 
 
 }
