@@ -1,10 +1,9 @@
 ## ilk öncelik
 - döneme ait sorular gözükmeli
-- gruplara gözükebilme eklenebilir yada konulara +++++
+- gruplara gözükebilme eklenebilir yada konulara +++++ ( gruplara eklendi)
 - yada grup ve konuya dönem eklenebilir 
 - konular pageable olmalı +++
 
-- toplu soru eklenirken metin silinmiyor 
 - soru olarak göster diye bir şey koyulabilir soru liste
 
 - ders çalış sayfasına soruları çağırınca drapdown koymak lazım istediğiimiz soruya gitme eklenmeli

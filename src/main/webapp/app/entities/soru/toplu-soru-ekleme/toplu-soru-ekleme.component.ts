@@ -83,12 +83,13 @@ export class TopluSoruEklemeComponent implements OnInit {
   }
 
   formBosalit(): void {
-    this.topluSoru.patchValue({ konu: null, donem: null});
+    this.topluSoru.patchValue({ konu: null, donem: null, metinliSorular:null});
     
     for (let index = 0; index < this.sorularFieldAsFormArray.controls.length; index++) {
       const element = this.sorularFieldAsFormArray.controls[index];      
       element.patchValue({name:'',type:'',resim:''})
     }
+
   }
 
   trackKonuById(_index: number, item: IKonu): number {
