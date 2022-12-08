@@ -9,8 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.Collections;
 import java.util.List;
 
-import static com.temrin.security.AuthoritiesConstants.ADMIN;
-import static com.temrin.security.AuthoritiesConstants.HOCA;
+import static com.temrin.security.AuthoritiesConstants.*;
 
 @Service
 public class KonuService {
@@ -44,6 +43,7 @@ public class KonuService {
                 Sinif sinif = sinifService.getSinifByHoca(userService.getCurrentUser());
                 return repository.findAllByGruplar(sinif.getGrup());
             case ADMIN:
+            case EDITOR:
                 return repository.findAll();
             default:
                 return Collections.emptyList();

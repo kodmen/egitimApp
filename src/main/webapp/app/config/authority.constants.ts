@@ -3,5 +3,6 @@ export enum Authority {
   USER = 'ROLE_USER',
   HOCA = 'ROLE_HOCA',
   MESUL = 'ROLE_MESUL',
-  KOMISYON = 'ROLE_KOMISYON'
+  KOMISYON = 'ROLE_KOMISYON',
+  EDITOR = 'ROLE_EDITOR'
 }

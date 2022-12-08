@@ -13,6 +13,8 @@ public final class AuthoritiesConstants {
 
     public static final String MESUL = "ROLE_MESUL";
 
+    public static final String EDITOR = "ROLE_EDITOR";
+
     public static final String KOMISYON = "ROLE_KOMISYON";
 
     public static final String ANONYMOUS = "ROLE_ANONYMOUS";

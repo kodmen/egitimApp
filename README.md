@@ -3,6 +3,8 @@
 - gruplara gözükebilme eklenebilir yada konulara +++++ ( gruplara eklendi)
 - yada grup ve konuya dönem eklenebilir 
 - konular pageable olmalı +++
+- editor ve komisyon eklenmeli önemli olan editor 
+- AUTH KISMI düzeltilmeli
 
 - soru olarak göster diye bir şey koyulabilir soru liste
 
