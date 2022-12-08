@@ -207,14 +207,14 @@ public class DenemeAnalizResource {
     }
 
 
-    @GetMapping("/deneme-analizs/siralama")
-    public ResponseEntity<List<DenemeAnalizSiralamaDto>> getAllAnaliz(@org.springdoc.api.annotations.ParameterObject Pageable pageable) {
-
-        final Page<DenemeAnalizSiralamaDto> page = denemeAnalizService.getAllAnaliz(pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
-        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
-
-    }
+//    @GetMapping("/deneme-analizs/siralama")
+//    public ResponseEntity<List<DenemeAnalizSiralamaDto>> getAllAnaliz(@org.springdoc.api.annotations.ParameterObject Pageable pageable) {
+//
+//        final Page<DenemeAnalizSiralamaDto> page = denemeAnalizService.getAllAnaliz(pageable);
+//        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+//        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+//
+//    }
 
     /**
      * {@code DELETE  /deneme-analizs/:id} : delete the "id" denemeAnaliz.

@@ -38,35 +38,35 @@ public class DenemeAnalizService {
      *
      * @return
      */
-    public Page<DenemeAnalizSiralamaDto> getAllAnaliz(Pageable pageable) {
-        List<DenemeAnalizSiralamaDto> dtos = new ArrayList<>();
-
-        Deneme gunlukDeneme = denemeService.getGunlukDeneme();
-        Pageable p = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize());
-
-        Page<DenemeAnaliz> top10analiz = repository.findAllByDenemeOrderByPuanDescSureAsc(gunlukDeneme, p);
-
-        for (DenemeAnaliz analiz : top10analiz.getContent()) {
-            DenemeAnalizSiralamaDto dto = new DenemeAnalizSiralamaDto();
-            dto.setSure(analiz.getSure());
-            dto.setPuan(analiz.getPuan());
-            dto.setUser(analiz.getUser());
-
-            Sinif s = sinifService.getOrgSinif(analiz.getUser());
-            if (s.getYurt() != null) {
-                String yurtIsim = s.getYurt().getIsim();
-                dto.setYurt(yurtIsim);
-            }
-
-
-            dtos.add(dto);
-        }
-
-        //gönderilecek içerik pageable nesne ve toplam eleman sayisi
-        Page<DenemeAnalizSiralamaDto> pages = new PageImpl<DenemeAnalizSiralamaDto>(dtos, pageable, top10analiz.getTotalElements());
-
-        return pages;
-    }
+//    public Page<DenemeAnalizSiralamaDto> getAllAnaliz(Pageable pageable) {
+//        List<DenemeAnalizSiralamaDto> dtos = new ArrayList<>();
+//
+//        Deneme gunlukDeneme = denemeService.getGunlukDeneme();
+//        Pageable p = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize());
+//
+//        Page<DenemeAnaliz> top10analiz = repository.findAllByDenemeOrderByPuanDescSureAsc(gunlukDeneme, p);
+//
+//        for (DenemeAnaliz analiz : top10analiz.getContent()) {
+//            DenemeAnalizSiralamaDto dto = new DenemeAnalizSiralamaDto();
+//            dto.setSure(analiz.getSure());
+//            dto.setPuan(analiz.getPuan());
+//            dto.setUser(analiz.getUser());
+//
+//            Sinif s = sinifService.getOrgSinif(analiz.getUser());
+//            if (s.getYurt() != null) {
+//                String yurtIsim = s.getYurt().getIsim();
+//                dto.setYurt(yurtIsim);
+//            }
+//
+//
+//            dtos.add(dto);
+//        }
+//
+//        //gönderilecek içerik pageable nesne ve toplam eleman sayisi
+//        Page<DenemeAnalizSiralamaDto> pages = new PageImpl<DenemeAnalizSiralamaDto>(dtos, pageable, top10analiz.getTotalElements());
+//
+//        return pages;
+//    }
 
     public boolean existDenemeAndUser(long id, User u) {
         return repository.existsByDeneme_IdAndUser(id, u);

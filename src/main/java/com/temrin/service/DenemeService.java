@@ -277,16 +277,16 @@ public class DenemeService {
         }
     }
 
-    /**
-     * burda adminin olusturudğu günlük denemeleri getircek
-     * en son hangi denemeyi oluşturduysa onu getircek
-     *
-     * @return
-     */
-    public Deneme getGunlukDeneme() {
-        Optional<User> admin = userService.getUserLogin("admin");
-        return repository.findTopByOlusturanOrderByIdDesc(admin.get());
-    }
+//    /**
+//     * burda adminin olusturudğu günlük denemeleri getircek
+//     * en son hangi denemeyi oluşturduysa onu getircek
+//     *
+//     * @return
+//     */
+//    public Deneme getGunlukDeneme() {
+//        Optional<User> admin = userService.getUserLogin("admin");
+//        return repository.findTopByOlusturanOrderByIdDesc(admin.get());
+//    }
 
     private List<Deneme> getOgrDeneme() {
         // bir gün önce
@@ -300,10 +300,11 @@ public class DenemeService {
         Sinif s = sinifService.getOrgSinif(u.get());
         List<Deneme> userAitDenemeler = repository.findAllByBaslamaTarihBetweenAndOlusturan(tt, dd, s.getHoca());
         if (userAitDenemeler.size() > 0){
-            userAitDenemeler.add(getGunlukDeneme());
+            //userAitDenemeler.add(getGunlukDeneme());
             return userAitDenemeler;
         }
-        return Collections.singletonList(getGunlukDeneme());
+        return Collections.emptyList();
+       // return Collections.singletonList(getGunlukDeneme());
     }
 
     private List<Deneme> getMesulDeneme() {
