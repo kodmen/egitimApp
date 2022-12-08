@@ -60,6 +60,7 @@ public class CacheConfiguration {
             createCache(cm, com.temrin.domain.Deneme.class.getName());
             createCache(cm, com.temrin.domain.Deneme.class.getName() + ".sorulars");
             createCache(cm, com.temrin.domain.Donem.class.getName());
+            createCache(cm, com.temrin.domain.Mesaj.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

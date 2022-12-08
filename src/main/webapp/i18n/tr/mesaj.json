@@ -1,0 +1,28 @@
+{
+  "temrinMatikApp": {
+    "mesaj": {
+      "home": {
+        "title": "Mesajs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Mesaj",
+        "createOrEditLabel": "Create or edit a Mesaj",
+        "notFound": "No Mesajs found"
+      },
+      "created": "A new Mesaj is created with identifier {{ param }}",
+      "updated": "A Mesaj is updated with identifier {{ param }}",
+      "deleted": "A Mesaj is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Mesaj {{ id }}?"
+      },
+      "detail": {
+        "title": "Mesaj"
+      },
+      "id": "ID",
+      "userName": "User Name",
+      "eposta": "Eposta",
+      "mesaj": "Mesaj",
+      "goruldu": "Goruldu",
+      "tarih": "Tarih"
+    }
+  }
+}

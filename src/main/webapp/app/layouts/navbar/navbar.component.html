@@ -27,6 +27,15 @@
           </a>
         </li>
 
+        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <a class="nav-link" routerLink="/mesaj/iletisim" (click)="collapseNavbar()">
+            <span>
+              <fa-icon icon="message"></fa-icon>
+              
+                           <span  >İletişim</span>
+            </span>
+          </a>
+        </li>
         <!-- ADMIN-->
         <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
         <li
@@ -54,6 +63,18 @@
               >
                 <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
                 <span jhiTranslate="global.menu.entities.yurt">Yurt</span>
+              </a>
+            </li>
+            <li>
+              <a
+                class="dropdown-item"
+                routerLink="mesaj"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                (click)="collapseNavbar()"
+              >
+                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                <span jhiTranslate="global.menu.entities.mesaj">Mesaj</span>
               </a>
             </li>
             <li>
@@ -265,6 +286,7 @@
                 <span jhiTranslate="global.menu.entities.donem">Donem</span>
               </a>
             </li>
+
             <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
           </ul>
         </li>

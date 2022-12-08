@@ -1,0 +1,48 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="mesaj">
+      <h2 data-cy="mesajDetailsHeading"><span jhiTranslate="temrinMatikApp.mesaj.detail.title">Mesaj</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ mesaj.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="temrinMatikApp.mesaj.userName">User Name</span></dt>
+        <dd>
+          <span>{{ mesaj.userName }}</span>
+        </dd>
+        <dt><span jhiTranslate="temrinMatikApp.mesaj.eposta">Eposta</span></dt>
+        <dd>
+          <span>{{ mesaj.eposta }}</span>
+        </dd>
+        <dt><span jhiTranslate="temrinMatikApp.mesaj.mesaj">Mesaj</span></dt>
+        <dd>
+          <span>{{ mesaj.mesaj }}</span>
+        </dd>
+        <dt><span jhiTranslate="temrinMatikApp.mesaj.goruldu">Goruldu</span></dt>
+        <dd>
+          <span>{{ mesaj.goruldu }}</span>
+        </dd>
+        <dt><span jhiTranslate="temrinMatikApp.mesaj.tarih">Tarih</span></dt>
+        <dd>
+          <span>{{ mesaj.tarih | formatMediumDate }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/mesaj', mesaj.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

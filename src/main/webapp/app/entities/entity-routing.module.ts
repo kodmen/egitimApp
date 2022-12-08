@@ -49,6 +49,11 @@ import { RouterModule } from '@angular/router';
         data: { pageTitle: 'temrinMatikApp.donem.home.title' },
         loadChildren: () => import('./donem/donem.module').then(m => m.DonemModule),
       },
+      {
+        path: 'mesaj',
+        data: { pageTitle: 'temrinMatikApp.mesaj.home.title' },
+        loadChildren: () => import('./mesaj/mesaj.module').then(m => m.MesajModule),
+      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],

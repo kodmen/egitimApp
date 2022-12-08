@@ -1,0 +1,30 @@
+{
+  "changelogDate": "20221207075031",
+  "fields": [
+    {
+      "fieldName": "userName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "eposta",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "mesaj",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "goruldu",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "tarih",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "name": "Mesaj",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [],
+  "service": "no"
+}

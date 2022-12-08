@@ -24,6 +24,7 @@
     <include file="config/liquibase/changelog/20220706194054_added_entity_DenemeAnaliz.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20220706194154_added_entity_Deneme.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20221124201252_added_entity_Donem.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20221207075031_added_entity_Mesaj.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20220706193454_added_entity_constraints_Yurt.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20220706193754_added_entity_constraints_Soru.xml" relativeToChangelogFile="false"/>

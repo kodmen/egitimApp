@@ -1,0 +1,71 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-mesaj-heading" data-cy="MesajCreateUpdateHeading" jhiTranslate="temrinMatikApp.mesaj.home.createOrEditLabel">
+        Create or edit a Mesaj
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="temrinMatikApp.mesaj.userName" for="field_userName">User Name</label>
+          <input type="text" class="form-control" name="userName" id="field_userName" data-cy="userName" formControlName="userName" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="temrinMatikApp.mesaj.eposta" for="field_eposta">Eposta</label>
+          <input type="text" class="form-control" name="eposta" id="field_eposta" data-cy="eposta" formControlName="eposta" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="temrinMatikApp.mesaj.mesaj" for="field_mesaj">Mesaj</label>
+          <input type="text" class="form-control" name="mesaj" id="field_mesaj" data-cy="mesaj" formControlName="mesaj" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="temrinMatikApp.mesaj.goruldu" for="field_goruldu">Goruldu</label>
+          <input type="checkbox" class="form-check" name="goruldu" id="field_goruldu" data-cy="goruldu" formControlName="goruldu" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="temrinMatikApp.mesaj.tarih" for="field_tarih">Tarih</label>
+          <div class="input-group">
+            <input
+              id="field_tarih"
+              data-cy="tarih"
+              type="text"
+              class="form-control"
+              name="tarih"
+              ngbDatepicker
+              #tarihDp="ngbDatepicker"
+              formControlName="tarih"
+            />
+            <button type="button" class="btn btn-secondary" (click)="tarihDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
