@@ -2,7 +2,7 @@
 - döneme ait sorular gözükmeli
 - gruplara gözükebilme eklenebilir yada konulara +++++ ( gruplara eklendi) [x]
 - yada grup ve konuya dönem eklenebilir 
-- konular pageable olmalı +++
+- konular pageable olmalı +++ [x]
 - editor ve komisyon eklenmeli önemli olan editor [x]
 - AUTH KISMI düzeltilmeli
 - editor ve öğrenci aynı anda eklenmiyor
@@ -10,11 +10,10 @@
 - soru olarak göster diye bir şey koyulabilir soru liste
 
 - ders çalış sayfasına soruları çağırınca drapdown koymak lazım istediğiimiz soruya gitme eklenmeli
-- grup da listte gozuksun yeri yanlış
+- grup da listte gozuksun yeri yanlış [x]
 - deneme oluştuurken toplam soru sayısı gözüksün 
-- hocalarda denemeler kısmı pageable olmalı
+- hocalarda denemeler kısmı pageable olmalı [x]
   
-- konulardan soruya gidince orda yeni soru ekleme var ordan ekleyince konuyu otomatik ekleyebilir
 - konulardan soru ekleyince soru gösterilsin false ekliyor(güncelleyince düzeliyor)(güzuksun null gidiyor)
 - yeni soru eklerken bir sürü konu içinden seçmek yerine önce grup secilir o gurubun konusu gelir sonra
 
