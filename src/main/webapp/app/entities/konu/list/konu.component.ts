@@ -1,29 +1,38 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
+import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { IKonu } from '../konu.model';
+import { IKonu, Konu } from '../konu.model';
 import { KonuService } from '../service/konu.service';
 import { KonuDeleteDialogComponent } from '../delete/konu-delete-dialog.component';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ASC, DESC, ITEMS_PER_PAGE,SORT } from 'app/config/pagination.constants';
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'jhi-konu',
   templateUrl: './konu.component.html',
 })
 export class KonuComponent implements OnInit {
-  konus?: IKonu[];
+  konus?: IKonu[] | null = null;
   isLoading = false;
 
-  constructor(protected konuService: KonuService, protected modalService: NgbModal,private router:Router) {}
+  totalItems = 0;
+  itemsPerPage = ITEMS_PER_PAGE;
+  page!: number;
+  predicate!: string;
+  ascending!: boolean;
+
+  constructor(protected konuService: KonuService, protected modalService: NgbModal,private router:Router, private activatedRoute: ActivatedRoute) {}
 
   loadAll(): void {
     this.isLoading = true;
 
-    this.konuService.query().subscribe({
+    this.konuService.queryPage({ page: this.page - 1, size: this.itemsPerPage }).subscribe({
       next: (res: HttpResponse<IKonu[]>) => {
         this.isLoading = false;
         this.konus = res.body ?? [];
+        this.onSuccess(res.body, res.headers);
       },
       error: () => {
         this.isLoading = false;
@@ -31,8 +40,19 @@ export class KonuComponent implements OnInit {
     });
   }
 
+  transition(): void {
+    this.router.navigate(['./'], {
+      relativeTo: this.activatedRoute.parent,
+      queryParams: {
+        page: this.page,
+        sort: `${this.predicate},${this.ascending ? ASC : DESC}`,
+      },
+    });
+  }
+
   ngOnInit(): void {
-    this.loadAll();
+    //this.loadAll();
+    this.handleNavigation()
   }
 
   trackId(_index: number, item: IKonu): number {
@@ -54,5 +74,22 @@ export class KonuComponent implements OnInit {
     console.log("gidiyorum");
     
     this.router.navigate([`soru/konu/`,id]);
+  }
+
+  private onSuccess(users: Konu[] | null, headers: HttpHeaders): void {
+    this.totalItems = Number(headers.get('X-Total-Count'));
+    this.konus = users;
+  }
+
+  private handleNavigation(): void {
+    this.loadAll();
+    combineLatest([this.activatedRoute.data, this.activatedRoute.queryParamMap]).subscribe(([data, params]) => {
+      const page = params.get('page');
+      this.page = +(page ?? 1);
+      const sort = (params.get(SORT) ?? data['defaultSort']).split(',');
+      
+      this.ascending = sort[1] === ASC;
+      this.loadAll();
+    });
   }
 }

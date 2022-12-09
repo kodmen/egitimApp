@@ -1,10 +1,11 @@
 ## ilk öncelik
 - döneme ait sorular gözükmeli
-- gruplara gözükebilme eklenebilir yada konulara +++++ ( gruplara eklendi)
+- gruplara gözükebilme eklenebilir yada konulara +++++ ( gruplara eklendi) [x]
 - yada grup ve konuya dönem eklenebilir 
 - konular pageable olmalı +++
-- editor ve komisyon eklenmeli önemli olan editor 
+- editor ve komisyon eklenmeli önemli olan editor [x]
 - AUTH KISMI düzeltilmeli
+- editor ve öğrenci aynı anda eklenmiyor
 
 - soru olarak göster diye bir şey koyulabilir soru liste
 
@@ -20,7 +21,7 @@
 - admin denemeye pageable yapılmalı
 
 - soru güncelleyince bazı veriler siliniyor gözükebilme null oluyor(çüknkü soru entitisinde get set yapmadım)
-- + soruya göster(boolean) diye bir alan daha eklenmeli ve döneme bu soruları gösterme diye fonksiyon eklenebilir
+- + soruya göster(boolean) diye bir alan daha eklenmeli ve döneme bu soruları gösterme diye fonksiyon eklenebilir [x]
 
 ## ikinci öncelik
 - kahoot sitesindeki documantasyon sayfası gibi sayfa yalılabilir

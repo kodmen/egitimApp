@@ -20,6 +20,11 @@ export class KonuService {
     return this.http.get<IKonu[]>(`${this.resourceUrl}/grup/${id}`, { observe: 'response' });
   }
 
+  queryPage(req?: any): Observable<EntityArrayResponseType> {
+    const options = createRequestOption(req);
+    return this.http.get<IKonu[]>(this.resourceUrl+"/page", { params: options, observe: 'response' });
+  }
+
   create(konu: IKonu): Observable<EntityResponseType> {
     return this.http.post<IKonu>(this.resourceUrl, konu, { observe: 'response' });
   }

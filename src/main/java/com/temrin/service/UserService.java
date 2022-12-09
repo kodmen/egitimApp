@@ -348,8 +348,6 @@ public class UserService {
     public String getAuth() {
         List<String> auths = getCurrentUserAuthories();
 
-
-        // buraya niye giriyor
         if (auths.size() >= 2) auths = Collections.singletonList(getBuyukRole(auths));
 
         for (String a : auths) {
@@ -389,8 +387,6 @@ public class UserService {
                 return "ROLE_HOCA";
             }
         }
-
-
 
         return "ROLE_USER";
     }
