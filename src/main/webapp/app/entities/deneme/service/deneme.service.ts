@@ -22,6 +22,13 @@ export class DenemeService {
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
+   queryPage(req?: any): Observable<EntityArrayResponseType> {
+    const options = createRequestOption(req);
+    return this.http
+      .get<IDeneme[]>(this.resourceUrl+"/page", { params: options, observe: 'response' })
+      .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+  }
+
   create(deneme: IDeneme): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(deneme);
     return this.http

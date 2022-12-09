@@ -9,6 +9,10 @@ import com.temrin.service.dto.deneme.DenemeCevapRequest;
 import com.temrin.service.dto.deneme.DenemeSinavDto;
 import com.temrin.service.dto.deneme.DenemeSonuclariDto;
 import com.temrin.service.dto.deneme.DenemeSoruDto;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
@@ -274,6 +278,21 @@ public class DenemeService {
                 return getOgrDeneme();
             default:
                 return Collections.emptyList();
+        }
+    }
+
+    public Page<Deneme> getAllDenemePage(Pageable pageable) {
+        // en son denemeyi getir
+        Pageable p = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by(Sort.Direction.DESC,"id"));
+
+        switch (userService.getAuth()) {
+            case ADMIN:
+                return repository.findAllWithEagerRelationships(p);
+            case HOCA:
+                return repository.findByOlusturanIsCurrentUser(p);
+
+            default:
+                return null;
         }
     }
 

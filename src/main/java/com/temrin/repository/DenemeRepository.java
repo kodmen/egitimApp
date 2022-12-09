@@ -22,6 +22,9 @@ public interface DenemeRepository extends DenemeRepositoryWithBagRelationships, 
     @Query("select deneme from Deneme deneme where deneme.olusturan.login = ?#{principal.username}")
     List<Deneme> findByOlusturanIsCurrentUser();
 
+    @Query("select deneme from Deneme deneme where deneme.olusturan.login = ?#{principal.username}")
+    Page<Deneme> findByOlusturanIsCurrentUser(Pageable pageable);
+
     default Optional<Deneme> findOneWithEagerRelationships(Long id) {
         return this.fetchBagRelationships(this.findOneWithToOneRelationships(id));
     }
