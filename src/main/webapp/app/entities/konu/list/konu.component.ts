@@ -54,6 +54,7 @@ export class KonuComponent implements OnInit {
         this.isLoading = false;
       },
     });
+    this.seacrhKonu = null;
   }
 
   transition(): void {
