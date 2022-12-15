@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { isPresent } from 'app/core/util/operators';
@@ -22,7 +22,7 @@ export class KonuService {
 
   queryPage(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
-    return this.http.get<IKonu[]>(this.resourceUrl+"/page", { params: options, observe: 'response' });
+    return this.http.get<IKonu[]>(this.resourceUrl + '/page', { params: options, observe: 'response' });
   }
 
   create(konu: IKonu): Observable<EntityResponseType> {
@@ -39,6 +39,16 @@ export class KonuService {
 
   find(id: number): Observable<EntityResponseType> {
     return this.http.get<IKonu>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+  }
+
+  seacrh(isim: string): Observable<EntityResponseType> {
+    let queryParams = new HttpParams();
+
+    if (isim) {
+      queryParams = queryParams.append('isim', isim);
+    }
+
+    return this.http.get<IKonu>(`${this.resourceUrl}/search`, { params: queryParams, observe: 'response' });
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {

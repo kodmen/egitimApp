@@ -8,6 +8,7 @@ import { KonuDeleteDialogComponent } from '../delete/konu-delete-dialog.componen
 import { ActivatedRoute, Router } from '@angular/router';
 import { ASC, DESC, ITEMS_PER_PAGE,SORT } from 'app/config/pagination.constants';
 import { combineLatest } from 'rxjs';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'jhi-konu',
@@ -15,6 +16,8 @@ import { combineLatest } from 'rxjs';
 })
 export class KonuComponent implements OnInit {
   konus?: IKonu[] | null = null;
+
+  seacrhKonu?: IKonu | null = null;
   isLoading = false;
 
   totalItems = 0;
@@ -23,7 +26,20 @@ export class KonuComponent implements OnInit {
   predicate!: string;
   ascending!: boolean;
 
-  constructor(protected konuService: KonuService, protected modalService: NgbModal,private router:Router, private activatedRoute: ActivatedRoute) {}
+  search = this.fb.group({
+    text: [],
+  });
+
+  constructor(protected fb:FormBuilder ,protected konuService: KonuService, protected modalService: NgbModal,private router:Router, private activatedRoute: ActivatedRoute) {}
+
+  searchText(): void {
+    const seacrh = this.search.get(['text'])!.value;
+    this.konuService.seacrh(seacrh).subscribe(res => {
+      if (res.body) {
+        this.seacrhKonu = res.body;
+      }
+    });
+  }
 
   loadAll(): void {
     this.isLoading = true;

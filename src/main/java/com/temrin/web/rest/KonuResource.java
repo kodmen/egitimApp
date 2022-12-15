@@ -7,6 +7,7 @@ import com.temrin.service.KonuService;
 import com.temrin.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -193,6 +194,18 @@ public class KonuResource {
         log.debug("REST request to get Konu : {}", id);
         Optional<Konu> konu = konuRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(konu);
+    }
+
+
+    @GetMapping("/konus/search")
+    public ResponseEntity<Konu> getKonuByisim(@RequestParam String isim) {
+        log.debug("REST request to get Konu : {}", isim);
+        Optional<Konu> konu = konuRepository.findKonuByIsim(isim);
+//        List<Konu> konu = konuRepository.findByIsimLike(isim);
+        if (konu.isPresent()){
+            return ResponseEntity.ok(konu.get());
+        }
+        return  ResponseEntity.ok(null);
     }
 
     /**

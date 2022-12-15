@@ -6,6 +6,12 @@
 - editor ve komisyon eklenmeli önemli olan editor [x]
 - AUTH KISMI düzeltilmeli
 - editor ve öğrenci aynı anda eklenmiyor
+- TOPLU SORU EKLERKEN KONUYU VERİRKEN ÖNCE GRUBU SORABİLİRİZ ÇOK FAZLA KONU OLUNCA KARIŞABİLİR
+- TOPLU SORU EKLERKEN SORU EKLE YERİNE DENEME OLUŞTUR YAZIYOR
+- konulara arama eklenmeli 
+- mesul soruları görsün ama ekleme düzenleme yapamasın
+- mesul yurt oluşturabilsin ve yurda hoca ekleyebilsin
+- mesulun useri 
 
 - soru olarak göster diye bir şey koyulabilir soru liste
 
