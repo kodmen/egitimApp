@@ -36,6 +36,7 @@ public class SinifService {
             case "ROLE_ADMIN":
                 return sinifRepository.findAllWithEagerRelationships();
             case "ROLE_MESUL":
+                // BURAYA MESULE AIT
                 Yurt y = yurtService.getCurrentUserYurt();
                 if (y != null) return sinifRepository.findByYurt(y);
                 return Collections.emptyList();

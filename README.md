@@ -1,14 +1,10 @@
 ## ilk öncelik
 - döneme ait sorular gözükmeli
-- gruplara gözükebilme eklenebilir yada konulara +++++ ( gruplara eklendi) [x]
 - yada grup ve konuya dönem eklenebilir 
-- konular pageable olmalı +++ [x]
-- editor ve komisyon eklenmeli önemli olan editor [x]
 - AUTH KISMI düzeltilmeli
 - editor ve öğrenci aynı anda eklenmiyor
 - TOPLU SORU EKLERKEN KONUYU VERİRKEN ÖNCE GRUBU SORABİLİRİZ ÇOK FAZLA KONU OLUNCA KARIŞABİLİR
 - TOPLU SORU EKLERKEN SORU EKLE YERİNE DENEME OLUŞTUR YAZIYOR
-- konulara arama eklenmeli 
 - mesul soruları görsün ama ekleme düzenleme yapamasın
 - mesul yurt oluşturabilsin ve yurda hoca ekleyebilsin
 - mesulun useri 
@@ -16,18 +12,15 @@
 - soru olarak göster diye bir şey koyulabilir soru liste
 
 - ders çalış sayfasına soruları çağırınca drapdown koymak lazım istediğiimiz soruya gitme eklenmeli
-- grup da listte gozuksun yeri yanlış [x]
 - deneme oluştuurken toplam soru sayısı gözüksün 
 - hocalarda denemeler kısmı pageable olmalı [x]
   
 - konulardan soru ekleyince soru gösterilsin false ekliyor(güncelleyince düzeliyor)(güzuksun null gidiyor)
 - yeni soru eklerken bir sürü konu içinden seçmek yerine önce grup secilir o gurubun konusu gelir sonra
 
-- admin denemeye pageable yapılmalı
-
 - soru güncelleyince bazı veriler siliniyor gözükebilme null oluyor(çüknkü soru entitisinde get set yapmadım)
-- + soruya göster(boolean) diye bir alan daha eklenmeli ve döneme bu soruları gösterme diye fonksiyon eklenebilir [x]
 
+- SORU KISMINA EKLEME VE TOPLU SORU EKLEME YERİNE ADMİN VE EDİTORE AİT YERİNE EKLENDİ
 ## ikinci öncelik
 - kahoot sitesindeki documantasyon sayfası gibi sayfa yalılabilir
 - iletişim sayfası
@@ -37,9 +30,6 @@
 - soru guncelleme( olusturulan soruyu güncellerken resim güncellenmiyor)
 - deneme olustururken eger fazla soru sayisi girersek hata veriyor ve hatayı söylemiyor
 
-## yapılanlar
-- konulara göre soru sıralama yapıldı ve orda soruya ait bilgiler gösterildi
-- sorulara üç alan eklendi 1-metin, 2-gözükme, 3-dönem 
 
 
 DERS ÇALIŞ SAYFASINA SORUYA GİT EKLENEBİLİR

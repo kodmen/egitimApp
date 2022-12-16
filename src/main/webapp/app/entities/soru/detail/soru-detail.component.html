@@ -68,11 +68,11 @@
         </dd>
       </dl>
 
-      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+      <button  type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
         <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
       </button>
 
-      <button  *jhiHasAnyAuthority="'ROLE_ADMIN'" type="button" [routerLink]="['/soru', soru.id, 'edit']" class="btn btn-primary">
+      <button *jhiHasAnyAuthority="['ROLE_ADMIN','ROLE_EDITOR']" type="button" [routerLink]="['/soru', soru.id, 'edit']" class="btn btn-primary">
         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
       </button>
     </div>
