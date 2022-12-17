@@ -435,6 +435,24 @@
               </a>
             </li>
             <li>
+              <a
+                class="dropdown-item"
+                routerLink="yurt"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                (click)="collapseNavbar()"
+              >
+                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                <span jhiTranslate="global.menu.entities.yurt">Yurt</span>
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" routerLink="mesul/user-management" routerLinkActive="active" (click)="collapseNavbar()">
+                <fa-icon icon="users" [fixedWidth]="true"></fa-icon>
+                <span>hocalar</span>
+              </a>
+            </li>
+            <li>
               <a class="dropdown-item" routerLink="grup" routerLinkActive="active" (click)="collapseNavbar()">
                 <fa-icon icon="users" [fixedWidth]="true"></fa-icon>
                 <span>Gruplar </span>

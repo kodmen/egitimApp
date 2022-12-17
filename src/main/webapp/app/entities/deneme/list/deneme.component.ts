@@ -6,7 +6,7 @@ import { Deneme, IDeneme } from '../deneme.model';
 import { DenemeService } from '../service/deneme.service';
 import { DenemeDeleteDialogComponent } from '../delete/deneme-delete-dialog.component';
 import { ASC, DESC, ITEMS_PER_PAGE,SORT } from 'app/config/pagination.constants';
-import { ActivatedRoute, Route, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest } from 'rxjs';
 
 @Component({
@@ -41,7 +41,6 @@ export class DenemeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //this.loadAll();
     this.handleNavigation();
   }
 
@@ -60,7 +59,6 @@ export class DenemeComponent implements OnInit {
     });
   }
 
-  //pageable
   transition(): void {
     this.router.navigate(['./'], {
       relativeTo: this.activatedRoute.parent,

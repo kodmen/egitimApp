@@ -7,7 +7,6 @@ import { UserManagementDetailComponent } from './detail/user-management-detail.c
 import { UserManagementUpdateComponent } from './update/user-management-update.component';
 import { UserManagementDeleteDialogComponent } from './delete/user-management-delete-dialog.component';
 import { userManagementRoute } from './user-management.route';
-import { HocaOlusturComponent } from './hoca-olustur/hoca-olustur.component';
 
 @NgModule({
   imports: [SharedModule, RouterModule.forChild(userManagementRoute)],
@@ -15,9 +14,8 @@ import { HocaOlusturComponent } from './hoca-olustur/hoca-olustur.component';
     UserManagementComponent,
     UserManagementDetailComponent,
     UserManagementUpdateComponent,
-    UserManagementDeleteDialogComponent,
-    HocaOlusturComponent,
-  ],
+    UserManagementDeleteDialogComponent
+    ],
   entryComponents: [UserManagementDeleteDialogComponent],
 })
 export class UserManagementModule {}

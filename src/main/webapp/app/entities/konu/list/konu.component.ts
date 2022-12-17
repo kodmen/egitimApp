@@ -68,7 +68,6 @@ export class KonuComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //this.loadAll();
     this.handleNavigation()
   }
 

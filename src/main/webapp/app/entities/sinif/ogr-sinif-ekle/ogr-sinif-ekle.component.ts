@@ -1,12 +1,7 @@
-import { HttpResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { YurtService } from 'app/entities/yurt/service/yurt.service';
-import { IYurt } from 'app/entities/yurt/yurt.model';
-import { map } from 'rxjs';
 import { SinifService } from '../service/sinif.service';
-import { ISinif } from '../sinif.model';
 
 @Component({
   selector: 'jhi-ogr-sinif-ekle',

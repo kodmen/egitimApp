@@ -1,9 +1,13 @@
 package com.temrin.web.rest;
 
+import com.temrin.domain.Authority;
+import com.temrin.service.AuthorityService;
 import com.temrin.service.UserService;
 import com.temrin.service.dto.UserDTO;
 import java.util.*;
 import java.util.Collections;
+import java.util.stream.Collectors;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -27,9 +31,11 @@ public class PublicUserResource {
     private final Logger log = LoggerFactory.getLogger(PublicUserResource.class);
 
     private final UserService userService;
+    private final AuthorityService authorityService;
 
-    public PublicUserResource(UserService userService) {
+    public PublicUserResource(UserService userService, AuthorityService authorityService) {
         this.userService = userService;
+        this.authorityService = authorityService;
     }
 
     /**
@@ -84,6 +90,8 @@ public class PublicUserResource {
      */
     @GetMapping("/authorities")
     public List<String> getAuthorities() {
-        return userService.getAuthorities();
+
+//        return userService.getAuthorities();
+        return authorityService.getAllAuth().stream().map(Authority::getName).collect(Collectors.toList());
     }
 }

@@ -136,7 +136,7 @@ public class UserResource {
      * @throws LoginAlreadyUsedException {@code 400 (Bad Request)} if the login is already in use.
      */
     @PutMapping("/users")
-    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
+    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.MESUL + "\")" + "|| hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")" )
     public ResponseEntity<AdminUserDTO> updateUser(@Valid @RequestBody AdminUserDTO userDTO) {
         log.debug("REST request to update User : {}", userDTO);
         Optional<User> existingUser = userRepository.findOneByEmailIgnoreCase(userDTO.getEmail());
@@ -175,9 +175,10 @@ public class UserResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
+    //jhipsetrin sitesinden kontrol edecektik
     @GetMapping("/users/search")
-    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
-    public ResponseEntity<AdminUserDTO> getUserSeacrh( @RequestParam(required = false) String seacrh) {
+    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.MESUL + "\")" + "|| hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")" )
+ public ResponseEntity<AdminUserDTO> getUserSeacrh( @RequestParam(required = false) String seacrh) {
         if (seacrh==null || seacrh==""){
             return new ResponseEntity<>(null, HttpStatus.OK);
         }
@@ -197,7 +198,8 @@ public class UserResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the "login" user, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/users/{login}")
-    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
+//    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
+    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.MESUL + "\")" + "|| hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")" )
     public ResponseEntity<AdminUserDTO> getUser(@PathVariable @Pattern(regexp = Constants.LOGIN_REGEX) String login) {
         log.debug("REST request to get User : {}", login);
         return ResponseUtil.wrapOrNotFound(userService.getUserWithAuthoritiesByLogin(login).map(AdminUserDTO::new));

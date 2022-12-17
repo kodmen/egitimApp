@@ -2,34 +2,47 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { UserManagementService } from 'app/admin/user-management/service/user-management.service';
+import { User } from 'app/admin/user-management/user-management.model';
 import { Account } from 'app/core/auth/account.model';
 import { AccountService } from 'app/core/auth/account.service';
-import { UserManagementService } from '../service/user-management.service';
-import { User } from '../user-management.model';
 
 @Component({
   selector: 'jhi-hoca-olustur',
   templateUrl: './hoca-olustur.component.html',
-  styleUrls: ['./hoca-olustur.component.scss'],
+  styleUrls: ['./hoca-olustur.component.scss']
 })
 export class HocaOlusturComponent implements OnInit {
-  search = this.fb.group({
-    text: [],
-  });
+
   currentAccount: Account | null = null;
-
-  seacrhUser: User | null = null;
-
+  users: User[] | null = null;
   isLoading = false;
   totalItems = 0;
+ // itemsPerPage = ITEMS_PER_PAGE;
   page!: number;
   predicate!: string;
   ascending!: boolean;
 
-  constructor(private userService: UserManagementService, private fb: FormBuilder, private accountService: AccountService,
+  seacrhUser: User | null = null;
+
+  search = this.fb.group({
+    text: [],
+  });
+
+  constructor(
+    private userService: UserManagementService,
+    private accountService: AccountService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private modalService: NgbModal,) {}
+    private modalService: NgbModal,
+    private fb: FormBuilder
+  ) {}
+
+  ngOnInit(): void {
+    this.accountService.identity().subscribe(account => (this.currentAccount = account));
+    console.log(this.currentAccount);
+    
+  }
 
   searchText(): void {
     const seacrh = this.search.get(['text'])!.value;
@@ -62,9 +75,5 @@ export class HocaOlusturComponent implements OnInit {
 
       this.seacrhUser = null;
   }
-
-
-  ngOnInit(): void {
-    this.accountService.identity().subscribe(account => (this.currentAccount = account));
-  }
+  
 }
