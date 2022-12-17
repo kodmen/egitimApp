@@ -5,9 +5,8 @@
 - editor ve öğrenci aynı anda eklenmiyor
 - TOPLU SORU EKLERKEN KONUYU VERİRKEN ÖNCE GRUBU SORABİLİRİZ ÇOK FAZLA KONU OLUNCA KARIŞABİLİR
 - TOPLU SORU EKLERKEN SORU EKLE YERİNE DENEME OLUŞTUR YAZIYOR
-- mesul soruları görsün ama ekleme düzenleme yapamasın
-- mesul yurt oluşturabilsin ve yurda hoca ekleyebilsin
-- mesulun useri 
+- deneme analiz sayfasını create olmasına gerek yok 
+- mesulun sınıfları başka hocanın sınıfları başka olmalı
 
 - soru olarak göster diye bir şey koyulabilir soru liste
 

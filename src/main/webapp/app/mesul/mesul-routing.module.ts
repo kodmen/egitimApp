@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { SinifComponent } from './sinif/sinif.component';
 /* jhipster-needle-add-admin-module-import - JHipster will add admin modules imports here */
 
 @NgModule({
@@ -12,7 +13,11 @@ import { RouterModule } from '@angular/router';
         data: {
           pageTitle: 'userManagement.home.title',
         },
-      },   
+      },  
+      {
+        path: 'sinif',
+        component:SinifComponent
+      },
     ]),
   ],
 })

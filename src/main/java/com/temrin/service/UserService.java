@@ -345,6 +345,7 @@ public class UserService {
         return userRepository.findOneByLogin(login);
     }
 
+    // bunu düzenlemem lazım yada kaldırmam
     public String getAuth() {
         List<String> auths = getCurrentUserAuthories();
 

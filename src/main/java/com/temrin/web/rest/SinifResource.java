@@ -158,10 +158,18 @@ public class SinifResource {
     @GetMapping("/sinifs")
     public List<Sinif> getAllSinifs(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get all Sinifs");
+
         return sinifService.getAllSinif();
 
     }
 
+    @GetMapping("/sinifs/mesul")
+    public List<Sinif> getAllSinifsForMesul() {
+        log.debug("REST request to get all Sinifs");
+
+        return sinifService.getAllSinifForMesul();
+
+    }
     /**
      * {@code GET  /sinifs/:id} : get the "id" sinif.
      *

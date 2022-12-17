@@ -1,0 +1,125 @@
+<div>
+    <h2 id="page-heading" data-cy="SinifHeading">
+      <span jhiTranslate="temrinMatikApp.sinif.home.title">Sinifs</span>
+  
+      <div class="d-flex justify-content-end">
+        <button class="btn btn-tema me-2" (click)="loadAll()" [disabled]="isLoading">
+          <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+          <span jhiTranslate="temrinMatikApp.sinif.home.refreshListLabel">Refresh List</span>
+        </button>
+  
+        <button *jhiHasAnyAuthority="['ROLE_MESUL','ROLE_ADMIN']" id="jh-create-entity" data-cy="entityCreateButton"
+          class=" me-2 btn btn-primary jh-create-entity create-sinif" [routerLink]="['/sinif/new']">
+          <fa-icon icon="plus"></fa-icon>
+          <span jhiTranslate="temrinMatikApp.sinif.home.createLabel"> Create a new Sinif </span>
+        </button>
+  
+        <ng-container *ngIf="!isSinif">
+          <button *jhiHasAnyAuthority="['ROLE_USER']" id="jh-create-entity" data-cy="entityCreateButton"
+            class=" me-2 btn btn-primary jh-create-entity create-sinif" [routerLink]="['/sinif/ogr-sinif-ekle']">
+            <fa-icon icon="plus"></fa-icon>
+            <span> Sinif seç </span>
+          </button>
+        </ng-container>
+  
+  
+      </div>
+    </h2>
+  
+    <jhi-alert-error></jhi-alert-error>
+  
+    <jhi-alert></jhi-alert>
+  
+    <ng-container *ngIf="!isSinif">
+      <ng-container  *jhiHasAnyAuthority="['ROLE_USER']">
+  
+        <div class="alert alert-warning" >
+          <span >Sınıfınız yoktur lütfen ait olduğunuz sınıfı seçiniz eğer sınıfınız sistemde kayıtlı değil ise hocanız sisteme kayıt yaptırmalı </span>
+        </div>
+  
+      </ng-container>
+      
+    </ng-container>
+  
+    <!-- <div class="alert alert-warning" id="no-result" *ngIf="sinifs?.length === 0">
+      <span jhiTranslate="temrinMatikApp.sinif.home.notFound">No sinifs found</span>
+    </div> -->
+  
+    <div class="table-responsive" id="entities" *ngIf="sinifs && sinifs.length > 0">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr>
+            <th *jhiHasAnyAuthority="['ROLE_ADMIN','ROLE_MESUL']" scope="col"><span
+                jhiTranslate="global.field.id">ID</span></th>
+            <th scope="col"><span jhiTranslate="temrinMatikApp.sinif.isim">Isim</span></th>
+            <th scope="col"><span jhiTranslate="temrinMatikApp.sinif.yurt">Yurt</span></th>
+            <th scope="col"><span jhiTranslate="temrinMatikApp.sinif.grup">Grup</span></th>
+            <th scope="col"><span jhiTranslate="temrinMatikApp.sinif.hoca">Hoca</span></th>
+            <th *jhiHasAnyAuthority="['ROLE_MESUL','ROLE_ADMIN','ROLE_HOCA']" scope="col"><span >Sinif kodu</span></th>
+            <th *jhiHasAnyAuthority="['ROLE_ADMIN','ROLE_MESUL']" scope="col"><span
+                jhiTranslate="temrinMatikApp.sinif.ogrenciler">Ogrenciler</span></th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let sinif of sinifs; trackBy: trackId" data-cy="entityTable">
+            <td *jhiHasAnyAuthority="['ROLE_ADMIN','ROLE_MESUL']">
+              <a [routerLink]="['/sinif', sinif.id, 'view']">{{ sinif.id }}</a>
+            </td>
+            <td>{{ sinif.isim }}</td>
+            <td>
+              <div *ngIf="sinif.yurt">
+                <a [routerLink]="['/yurt', sinif.yurt?.id, 'view']">{{ sinif.yurt?.isim }}</a>
+              </div>
+            </td>
+            <td>
+              <div *ngIf="sinif.grup">
+                <a [routerLink]="['/grup', sinif.grup?.id, 'view']">{{ sinif.grup?.isim }}</a>
+              </div>
+            </td>
+            <td>
+              {{ sinif.hoca?.login }}
+            </td>
+            <td *jhiHasAnyAuthority="['ROLE_MESUL','ROLE_ADMIN','ROLE_HOCA']" style="color: red;">
+              {{ sinif.konulimizjson }}
+            </td>
+            <td *jhiHasAnyAuthority="['ROLE_ADMIN','ROLE_MESUL']">
+              <!-- <span *ngFor="let ogrenciler of sinif.ogrencilers"> {{ ogrenciler.login }} </span> -->
+              <span > {{ sinif.ogrencilers?.length }} </span>
+            </td>
+  
+            <td class="text-end">
+              <div class="btn-group">
+                <button type="submit" [routerLink]="['/sinif', sinif.id, 'view']" class="btn btn-tema btn-sm"
+                  data-cy="entityDetailsButton">
+                  <fa-icon icon="eye"></fa-icon>
+                  <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                </button>
+  
+                <button *jhiHasAnyAuthority="['ROLE_ADMIN','ROLE_HOCA','ROLE_MESUL']" type="submit"
+                  [routerLink]="['/sinif', sinif.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                  <fa-icon icon="pencil-alt"></fa-icon>
+                  <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                </button>
+  
+                <button *jhiHasAnyAuthority="['ROLE_ADMIN','ROLE_MESUL']" type="submit" (click)="delete(sinif)"
+                  class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                  <fa-icon icon="times"></fa-icon>
+                  <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                </button>
+  
+                <button *jhiHasAnyAuthority="['ROLE_MESUL','ROLE_ADMIN','ROLE_HOCA']"  type="submit" (click)="copyText(sinif.konulimizjson!)"
+                class="btn btn-success btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="copy"></fa-icon>
+                <span class="d-none d-md-inline" >Kodu kopyala</span>
+              </button>
+  
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+  
+  </div>

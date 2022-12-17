@@ -27,6 +27,7 @@ import { ActiveMenuDirective } from './layouts/navbar/active-menu.directive';
 import { ErrorComponent } from './layouts/error/error.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { AuthorityComponent } from './admin/authority/authority.component';
+import { SinifComponent } from './mesul/sinif/sinif.component';
 
 @NgModule({
   imports: [
@@ -48,7 +49,7 @@ import { AuthorityComponent } from './admin/authority/authority.component';
     { provide: NgbDateAdapter, useClass: NgbDateDayjsAdapter },
     httpInterceptorProviders,
   ],
-  declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent, AuthorityComponent],
+  declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent, AuthorityComponent, SinifComponent],
   bootstrap: [MainComponent],
 })
 export class AppModule {

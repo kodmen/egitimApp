@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static com.temrin.security.AuthoritiesConstants.*;
 import static com.temrin.security.SecurityUtils.getCurrentUserLogin;
 
 @Service
@@ -31,16 +32,32 @@ public class SinifService {
         this.encryptAndDecryptService = encryptAndDecryptService;
     }
 
+    public List<Sinif> getAllSinifForMesul() {
+        return sinifRepository.findAllWithEagerRelationships();
+//        switch (userService.getAuth()) {
+//            case ADMIN:
+//                return sinifRepository.findAllWithEagerRelationships();
+//            case MESUL:
+//                Yurt y = yurtService.getCurrentUserYurt();
+//                if (y != null) return sinifRepository.findByYurt(y);
+//                return Collections.emptyList();
+//            default:
+//                return Collections.emptyList();
+//        }
+    }
+
     public List<Sinif> getAllSinif() {
         switch (userService.getAuth()) {
-            case "ROLE_ADMIN":
+            case ADMIN:
                 return sinifRepository.findAllWithEagerRelationships();
-            case "ROLE_MESUL":
-                // BURAYA MESULE AIT
-                Yurt y = yurtService.getCurrentUserYurt();
-                if (y != null) return sinifRepository.findByYurt(y);
-                return Collections.emptyList();
-            case "ROLE_HOCA":
+            case MESUL:
+            case HOCA:
+//                // BURAYA MESULE AIT
+                // EĞER MESUL SE SINIFLARA DİĞER SINIFLARIDA EKLEYEBİLİRİSİN
+//                Yurt y = yurtService.getCurrentUserYurt();
+//                if (y != null) return sinifRepository.findByYurt(y);
+//                return Collections.emptyList();
+//            case "ROLE_HOCA":
                 List<Sinif> sinifList = sinifRepository.findByHocaIsCurrentUser();
                 sinifList.stream().map(sinif -> {
                     sinif.setKonulimizjson(encryptAndDecryptService.encodeToBase64(sinif.getId().toString()));

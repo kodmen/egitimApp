@@ -36,9 +36,11 @@ public class KonuService {
 
 
     public List<Konu> getAll(){
+
         // farklı roller geldiği zaman buraya ekleme yapılabilir mesela editor gibi
         switch (userService.getAuth()){
             case HOCA:
+            case MESUL:
                 // bir hocanın birden fazla sınıfı olursa burası patlıyor
                 Sinif sinif = sinifService.getSinifByHoca(userService.getCurrentUser());
                 return repository.findAllByGruplar(sinif.getGrup());

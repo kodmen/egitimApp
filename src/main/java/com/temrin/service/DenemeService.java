@@ -266,6 +266,7 @@ public class DenemeService {
         return result;
     }
 
+    // burda değişiklik lazım
     public List<Deneme> getAllDeneme() {
         switch (userService.getAuth()) {
             case ADMIN:
@@ -282,17 +283,15 @@ public class DenemeService {
     }
 
     public Page<Deneme> getAllDenemePage(Pageable pageable) {
-        // en son denemeyi getir
+        // burda null kontrolu yapabiliriz
         Pageable p = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by(Sort.Direction.DESC,"id"));
 
+        // burda hoca değilde sınıfa ait denemeler getirilmesi lazım bence
         switch (userService.getAuth()) {
             case ADMIN:
                 return repository.findAllWithEagerRelationships(p);
-            case HOCA:
-                return repository.findByOlusturanIsCurrentUser(p);
-
             default:
-                return null;
+                return repository.findByOlusturanIsCurrentUser(p);
         }
     }
 

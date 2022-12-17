@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import java.util.Collections;
 import java.util.List;
 
+import static com.temrin.security.AuthoritiesConstants.MESUL;
+
 @Service
 public class DenemeAnalizSinifService {
 
@@ -42,6 +44,7 @@ public class DenemeAnalizSinifService {
             case "ROLE_ADMIN":
                 return repository.findAll();
             case "ROLE_HOCA":
+            case MESUL:
                 return getHocaDenemeAnalizSinif();
             default:
                 return Collections.emptyList();
