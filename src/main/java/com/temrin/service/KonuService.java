@@ -42,6 +42,7 @@ public class KonuService {
             case HOCA:
             case MESUL:
                 // bir hocanın birden fazla sınıfı olursa burası patlıyor
+                // burda eğer hocanın birden çok sınıfı varsa buraya değilde sınıf id si ile konuları getir
                 Sinif sinif = sinifService.getSinifByHoca(userService.getCurrentUser());
                 return repository.findAllByGruplar(sinif.getGrup());
             case ADMIN:

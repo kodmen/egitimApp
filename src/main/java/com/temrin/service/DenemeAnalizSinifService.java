@@ -52,6 +52,9 @@ public class DenemeAnalizSinifService {
     }
 
     public List<DenemeAnalizSinif> getHocaDenemeAnalizSinif() {
+        // hocaya ait olan sinifları getir
+        // sinif id e göre deneme analizlerini getir
+        // gelen denemeanalizlerini hocaya göster
         return repository.findByDeneme_Olusturan(userService.getCurrentUser());
     }
 

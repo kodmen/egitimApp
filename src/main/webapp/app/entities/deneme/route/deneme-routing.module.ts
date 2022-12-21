@@ -10,6 +10,7 @@ import { CreateComponent } from '../create/create.component';
 import { DenemeGirisComponent } from '../deneme-giris/deneme-giris.component';
 import { OgrDenemeListComponent } from '../ogr-deneme-list/ogr-deneme-list.component';
 import { DersCalisComponent } from '../ders-calis/ders-calis.component';
+import { PdfYapmaComponent } from '../pdf-yapma/pdf-yapma.component';
 
 const denemeRoute: Routes = [
   {
@@ -28,6 +29,11 @@ const denemeRoute: Routes = [
   {
     path: ':id/basla',
     component: DenemeGirisComponent,
+    canActivate: [UserRouteAccessService],
+  },
+  {
+    path: ':id/pdf',
+    component: PdfYapmaComponent,
     canActivate: [UserRouteAccessService],
   },
   {

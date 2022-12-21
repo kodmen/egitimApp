@@ -13,12 +13,13 @@ import { OgrDenemeListComponent } from './ogr-deneme-list/ogr-deneme-list.compon
 import { CountdownModule } from 'ngx-countdown';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DersCalisComponent } from './ders-calis/ders-calis.component';
-import { LazyLoadImageModule } from 'ng-lazyload-image'; // <-- import it
+import { LazyLoadImageModule } from 'ng-lazyload-image';
+import { PdfYapmaComponent } from './pdf-yapma/pdf-yapma.component'; // <-- import it
 
 
 @NgModule({
   imports: [SharedModule, DenemeRoutingModule,NgxPaginationModule,CountdownModule,NgbModule,LazyLoadImageModule],
-  declarations: [DenemeComponent, DenemeDetailComponent, DenemeUpdateComponent, DenemeDeleteDialogComponent, CreateComponent, DenemeGirisComponent, OgrDenemeListComponent,NgbdModalComponent, DersCalisComponent],
+  declarations: [DenemeComponent, DenemeDetailComponent, DenemeUpdateComponent, DenemeDeleteDialogComponent, CreateComponent, DenemeGirisComponent, OgrDenemeListComponent,NgbdModalComponent, DersCalisComponent, PdfYapmaComponent],
   entryComponents: [DenemeDeleteDialogComponent],
   bootstrap: [DenemeGirisComponent]
 })
