@@ -22,28 +22,28 @@
                     <div class="row">
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Ders seçin</label>
-                            
-                                <select formControlName="konu" class="form-select" aria-label="Konu">
-                                    <option selected value="">Ders seçin</option>
-                                    <option [value]="konu.id" *ngFor="let konu of konularSharedCollection; let i=index">
-                                        {{
-                                        konu.isim }}</option>
-                                </select>
-                            
+
+                            <select formControlName="konu" class="form-select" aria-label="Konu">
+                                <option selected value="">Ders seçin</option>
+                                <option [value]="konu.id" *ngFor="let konu of konularSharedCollection; let i=index">
+                                    {{
+                                    konu.isim }}</option>
+                            </select>
+
                         </div>
                     </div>
 
                     <div class="row ">
                         <div class="mb-3">
                             <div class="form-check">
-                               
-                                    <input class="form-check-input" type="checkbox" id="defaultCheck1"
-                                        formControlName="soruKaristir">
 
-                                    <label class="form-check-label" for="defaultCheck1">
-                                        Soru kariştir
-                                    </label>
-                                
+                                <input class="form-check-input" type="checkbox" id="defaultCheck1"
+                                    formControlName="soruKaristir">
+
+                                <label class="form-check-label" for="defaultCheck1">
+                                    Soru kariştir
+                                </label>
+
                             </div>
                         </div>
 
@@ -52,14 +52,14 @@
                     <div class="row">
                         <div class="mb-3">
                             <div class="form-check">
-                                
-                                    <input class="form-check-input" type="checkbox" id="defaultCheck2"
-                                        formControlName="cevapKaristir">
 
-                                    <label class="form-check-label" for="defaultCheck2">
-                                        Cevap kariştir
-                                    </label>
-                                
+                                <input class="form-check-input" type="checkbox" id="defaultCheck2"
+                                    formControlName="cevapKaristir">
+
+                                <label class="form-check-label" for="defaultCheck2">
+                                    Cevap kariştir
+                                </label>
+
                             </div>
                         </div>
 

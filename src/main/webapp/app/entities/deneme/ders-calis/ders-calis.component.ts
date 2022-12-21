@@ -79,7 +79,7 @@ export class DersCalisComponent implements OnInit {
   }
 
   soruGetir(): void {
-    // const grupId = this.form.get(['grup'])!.value;
+     const grupId = this.form.get(['grup'])!.value;
 
     const konuId = this.form.get(['konu'])!.value;
     const soruKaristir = this.form.get(['soruKaristir'])!.value;
@@ -100,19 +100,14 @@ export class DersCalisComponent implements OnInit {
   }
 
   geri(): void {
-    this.form.get(['konu'])!.setValue('');
+   // this.form.get(['konu'])!.setValue('');
     this.form.get(['soruKaristir'])!.setValue(false);
     this.form.get(['cevapKaristir'])!.setValue(false);
     this.soruVarmi = false;
-    this.konuVar = false;
+    //this.konuVar = false;
     this.p = 1;
+    this.pageChanged();
   }
-
-  // getKonu(): any {
-  //   this.konuService.query().subscribe(res => {
-  //     this.konularSharedCollection = res.body ?? [];
-  //   });
-  // }
 
   getGruplar(): any {
     this.grupService.getAllGrupByGozuksun().subscribe(res => {
@@ -122,7 +117,6 @@ export class DersCalisComponent implements OnInit {
 
   ngOnInit(): void {
     this.count = 0;
-    // this.getKonu();
     this.getGruplar();
   }
 
