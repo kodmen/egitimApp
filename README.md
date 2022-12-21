@@ -1,12 +1,21 @@
 ## ilk öncelik
+
+1. ders çalışma sayfası geri gelince ders seçte iktikrarsızlık var
+2. - TOPLU SORU EKLERKEN SORU EKLE YERİNE DENEME OLUŞTUR YAZIYOR
+3. denemeyi pdf olarak göstersin ve indirsin
+
 - döneme ait sorular gözükmeli
 - yada grup ve konuya dönem eklenebilir 
 - AUTH KISMI düzeltilmeli
 - editor ve öğrenci aynı anda eklenmiyor
 - TOPLU SORU EKLERKEN KONUYU VERİRKEN ÖNCE GRUBU SORABİLİRİZ ÇOK FAZLA KONU OLUNCA KARIŞABİLİR
-- TOPLU SORU EKLERKEN SORU EKLE YERİNE DENEME OLUŞTUR YAZIYOR
 - deneme analiz sayfasını create olmasına gerek yok 
 - mesulun sınıfları başka hocanın sınıfları başka olmalı
+- deneme sınıf analiz incelenirken admin girice girmiyor admin girince olması lazım 
+- ders çalışma yerinde seçtikten sonra geri tekrar ders seçerken (seçili gurup  ) gözüküyor ama konular gelmiyor seçilmemiş gibi oluyor tekrar gurupları getirmesin
+- ders çalışırken geri gelince sorular yanlış gösteriyor boş göstermesi lazım 
+- destek safyası lazım 
+- denemeleri pdf olarak indirebilenecek yer lazım 
 
 - soru olarak göster diye bir şey koyulabilir soru liste
 

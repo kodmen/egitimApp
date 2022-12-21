@@ -51,6 +51,7 @@ public interface DenemeAnalizRepository extends JpaRepository<DenemeAnaliz, Long
     Page<DenemeAnaliz> findByDeneme_Olusturan(User user,Pageable p);
 
     List<DenemeAnaliz> findByDeneme_OlusturanAndDeneme_Id(User user, long denemeId);
+    List<DenemeAnaliz> findByDeneme_Id(long denemeId);
 
     boolean existsByDeneme_IdAndUser(long id,User u);
 

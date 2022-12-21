@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static com.temrin.security.AuthoritiesConstants.MESUL;
+
 @Service
 public class DenemeAnalizService {
 
@@ -91,6 +93,7 @@ public class DenemeAnalizService {
     }
 
     /**
+     * ADMİN GİRİNCE NE YAPACAK
      * burda denemeId ve OluşturanId göre denemeleri getiriyoruz
      * yani hoca denemeye göre sınıfındaki öğrencilerin denemelerini getiriyor
      *
@@ -98,7 +101,18 @@ public class DenemeAnalizService {
      * @return
      */
     public List<DenemeAnaliz> getHocaDeneme(long denemeId) {
-        return repository.findByDeneme_OlusturanAndDeneme_Id(userService.getCurrentUser(), denemeId);
+        // buraya eğer admin girerse
+        switch (userService.getAuth()) {
+            case "ROLE_ADMIN":
+                return repository.findByDeneme_Id(denemeId);
+            case "ROLE_HOCA":
+            case MESUL:
+                return repository.findByDeneme_OlusturanAndDeneme_Id(userService.getCurrentUser(), denemeId);
+                // BURDA EĞER HEM ÖĞRENCİ HEM ÖRETMENSE BURDA HATA VERİY
+            default:
+                return Collections.emptyList();
+        }
+        //return repository.findByDeneme_OlusturanAndDeneme_Id(userService.getCurrentUser(), denemeId);
     }
 
     public List<DenemeAnaliz> getDenemeAnalizByDeneme(Deneme d) {
