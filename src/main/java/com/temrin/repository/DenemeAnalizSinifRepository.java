@@ -48,5 +48,6 @@ public interface DenemeAnalizSinifRepository extends JpaRepository<DenemeAnalizS
     DenemeAnalizSinif findByDeneme(Deneme deneme);
 
     List<DenemeAnalizSinif> findByDeneme_Olusturan(User user);
+    List<DenemeAnalizSinif> findBySinif_Id(long id);
 
 }

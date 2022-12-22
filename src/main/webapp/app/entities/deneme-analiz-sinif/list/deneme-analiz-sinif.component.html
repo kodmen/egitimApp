@@ -28,6 +28,21 @@
   <div class="alert alert-warning" id="no-result" *ngIf="denemeAnalizSinifs?.length === 0">
     <span jhiTranslate="temrinMatikApp.denemeAnalizSinif.home.notFound">No denemeAnalizSinifs found</span>
   </div>
+<form [formGroup]="sinifSec">
+  <ng-container *ngIf="siniflar?.length! > 1">
+<div class="row mb-3">
+    <div class="col-md-6">
+      <ng-multiselect-dropdown (onSelect)="sinifGetir($event)" [placeholder]="'öğrencileri seçiniz'" [settings]="dropdownSettings"
+        [data]="siniflar!" formControlName="sinif">
+      </ng-multiselect-dropdown>
+    </div>
+  </div>
+  </ng-container>
+  
+ 
+
+</form>
+ 
 
   <div class="table-responsive" id="entities" *ngIf="denemeAnalizSinifs && denemeAnalizSinifs.length > 0">
     <table class="table table-striped" aria-describedby="page-heading">

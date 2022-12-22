@@ -5,6 +5,12 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { IDenemeAnalizSinif } from '../deneme-analiz-sinif.model';
 import { DenemeAnalizSinifService } from '../service/deneme-analiz-sinif.service';
 import { DenemeAnalizSinifDeleteDialogComponent } from '../delete/deneme-analiz-sinif-delete-dialog.component';
+import { ISinif } from 'app/entities/sinif/sinif.model';
+import { SinifService } from 'app/entities/sinif/service/sinif.service';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { FormBuilder } from '@angular/forms';
+import { Account } from 'app/core/auth/account.model';
+import { AccountService } from 'app/core/auth/account.service';
 
 @Component({
   selector: 'jhi-deneme-analiz-sinif',
@@ -14,24 +20,83 @@ export class DenemeAnalizSinifComponent implements OnInit {
   denemeAnalizSinifs?: IDenemeAnalizSinif[];
   isLoading = false;
 
-  constructor(protected denemeAnalizSinifService: DenemeAnalizSinifService, protected modalService: NgbModal) {}
+  siniflar?: ISinif[] = [];
+  seciliSinif?: ISinif;
+  // dropdownList:any[] = [];
+  dropdownSettings: IDropdownSettings;
+  account: Account | null = null;
 
+  sinifSec = this.fb.group({
+    sinif: [],
+  });
+
+  constructor(
+    private accountService: AccountService,
+    protected sinifService: SinifService,
+    protected denemeAnalizSinifService: DenemeAnalizSinifService,
+    protected modalService: NgbModal,
+    protected fb: FormBuilder
+  ) {}
+  sinifGetir(any: any): void {
+    if (this.seciliSinif !== any) {
+      this.seciliSinif = any;
+      console.log('sinif değişti');
+      this.denemeAnalizSinifService.query({ sinifId: this.seciliSinif?.id }).subscribe({
+        next: (res: HttpResponse<IDenemeAnalizSinif[]>) => {
+          this.isLoading = false;
+          this.denemeAnalizSinifs = res.body ?? [];
+        },
+        error: () => {
+          this.isLoading = false;
+        },
+      });
+    }
+    // sınıf değişince eğer secili
+  }
   loadAll(): void {
     this.isLoading = true;
 
-    this.denemeAnalizSinifService.query().subscribe({
-      next: (res: HttpResponse<IDenemeAnalizSinif[]>) => {
+    this.sinifService.query().subscribe({
+      next: (res: HttpResponse<ISinif[]>) => {
         this.isLoading = false;
-        this.denemeAnalizSinifs = res.body ?? [];
+        this.siniflar = res.body ?? [];
       },
       error: () => {
         this.isLoading = false;
       },
     });
+
+    if (this.account?.authorities.includes('ROLE_ADMIN')) {
+      this.denemeAnalizSinifService.query().subscribe({
+        next: (res: HttpResponse<IDenemeAnalizSinif[]>) => {
+          this.isLoading = false;
+          this.denemeAnalizSinifs = res.body ?? [];
+        },
+        error: () => {
+          this.isLoading = false;
+        },
+      });
+    }
   }
 
   ngOnInit(): void {
+      this.accountService.getAuthenticationState().subscribe(account => {
+      this.account = account;
+    });
     this.loadAll();
+
+  
+
+    this.dropdownSettings = {
+      singleSelection: true,
+      idField: 'id',
+      textField: 'isim',
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      enableCheckAll: false,
+      itemsShowLimit: 3,
+      allowSearchFilter: false,
+    };
   }
 
   trackId(_index: number, item: IDenemeAnalizSinif): number {

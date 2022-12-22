@@ -97,7 +97,6 @@ public class SinifService {
 
     public boolean ogrenciSinifIceriyormu() {
         User current = userService.getCurrentUser();
-//        Optional<User> u = userService.findByLogin(login);
         return sinifRepository.existsByOgrencilersContains(current);
     }
 

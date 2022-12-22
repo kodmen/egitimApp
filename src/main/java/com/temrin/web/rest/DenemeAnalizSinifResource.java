@@ -153,10 +153,10 @@ public class DenemeAnalizSinifResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of denemeAnalizSinifs in body.
      */
     @GetMapping("/deneme-analiz-sinifs")
-    public List<DenemeAnalizSinif> getAllDenemeAnalizSinifs(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
+    public List<DenemeAnalizSinif> getAllDenemeAnalizSinifs(@RequestParam(required = false, defaultValue = "false") boolean eagerload,@RequestParam(required = false,defaultValue = "0")long sinifId) {
         log.debug("REST request to get all DenemeAnalizSinifs");
 //        return denemeAnalizSinifRepository.findAllWithEagerRelationships();
-        return denemeAnalizSinifService.getAllDenemeAnalizSinif();
+        return denemeAnalizSinifService.getAllDenemeAnalizSinif(sinifId);
     }
 
     /**

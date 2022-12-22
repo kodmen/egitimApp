@@ -39,23 +39,24 @@ public class DenemeAnalizSinifService {
         repository.save(d);
     }
 
-    public List<DenemeAnalizSinif> getAllDenemeAnalizSinif() {
+    public List<DenemeAnalizSinif> getAllDenemeAnalizSinif(long sinifId) {
         switch (userService.getAuth()) {
             case "ROLE_ADMIN":
                 return repository.findAll();
             case "ROLE_HOCA":
             case MESUL:
-                return getHocaDenemeAnalizSinif();
+                return getHocaDenemeAnalizSinif(sinifId);
             default:
                 return Collections.emptyList();
         }
     }
 
-    public List<DenemeAnalizSinif> getHocaDenemeAnalizSinif() {
+    public List<DenemeAnalizSinif> getHocaDenemeAnalizSinif(long id) {
         // hocaya ait olan sinifları getir
         // sinif id e göre deneme analizlerini getir
         // gelen denemeanalizlerini hocaya göster
-        return repository.findByDeneme_Olusturan(userService.getCurrentUser());
+        //return repository.findByDeneme_Olusturan(userService.getCurrentUser());
+        return repository.findBySinif_Id(id);
     }
 
     public DenemeAnalizSinif getDeneme(Deneme d) {

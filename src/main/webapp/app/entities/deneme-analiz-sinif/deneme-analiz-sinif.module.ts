@@ -6,9 +6,10 @@ import { DenemeAnalizSinifUpdateComponent } from './update/deneme-analiz-sinif-u
 import { DenemeAnalizSinifDeleteDialogComponent } from './delete/deneme-analiz-sinif-delete-dialog.component';
 import { DenemeAnalizSinifRoutingModule } from './route/deneme-analiz-sinif-routing.module';
 import { HocaOgrListComponent } from './hoca-ogr-list/hoca-ogr-list.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 @NgModule({
-  imports: [SharedModule, DenemeAnalizSinifRoutingModule],
+  imports: [SharedModule, DenemeAnalizSinifRoutingModule,NgMultiSelectDropDownModule],
   declarations: [
     DenemeAnalizSinifComponent,
     DenemeAnalizSinifDetailComponent,
