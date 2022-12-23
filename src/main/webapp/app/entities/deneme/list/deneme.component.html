@@ -40,6 +40,8 @@
           <!-- <th scope="col"><span jhiTranslate="temrinMatikApp.deneme.cevapAnahtar">Cevap Anahtar</span></th> -->
           <!-- <th scope="col"><span jhiTranslate="temrinMatikApp.deneme.denemeInfoJson">Deneme Info Json</span></th> -->
           <th scope="col"><span jhiTranslate="temrinMatikApp.deneme.olusturan">Olusturan</span></th>
+          <th scope="col"><span >Sinif</span></th>
+          <th scope="col"><span >Grup</span></th>
           <!-- <th scope="col"><span jhiTranslate="temrinMatikApp.deneme.sorular">Sorular</span></th> -->
           <th scope="col"></th>
         </tr>
@@ -58,6 +60,12 @@
           <td>
             {{ deneme.olusturan?.login }}
           </td>
+          <td>
+            {{ deneme.sinif?.isim }}
+          </td>
+          <td>
+            {{ deneme.grup?.isim }}
+          </td>
           <!-- <td>
             <span *ngFor="let sorular of deneme.sorulars; let last = last">
               <a class="form-control-static" [routerLink]="['/soru', sorular.id, 'view']">{{ sorular.isim }}</a
@@ -67,7 +75,7 @@
           <td class="text-end">
             <div class="btn-group">
               <button type="submit" [routerLink]="['/deneme',deneme.id, 'pdf', ]" class="btn btn-success btn-sm" data-cy="entityDetailsButton">
-                <fa-icon icon="eye"></fa-icon>
+                <fa-icon icon="file-pdf"></fa-icon>
                 <span class="d-none d-md-inline" >Pdf indir</span>
               </button>
 

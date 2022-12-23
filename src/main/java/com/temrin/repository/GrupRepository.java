@@ -24,4 +24,7 @@ public interface GrupRepository extends GrupRepositoryWithBagRelationships, JpaR
     }
 
     List<Grup> findAllByGozuksun(boolean gozuksun);
+
+    Optional<Grup> findByIsim(String isim);
+
 }

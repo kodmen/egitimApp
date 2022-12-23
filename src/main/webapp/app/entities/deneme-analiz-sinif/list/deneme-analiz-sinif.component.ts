@@ -22,13 +22,9 @@ export class DenemeAnalizSinifComponent implements OnInit {
 
   siniflar?: ISinif[] = [];
   seciliSinif?: ISinif;
-  // dropdownList:any[] = [];
   dropdownSettings: IDropdownSettings;
   account: Account | null = null;
-
-  sinifSec = this.fb.group({
-    sinif: [],
-  });
+  tekSinifVar = false;
 
   constructor(
     private accountService: AccountService,
@@ -37,10 +33,10 @@ export class DenemeAnalizSinifComponent implements OnInit {
     protected modalService: NgbModal,
     protected fb: FormBuilder
   ) {}
+
   sinifGetir(any: any): void {
     if (this.seciliSinif !== any) {
       this.seciliSinif = any;
-      console.log('sinif değişti');
       this.denemeAnalizSinifService.query({ sinifId: this.seciliSinif?.id }).subscribe({
         next: (res: HttpResponse<IDenemeAnalizSinif[]>) => {
           this.isLoading = false;
@@ -51,8 +47,20 @@ export class DenemeAnalizSinifComponent implements OnInit {
         },
       });
     }
-    // sınıf değişince eğer secili
   }
+
+  sinifGetirTekli(sinifId: number): void {
+    this.denemeAnalizSinifService.query({ sinifId }).subscribe({
+      next: (res: HttpResponse<IDenemeAnalizSinif[]>) => {
+        this.isLoading = false;
+        this.denemeAnalizSinifs = res.body ?? [];
+      },
+      error: () => {
+        this.isLoading = false;
+      },
+    });
+  }
+
   loadAll(): void {
     this.isLoading = true;
 
@@ -60,6 +68,14 @@ export class DenemeAnalizSinifComponent implements OnInit {
       next: (res: HttpResponse<ISinif[]>) => {
         this.isLoading = false;
         this.siniflar = res.body ?? [];
+        if (this.siniflar.length <= 1) {
+          this.tekSinifVar = false;
+          if (this.siniflar.length === 1) {
+           this.sinifGetirTekli(this.siniflar[0].id!);
+          }
+        } else {
+          this.tekSinifVar = true;
+        }
       },
       error: () => {
         this.isLoading = false;
@@ -80,12 +96,11 @@ export class DenemeAnalizSinifComponent implements OnInit {
   }
 
   ngOnInit(): void {
-      this.accountService.getAuthenticationState().subscribe(account => {
+    this.accountService.getAuthenticationState().subscribe(account => {
       this.account = account;
     });
-    this.loadAll();
 
-  
+    this.loadAll();
 
     this.dropdownSettings = {
       singleSelection: true,

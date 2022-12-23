@@ -79,7 +79,6 @@ export class DersCalisComponent implements OnInit {
   }
 
   soruGetir(): void {
-     const grupId = this.form.get(['grup'])!.value;
 
     const konuId = this.form.get(['konu'])!.value;
     const soruKaristir = this.form.get(['soruKaristir'])!.value;
@@ -104,7 +103,7 @@ export class DersCalisComponent implements OnInit {
     this.form.get(['soruKaristir'])!.setValue(false);
     this.form.get(['cevapKaristir'])!.setValue(false);
     this.soruVarmi = false;
-    //this.konuVar = false;
+    // this.konuVar = false;
     this.p = 1;
     this.pageChanged();
   }

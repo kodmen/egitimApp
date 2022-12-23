@@ -47,7 +47,7 @@ export class TopluSoruEklemeComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadRelationshipsOptions();
-    //this.imageInfos = this.soruService.getFiles();
+    // this.imageInfos = this.soruService.getFiles();
   }
 
   get sorularFieldAsFormArray(): FormArray {

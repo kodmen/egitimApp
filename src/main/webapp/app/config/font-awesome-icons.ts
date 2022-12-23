@@ -43,9 +43,8 @@ import {
   faCopy,
   faHouse,
   faBookmark,
-  faAddressBook,
-  faPager,
-  faFile
+  faFile,
+  faFilePdf
   // jhipster-needle-add-icon-import
 } from '@fortawesome/free-solid-svg-icons';
 
@@ -95,6 +94,7 @@ export const fontAwesomeIcons = [
   faHouse,
   faBook,
   faBookmark,
-  faFile
+  faFile,
+  faFilePdf
   // jhipster-needle-add-icon-import
 ];

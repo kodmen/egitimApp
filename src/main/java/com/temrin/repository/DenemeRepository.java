@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import com.temrin.domain.Sinif;
 import com.temrin.domain.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -54,6 +55,9 @@ public interface DenemeRepository extends DenemeRepositoryWithBagRelationships, 
     List<Deneme> findAllByBaslamaTarihBetween(Instant a, Instant b);
 
     List<Deneme> findAllByBaslamaTarihBetweenAndOlusturan(Instant a, Instant b, User olusturan);
+
+    List<Deneme> findAllByBaslamaTarihBetweenAndSinif(Instant a, Instant b, Sinif s);
+
 
     /**
      * girilen useren son olusturduğu denemeyi getiriyor

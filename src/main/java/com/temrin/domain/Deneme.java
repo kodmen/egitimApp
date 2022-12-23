@@ -51,6 +51,16 @@ public class Deneme implements Serializable {
     @ManyToOne
     private User olusturan;
 
+    //grup ve sınıf eklenmesin mi
+
+    @ManyToOne
+    private Grup grup;
+
+    @ManyToOne
+    private Sinif sinif;
+
+
+
     @ManyToMany
     @JoinTable(
         name = "rel_deneme__sorular",
@@ -62,6 +72,23 @@ public class Deneme implements Serializable {
     private Set<Soru> sorulars = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
+
+
+    public Grup getGrup() {
+        return grup;
+    }
+
+    public void setGrup(Grup grup) {
+        this.grup = grup;
+    }
+
+    public Sinif getSinif() {
+        return sinif;
+    }
+
+    public void setSinif(Sinif sinif) {
+        this.sinif = sinif;
+    }
 
     public Long getId() {
         return this.id;

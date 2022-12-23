@@ -189,6 +189,12 @@ public class DenemeService {
 
     public Deneme create(DenemeDTO dto) throws ParseException {
         Deneme entity = new Deneme();
+        Optional<Sinif> s = sinifService.getSinifById(dto.getSinifId());
+
+        if (s.isPresent()){
+            entity.setSinif(s.get());
+            entity.setGrup(s.get().getGrup());
+        }
 
         entity.setOlusturan(userService.getCurrentUser());
         entity.setOlusturmaTarih(LocalDate.now());
@@ -307,6 +313,10 @@ public class DenemeService {
 //    }
 
     private List<Deneme> getOgrDeneme() {
+        // eğer hocanın birden çok sınıfı olursa denemeler patlayabilir
+
+        // sınıf ve grup id almamn lazım
+
         // bir gün önce
         LocalDate birHaftaOnce = LocalDate.now().minusDays(2);
         LocalDate birHaftaSonra = LocalDate.now().plusDays(2);
@@ -315,8 +325,21 @@ public class DenemeService {
         Instant dd = birHaftaSonra.atStartOfDay(ZoneId.systemDefault()).toInstant();
 
         Optional<User> u = userService.getUserLogin(getCurrentUserLogin().get());
-        Sinif s = sinifService.getOrgSinif(u.get());
-        List<Deneme> userAitDenemeler = repository.findAllByBaslamaTarihBetweenAndOlusturan(tt, dd, s.getHoca());
+        List<Sinif> s = sinifService.getOrgSinif(u.get());
+        List<Deneme> userAitDenemeler = new ArrayList<>(Collections.emptyList());
+        // burda tüm sınfıflardaki değerlerini getiriyoruz
+        for (Sinif sinif : s){
+            List<Deneme> gelen_denemeler = repository.findAllByBaslamaTarihBetweenAndSinif(tt, dd, sinif);
+            if (gelen_denemeler.isEmpty()) {
+                continue;
+            }
+            userAitDenemeler.addAll(gelen_denemeler);
+        }
+//        s.stream().forEach(sinif -> {
+//            userAitDenemeler.add((Deneme) repository.findAllByBaslamaTarihBetweenAndSinif(tt, dd, sinif));
+//        });
+
+        //List<Deneme> userAitDenemeler = repository.findAllByBaslamaTarihBetweenAndSinif(tt, dd, s);
         if (userAitDenemeler.size() > 0){
             //userAitDenemeler.add(getGunlukDeneme());
             return userAitDenemeler;

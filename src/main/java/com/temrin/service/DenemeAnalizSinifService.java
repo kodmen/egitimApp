@@ -27,7 +27,7 @@ public class DenemeAnalizSinifService {
     public void DenemeAnalizSinifCreate(Deneme d) {
         // buraya deneme old sınıfı koymak lazım
         DenemeAnalizSinif sinif = new DenemeAnalizSinif();
-        Sinif hocaSinif = sinifService.getCurrentUserSinif();
+        Sinif hocaSinif = d.getSinif();
         sinif.setSinif(hocaSinif);
         sinif.setDeneme(d);
         sinif.setOrtalama(0f);

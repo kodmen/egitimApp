@@ -1,6 +1,8 @@
 import dayjs from 'dayjs/esm';
 import { IUser } from 'app/entities/user/user.model';
 import { ISoru } from 'app/entities/soru/soru.model';
+import { IGrup } from '../grup/grup.model';
+import { ISinif } from '../sinif/sinif.model';
 
 export interface IDeneme {
   id?: number;
@@ -12,6 +14,8 @@ export interface IDeneme {
   denemeInfoJson?: string | null;
   olusturan?: IUser | null;
   sorulars?: ISoru[] | null;
+  grup?: IGrup | null;
+  sinif?: ISinif | null;
 }
 
 export class Deneme implements IDeneme {
@@ -24,7 +28,9 @@ export class Deneme implements IDeneme {
     public cevapAnahtar?: string | null,
     public denemeInfoJson?: string | null,
     public olusturan?: IUser | null,
-    public sorulars?: ISoru[] | null
+    public sorulars?: ISoru[] | null,
+    public grup?: IGrup | null,
+    public sinif?: ISinif | null
   ) {}
 }
 

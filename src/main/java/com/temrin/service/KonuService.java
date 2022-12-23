@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import static com.temrin.security.AuthoritiesConstants.*;
 
@@ -52,6 +53,15 @@ public class KonuService {
                 return Collections.emptyList();
         }
 
+    }
+
+    public List<Konu> getByGrup(String grup){
+        Optional<Grup> g = grupService.getGrupByIsim(grup);
+        if (g.isPresent()){
+            return repository.findAllByGruplar(g.get());
+        }else {
+            return Collections.emptyList();
+        }
     }
 
     public Konu konuSayisiArttir(Konu k){

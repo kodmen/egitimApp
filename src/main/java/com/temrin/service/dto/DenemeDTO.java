@@ -5,11 +5,20 @@ import java.util.List;
 
 public class DenemeDTO {
 
+    public long sinifId;
     public String isim;
     public Instant baslamaTarih;
     public int sure;
     public List<KonuDTO> konudto;
     public boolean rastgele;
+
+    public long getSinifId() {
+        return sinifId;
+    }
+
+    public void setSinifId(long sinifId) {
+        this.sinifId = sinifId;
+    }
 
     public Instant getBaslamaTarih() {
         return baslamaTarih;

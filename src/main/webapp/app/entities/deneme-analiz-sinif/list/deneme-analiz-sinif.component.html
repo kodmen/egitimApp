@@ -8,13 +8,8 @@
         <span jhiTranslate="temrinMatikApp.denemeAnalizSinif.home.refreshListLabel">Refresh List</span>
       </button>
 
-      <button
-      *jhiHasAnyAuthority="'ROLE_ADMIN'"
-        id="jh-create-entity"
-        data-cy="entityCreateButton"
-        class="btn btn-primary jh-create-entity create-deneme-analiz-sinif"
-        [routerLink]="['/deneme-analiz-sinif/new']"
-      >
+      <button *jhiHasAnyAuthority="'ROLE_ADMIN'" id="jh-create-entity" data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-deneme-analiz-sinif" [routerLink]="['/deneme-analiz-sinif/new']">
         <fa-icon icon="plus"></fa-icon>
         <span jhiTranslate="temrinMatikApp.denemeAnalizSinif.home.createLabel"> Create a new Deneme Analiz Sinif </span>
       </button>
@@ -28,21 +23,16 @@
   <div class="alert alert-warning" id="no-result" *ngIf="denemeAnalizSinifs?.length === 0">
     <span jhiTranslate="temrinMatikApp.denemeAnalizSinif.home.notFound">No denemeAnalizSinifs found</span>
   </div>
-<form [formGroup]="sinifSec">
-  <ng-container *ngIf="siniflar?.length! > 1">
-<div class="row mb-3">
-    <div class="col-md-6">
-      <ng-multiselect-dropdown (onSelect)="sinifGetir($event)" [placeholder]="'öğrencileri seçiniz'" [settings]="dropdownSettings"
-        [data]="siniflar!" formControlName="sinif">
-      </ng-multiselect-dropdown>
-    </div>
-  </div>
-  </ng-container>
-  
- 
 
-</form>
- 
+  <ng-container *ngIf="tekSinifVar">
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <ng-multiselect-dropdown (onSelect)="sinifGetir($event)" [placeholder]="'Sınıfınızı seçiniz'"
+          [settings]="dropdownSettings" [data]="siniflar!">
+        </ng-multiselect-dropdown>
+      </div>
+    </div>
+  </ng-container>
 
   <div class="table-responsive" id="entities" *ngIf="denemeAnalizSinifs && denemeAnalizSinifs.length > 0">
     <table class="table table-striped" aria-describedby="page-heading">
@@ -59,11 +49,12 @@
         <tr *ngFor="let denemeAnalizSinif of denemeAnalizSinifs; trackBy: trackId" data-cy="entityTable">
           <td>
             <div *ngIf="denemeAnalizSinif.deneme">
-              <a [routerLink]="['/deneme', denemeAnalizSinif.deneme?.id, 'view']">{{ denemeAnalizSinif.deneme?.isim }}</a>
+              <a [routerLink]="['/deneme', denemeAnalizSinif.deneme?.id, 'view']">{{ denemeAnalizSinif.deneme?.isim
+                }}</a>
             </div>
           </td>
           <td>{{ denemeAnalizSinif.ortalama }}</td>
-         
+
           <td>
             <div *ngIf="denemeAnalizSinif.sinif">
               <a [routerLink]="['/sinif', denemeAnalizSinif.sinif?.id, 'view']">{{ denemeAnalizSinif.sinif?.isim }}</a>
@@ -71,38 +62,27 @@
           </td>
           <td class="text-end">
             <div class="btn-group">
-              <button
-                type="submit"
-                [routerLink]="['/deneme-analiz-sinif', denemeAnalizSinif.id, 'view']"
-                class="btn btn-info btn-sm m-1"
-                data-cy="entityDetailsButton"
-              >
+              <button type="submit" [routerLink]="['/deneme-analiz-sinif', denemeAnalizSinif.id, 'view']"
+                class="btn btn-info btn-sm m-1" data-cy="entityDetailsButton">
                 <fa-icon icon="eye"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
               </button>
 
-              <button
-                type="submit"
-                [routerLink]="['/deneme-analiz-sinif', denemeAnalizSinif.id, 'ogr-view']"
-                class="btn btn-success btn-sm m-1"
-                data-cy="entityDetailsButton"
-              >
+              <button type="submit" [routerLink]="['/deneme-analiz-sinif', denemeAnalizSinif.id, 'ogr-view']"
+                class="btn btn-success btn-sm m-1" data-cy="entityDetailsButton">
                 <fa-icon icon="eye"></fa-icon>
                 <span class="d-none d-md-inline">ogrenci analiz</span>
               </button>
 
-              <button
-              *jhiHasAnyAuthority="'ROLE_ADMIN'"
-                type="submit"
-                [routerLink]="['/deneme-analiz-sinif', denemeAnalizSinif.id, 'edit']"
-                class="btn btn-primary btn-sm"
-                data-cy="entityEditButton"
-              >
+              <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit"
+                [routerLink]="['/deneme-analiz-sinif', denemeAnalizSinif.id, 'edit']" class="btn btn-primary btn-sm"
+                data-cy="entityEditButton">
                 <fa-icon icon="pencil-alt"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
               </button>
 
-              <button  *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit" (click)="delete(denemeAnalizSinif)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+              <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit" (click)="delete(denemeAnalizSinif)"
+                class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
                 <fa-icon icon="times"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
               </button>

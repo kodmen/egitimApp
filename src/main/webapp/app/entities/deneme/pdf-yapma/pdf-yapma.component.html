@@ -5,164 +5,125 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
-    <title>مرحبًا بالعالم!</title>
 </head>
-
-<!-- <div class="book">
-    <div class="page">
-        <div class="subpage">
-
-            <div class="container text-center">
-                <div class="row">
-                    <div class="col-6">
-
-                    </div>
-                    <div class="col-6">
-
-                    </div>
-                    <div class="col-6">
-
-                    </div>
-                    <div class="col-6">
-
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-    </div>
-</div> -->
-
-
-
 
 
 <body>
-<div class="container">
-    <div class="row">
+    <div class="container">
+        <div class="row">
 
-        <jhi-alert-error></jhi-alert-error>
+            <jhi-alert-error></jhi-alert-error>
 
-        <jhi-alert></jhi-alert>
-    </div>
+            <jhi-alert></jhi-alert>
+        </div>
 
-    <!-- <div class="book">
-        <div *ngFor="let d of sinav.sorular ; index as p ">
-
-            <div  class="page">
-                <div class="subpage">
-
-                    <h3 style="color:red ;" class="mt-4 text-end ">(-{{p+1 }}</h3>
-
-                    <ng-container *ngIf="d.soruResimUrl !== null">
-                        <img [src]="foto + d.soruResimUrl" class="rounded mx-auto d-block responsive" alt="..." />
-                    </ng-container>
-                    <ng-container *ngIf="d.metin !== null">
-                        <h3 class="question-text answer-text text-end" data-answer="a">{{d.metin}}</h3>
-                    </ng-container>
-
-
-                    <ng-container *ngIf="d.cevapli">
-                        <table class="table table-borderless">
-
-                            <tbody class="text-end">
-                                <tr>
-                                    <td>{{d.kar!.a}}</td>
-
-                                    <th scope="row text-start">( ا </th>
-
-                                </tr>
-                                <tr>
-                                    <td>{{d.kar!.b}}</td>
-
-                                    <th scope="row">( ب </th>
-
-                                </tr>
-                                <tr>
-                                    <td>{{d.kar!.c}}</td>
-
-                                    <th scope="row">( ج </th>
-
-                                </tr>
-                                <tr>
-                                    <td>{{d.kar!.d}}</td>
-
-                                    <th scope="row">( د </th>
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </ng-container>
-
-                     <ng-container *ngIf="p%2 !== 0">
-                        <h3 style="color:red ;" class="mt-4 text-end ">(-{{p+1 }}</h3>
-
-                        <ng-container *ngIf="d.soruResimUrl !== null">
-                            <img [src]="foto + d.soruResimUrl" class="rounded mx-auto d-block responsive" alt="..." />
-                        </ng-container>
-                        <ng-container *ngIf="d.metin !== null">
-                            <h3 class="question-text answer-text text-end" data-answer="a">{{d.metin}}</h3>
-                        </ng-container>
-
-
-                        <ng-container *ngIf="d.cevapli">
-                            <table class="table table-borderless">
-
-                                <tbody class="text-end">
-                                    <tr>
-                                        <td>{{d.kar!.a}}</td>
-
-                                        <th scope="row text-start">( ا </th>
-
-                                    </tr>
-                                    <tr>
-                                        <td>{{d.kar!.b}}</td>
-
-                                        <th scope="row">( ب </th>
-
-                                    </tr>
-                                    <tr>
-                                        <td>{{d.kar!.c}}</td>
-
-                                        <th scope="row">( ج </th>
-
-                                    </tr>
-                                    <tr>
-                                        <td>{{d.kar!.d}}</td>
-
-                                        <th scope="row">( د </th>
-
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </ng-container>
-                    </ng-container> 
-
+        <!-- <div class="row row-cols-2">
+            <div class="col">
+                <div class="d-flex flex-column mb-3">
+                    <div class="p-2">Flex item 1</div>
+                    <div class="p-2">Flex item 2</div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="d-flex flex-column mb-3">
+                    <div class="p-2">Flex item 1</div>
+                    <div class="p-2">Flex item 2</div>
                 </div>
             </div>
 
+        </div> -->
+        <!-- 
+        <div class="row row-cols-2">
 
+            <div class="col">
+                <div class="d-flex flex-column mb-3">
+                    <div *ngFor="let d of sinav.sorular ; index as p " class=" ">
 
-        </div>
+                        <h3 style="color:red ;" class="mt-4 text-end ">(-{{p+1 }}</h3>
 
-         <div class="page">
-            <div class="subpage">
+                        <div class="">
+                            <ng-container *ngIf="d.soruResimUrl !== null">
+                                <img [src]="foto + d.soruResimUrl" class="rounded mx-auto d-block responsive"
+                                    alt="..." />
+                            </ng-container>
+                            <ng-container *ngIf="d.metin !== null">
+                                <h3 class="question-text answer-text text-end" data-answer="a">{{d.metin}}</h3>
+                            </ng-container>
 
+                            <ng-container *ngIf="d.cevapli">
+                                <table class="table table-borderless">
 
-                <div class="container text-center">
-                    <div class="row">
-                        <div class="col-6">
+                                    <tbody class="text-end">
+                                        <tr>
+                                            <th scope="row text-start"> ا ) </th>
+
+                                            <td>{{d.kar!.a}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">ب )</th>
+
+                                            <td>{{d.kar!.b}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">ج )</th>
+
+                                            <td>{{d.kar!.c}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">د )</th>
+
+                                            <td>{{d.kar!.d}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </ng-container>
 
                         </div>
-                        <div class="col-6">
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="d-flex flex-column mb-3">
+                    <div *ngFor="let d of sinav.sorular ; index as p " class=" ">
 
-                        </div>
-                        <div class="col-6">
+                        <h3 style="color:red ;" class="mt-4 text-end ">(-{{p+1 }}</h3>
 
-                        </div>
-                        <div class="col-6">
+                        <div class="">
+                            <ng-container *ngIf="d.soruResimUrl !== null">
+                                <img [src]="foto + d.soruResimUrl" class="rounded mx-auto d-block responsive"
+                                    alt="..." />
+                            </ng-container>
+                            <ng-container *ngIf="d.metin !== null">
+                                <h3 class="question-text answer-text text-end" data-answer="a">{{d.metin}}</h3>
+                            </ng-container>
+
+                            <ng-container *ngIf="d.cevapli">
+                                <table class="table table-borderless">
+
+                                    <tbody class="text-end">
+                                        <tr>
+                                            <th scope="row text-start"> ا ) </th>
+
+                                            <td>{{d.kar!.a}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">ب )</th>
+
+                                            <td>{{d.kar!.b}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">ج )</th>
+
+                                            <td>{{d.kar!.c}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">د )</th>
+
+                                            <td>{{d.kar!.d}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </ng-container>
 
                         </div>
                     </div>
@@ -170,96 +131,128 @@
             </div>
 
 
-        </div> 
-    </div> -->
+        </div> -->
 
 
-    <div class="row">
+        <div class="row row-cols-2">
+            <ng-container *ngFor="let item of duzen ; index as dort ">
 
+                <div class="col border border-bottom-1 border-dark">
+                    <ng-container *ngFor="let d of item.slice(0,2); index as t ">
 
+                        <div class="d-flex flex-column mb-3">
 
-        <div class="col-6  align-self-end border" *ngFor="let d of sinav.sorular ; index as p ">
-            <div class=" justify-content-center">
+                            <div class=" ">
 
-                <h3 style="color:red ;" class="mt-4 text-end ">(-{{p+1 }}</h3>
+                                <h3 style="color:red ;" class="mt-4 text-end ">(-{{(t+1)+(dort*4) }}</h3>
 
-                <div class="">
-                    <ng-container *ngIf="d.soruResimUrl !== null">
-                        <img [src]="foto + d.soruResimUrl" class="rounded mx-auto d-block responsive" alt="..." />
-                    </ng-container>
-                    <ng-container *ngIf="d.metin !== null">
-                        <h3 class="question-text answer-text text-end" data-answer="a">{{d.metin}}</h3>
-                    </ng-container>
+                                <div class="">
+                                    <ng-container *ngIf="d.soruResimUrl !== null">
+                                        <img [src]="foto + d.soruResimUrl" class="rounded mx-auto d-block responsive"
+                                            alt="..." />
+                                    </ng-container>
+                                    <ng-container *ngIf="d.metin !== null">
+                                        <h3 class="question-text answer-text text-end" data-answer="a">{{d.metin}}</h3>
+                                    </ng-container>
 
-                    <!-- <ng-container *ngIf="d.cevapli">
-                        <table class="table table-borderless">
+                                    <ng-container *ngIf="d.cevapli">
+                                        <table class="table table-borderless">
 
-                            <tbody class="text-end">
-                                <tr>
-                                    <td>{{d.kar!.a}}</td>
+                                            <tbody class="text-end">
+                                                <tr>
+                                                    <th scope="row text-start"> ا ) </th>
 
-                                    <th scope="row text-start">( ا </th>
+                                                    <td>{{d.kar!.a}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">ب )</th>
 
-                                </tr>
-                                <tr>
-                                    <td>{{d.kar!.b}}</td>
+                                                    <td>{{d.kar!.b}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">ج )</th>
 
-                                    <th scope="row">( ب </th>
+                                                    <td>{{d.kar!.c}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">د )</th>
 
-                                </tr>
-                                <tr>
-                                    <td>{{d.kar!.c}}</td>
+                                                    <td>{{d.kar!.d}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </ng-container>
 
-                                    <th scope="row">( ج </th>
+                                </div>
+                            </div>
 
-                                </tr>
-                                <tr>
-                                    <td>{{d.kar!.d}}</td>
-
-                                    <th scope="row">( د </th>
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </ng-container> -->
-                    <ng-container *ngIf="d.cevapli">
-                        <table class="table table-borderless">
-
-                            <tbody class="text-end">
-                                <tr>
-                                    <th scope="row text-start"> ا ) </th>
-
-                                    <td>{{d.kar!.a}}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">ب )</th>
-
-                                    <td>{{d.kar!.b}}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">ج )</th>
-
-                                    <td>{{d.kar!.c}}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">د )</th>
-
-                                    <td>{{d.kar!.d}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        </div>
                     </ng-container>
 
                 </div>
-            </div>
+
+
+                <div class="col border border-bottom-1 border-dark">
+                    <ng-container *ngFor="let d of item.slice(-2); index as t ">
+
+                        <div class="d-flex flex-column mb-3">
+
+                            <div class=" ">
+
+                                <h3 style="color:red ;" class="mt-4 text-end ">(-{{(t+3)+(dort*4) }}</h3>
+
+                                <div class="">
+                                    <ng-container *ngIf="d.soruResimUrl !== null">
+                                        <img [src]="foto + d.soruResimUrl" class="rounded mx-auto d-block responsive"
+                                            alt="..." />
+                                    </ng-container>
+                                    <ng-container *ngIf="d.metin !== null">
+                                        <h3 class="question-text answer-text text-end" data-answer="a">{{d.metin}}</h3>
+                                    </ng-container>
+
+                                    <ng-container *ngIf="d.cevapli">
+                                        <table class="table table-borderless">
+
+                                            <tbody class="text-end">
+                                                <tr>
+                                                    <th scope="row text-start"> ا ) </th>
+
+                                                    <td>{{d.kar!.a}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">ب )</th>
+
+                                                    <td>{{d.kar!.b}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">ج )</th>
+
+                                                    <td>{{d.kar!.c}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">د )</th>
+
+                                                    <td>{{d.kar!.d}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </ng-container>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </ng-container>
+
+                </div>
+
+            </ng-container>
+
+            <hr>
 
         </div>
 
-
-
     </div>
-
-</div>
 
 
 

@@ -75,15 +75,8 @@ public class SinifService {
         }
     }
 
-    public Sinif getOrgSinif(User user) {
-        // burda gelen sınıf ilişkisiz bunu ilişkili yapmak lazım
-        List<Sinif> sinifList = sinifRepository.findByOgrencilersIsContaining(user);
-
-        if (sinifList.isEmpty()) {
-            return new Sinif();
-        }
-        return sinifList.get(0);
-
+    public List<Sinif> getOrgSinif(User user) {
+       return sinifRepository.findByOgrencilersIsContaining(user);
     }
 
     public Sinif getSinifByHoca(User hoca) {
@@ -132,6 +125,10 @@ public class SinifService {
 
     public List<Sinif> getAllSinifByYurt(Yurt y) {
         return sinifRepository.findByYurt(y);
+    }
+
+    public Optional<Sinif> getSinifById(long id){
+        return sinifRepository.findById(id);
     }
 
     // öğrenci sınıftan çıkabilir mi ?

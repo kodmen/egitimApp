@@ -14,7 +14,7 @@ import { combineLatest } from 'rxjs';
   styleUrls: ['./list-konu.component.scss'],
 })
 export class ListKonuComponent implements OnInit {
-  //sorus?: ISoru[]|null;
+  // sorus?: ISoru[]|null;
   sorus?: ISoru[] | null = null;
   isLoading = false;
 

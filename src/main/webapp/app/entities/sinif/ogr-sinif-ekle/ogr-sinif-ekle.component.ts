@@ -23,7 +23,7 @@ export class OgrSinifEkleComponent {
 
     if (this.yurtKodForm.status === 'VALID') {
       this.sinifService.ogrSinifAta(kod).subscribe(
-        res => {
+        () => {
           this.router.navigate(['sinif']);
         },
         err => {

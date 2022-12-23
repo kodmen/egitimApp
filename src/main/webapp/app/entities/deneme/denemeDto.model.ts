@@ -7,6 +7,7 @@ export interface IDenemeDto {
   baslamaTarih?: dayjs.Dayjs | null;
   sure?: number | null;
   konudto?: IKonuDto[] | null;
+  sinifId?:number|null;
 }
 
 export class DenemeDto implements IDenemeDto {
@@ -15,6 +16,7 @@ export class DenemeDto implements IDenemeDto {
     public isim?: string | null,
     public baslamaTarih?: dayjs.Dayjs | null,
     public sure?: number | null,
-    public konudto?: IKonuDto[] | null
+    public konudto?: IKonuDto[] | null,
+    public sinifId?: number |null
   ) {}
 }

@@ -107,15 +107,15 @@ export class DataUtils {
             };
             observer.error(error);
           } else {
-            //const fieldContentType: string = field + 'ContentType';
+            // const fieldContentType: string = field + 'ContentType';
             this.toBase64(file, (base64Data: string) => {
-              
+
               editForm.push(fb.group({
                 type:[file.type],
                 resim:[base64Data],
                 name:[file.name]
               }))
-        
+
               observer.next();
               observer.complete();
             });
@@ -129,7 +129,7 @@ export class DataUtils {
           observer.error(error);
         }
       }
-     
+
     }});
   }
 
