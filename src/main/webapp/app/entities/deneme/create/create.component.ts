@@ -141,6 +141,7 @@ export class CreateComponent implements OnInit {
           if (this.siniflar.length === 1) {
             if (this.siniflar[0].grup?.id) {
               this.getKonuByMultiSinif(this.siniflar[0].grup?.id);
+              this.seciliSinifGelen = this.siniflar[0];
             }
           }
         } else {
