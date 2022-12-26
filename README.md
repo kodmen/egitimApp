@@ -5,8 +5,10 @@
 3. denemeyi pdf olarak göstersin ve indirsin
 4. hoca denemeyi oluştururken toplam soru gösterilsin
 5. hoca denemeyi düzeltirken soruları düzeltemesin
-6. bir hocaya birden çok sınıf verilebilir mi( analizleri sınıf ide göre getirmeli- deneme oluştururken hocanın sınıfı fazla old için hata alıyoruz)
-7. eğer hocanın çok sınıfı yoksa sınıflar dropdown gözükmesin
+6. ~~bir hocaya birden çok sınıf verilebilir mi( analizleri sınıf ide göre getirmeli- deneme oluştururken hocanın sınıfı fazla old için hata alıyoruz)~~
+7. ~~eğer hocanın çok sınıfı yoksa sınıflar dropdown gözükmesin~~
+8. deneme çözme tasarımı ders çalışma gibi olsun
+9. düzgün bir proje tanıtım sayfası lazım
 
 - döneme ait sorular gözükmeli
 - yada grup ve konuya dönem eklenebilir 
