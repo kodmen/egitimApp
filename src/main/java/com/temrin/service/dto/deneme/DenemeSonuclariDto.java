@@ -24,11 +24,18 @@ public class DenemeSonuclariDto {
     }
 
     public float getPuan() {
+        /**
+         * burda hata çok saçma amk bunu düzgün test etmek lazımdı
+         * 34 soru olunca
+         * tek sorunun
+         */
         int toplanSoru = dogru + yanlis + bos;
-        float tekSoru = 100 / toplanSoru;
+        float tekSoru;
+        tekSoru = 100 / (float)toplanSoru;
         if (toplanSoru == dogru){
             return 100;
         }
+
         return tekSoru * dogru;
     }
 

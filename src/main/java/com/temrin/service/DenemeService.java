@@ -80,7 +80,9 @@ public class DenemeService {
     public long cevapKontrol(DenemeCevapRequest request) {
 
         Deneme deneme = repository.getById(request.getDenemeId());
-        String[] cevaplar = deneme.getCevapAnahtar().split(",");
+
+        String[] cevaplar = deneme.getCevapAnahtar().split(","); // bura kullanılmıyor mu
+
         DenemeSonuclariDto sonuclar = new DenemeSonuclariDto();
 
         HashMap<Long, String> cevaplarMap = new HashMap<>();
@@ -122,7 +124,7 @@ public class DenemeService {
         denemeAnaliz = denemeAnalizService.create(denemeAnaliz);
 
         DenemeAnalizSinif denemeAnalizSinif = denemeAnalizSinifService.getDeneme(deneme);
-        denemeAnalizSinif.setOrtalama(sinifOrtalamasiEkle(denemeAnalizSinif, sonuclar.getPuan()));
+        denemeAnalizSinif.setOrtalama(sinifOrtalamasiEkle(denemeAnalizSinif,(float) sonuclar.getPuan()));
         denemeAnalizSinifService.updateDenemeAnaliz(denemeAnalizSinif);
 
         return denemeAnaliz.getId();
