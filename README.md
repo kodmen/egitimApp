@@ -9,6 +9,9 @@
 7. ~~eğer hocanın çok sınıfı yoksa sınıflar dropdown gözükmesin~~
 8. deneme çözme tasarımı ders çalışma gibi olsun
 9. düzgün bir proje tanıtım sayfası lazım
+10. sınıfa eklenen sorularda düzgün gözüksün çok karışık duruyor
+11. deneme analiz sınıfda pageable olmalı sistem yoruluyor
+12. tekli soruda eğer metinse resim null dönüyor
 
 - döneme ait sorular gözükmeli
 - yada grup ve konuya dönem eklenebilir 

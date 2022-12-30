@@ -5,14 +5,17 @@
 
 
         <div class="question-holder row">
-            <div class="col-12">
-                <!-- <h4 id="question">{{item.soruText}}</h4> -->
-                <!-- <img [src]="foto + s.resimUrl" class="rounded mx-auto d-block responsive" alt="..." /> -->
+            <div *ngIf="soru?.resimUrl!" class="col-12">
                 <img class="rounded mx-auto d-block responsive" [defaultImage]="defaultImage"
                     [lazyLoad]="foto + soru?.resimUrl!" />
-
-
             </div>
+
+            <ng-container *ngIf="soru?.metin !== null">
+                <h3 class="question-text answer-text text-end" data-answer="a">{{soru?.metin!}}</h3>
+            </ng-container>
+
+
+
         </div>
 
         <div class="row">
