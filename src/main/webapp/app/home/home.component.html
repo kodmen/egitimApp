@@ -1,47 +1,3 @@
-<!-- <div class="row">
-
-
-
-  <div class="col-md-5">
-    <img src="../../content/images/TEMRINPOTO.png" class="rounded mx-auto d-block responsive" alt="">
-  </div>
-
-  <div class="col-md-7">
-    <h1 class="display-4 text-center">Gölbaşı Talebe Yurdu </h1>
-
-    <p class="lead" jhiTranslate="home.subtitle">Gölbaşı katkılarıyla temrin uygulaması</p>
-
-    <div [ngSwitch]="account !== null">
-      <h1>ilk girişte yapmanız gerekenler</h1>
-      <div class="alert alert-success" *ngSwitchCase="true">
-
-        <h4>öğrenci isen </h4>
-        <h4>hocanıza haber verin sizi sınıfıza dahil etsin</h4>
-      </div>
-      <div class="alert alert-success" *ngSwitchCase="true">
-        <h4>hoca iseniz </h4>
-        <h4>Admin ile iletişime geçin</h4>
-      </div>
-
-      <div class="alert alert-warning" *ngSwitchCase="false">
-        <span jhiTranslate="global.messages.info.register.noaccount">You don't have an account yet?</span>&nbsp;
-        <a class="alert-link" routerLink="account/register" jhiTranslate="global.messages.info.register.link">Register a
-          new account</a>
-      </div>
-
-      <div class="alert alert-warning" *ngSwitchCase="false">
-        <span>Üyeliğiniz var mı?</span>&nbsp;
-        <a class="alert-link" routerLink="login">Giriş yapın</a>
-      </div>
-
-    </div>
-  </div>
-
-
-
-
-</div> -->
-
 
 
 <!-- Design inspired from https://www.hotjar.com/ -->
@@ -50,8 +6,8 @@
 
     <div class="row" [ngSwitch]="account !== null">
       <div class="col-lg-6 my-auto">
-        <h1 class="display-4">Temrin Uygulaması</h1>
-        <p class="lead">Gölbaşı Talebe Yurdunun tekamül altı talebelerinin hazırlamış olduğu temrin uygulamas</p>
+        <h1 class="display-4">Deneme Uygulaması</h1>
+        <p class="lead">Öğrenciler için deneme çözme ve analiz uygulaması</p>
         <div class="lc-block" *ngSwitchCase="false">
           <a class="btn  mt-2" style="background-color:#1dc49c ;" routerLink="login" role="button">Giriş Yap</a>
           <a class="btn btn-outline-primary mt-2" routerLink="account/register" role="button">Üye Ol</a>
@@ -78,9 +34,8 @@
   <div class="row">
     <div class="col-md-12 text-center">
       <div class="lc-block">
-        <span editable="inline" class="small mt-4 d-block">Temrin app</span>
         <h2 editable="inline" class="display-2 mb-0"><b>Özellikler</b></h2>
-        <p editable="inline">Temrin uygulaması özellikleri</p>
+        <p editable="inline">Deneme uygulaması özellikleri</p>
       </div><!-- /lc-block -->
     </div>
   </div>
@@ -124,12 +79,12 @@
         </div>
         <div class="lc-block mb-4">
           <div editable="rich">
-            <h4>Deneme oluşturabiliyorsunuz</h4>
+            <h4>Kolay Kullanım:</h4>
           </div>
         </div>
         <div class="lc-block mb-lg-5 mb-2">
           <div editable="rich">
-            <p> Temamül altı öğrencileri için soru aralıklarını girerek deneme oluşturabiliyorsunuz</p>
+            <p> Deneme çözme uygulamamızın kolay kullanımı sayesinde, deneme sınavlarınızı istediğiniz zaman ve istediğiniz yerde çözebilirsiniz.</p>
           </div>
         </div>
       </div>
@@ -148,12 +103,12 @@
         </div>
         <div class="lc-block mb-4">
           <div editable="rich">
-            <h4>Talebeler Deneme Çözebiliyor</h4>
+            <h4>Geniş Konu Yelpazesi:</h4>
           </div>
         </div>
         <div class="lc-block mb-lg-5 mb-2">
           <div editable="rich">
-            <p> Talebeler telefondan yada bilgisayardan kolayca hocalarının hazırladığı denemeleri çözebiliyorlar</p>
+            <p> Deneme çözme uygulamamız, farklı konularda çok sayıda deneme sınavı içermekte ve sizlere bu konularla ilgili detaylı geri bildirimler sağlamaktadır.</p>
           </div>
         </div>
       </div>
@@ -172,12 +127,12 @@
         </div>
         <div class="lc-block mb-4">
           <div editable="rich">
-            <h4>Denemelerin analizleri görüntüleyebilme</h4>
+            <h4>Zaman Yönetimi Becerileri:</h4>
           </div>
         </div>
         <div class="lc-block mb-lg-5 mb-2">
           <div editable="rich">
-            <p> talebe çözdüğü denemnin analizini kolay bir şeklde görüp hangi sorularda yanlış yaptığını bulabiliyor
+            <p> Öğrenci çözdüğü denemnin analizini kolay bir şeklde görüp hangi sorularda yanlış yaptığını bulabiliyor
             </p>
           </div>
         </div>
@@ -197,12 +152,12 @@
         </div>
         <div class="lc-block mb-4">
           <div editable="rich">
-            <h4>Sınıf analizi görüntüleyebilme</h4>
+            <h4>Kişiselleştirilmiş Performans Analizi:</h4>
           </div>
         </div>
         <div class="lc-block mb-lg-5 mb-2">
           <div editable="rich">
-            <p> Hoca efendi gurubunun çözdüğü denemeyi kolayca analizini edip hangi eksikleri olduğunu görebiliyor</p>
+            <p>Deneme çözme uygulamamız, çözdüğünüz deneme sınavlarına göre kişiselleştirilmiş performans analizleri sunarak, zayıf ve güçlü yönlerinizi belirleyebilir ve bu yönde çalışmalar yapmanıza yardımcı olabilir.</p>
           </div>
         </div>
       </div>
@@ -248,26 +203,26 @@
         </div>
       </div>
     </div>
-    <!-- <div class="col-md-6">
+    <div class="col-md-6">
         <div class="lc-block mb-5">
            <div editable="rich">
-              <p class="h4">Duis aute irure dolor in?</p>
-              <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+              <p class="h4">Deneme çözme uygulamanız nasıl çalışır?</p>
+              <p>Deneme çözme uygulamamız, kullanıcılara farklı konulardaki deneme sınavlarını çözmelerine ve bu sınavlarla ilgili geri bildirimleri alarak performanslarını iyileştirmelerine olanak sağlar. Kullanıcılar, uygulamayı indirerek kayıt olabilir ve deneme sınavlarına erişebilirler. </p>
            </div>
         </div>
         <div class="lc-block mb-5">
            <div editable="rich">
-              <p class="h4">Consequuntur magni dolores eos qui?</p>
-              <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+              <p class="h4">Uygulamanızda hangi konular yer almaktadır?</p>
+              <p>Uygulamamızda Sınıfınızın seviyesine göre müfredatta olan konular yer almaktadır. </p>
            </div>
         </div>
         <div class="lc-block mb-5">
            <div editable="rich">
-              <p class="h4">Excepteur sint occaecat cupidatat non? </p>
-              <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+              <p class="h4">Geri bildirimler nasıl sağlanmaktadır? </p>
+              <p>Deneme çözme uygulamamız, kullanıcıların deneme sınavlarını çözmeleri ve sonuçlarına göre kişiselleştirilmiş geri bildirimler almalarına olanak sağlamaktadır. Kullanıcılar, sınav sonuçlarını ve doğru/yanlış cevaplarını görüntüleyebilirler. </p>
            </div>
         </div>
-     </div> -->
+     </div>
   </div>
 </div>
 <div class="container py-5">
@@ -278,45 +233,39 @@
 
     </div></div></div>
 
-<div class="container-fluid bg-dark g-0">
-  <div class="row g-0 align-items-center">
-    <div class="col-lg-6 d-flex justify-content-center">
-      <div class="col-12 col-lg-8 p-4 text-white">
 
-        <div class="lc-block">
-          <div editable="rich">
-            <h2 class="fw-bolder">Address</h2>
-          </div>
-        </div>
-        <div class="lc-block">
-          <div editable="rich">
-            <p> beşköprü mahallesi. 16. cad. no:77 -&nbsp;Serdivan&nbsp;<br>Sakarya/Türkiye</p>
-          </div>
-        </div>
+    <div class="container py-5">
+      <div class="row min-vh-25 align-items-center text-center">
 
-        <div class="lc-block">
-          <div editable="rich">
-            <h2 class="fw-bolder">E-posta</h2>
-          </div>
-        </div>
-
-        <div class="lc-block">
-          <div editable="rich">
-            <p>bedirhan1029@gmail.com</p>
-          </div>
-        </div>
-
+        <div class="col-xl-4 mb-5 mb-xl-0">
+          <div class="lc-block">
+            <div class="d-inline-flex">
+              <div>
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="2em" height="2em" viewBox="0 0 24 24" style="" lc-helper="svg-icon" fill="currentColor">
+                  <path d="M12,6.5A2.5,2.5 0 0,1 14.5,9A2.5,2.5 0 0,1 12,11.5A2.5,2.5 0 0,1 9.5,9A2.5,2.5 0 0,1 12,6.5M12,2A7,7 0 0,1 19,9C19,14.25 12,22 12,22C12,22 5,14.25 5,9A7,7 0 0,1 12,2M12,4A5,5 0 0,0 7,9C7,10 7,12 12,18.71C17,12 17,10 17,9A5,5 0 0,0 12,4Z"></path>
+                </svg>
+              </div>
+    
+              <div class="ms-3 align-self-center" editable="rich">
+                <p class="lead">İstanbul - Türkiye</p>
+              </div>
+            </div>
+          </div><!-- /lc-block -->
+        </div><!-- /col -->
+        <div class="col-xl-4 mb-5 mb-xl-0">
+          <div class="lc-block">
+            <div class="d-inline-flex">
+              <div>
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="2em" height="2em" viewBox="0 0 24 24" style="" lc-helper="svg-icon" fill="currentColor">
+                  <path d="M13 17H17V14L22 18.5L17 23V20H13V17M20 4H4A2 2 0 0 0 2 6V18A2 2 0 0 0 4 20H11V18H4V8L12 13L20 8V14H22V6A2 2 0 0 0 20 4M12 11L4 6H20Z"></path>
+                </svg>
+              </div>
+    
+              <div class="ms-3 align-self-center" editable="rich">
+                <p class="lead">bedirhan1029@gmail.com</p>
+              </div>
+            </div>
+          </div><!-- /lc-block -->
+        </div><!-- /col -->
       </div>
     </div>
-    <div class="col-lg-6">
-      <div class="lc-block">
-        <div class="ratio ratio-16x9" lc-helper="gmap-embed">
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10811.061224686386!2d30.33916803887!3d40.73440203709105!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14ccadf10a2d752b%3A0xe2437f68ada4776a!2zR8OWTEJBxZ5JIFnDnEtTRUsgw5bEnlJFTsSwTSBFUktFSyDDlsSeUkVOQ8SwIFlVUkRV!5e0!3m2!1str!2str!4v1658350127660!5m2!1str!2str"
-            width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
-      </div><!-- /lc-block -->
-    </div>
-  </div>
-</div>
