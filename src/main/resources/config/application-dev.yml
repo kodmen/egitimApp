@@ -32,8 +32,8 @@ spring:
       indent-output: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:postgresql://localhost:5432/temrinyeni
-    username: Gamification
+    url: jdbc:postgresql://localhost:5432/sales
+    username: egitimpartneri
     password:
     hikari:
       poolName: Hikari
