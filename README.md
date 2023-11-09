@@ -1,5 +1,5 @@
 
-# Temrin Matik: Öğrencilere Yön Veren Eğitim Platformu
+# EgitimApp: Öğrencilere Yön Veren Eğitim Platformu
 
 Temrin Matik, öğrencilerin deneme çözebileceği ve ders çalışabileceği interaktif bir eğitim platformudur. Eğitim sürecini daha etkili ve keyifli hale getirmeyi amaçlayan bu platform, öğrencilere özel tasarlanmış bir deneyim sunar. Editörler tarafından eklenen zengin içerikleriyle öğrenciler, konuları daha iyi anlamalarına yardımcı olan soruları çözebilir ve performanslarını geliştirebilirler.
 
